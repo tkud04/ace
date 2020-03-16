@@ -1,2 +1,2 @@
-# ace
-Ace Luxury store (fashion accessories)
+# ob-sender
+Sender app for Ob's friend
