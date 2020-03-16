@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>:: Royal Market - Home ::</title>
+<title>Welcome | Ace Luxury Store - Online Luxury Fashion Accessories Store in Nigeria</title>
 <!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!-- Ionicons font -->
@@ -81,66 +81,26 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="col-sm-8 collapse navbar-collapse navbar-right" id="line-navbar-collapse-1">
           <ul class="nav navbar-nav top-menu">
-            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">2</span> </a>
+            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">0</span> </a>
               <ul role="menu" class="dropdown-menu">
                 <li>
-                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> 2 products added. <span class="lnt-cart-total">$1300</span> </div>
+                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> 0 products added. <span class="lnt-cart-total">&#8356;0.00</span> </div>
                 </li>
-                <li>
-                  <div class="lnt-cart-products"> <img alt="Product title" src="images/cart-thumb-1.jpg">
-                    <P class="lnt-product-info">
-                      <button class="close"><span aria-hidden="true" class="ion-android-cancel"></span></button>
-                      <span class="lnt-product-name">Lorem ipsum dolor sit amet</span> <span class="lnt-product-price text-info">$600</span> </P>
-                  </div>
-                </li>
-                <li>
-                  <div class="lnt-cart-products"> <img alt="Product title" src="images/cart-thumb-2.jpg">
-                    <p class="lnt-product-info">
-                      <button class="close"><span aria-hidden="true" class="ion-android-cancel"></span></button>
-                      <span class="lnt-product-name">Awesome pack of new clothes for you</span> <span class="lnt-product-price text-info">$700</span> </p>
-                  </div>
-                </li>
-                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="cart.html">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="checkout.html">Checkout</a> </li>
+               
+                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="#">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="checkout.html">Checkout</a> </li>
               </ul>
             </li>
-            <li><a href="compare-list.html">Compare list</a></li>
-            <li><a href="wish-list.html">wish list</a></li>
+          
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> login</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Features <span class="ion-android-arrow-dropdown"></span></a>
-              <ul class="dropdown-menu theme-features menu-nudge" role="menu">
-                <li> <a href="index.html"><i class="ion-home"></i>Home Style One</a> </li>
-                <li> <a href="products.html"><i class="ion-android-done-all"></i>Products Catalogue </a> </li>
-                <li> <a href="product-details.html"><i class="ion-wand"></i>Product Details</a> </li>
-                <li> <a href="cart.html"><i class="ion-flag"></i>Shopping Cart</a> </li>
-                <li> <a href="checkout.html"><i class="ion-wrench"></i>Checkout</a> </li>
-                <li> <a href="blog-standard.html"><i class="ion-scissors"></i>Blog Standard</a> </li>
-                <li> <a href="blog-masonry.html"><i class="ion-document-text"></i>Blog Masonry</a> </li>
-                <li> <a href="post-details.html"><i class="ion-star"></i>Post Details</a> </li>
-                <li> <a href="contact.html"><i class="ion-bluetooth"></i>Contact</a> </li>
-                <li> <a href="404.html"><i class="ion-bug"></i>404 Page</a> </li>
-                <li> <a href="search-result-found.html"><i class="ion-android-expand"></i>Search Result Found</a> </li>
-                <li> <a href="search-result-not-found.html"><i class="ion-android-notifications"></i>Search Result Not Found</a> </li>
-                <li> <a href="coming-soon.html"><i class="ion-ios-lightbulb"></i>Coming Soon Page</a> </li>
-                <li> <a href="forget-password.html"><i class="ion-android-sync"></i>forget password</a> </li>
-                <li> <a href="faqs-accordion.html"><i class="ion-eye"></i>FAQ's Accordion</a> </li>
-                <li> <a href="faqs-flip.html"><i class="ion-android-microphone"></i>FAQ's Flip</a> </li>
-                <li> <a href="terms.html"><i class="ion-asterisk"></i>Terms &amp; Conditions</a> </li>
-                <li> <a href="track-order.html"><i class="ion-android-pin"></i>Track Your Order</a> </li>
-                <li> <a href="shortcodes.html"><i class="ion-ios-briefcase"></i>Shortcodes</a> </li>
-                <li> <a class="soon" href="javascript:void(0)"><i class="ion-android-radio-button-on"></i>Extra Pages Soon</a> </li>
-              </ul>
-            </li>
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">USD <span class="ion-android-arrow-dropdown"></span></a>
+            <li><a href="#">Register</a></li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">GBP</a></li>
-                <li><a href="#">EUR </a></li>
+      
               </ul>
             </li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/uk.png"> <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu">
-                <li> <a href="#"><img width="16" height="12" alt="" src="images/italy.png"></a> </li>
-                <li> <a href="#"><img width="16" height="12" alt="" src="images/turkey.png"></a> </li>
+
               </ul>
             </li>
           </ul>
@@ -170,7 +130,7 @@
   <header>
     <div class="container">
       <div class="row"> <!--start of logo-->
-        <div class="col-sm-12 col-md-4 col-lg-3 "> <a href="index.html" class="navbar-brand"></a></div>
+        <div class="col-sm-12 col-md-4 col-lg-3 "> <a href="<?php echo e(url('/')); ?>" class="navbar-brand"></a></div>
         <!--end of logo--> <!--start of features-->
         <div class="col-sm-12 col-md-8 col-lg-9 feature hidden-xs">
           <div class="row">
@@ -224,7 +184,7 @@
                     <div class="lnt-subcategory col-sm-8 col-md-8">
                       <h3 class="lnt-category-name text-info text-uppercase">All pages</h3>
                       <ul class="list-unstyled col-sm-6">
-                        <li> <a href="index.html"><i class="ion-home icon"></i>Home Style One</a> </li>
+                        <li> <a href="<?php echo e(url('/')); ?>"><i class="ion-home icon"></i>Home Style One</a> </li>
                         <li> <a href="products.html"><i class="ion-android-done-all icon"></i>Products Catalogue </a> </li>
                         <li> <a href="product-details.html"><i class="ion-wand icon"></i>Product Details</a> </li>
                         <li> <a href="cart.html"><i class="ion-flag icon"></i>Shopping Cart</a> </li>
@@ -455,7 +415,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav main-nav">
-          <li class="active"><a href="index.html" class="ion-ios-home"></a></li>
+          <li class="active"><a href="<?php echo e(url('/')); ?>" class="ion-ios-home"></a></li>
           <li><a href="products.html">NEW ARRIVALS</a></li>
           <li><a href="products.html">BEST SELLER</a></li>
           <li><span class="nav-span hot-sale">20% OFF</span><a href="products.html">hot sale</a></li>
