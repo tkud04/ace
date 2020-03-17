@@ -41,6 +41,23 @@
 <link rel="icon" type="image/png" href="favicon/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="favicon/favicon-16x16.png" sizes="16x16">
 <link rel="manifest" href="favicon/manifest.json">
+
+<style type="text/css">
+.overlay-effect {
+ width: 100%;
+ height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow:hidden;
+}
+</style>
 </head>
 <body>
 <!--start of loader-->
@@ -137,19 +154,19 @@
             <div class="col-sm-4 feature-box ion-chatbubble-working">
               <dl  class="text-primary text-capitalize">
                 <dt>Online Support</dt>
-                <dd class="text-muted">24/7 Etiam ultricies nis</dd>
+                <dd class="text-muted">24/7 if you need any help</dd>
               </dl>
             </div>
             <div class="col-sm-4 feature-box ion-android-sync">
               <dl  class="text-primary text-capitalize">
-                <dt>30 Days Free Return</dt>
-                <dd class="text-muted">Nullam dictum felis eu pede </dd>
+                <dt>2 Days Free Return</dt>
+                <dd class="text-muted">For defective products </dd>
               </dl>
             </div>
             <div class="col-sm-4 feature-box ion-lock-combination">
               <dl  class="text-primary text-capitalize">
-                <dt>Payment Secured</dt>
-                <dd class="text-muted">Lorem ipsum dolor consecteure</dd>
+                <dt>Secure Payment</dt>
+                <dd class="text-muted">We don't store your details</dd>
               </dl>
             </div>
           </div>
@@ -159,6 +176,67 @@
     </div>
   </header>
   <!--end of header--> 
+  <?php
+  $sss = [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => "hot"],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ];
+  $navData = [
+    'anklets' => [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => "trending"],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ],
+    'bracelets' => [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => "popular"],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ],
+    'brooches' => [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => "hot"],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ],
+    'earrings' => [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ],
+    'necklaces' => [
+          ['name' => "Category_1",'url' => "#",'special' => "hot"],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => ""],
+	     ],
+    'rings' => [
+          ['name' => "Category_1",'url' => "#",'special' => ""],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => ""],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => "trending"],
+	     ]
+  ];
+  $special = ['hot' => "rings", 'popular' => "earrings", 'trending' => "bracelets"];
+  ?>
   <!-- strat of navigation -->
   <nav class="navbar navbar-default navbar-static-top line-navbar-two">
     <div class="container"> 
@@ -170,41 +248,74 @@
               <div class="lnt-dropdown-mega-menu"> 
                 <!-- List of categories -->
                 <ul class="lnt-category list-unstyled">
-                  <li class="active"><a href="#subcategory-home">All pages</a></li>
-                  <li><a href="#subcategory-sports">Sports and outdoors</a></li>
-                  <li><a href="#subcategory-music">Digital music</a></li>
-                  <li><a href="#subcategory-books">Books <span class="label label-danger">Hot</span></a></li>
-                  <li><a href="#subcategory-fashion">Fashion and beauty</a></li>
-                  <li><a href="#subcategory-movies">Movies and games</a></li>
+				<?php
+				 $i = 0;
+				 foreach($navData as $key => $value)
+				 {
+					 $cl = ($i == 0) ? ' class="active"' : '';
+					 ++$i;
+					 $spp = "";
+					 if($special['hot'] == $key || $special['popular'] == $key || $special['trending'] == $key)
+					 {
+						 if($special['hot'] == $key) $spp = '<span class="label label-danger">Hot</span></a>';
+						 if($special['popular'] == $key) $spp = '<span class="label label-info">Popular</span></a>';
+						 if($special['trending'] == $key) $spp = '<span class="label label-primary">Trending</span></a>';
+					 }
+				?>
+                  <li{{$cl}}><a href="#{{$key}}">{{ucwords($key)}} {!!$spp!!}</a></li>
+				<?php
+				 }
+				?>
                 </ul>
                 <!-- Subcategory and carousel wrap -->
                 <div class="lnt-subcategroy-carousel-wrap container-fluid">
-                  <div id="subcategory-home" class="active"> 
+				<?php
+				 $i = 0;
+				 foreach($navData as $key => $value)
+				 {
+					 $dl = ($i == 0) ? ' class="active"' : '';
+					 ++$i;
+			    ?>
+                  <div id="{{$key}}"{{$dl}}> 
                     <!-- Sub categories list-->
                     <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">All pages</h3>
+                      <h3 class="lnt-category-name text-info text-uppercase">{{$key}}</h3>
+					 
                       <ul class="list-unstyled col-sm-6">
-                        <li> <a href="{{url('/')}}"><i class="ion-home icon"></i>Home Style One</a> </li>
-                        <li> <a href="products.html"><i class="ion-android-done-all icon"></i>Products Catalogue </a> </li>
-                        <li> <a href="product-details.html"><i class="ion-wand icon"></i>Product Details</a> </li>
-                        <li> <a href="cart.html"><i class="ion-flag icon"></i>Shopping Cart</a> </li>
-                        <li> <a href="checkout.html"><i class="ion-wrench icon"></i>Checkout</a> </li>
-                        <li> <a href="blog-standard.html"><i class="ion-scissors icon"></i>Blog Standard</a> </li>
-                        <li> <a href="blog-masonry.html"><i class="ion-document-text icon"></i>Blog Masonry</a> </li>
-                        <li> <a href="post-details.html"><i class="ion-star icon"></i>Post Details</a> </li>
-                        <li> <a href="contact.html"><i class="ion-bluetooth icon"></i>Contact</a> </li>
-                        <li> <a href="404.html"><i class="ion-bug icon"></i>404 Page</a> </li>
+					  	<?php
+				         for($x = 0; $x < 3; $x++)
+				         {
+							 $nn = $value[$x];
+	                       $npp = "";
+					       if($nn['special'] == 'hot' || $nn['special'] == 'popular' || $nn['special'] == 'trending')
+					       {
+						     if($nn['special'] == 'hot') $npp = "<span class='label label-danger'>Hot</span>";
+						     if($nn['special'] == 'popular') $npp = "<span class='label label-info'>Popular</span>";
+						     if($nn['special'] == 'trending') $npp = "<span class='label label-primary'>Trending</span>";
+					       }
+				         ?>
+                        <li{{$cl}}><a href="#{{$nn['url']}}">{{$nn['name']}} {!!$npp!!}</a></li>
+						<?php
+						 }
+						 ?>
                       </ul>
                       <ul class="list-unstyled col-sm-6">
-                        <li> <a href="search-result-found.html"><i class="ion-android-expand icon"></i>Search Result Found</a> </li>
-                        <li> <a href="search-result-not-found.html"><i class="ion-android-notifications icon"></i>Search Result Not Found</a> </li>
-                        <li> <a href="coming-soon.html"><i class="ion-ios-lightbulb icon"></i>Coming Soon Page</a> </li>
-                        <li> <a href="forget-password.html"><i class="ion-android-sync icon"></i>forget password</a> </li>
-                        <li> <a href="faqs-accordion.html"><i class="ion-eye icon"></i>FAQ's Accordion</a> </li>
-                        <li> <a href="faqs-flip.html"><i class="ion-android-microphone icon"></i>FAQ's Flip</a> </li>
-                        <li> <a href="terms.html"><i class="ion-asterisk icon"></i>Terms &amp; Conditions</a> </li>
-                        <li> <a href="track-order.html"><i class="ion-android-pin icon"></i>Track Your Order</a> </li>
-                        <li> <a href="shortcodes.html"><i class="ion-ios-briefcase icon"></i>Shortcodes</a> </li>
+                      <?php
+				         for($x = 3; $x < 6; $x++)
+				         {
+							 $nn = $value[$x];
+	                       $npp = "";
+					       if($nn['special'] == 'hot' || $nn['special'] == 'popular' || $nn['special'] == 'trending')
+					       {
+						     if($nn['special'] == 'hot') $npp = '<span class="label label-danger">Hot</span>';
+						     if($nn['special'] == 'popular') $npp = '<span class="label label-info">Popular</span>';
+						     if($nn['special'] == 'trending') $npp = '<span class="label label-primary">Trending</span>';
+					       }
+				         ?>
+                        <li{{$cl}}><a href="#{{$nn['url']}}">{{$nn['name']}} {!!$npp!!}</a></li>
+						<?php
+						 }
+						 ?>
                       </ul>
                     </div>
                     <!-- Carousel -->
@@ -223,192 +334,9 @@
                       </div>
                     </div>
                   </div>
-                  <div id="subcategory-sports"> 
-                    <!-- Sub categories list-->
-                    <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">Sports and outdoors</h3>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Exercise</a></li>
-                        <li><a href="#">Fitness</a></li>
-                        <li><a href="#">Hunting</a></li>
-                        <li><a href="#">Fishing</a> <span class="label label-primary">Trending</span></li>
-                        <li><a href="#">Boating</a></li>
-                        <li><a href="#">Water sports</a></li>
-                        <li><a href="#">Hardware</a></li>
-                        <li><a href="#">Fan shop</a></li>
-                        <li><a href="#">Team sports</a></li>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Golf</a></li>
-                        <li><a href="#">Outdoor clothing</a></li>
-                        <li><a href="#">Cycling</a></li>
-                        <li><a href="#">Action sports</a></li>
-                        <li><a href="#">Game room</a> <span class="label label-danger">Hot</span></li>
-                      </ul>
-                    </div>
-                    <!-- Carousel -->
-                    <div class="col-sm-4 col-md-4">
-                      <div id="carousel-category-sports" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carousel-category-sports" data-slide-to="0" class=""></li>
-                          <li data-target="#carousel-category-sports" data-slide-to="1" class="active"></li>
-                          <li data-target="#carousel-category-sports" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="subcategory-music"> 
-                    <!-- Sub categories list-->
-                    <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">Digital music</h3>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Online</a></li>
-                        <li><a href="#">Best</a></li>
-                        <li><a href="#">New releases</a></li>
-                        <li><a href="#">Deals</a></li>
-                        <li><a href="#">Top selling</a></li>
-                        <li><a href="#">Top grossing</a> <span class="label label-info">Popular</span></li>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Pop</a></li>
-                        <li><a href="#">Jazz</a> <span class="label label-danger">Hot</span></li>
-                        <li><a href="#">Country</a></li>
-                        <li><a href="#">Classic</a></li>
-                        <li><a href="#">Rock</a></li>
-                      </ul>
-                    </div>
-                    <!-- Carousel -->
-                    <div class="col-sm-4 col-md-4">
-                      <div id="carousel-category-music" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carousel-category-music" data-slide-to="0" class=""></li>
-                          <li data-target="#carousel-category-music" data-slide-to="1" class="active"></li>
-                          <li data-target="#carousel-category-music" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="subcategory-books">
-                    <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">Books</h3>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Books</a> <span class="label label-primary">Trending</span></li>
-                        <li><a href="#">Magazines</a></li>
-                        <li><a href="#">Children</a></li>
-                        <li><a href="#">Textbooks</a></li>
-                        <li><a href="#">Kindle</a></li>
-                        <li><a href="#">Audible</a></li>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Web development</a> <span class="label label-danger">hot</span></li>
-                        <li><a href="#">Typography</a></li>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Novel</a></li>
-                        <li><a href="#">Short story</a></li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Romance</a></li>
-                        <li><a href="#">Political</a></li>
-                      </ul>
-                    </div>
-                    <!-- Carousel -->
-                    <div class="col-sm-4 col-md-4">
-                      <div id="carousel-category-books" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carousel-category-books" data-slide-to="0" class=""></li>
-                          <li data-target="#carousel-category-books" data-slide-to="1" class="active"></li>
-                          <li data-target="#carousel-category-books" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="subcategory-fashion"> 
-                    <!-- Sub categories list-->
-                    <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">Fashion and beauty</h3>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Girls</a></li>
-                        <li><a href="#">Boys</a></li>
-                        <li><a href="#">Baby</a></li>
-                        <li><a href="#">Top selling</a> <span class="label label-info">Popular</span></li>
-                        <li><a href="#">Cheap</a></li>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">All beauty</a></li>
-                        <li><a href="#">Diets</a></li>
-                        <li><a href="#">Baby care</a> <span class="label label-primary">Trending</span></li>
-                        <li><a href="#">Men's grooming</a></li>
-                        <li><a href="#">Health</a></li>
-                      </ul>
-                    </div>
-                    <!-- Carousel -->
-                    <div class="col-sm-4 col-md-4">
-                      <div id="carousel-category-fashion" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carousel-category-fashion" data-slide-to="0" class=""></li>
-                          <li data-target="#carousel-category-fashion" data-slide-to="1" class="active"></li>
-                          <li data-target="#carousel-category-fashion" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="subcategory-movies"> 
-                    <!-- Sub categories list-->
-                    <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase">Movies and games</h3>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Movies and TV</a></li>
-                        <li><a href="#">Blu-ray</a></li>
-                        <li><a href="#">Div-ix</a> <span class="label label-info">Popular</span></li>
-                        <li><a href="#">Instant movies</a></li>
-                        <li><a href="#">Free movies</a></li>
-                        <li><a href="#">Digital instruments</a></li>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                        <li><a href="#">Online games</a></li>
-                        <li><a href="#">Trending</a> <span class="label label-danger">hot</span></li>
-                        <li><a href="#">Popular</a></li>
-                        <li><a href="#">Grossing</a></li>
-                        <li><a href="#">Game room</a></li>
-                      </ul>
-                    </div>
-                    <!-- Carousel -->
-                    <div class="col-sm-4 col-md-4">
-                      <div id="carousel-category-movies" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carousel-category-movies" data-slide-to="0" class=""></li>
-                          <li data-target="#carousel-category-movies" data-slide-to="1" class="active"></li>
-                          <li data-target="#carousel-category-movies" data-slide-to="2" class=""></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="item active"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+				  <?php
+				   }
+				  ?>
                 </div>
               </div>
             </div>
@@ -416,14 +344,14 @@
         </ul>
         <ul class="nav navbar-nav main-nav">
           <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
-          <li><a href="products.html">NEW ARRIVALS</a></li>
-          <li><a href="products.html">BEST SELLER</a></li>
-          <li><span class="nav-span hot-sale">20% OFF</span><a href="products.html">hot sale</a></li>
-          <li><a href="blog-standard.html">BLOG</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="#">NEW ARRIVALS</a></li>
+          <li><a href="#">BEST SELLER</a></li>
+          <li><span class="nav-span hot-sale">20% OFF</span><a href="#">hot sale</a></li>
+          <li><a href="#">BLOG</a></li>
+          <li><a href="#">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
-          <li><a href="#">Home</a></li>
+          <li><a href="{{url('/')}}">Home</a></li>
         </ul>
         <form class="navbar-form navbar-right lnt-search-form" role="search">
           <div class="form-group">
@@ -431,12 +359,9 @@
               <div class="input-group-btn lnt-search-category">
                 <button type="button" class="btn btn-default dropdown-toggle selected-category-btn" data-toggle="dropdown" aria-expanded="false"> <span class="selected-category-text">All </span> <span class="ion-android-arrow-dropdown"></span> </button>
                 <ul class="dropdown-menu " role="menu">
-                  <li><a href="#">Fashion</a></li>
-                  <li><a href="#">Sport</a></li>
-                  <li><a href="#">Electronics</a></li>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Toys</a></li>
-                  <li><a href="#">Motors</a></li>
+				@foreach($navData as $key => $value)
+                  <li><a href="#">{{ucwords($key)}}</a></li>
+				@endforeach         
                 </ul>
               </div>
               <input type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Find Your Product">
@@ -469,8 +394,10 @@
   
   <!--start of banner-->
   <div id="banner">
-    <div class="item"> <img class="img-responsive hidden-xs" src="images/banner-img-1.jpg" width="1920" height="550" alt=""/>
-    <img class="img-responsive visible-xs" src="images/banner-img-1-small.jpg" width="1920" height="550" alt=""/>
+    <div class="item">
+    <div class="overlay-effect"></div>	
+	<img class="img-responsive hidden-xs" src="images/j-5.jpg" width="1920" height="550" alt=""/>
+    <img class="img-responsive visible-xs" src="images/images/j-5.jpg" width="1920" height="550" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
@@ -484,8 +411,8 @@
         </div>
       </div>
     </div>
-    <div class="item"> <img class="img-responsive hidden-xs" src="images/banner-img-2.jpg" width="1920" height="540" alt=""/>
-    <img class="img-responsive visible-xs" src="images/banner-img-2-small.jpg" width="1920" height="540" alt=""/>
+    <div class="item"> <img class="img-responsive hidden-xs" src="images/j-5.jpg" width="1920" height="540" alt=""/>
+    <img class="img-responsive visible-xs" src="images/j-5.jpg" width="1920" height="540" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
