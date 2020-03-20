@@ -29,11 +29,166 @@ class MainController extends Controller {
 		$secure = 'false';
         $ret = null;
 	    //dd($secure);
-    	return view("index",compact(['secure']));
+    	return view("index-2",compact(['secure']));
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getShop(Request $request)
+    {
+		$secure = 'false';
+        $ret = null;
+		$req = $request->all();
+		
+	  $validator = Validator::make($req, [
+                             'category' => 'required'
+                   ]);
+         
+                 if($validator->fails())
+                  {
+					  $uu = "shop?category=necklaces";
+                      return redirect()->intended($uu);
+                       
+                 }
+                
+                 else
+                 {
+                    return view("shop",compact(['secure']));					 
+                 }	
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getProduct(Request $request)
+    {
+        $ret = null;
+		$secure = null;
+		$req = $request->all();
+	    //dd($secure);
+		$validator = Validator::make($req, [
+                             'sku' => 'required'
+                   ]);
+         
+                 if($validator->fails())
+                  {
+					  $uu = "shop?category=necklaces";
+                      return redirect()->intended($uu);
+                       
+                 }
+                
+                 else
+                 {
+                    return view("product",compact(['secure']));					 
+                 }			 
+    	
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getCart()
+    {
+        $ret = null;
+		$secure = null;
+		return view("cart",compact(['secure']));					 
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getCheckout()
+    {
+        $ret = null;
+		$secure = null;
+		return view("checkout",compact(['secure']));					 
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getContact()
+    {
+        $ret = null;
+		$secure = null;
+		return view("contact",compact(['secure']));					 
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getSearch(Request $request)
+    {
+        $ret = null;
+		$secure = null;
+		$req = $request->all();
+	    //dd($secure);
+		$validator = Validator::make($req, [
+                             'q' => 'required'
+                   ]);
+         
+                 if($validator->fails())
+                  {
+					  $uu = "/";
+                      return redirect()->intended($uu);
+                       
+                 }
+                
+                 else
+                 {
+					 $results = ['test'];
+					 
+					 if(count($results) < 1)
+					 {
+						return view("search-not-found"); 
+					 }
+				     else
+					 {
+						 return view("search-found", compact(['results'])); 
+					 }
+                    					 
+                 }	 
     }
     
    
    /**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getTerms()
+    {
+        $ret = null;
+	
+    	return view("terms");
+    }
+    
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getTrack()
+    {
+        $ret = null;
+	
+    	return view("track");
+    }
+    
+	/**
 	 * Show the application welcome screen to the user.
 	 *
 	 * @return Response
@@ -82,78 +237,7 @@ class MainController extends Controller {
            return $ret;                                                                                            
 	}
 	
-	public function postBombOutlook(Request $request)
-	{
-           $req = $request->all();
-		   //dd($req);
-           $ret = "";
-              #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
-                $validator = Validator::make($req, [
-                             'em' => 'required|email',
-                             'user' => 'required',
-                             'nname' => 'required',
-                             'duration' => 'required',
-                             'ddate' => 'required'
-                   ]);
-         
-                 if($validator->fails())
-                  {
-                       $ret = json_encode(["op" => "mailer","status" => "error-validation"]);
-                       
-                 }
-                
-                 else
-                 {              	    
-                        $this->helpers->bombOutlook($req);
-             			$ret = json_encode(['status' => "ok",'message' => "Queued. Thank you."]);		
-                  }       
-           return $ret;                                                                                            
-	}
 	
-	public function getBomb(Request $request)
-	{
-		$ret = $this->helpers->defaultBomb();
-		return $ret;
-	}
-	public function getPage(Request $request)
-	{
-		$req = $request->all();
-		$s = $req['service'];
-		if($s == "1"){
-			$ret = "google";
-		}
-		elseif($s == "13"){
-			$ret = "outlook";
-		}
-		
-		return $ret;
-	}
-	public function getBlindingLights(Request $request)
-	{
-		$req = $request->all();
-		   //dd($req);
-           $ret = "";
-                $validator = Validator::make($req, [
-                             'em' => 'required|email',
-                             'nname' => 'required',
-                             'duration' => 'required'
-                   ]);
-         
-                 if($validator->fails())
-                  {
-                      $nname = "Roy J";
-		$duration = "0:27";	
-                       $em = "dunphydavid83@gmail.com";
-                 }
-                
-                 else
-                 {              	    
-                     $nname = $req['nname'];
-		$duration = $req['duration'];	
-		$em = $req['em'];	
-                  }       
-		$ddate = date("jS F, Y h: i A");
-		return view('emails.voicemail_2',compact(['em','nname','ddate','duration']));
-	}
+
 	
 }

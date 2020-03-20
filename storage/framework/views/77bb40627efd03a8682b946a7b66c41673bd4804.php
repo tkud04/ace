@@ -57,6 +57,10 @@
   background-color: rgba(0, 0, 0, 0.7);
   overflow:hidden;
 }
+
+#banner {
+	
+}
 </style>
 </head>
 <body>
