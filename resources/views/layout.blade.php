@@ -102,13 +102,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="col-sm-8 collapse navbar-collapse navbar-right" id="line-navbar-collapse-1">
           <ul class="nav navbar-nav top-menu">
-            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">0</span> </a>
+		   <?php
+			$cc = (isset($cart)) ? count($cart) : 0;
+		   ?>
+            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">{{$cc}}</span> </a>
               <ul role="menu" class="dropdown-menu">
                 <li>
                   <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> 0 products added. <span class="lnt-cart-total">&#8356;0.00</span> </div>
                 </li>
                
-                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="#">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="checkout.html">Checkout</a> </li>
+                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="{{url('cart')}}">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="{{url('checkout')}}">Checkout</a> </li>
               </ul>
             </li>
           
@@ -181,64 +184,7 @@
   </header>
   <!--end of header--> 
   <?php
-  $sss = [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => "hot"],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ];
-  $navData = [
-    'anklets' => [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => "trending"],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ],
-    'bracelets' => [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => "popular"],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ],
-    'brooches' => [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => "hot"],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ],
-    'earrings' => [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ],
-    'necklaces' => [
-          ['name' => "Category_1",'url' => "#",'special' => "hot"],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => ""],
-	     ],
-    'rings' => [
-          ['name' => "Category_1",'url' => "#",'special' => ""],
-          ['name' => "Category_2",'url' => "#",'special' => ""],
-          ['name' => "Category_3",'url' => "#",'special' => ""],
-          ['name' => "Category_4",'url' => "#",'special' => ""],
-          ['name' => "Category_5",'url' => "#",'special' => ""],
-          ['name' => "Category_6",'url' => "#",'special' => "trending"],
-	     ]
-  ];
+ 
   $special = ['hot' => "rings", 'popular' => "earrings", 'trending' => "bracelets"];
   ?>
   <!-- strat of navigation -->
@@ -254,7 +200,7 @@
                 <ul class="lnt-category list-unstyled">
 				<?php
 				 $i = 0;
-				 foreach($navData as $key => $value)
+				 foreach($c as $key => $value)
 				 {
 					 $cl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
@@ -275,7 +221,7 @@
                 <div class="lnt-subcategroy-carousel-wrap container-fluid">
 				<?php
 				 $i = 0;
-				 foreach($navData as $key => $value)
+				 foreach($c as $key => $value)
 				 {
 					 $dl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
@@ -352,23 +298,23 @@
           <li><a href="#">BEST SELLER</a></li>
           <li><span class="nav-span hot-sale">20% OFF</span><a href="#">hot sale</a></li>
           <li><a href="#">BLOG</a></li>
-          <li><a href="#">CONTACT</a></li>
+          <li><a href="{{url('contact')}}">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
           <li><a href="{{url('/')}}">Home</a></li>
         </ul>
-        <form class="navbar-form navbar-right lnt-search-form" role="search">
+        <form class="navbar-form navbar-right lnt-search-form" action="{{url('search')}}" role="search">
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-btn lnt-search-category">
                 <button type="button" class="btn btn-default dropdown-toggle selected-category-btn" data-toggle="dropdown" aria-expanded="false"> <span class="selected-category-text">All </span> <span class="ion-android-arrow-dropdown"></span> </button>
                 <ul class="dropdown-menu " role="menu">
-				@foreach($navData as $key => $value)
+				@foreach($c as $key => $value)
                   <li><a href="#">{{ucwords($key)}}</a></li>
 				@endforeach         
                 </ul>
               </div>
-              <input type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Find Your Product">
+              <input type="text" class="form-control lnt-search-input" name="q" aria-label="Search" placeholder="Find Your Product">
             </div>
           </div>
           <div class="lnt-search-suggestion">
@@ -419,69 +365,35 @@
       <div class="footer-middle wow fadeIn" data-wow-offset="40" data-wow-duration="2s">
         <div class="container">
           <div class="row">
-            <div class="col-md-2 col-sm-3">
+            <div class="col-md-3 col-sm-6">
               <h5 class="text-info text-uppercase">useful pages</h5>
               <ul class="list-unstyled nudge">
-                <li><a href="text.html">About us</a> </li>
-                <li><a href="text-left.html">Terms and conditions</a> </li>
-                <li><a href="faqs.html">FAQ</a> </li>
-                <li><a href="contact.html">Contact us</a> </li>
+                <li><a href="{{url('about')}}">About us</a> </li>
+                <li><a href="{{url('terms')}}">Terms and conditions</a> </li>
+                <li><a href="#">FAQ</a> </li>
+                <li><a href="{{url('contact')}}">Contact us</a> </li>
               </ul>
               <hr>
               <h5 class="text-info text-uppercase">User section</h5>
               <ul class="list-unstyled nudge">
-                <li><a href="#">Login</a> </li>
-                <li><a href="register.html">Regiter</a> </li>
+                <li><a href="{{url('login')}}">Sign in</a> </li>
+                <li><a href="{{url('register')}}">Create account</a> </li>
               </ul>
               <hr class="hidden-md hidden-lg hidden-sm">
             </div>
-            <div class="col-md-2 col-sm-3">
-              <h5 class="text-info text-uppercase">Men</h5>
+            <div class="col-md-3 col-sm-6">
+              <h5 class="text-info text-uppercase">Categories</h5>
               <ul class="list-unstyled nudge">
-                <li><a href="#">T-shirts</a> </li>
-                <li><a href="#">Shirts</a> </li>
-                <li><a href="#">Accessories</a> </li>
-                <li><a  href="#">Casual Dresses</a></li>
-                <li><a  href="#">Apparel</a></li>
-                <li><a  href="#">Jakets &amp; Coats</a></li>
-                <li><a  href="#">Formal Shoes</a></li>
-                <li><a href="#">Belts</a></li>
-                <li><a href="#">Blouses &amp; Shirts</a></li>
+			  @foreach($c as $key => $value)
+                <li><a href="#">{{ucwords($key)}}</a> </li>
+			  @endforeach
               </ul>
             </div>
-            <div class="col-md-2 col-sm-3">
-              <h5 class="text-info text-uppercase">Women</h5>
-              <ul class="list-unstyled nudge">
-                <li><a href="#">Casual Dresses</a></li>
-                <li><a href="#">Apparel</a></li>
-                <li><a href="#">Jakets &amp; Coats</a></li>
-                <li><a href="#">Blouses &amp; Shirts</a></li>
-                <li><a href="#">Skirts</a></li>
-                <li><a href="#">Formal Shoes</a></li>
-                <li><a href="#">Jweelery</a></li>
-                <li><a href="#">Accessories</a> </li>
-                <li><a href="#">Casual Dresses</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-3">
-              <h5 class="text-info text-uppercase">juniors</h5>
-              <ul class="list-unstyled nudge">
-                <li><a href="#">Sunglassess</a> </li>
-                <li><a href="#">Sport Shoes</a> </li>
-                <li><a href="#">T-shirts</a> </li>
-                <li><a href="#">Skirts</a> </li>
-                <li><a href="#">Pants</a> </li>
-                <li><a href="#">Accessories</a> </li>
-                <li><a href="#">Sandals</a> </li>
-                <li><a href="#">Accessories</a> </li>
-                <li><a  href="#">Apparel</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6">
               <div class="row">
                 <div class="col-sm-12">
                   <h5 class="text-info text-uppercase">Get the news</h5>
-                  <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                  <p class="text-muted">Subscribe for updates on our latest arrivals</p>
                   <form action="#" method="post" id="newsletter">
                     <div>
                       <input type="text" name="email" id="newsletter-mail" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address" autocomplete="off">
@@ -499,7 +411,7 @@
                     <li class="col-sm-4 twitter"><a href="#"> <span><i class=" ion-social-twitter"></i></span>
                       <p>4576</p>
                       </a></li>
-                    <li class="col-sm-4 googleplus"><a href="#"> <span><i class=" ion-social-googleplus"></i></span>
+                    <li class="col-sm-4 googleplus"><a href="#"> <span><i class=" ion-social-instagram"></i></span>
                       <p>1269</p>
                       </a></li>
                   </ul>

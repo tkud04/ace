@@ -9,7 +9,7 @@ use Auth;
 use Session; 
 use Validator; 
 use Carbon\Carbon; 
-
+use App\Products;
 class MainController extends Controller {
 
 	protected $helpers; //Helpers implementation
@@ -26,10 +26,18 @@ class MainController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
-		$secure = 'false';
-        $ret = null;
-	    //dd($secure);
-    	return view("index-2",compact(['secure']));
+		$user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		
+    	return view("index-2",compact(['user','cart','c','signals']));
     }
 	
 	/**
