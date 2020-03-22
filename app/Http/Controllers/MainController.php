@@ -104,9 +104,17 @@ class MainController extends Controller {
 	 */
 	public function getCart()
     {
-        $ret = null;
-		$secure = null;
-		return view("cart",compact(['secure']));					 
+        $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		return view("cart",compact(['user','cart','c','signals']));					 
     }
 	
 	/**
@@ -116,9 +124,17 @@ class MainController extends Controller {
 	 */
 	public function getCheckout()
     {
-        $ret = null;
-		$secure = null;
-		return view("checkout",compact(['secure']));					 
+        $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		return view("checkout",compact(['user','cart','c','signals']));								 
     }
 	
 	/**
@@ -128,9 +144,17 @@ class MainController extends Controller {
 	 */
 	public function getContact()
     {
-        $ret = null;
-		$secure = null;
-		return view("contact",compact(['secure']));					 
+        $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		return view("contact",compact(['user','cart','c','signals']));							 
     }
 	
 	/**
@@ -140,8 +164,17 @@ class MainController extends Controller {
 	 */
 	public function getSearch(Request $request)
     {
-        $ret = null;
-		$secure = null;
+         $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		
 		$req = $request->all();
 	    //dd($secure);
 		$validator = Validator::make($req, [
@@ -161,11 +194,11 @@ class MainController extends Controller {
 					 
 					 if(count($results) < 1)
 					 {
-						return view("search-not-found"); 
+						return view("search-not-found",compact(['user','cart','c','signals'])); 
 					 }
 				     else
 					 {
-						 return view("search-found", compact(['results'])); 
+						 return view("search-found", compact(['results','user','cart','c','signals'])); 
 					 }
                     					 
                  }	 
@@ -179,9 +212,17 @@ class MainController extends Controller {
 	 */
 	public function getTerms()
     {
-        $ret = null;
-	
-    	return view("terms");
+       $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		return view("terms",compact(['user','cart','c','signals']));	
     }
     
 	/**
@@ -191,11 +232,127 @@ class MainController extends Controller {
 	 */
 	public function getTrack()
     {
-        $ret = null;
+       $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		return view("track",compact(['user','cart','c','signals']));	
+    }
 	
-    	return view("track");
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getDashboard()
+    {
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+			$c = $this->helpers->categories;
+		    $signals = $this->helpers->signals;
+		    return view("dashboard",compact(['user','cart','c','signals']));			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
     }
     
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getProfile()
+    {
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+			$c = $this->helpers->categories;
+		    $signals = $this->helpers->signals;
+		    $states = $this->helpers->states;
+			$account = $this->helpers->getUser($user->email);
+			$shipping = $this->helpers->getShippingDetails($user);
+
+			$ss = ['company' => "",
+			       'address' => "",
+			       'city' => "",
+			       'state' => "",
+			       'zipcode' => "",
+			       'id' => "",
+			       'date' => ""
+			    ];
+				
+		   if(count($shipping) > 0) $ss = $shipping[0];
+		    return view("profile",compact(['user','cart','c','signals','account','ss','states']));			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postProfile(Request $request)
+    {
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+		else
+        {
+        	return redirect()->intended('login?return=dashboard');
+        }
+        
+        $req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'fname' => 'required',
+                             'lname' => 'required',
+                             'email' => 'required|email',
+                             'phone' => 'required|numeric',
+							 'address' => 'required',
+                             'city' => 'required',
+                             'state' => 'required',
+                             'zip' => 'required|numeric'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$req["xf"] = $user->id; 
+         	$this->helpers->updateProfile($user, $req);
+	        session()->flash("profile-status","ok");
+			return redirect()->intended('profile');
+         }        
+    }
+	
+	
+	
+	
+	
 	/**
 	 * Show the application welcome screen to the user.
 	 *

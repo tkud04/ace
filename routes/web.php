@@ -20,3 +20,19 @@ Route::get('contact', 'MainController@getContact');
 Route::get('search', 'MainController@getSearch');
 Route::get('terms', 'MainController@getTerms');
 Route::get('track', 'MainController@getTrack');
+
+Route::get('login', 'LoginController@getLogin');
+Route::get('register', 'LoginController@getRegister');
+Route::post('login', 'LoginController@postLogin');
+Route::post('register', 'LoginController@postRegister');
+
+Route::get('forgot-password', 'LoginController@getForgotPassword');
+Route::post('forgot-password', 'LoginController@postForgotPassword');
+Route::get('reset', 'LoginController@getPasswordReset');
+Route::post('reset', 'LoginController@postPasswordReset');
+
+Route::get('signout', 'LoginController@getLogout');
+
+Route::get('dashboard', 'MainController@getDashboard');
+Route::get('profile', 'MainController@getProfile');
+Route::post('profile', 'MainController@postProfile');

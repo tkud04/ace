@@ -6,8 +6,13 @@ use Crypt;
 use Carbon\Carbon; 
 use Mail;
 use Auth;
+use App\ShippingDetails;
+use App\User;
+use App\Carts;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
+use \Cloudinary\Api;
+use \Cloudinary\Api\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
@@ -17,13 +22,15 @@ class Helper implements HelperContract
 {
 
  public $signals = ['okays'=> ["login-status" => "Sign in successful",            
-                     "signup-status" => "Account created successfully! You can now login to complete your profile.",
+                     "signup-status" => "Account created. Enjoy your shopping!",
+                     "profile-status" => "Profile updated!",
                      "update-status" => "Account updated!",
                      "config-status" => "Config added/updated!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
-					 "signup-status-error" => "There was a problem signing in, please contact support.",
+					 "signup-status-error" => "There was a problem creating your account, please contact support.",
+					 "profile-status-error" => "There was a problem updating your profile, please contact support.",
 					 "update-status-error" => "There was a problem updating the account, please contact support.",
 					 "contact-status-error" => "There was a problem sending your message, please contact support.",
                     ]
@@ -79,6 +86,47 @@ public $categories = [
           ['name' => "Category_6",'url' => "#",'special' => "trending"],
 	     ]
   ];
+  
+  
+  public $states = [
+			                       'abia' => 'Abia',
+			                       'adamawa' => 'Adamawa',
+			                       'akwa-ibom' => 'Akwa Ibom',
+			                       'anambra' => 'Anambra',
+			                       'bauchi' => 'Bauchi',
+			                       'bayelsa' => 'Bayelsa',
+			                       'benue' => 'Benue',
+			                       'borno' => 'Borno',
+			                       'cross-river' => 'Cross River',
+			                       'delta' => 'Delta',
+			                       'ebonyi' => 'Ebonyi',
+			                       'enugu' => 'Enugu',
+			                       'edo' => 'Edo',
+			                       'ekiti' => 'Ekiti',
+			                       'gombe' => 'Gombe',
+			                       'imo' => 'Imo',
+			                       'jigawa' => 'Jigawa',
+			                       'kaduna' => 'Kaduna',
+			                       'kano' => 'Kano',
+			                       'katsina' => 'Katsina',
+			                       'kebbi' => 'Kebbi',
+			                       'kogi' => 'Kogi',
+			                       'kwara' => 'Kwara',
+			                       'lagos' => 'Lagos',
+			                       'nasarawa' => 'Nasarawa',
+			                       'niger' => 'Niger',
+			                       'ogun' => 'Ogun',
+			                       'ondo' => 'Ondo',
+			                       'osun' => 'Osun',
+			                       'oyo' => 'Oyo',
+			                       'plateau' => 'Plateau',
+			                       'rivers' => 'Rivers',
+			                       'sokoto' => 'Sokoto',
+			                       'taraba' => 'Taraba',
+			                       'yobe' => 'Yobe',
+			                       'zamfara' => 'Zamfara',
+			                       'fct' => 'FCT'  
+			];         
 
 
           /**
@@ -302,6 +350,184 @@ $subject = $data['subject'];
 			    }
               return $ret; 
            }
+		   
+		   
+		   
+           function createUser($data)
+           {
+           	$ret = User::create(['fname' => $data['fname'], 
+                                                      'lname' => $data['lname'], 
+                                                      'email' => $data['email'], 
+                                                      'phone' => $data['phone'], 
+                                                      'role' => $data['role'], 
+                                                      'status' => $data['status'], 
+                                                      'verified' => $data['verified'], 
+                                                      'password' => bcrypt($data['pass']), 
+                                                      ]);
+                                                      
+                return $ret;
+           }
+           function createShippingDetails($data)
+           {
+           	$ret = ShippingDetails::create(['user_id' => $data['user_id'],                                                                                                          
+                                                      'company' => $data['company'], 
+                                                      'zipcode' => $data['zip'],                                                      
+                                                      'address' => $data['address'], 
+                                                      'city' => $data['city'], 
+                                                      'state' => $data['state'], 
+                                                      ]);
+                                                      
+                return $ret;
+           }
+		   
+		   
+		   function getCart($user)
+           {
+           	$ret = [];
+               $cart = Carts::where('user_id',$user->id)->get();
+              if($cart != null)
+               {
+               	foreach($cart as $c) 
+                    {
+                    	$temp = [];
+               	     $temp['id'] = $c->id; 
+                        $temp['sku'] = $c->sku; 
+                        $temp['deal'] = $this->getDeal($c->sku);
+                        $temp['qty'] = $c->qty; 
+						$temp['color'] = $c->color; 
+                        $temp['size'] = $c->size; 
+                        $temp['bid'] = Bids::where('auction_id', $c->auction_id)->where('user_id', $user->id)->first(); 
+                        $temp['type'] = $c->type; 
+                        array_push($ret, $temp); 
+                   }
+               }                                 
+                                                      
+                return $ret;
+           }
+           function clearCart($user)
+           {
+           	$ret = [];
+               $cart = Carts::where('user_id',$user->id)->get();
+ 
+              if($cart != null)
+               {
+               	foreach($cart as $c) 
+                    {
+                    	$c->delete(); 
+                   }
+               }                                 
+           }
+		   
+		   
+		   function getUser($id)
+           {
+           	$ret = [];
+               $u = User::where('email',$id)
+			            ->orWhere('id',$id)->first();
+ 
+              if($u != null)
+               {
+                   	$temp['fname'] = $u->fname; 
+                       $temp['lname'] = $u->lname; 
+                       //$temp['wallet'] = $this->getWallet($u);
+                       $temp['phone'] = $u->phone; 
+                       $temp['email'] = $u->email; 
+                       $temp['role'] = $u->role; 
+                       $temp['status'] = $u->status; 
+                       $temp['verified'] = $u->verified; 
+                       $temp['id'] = $u->id; 
+                       $temp['date'] = $u->created_at->format("jS F, Y"); 
+                       $ret = $temp; 
+               }                          
+                                                      
+                return $ret;
+           }
+		   
+		   
+		   function getShippingDetails($user)
+           {
+           	$ret = [];
+               $sdd = ShippingDetails::where('user_id',$user->id)->get();
+ 
+              if($sdd != null)
+               {
+				   foreach($sdd as $sd)
+				   {
+				      $temp = [];
+                   	   $temp['company'] = $sd->company; 
+                       $temp['address'] = $sd->address; 
+                       $temp['city'] = $sd->city;
+                       $temp['state'] = $sd->state; 
+                       $temp['zipcode'] = $sd->zipcode; 
+                       $temp['id'] = $sd->id; 
+                       $temp['date'] = $sd->created_at->format("jS F, Y"); 
+                       array_push($ret,$temp); 
+				   }
+               }                         
+                                                      
+                return $ret;
+           }
+		   
+		   
+		   function updateProfile($user, $data)
+           {  
+              $ret = 'error'; 
+         
+              if(isset($data['xf']))
+               {
+               	$u = User::where('id', $data['xf'])->first();
+                   
+                        if($u != null && $user == $u)
+                        {
+							$role = $u->role;
+							if(isset($data['role'])) $role = $data['role'];
+							$status = $u->status;
+							if(isset($data['status'])) $role = $data['status'];
+							
+                        	$u->update(['fname' => $data['fname'],
+                                              'lname' => $data['lname'],
+                                              'email' => $data['email'],
+                                              'phone' => $data['phone'],
+                                              'role' => $role,
+                                              'status' => $status,
+                                              #'verified' => $data['verified'],
+                                           ]);
+										   
+							$this->updateShippingDetails($user,$data);
+                                           
+                                           $ret = "ok";
+                        }                                    
+               }                                 
+                  return $ret;                               
+           }
+
+           function updateShippingDetails($user, $data)
+           {		
+				$company = isset($data['company']) ? $data['company'] : "";
+
+				$ss = ShippingDetails::where('user_id', $data['xf'])->first();
+				
+				if(is_null($ss))
+				{
+					$shippingDetails =  ShippingDetails::create(['user_id' => $user->id,                                                                                                          
+                                                      'company' => $company, 
+                                                      'address' => $data['address'],
+                                                     'city' => $data['city'],
+                                                'state' => $data['state'],
+                                              'zipcode' => $data['zip'] 
+                                                      ]);	
+				}
+				else
+				{
+					$ss->update(['company' => $company, 
+                                                      'address' => $data['address'],
+                                                     'city' => $data['city'],
+                                                'state' => $data['state'],
+                                              'zipcode' => $data['zip'] 
+                                                      ]);	
+				}
+					
+           }		   
 		   
    
 }

@@ -61,29 +61,20 @@
 #banner {
 	
 }
+
 </style>
+<?php echo $__env->yieldContent('styles'); ?>
+<!--jQuery--> 
+<script src="js/jquery.min.js"></script> 
+<!--SweetAlert--> 
+<script src="lib/sweet-alert/all.js"></script>
 </head>
 <body>
 <!--start of loader-->
 <div id="preloader">
   <div id="status"></div>
 </div>
-<!--end of loader--> <!--start of style switcher-->
-<div class="switcher-container"> <a id="switcher" class="hide-panel ion-ios-settings"></a>
-  <div class="colors-panel">
-    <ul class="colors-list">
-      <li><a id="custom-gold" class="gold" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-red" class="red" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-green" class="green" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-blue" class="blue" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-orange" class="orange" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-purple" class="purple" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-turquoise" class="turquoise" title="switch styling" href="javascript: void(0)"></a></li>
-      <li><a id="custom-pink" class="pink" title="switch styling" href="javascript: void(0)"></a></li>
-    </ul>
-  </div>
-</div>
-<!--end of style switcher--> 
+<!--end of loader-->
 
 <!--start of top sec-->
 <div class="top-sec">
@@ -98,7 +89,10 @@
         <button class="lno-btn-toggle"> <span class="fa fa-bars"></span> </button>
       </div>
       <div class="row">
-        <div class="col-sm-4 welcome-msg hidden-xs">Welcome to our online store!</div>
+	  <?php
+       $welcomeText = (is_null($user)) ? "Welcome to our online store!" : "Welcome back, ".$user->fname."!";	  
+	  ?>
+        <div class="col-sm-4 welcome-msg hidden-xs"><?php echo e($welcomeText); ?></div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="col-sm-8 collapse navbar-collapse navbar-right" id="line-navbar-collapse-1">
           <ul class="nav navbar-nav top-menu">
@@ -114,9 +108,13 @@
                 <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="<?php echo e(url('cart')); ?>">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="<?php echo e(url('checkout')); ?>">Checkout</a> </li>
               </ul>
             </li>
-          
+           <?php if(is_null($user)): ?>
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> login</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="<?php echo e(url('register')); ?>">Register</a></li>
+		   <?php else: ?>
+            <li><a href="<?php echo e(url('dashboard')); ?>">Dashboard</a></li>
+            <li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>
+		   <?php endif; ?>
             <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu" role="menu">
       
@@ -342,6 +340,35 @@
   </nav>
   <!-- end of navigation --> 
   
+   <!--------- Cookie consent-------------->
+        	<?php echo $__env->make('cookie-consent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
+        <!--------- Session notifications-------------->
+        	<?php
+               $pop = ""; $val = "";
+               
+               if(isset($signals))
+               {
+                  foreach($signals['okays'] as $key => $value)
+                  {
+                    if(session()->has($key))
+                    {
+                  	$pop = $key; $val = session()->get($key);
+                    }
+                 }
+              }
+              
+             ?> 
+
+                 <?php if($pop != "" && $val != ""): ?>
+                   <?php echo $__env->make('session-status',['pop' => $pop, 'val' => $val], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                 <?php endif; ?>
+        	<!--------- Input errors -------------->
+                    <?php if(count($errors) > 0): ?>
+                          <?php echo $__env->make('input-errors', ['errors'=>$errors], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                     <?php endif; ?> 
+  
+  
  <?php echo $__env->yieldContent('content'); ?>
  
 
@@ -376,7 +403,7 @@
               <hr>
               <h5 class="text-info text-uppercase">User section</h5>
               <ul class="list-unstyled nudge">
-                <li><a href="<?php echo e(url('login')); ?>">Sign in</a> </li>
+                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#login-box">Sign in</a> </li>
                 <li><a href="<?php echo e(url('register')); ?>">Create account</a> </li>
               </ul>
               <hr class="hidden-md hidden-lg hidden-sm">
@@ -450,24 +477,26 @@
             <li class="col-sm-4"> <a href="#" class="btn btn-block btn-google" ><i class="ion-social-google"></i></a></li>
           </ul>
           <hr>
-          <form method="post" id="login-form" action="#" accept-charset="UTF-8">
+          <form method="post" id="login-form" action="<?php echo e(url('login')); ?>" accept-charset="UTF-8">
+		   <?php echo csrf_field(); ?>
+
             <div class=" form-group">
-              <label class="control-label" for="login-name">Your name</label>
-              <input type="text" class="form-control" value="" name="login[name]" id="login-name" required>
+              <label class="control-label" for="login-name">Email address or phone number</label>
+              <input type="text" class="form-control" value="" name="id" id="login-name" required>
             </div>
             <div class="form-group">
               <label class="control-label text-uppercase" for="login-password">Your password</label>
-              <input type="password" class="form-control" value="" name="login[password]" id="login-password" required>
+              <input type="password" class="form-control" value="" name="pass" id="login-password" required>
             </div>
             <div class="checkbox">
-              <input type="checkbox" id="logincheckbox" value="option1" name="logincheckbox">
+              <input type="checkbox" id="logincheckbox" value="option1" name="remember">
               <label for="logincheckbox"> Remember me </label>
             </div>
             <button class="btn btn-block btn-primary hvr-underline-from-center-primary" id="login-submit" type="submit">login</button>
           </form>
         </div>
         <div class="modal-footer">
-          <p class="text-center"><small>Forget your password? <a href="forget-password.html">We can help!</a></small></p>
+          <p class="text-center"><small>Forget your password? <a href="#">We can help!</a></small></p>
         </div>
       </div>
     </div>
@@ -527,8 +556,7 @@
 
 <!--start of js--> 
 
-<!--jQuery--> 
-<script src="js/jquery.min.js"></script> 
+
 <!--custom js--> 
 <script src="js/custom.js"></script> 
 <!--style switcher--> 
@@ -568,6 +596,8 @@
 <script src="js/salvattore.js"></script> 
 <!--tab collapse--> 
 <script src="js/bootstrap-tabcollapse.js"></script> 
+
+<?php echo $__env->yieldContent('scripts'); ?>
 <!--end of js-->
 </body>
 </html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
