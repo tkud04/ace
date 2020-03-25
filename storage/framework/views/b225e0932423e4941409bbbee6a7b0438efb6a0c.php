@@ -110,7 +110,6 @@
             </li>
            <?php if(is_null($user)): ?>
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> login</a></li>
-            <li><a href="<?php echo e(url('register')); ?>">Register</a></li>
 		   <?php else: ?>
             <li><a href="<?php echo e(url('dashboard')); ?>">Dashboard</a></li>
             <li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>

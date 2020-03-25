@@ -75,8 +75,19 @@ class MainController extends Controller {
 	 */
 	public function getProduct(Request $request)
     {
-        $ret = null;
-		$secure = null;
+        $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
+		$c = $this->helpers->categories;
+		$signals = $this->helpers->signals;
+		
+    	
+		
 		$req = $request->all();
 	    //dd($secure);
 		$validator = Validator::make($req, [
@@ -92,7 +103,8 @@ class MainController extends Controller {
                 
                  else
                  {
-                    return view("product",compact(['secure']));					 
+					 $product = $this->helpers->getProduct($req["sku"]);
+                    return view("product",compact(['user','cart','c','product','signals']));			 
                  }			 
     	
     }

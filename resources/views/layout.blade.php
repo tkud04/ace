@@ -110,7 +110,6 @@
             </li>
            @if(is_null($user))
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> login</a></li>
-            <li><a href="{{url('register')}}">Register</a></li>
 		   @else
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
             <li><a href="{{url('signout')}}">Sign out</a></li>
