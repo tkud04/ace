@@ -13,6 +13,7 @@
 <!-- Bootstrap styles-->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!--custom styles-->
+<link href="css/custom.css" rel="stylesheet" />
 <link href="css/custom-pink.css" rel="stylesheet" />
 <link href="css/custom-turquoise.css" rel="stylesheet" />
 <link href="css/custom-purple.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-touch-icon-60x60.png">
 <link rel="icon" type="image/png" href="favicon/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="favicon/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="favicon/manifest.json">
 
 <style type="text/css">
 .overlay-effect {
@@ -459,6 +459,12 @@
         </div>
       </div>
     </footer>
+	<div class="whatsapp-btn">
+	  <a href="javascript:void(0)" data-toggle="modal" data-target="#whatsapp-box" class="btn btn-sm btn-primary">Need help? <b>Chat with us</b></a>
+	  <a href="javascript:void(0)" data-toggle="modal" data-target="#whatsapp-box">
+	    <span><i class="ion-social-whatsapp"></i></span>
+	  </a>
+	</div>
   </div>
   <!--end of btm sec--> 
   
@@ -497,6 +503,28 @@
         </div>
         <div class="modal-footer">
           <p class="text-center"><small>Forget your password? <a href="#">We can help!</a></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end of login box--> 
+
+  <!--start of whatsapp box-->
+  <div class="whatsapp-box modal fade" id="whatsapp-box" tabindex="-1" role="dialog" aria-labelledby="loginboxLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="tw">&times;</span></button>
+          <h4 class="modal-title tw text-uppercase" id="loginboxLabel" >start a conversation</h4>
+		  <h6 class="tw">Click one any of numbers listed beow to chat on Whatsapp:</h6>
+        </div>
+        <div class="modal-body">
+          <ul class="list-inline row">
+            <li class="col-sm-12"> <a href="https://web.whatsapp.com/send?phone=2347054291601" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <p class="text-center"><small>The team usually reply in a few minutes</small></p>
         </div>
       </div>
     </div>

@@ -37,7 +37,15 @@ class Helper implements HelperContract
                    ];
 
 public $categories = [
-    'anklets' => [
+    'watches' => [
+          ['name' => "Category_1",'url' => "#",'special' => "popular"],
+          ['name' => "Category_2",'url' => "#",'special' => ""],
+          ['name' => "Category_3",'url' => "#",'special' => ""],
+          ['name' => "Category_4",'url' => "#",'special' => "hot"],
+          ['name' => "Category_5",'url' => "#",'special' => ""],
+          ['name' => "Category_6",'url' => "#",'special' => "trending"],
+	     ],
+	'anklets' => [
           ['name' => "Category_1",'url' => "#",'special' => ""],
           ['name' => "Category_2",'url' => "#",'special' => ""],
           ['name' => "Category_3",'url' => "#",'special' => ""],
