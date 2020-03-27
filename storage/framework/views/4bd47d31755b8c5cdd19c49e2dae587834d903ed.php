@@ -86,6 +86,8 @@
                       </div>
                     </div>
                     <div class="col-sm-6 sub-info">
+					 <input type="hidden" id="sku" value="<?php echo e($product['sku']); ?>">
+					 <input type="hidden" id="cu" value="<?php echo e($cu); ?>">
                       <div class="product-name">
                         <h5 class="text-primary text-uppercase"><?php echo e($sku); ?></h5>
                       </div>
@@ -102,10 +104,10 @@
                         <h5 class="text-primary text-uppercase">select quantity</h5>
                         <div class="qty-btngroup clearfix pull-left">
                           <button type="button" class="minus">-</button>
-                          <input type="text" value="1">
+                          <input type="text" id="qty" value="1">
                           <button type="button" class="plus">+</button>
                         </div>
-                        <a href="#" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
+                        <a href="#" id="add-to-cart-btn" onclick="addToCart(); return false;" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
                     </div>
                   </div>
                   <hr>

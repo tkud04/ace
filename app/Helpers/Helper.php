@@ -32,6 +32,7 @@ class Helper implements HelperContract
                      "config-status" => "Config added/updated!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
                      "add-review-status" => "Thank you for your review!",
+                     "add-to-cart-status" => "Added to cart!",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
 					 "signup-status-error" => "There was a problem creating your account, please contact support.",
@@ -39,6 +40,7 @@ class Helper implements HelperContract
 					 "update-status-error" => "There was a problem updating the account, please contact support.",
 					 "contact-status-error" => "There was a problem sending your message, please contact support.",
 					 "add-review-status-error" => "There was a problem sending your review, please contact support.",
+					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please contact support.",
                     ]
                    ];
 
@@ -415,12 +417,7 @@ $subject = $data['subject'];
                     	$temp = [];
                	     $temp['id'] = $c->id; 
                         $temp['sku'] = $c->sku; 
-                        $temp['deal'] = $this->getDeal($c->sku);
                         $temp['qty'] = $c->qty; 
-						$temp['color'] = $c->color; 
-                        $temp['size'] = $c->size; 
-                        $temp['bid'] = Bids::where('auction_id', $c->auction_id)->where('user_id', $user->id)->first(); 
-                        $temp['type'] = $c->type; 
                         array_push($ret, $temp); 
                    }
                }                                 
@@ -711,6 +708,17 @@ $subject = $data['subject'];
 				  }
                }                         
                                   
+                return $ret;
+           }
+		   
+		   
+		   function addToCart($data)
+           {
+           	$ret = Carts::create(['user_id' => $data['user_id'], 
+                                                      'sku' => $data['sku'], 
+                                                      'qty' => $data['qty']
+                                                      ]);
+                                                      
                 return $ret;
            }
    

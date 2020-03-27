@@ -313,3 +313,13 @@ function populateQV(sku,description,amount,oldAmount,inStock,img){
         $("#quickviewboxOldAmount").html(oldAmount);
         $("#quickviewboxImg").attr("src",img);
 }
+
+function addToCart(){
+       let qty = $('#qty').val();
+	   console.log("qty: ",qty);
+	   
+	   let cu = $('#cu').val();
+	   cu += "&qty=" + qty;
+	   console.log("cu: ",cu);
+	   window.location = cu;
+}
