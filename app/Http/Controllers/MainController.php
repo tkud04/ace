@@ -95,6 +95,7 @@ class MainController extends Controller {
 		}
 		
 		$c = $this->helpers->categories;
+		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
 		
     	
@@ -115,7 +116,8 @@ class MainController extends Controller {
                  else
                  {
 					 $product = $this->helpers->getProduct($req["sku"]);
-                    return view("product",compact(['user','cart','c','product','signals']));			 
+					// dd($product);
+                    return view("product",compact(['user','cart','c','cc','product','signals']));			 
                  }			 
     	
     }

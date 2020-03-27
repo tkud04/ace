@@ -1,12 +1,12 @@
-<?php $__env->startSection('title',"Product Details"); ?>
+<?php $__env->startSection('title',$product['sku']); ?>
 
 <?php $__env->startSection('content'); ?>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">product details</h2>
-        <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+        <h2 class="text-primary text-uppercase"><?php echo e($product['sku']); ?></h2>
+        <p>View more information about this product.</p>
       </div>
     </div>
     <section class="container">
@@ -22,57 +22,20 @@
               <section>
                 <h5 class="sub-title text-info text-uppercase">Categories</h5>
                 <ul class="list-group nudge">
-                  <li class="list-group-item"><a href="#" style="padding-left: 0px;">Cras justo odio</a></li>
-                  <li class="list-group-item"><a href="#">Dapibus ac facilisis in</a><span class="label label-info pull-right">20% off</span></li>
-                  <li class="list-group-item"><a href="#">Morbi leo risus</a></li>
-                  <li class="list-group-item"><a href="#">Porta ac consectetur ac</a></li>
-                  <li class="list-group-item"><a href="#">Vestibulum at eros</a></li>
+				<?php
+				  $i = 0;
+				 foreach($cc as $key => $value)
+				 {
+					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
+					 $uu = url('shop')."?category=".$key;
+				?>
+                  <li class="list-group-item"><a href="<?php echo e($uu); ?>"<?php echo e($style); ?>><?php echo e($value); ?></a></li>
+				<?php
+				 }
+				?>
+                  
                 </ul>
-              </section>
-              <section>
-                <h5 class="sub-title text-info text-uppercase">price range</h5>
-                <span>$10</span>
-                <div class="slider slider-horizontal" style="width: 174px;"><div class="slider-track"><div class="slider-selection" style="left: 0%; width: 49.4949%;"></div><div class="slider-handle round" style="left: 0%;"></div><div class="slider-handle round" style="left: 49.4949%;"></div></div><div class="tooltip top" style="top: -30px; left: 12.5707px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">10 : 500</div></div><input id="price-slider" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[10,500]" style=""></div>
-                <span>$1000</span> </section>
-              <section>
-                <h5 class="sub-title text-info text-uppercase">preffered color</h5>
-                <ul class="list-inline color">
-                  <li><a class="color-1" href="#"></a></li>
-                  <li><a class="color-2" href="#"></a></li>
-                  <li><a class="color-3" href="#"></a></li>
-                  <li><a class="color-4" href="#"></a></li>
-                  <li><a class="color-5" href="#"></a></li>
-                  <li><a class="color-6" href="#"></a></li>
-                  <li><a class="color-7" href="#"></a></li>
-                  <li><a class="color-8" href="#"></a></li>
-                  <li><a class="color-9" href="#"></a></li>
-                  <li><a class="color-10" href="#"></a></li>
-                  <li><a class="color-11" href="#"></a></li>
-                  <li><a class="color-12" href="#"></a></li>
-                  <li><a href="#" class="color-13"></a></li>
-                </ul>
-              </section>
-              <section>
-                <h5 class="sub-title text-info text-uppercase">choose size</h5>
-                <ul class="list-inline size text-uppercase">
-                  <li><a href="#">s</a></li>
-                  <li><a href="#">m</a></li>
-                  <li><a href="#">l</a></li>
-                  <li><a href="#">xl</a></li>
-                  <li><a href="#">xxl</a></li>
-                  <li><a href="#">slimfit</a></li>
-                  <li><a href="#">onesize</a></li>
-                </ul>
-              </section>
-              <section>
-                <h5 class="sub-title text-info text-uppercase">Manufacturer</h5>
-                <ul class="list-group nudge">
-                  <li class="list-group-item"><a href="#">Zara</a> <span class="pull-right">(22)</span></li>
-                  <li class="list-group-item"><a href="#">H&amp;M</a> <span class="pull-right">(10)</span></li>
-                  <li class="list-group-item"><a href="#">Christopher Kane</a> <span class="pull-right">(19)</span></li>
-                  <li class="list-group-item"><a href="#">Christian Dior</a> <span class="pull-right">(31)</span></li>
-                </ul>
-              </section>
+              </section>        
               <section> <img width="820" height="703" alt="" src="images/banner4.jpg" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
@@ -82,87 +45,62 @@
               <div class="row">
                 <div class="col-sm-12">
                   <ol class="breadcrumb  dashed-border">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Men</a></li>
-                    <li class="active">Product Details</li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                    <li><a href="<?php echo e(url('shop')); ?>">Shop</a></li>
+                    <li class="active"><?php echo e($product['sku']); ?></li>
                   </ol>
                 </div>
                 <!--start of product details-->
-                
+                <?php
+				   $sku = $product['sku'];
+			   $uu = url('product')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku;
+			   $wu = url('add-to-wishlist')."?sku=".$sku;
+			   $ccu = url('add-to-compare')."?sku=".$sku;
+			   $pd = $product['pd'];
+			   $description = $pd['description'];
+			   $in_stock = $pd['in_stock'];
+			   $amount = $pd['amount'];
+				  $imggs = $product['imggs'];
+				?>
                 <div class="col-sm-12 product-details">
                   <div class="row">
                     <div class="col-sm-6">
                       <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
                         <div class="carousel-inner">
-                          <div class="item active"><span class="inner-zoom" style="position: relative; overflow: hidden;"><img class="img-responsive" src="images/p-details-z-1.jpg" width="700" height="700" alt=""><img src="images/p-details-z-1.jpg" class="zoomImg" style="position: absolute; top: -270.367px; left: -6.04768px; opacity: 0; width: 700px; height: 700px; border: none; max-width: none; max-height: none;"></span></div>
-                          <div class="item"> <span class="inner-zoom" style="position: relative; overflow: hidden;"><img class="img-responsive" src="images/p-details-z-2.jpg" width="700" height="700" alt=""><img src="images/p-details-z-2.jpg" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 700px; height: 700px; border: none; max-width: none; max-height: none;"></span> </div>
-                          <div class="item"><span class="inner-zoom" style="position: relative; overflow: hidden;"> <img class="img-responsive" src="images/p-details-z-3.jpg" width="700" height="700" alt=""> <img src="images/p-details-z-3.jpg" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 700px; height: 700px; border: none; max-width: none; max-height: none;"></span></div>
-                          <div class="item"> <span class="inner-zoom" style="position: relative; overflow: hidden;"><img class="img-responsive" src="images/p-details-z-4.jpg" width="700" height="700" alt=""> <img src="images/p-details-z-4.jpg" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 700px; height: 700px; border: none; max-width: none; max-height: none;"></span></div>
+						   <?php
+						   for($k = 0; $k < count($imggs); $k++)
+						   {
+							   $class = $k == 0 ? "item active" : "item";
+						   ?>
+                           <div class="<?php echo e($class); ?>"><span class="inner-zoom" style="position: relative; overflow: hidden;"><img class="img-responsive" src="<?php echo e($imggs[$k]); ?>" width="700" height="700" alt=""><img src="<?php echo e($imggs[$k]); ?>" class="zoomImg" style="position: absolute; top: -270.367px; left: -6.04768px; opacity: 0; width: 700px; height: 700px; border: none; max-width: none; max-height: none;"></span></div>
+					       <?php
+						   }
+						   ?>
                         </div>
                         <div class="carousel-link clearfix">
-                          <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="images/p-details-z-1.jpg" alt=""></div>
-                          <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="images/p-details-z-2.jpg" alt=""></div>
-                          <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="images/p-details-z-3.jpg" alt=""></div>
-                          <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="images/p-details-z-4.jpg" alt=""></div>
-                        </div>
+						  <?php for($j = 0; $j < count($imggs); $j++): ?>
+                          <div data-target="#carousel" data-slide-to="<?php echo e($j); ?>" class="thumb"><img src="<?php echo e($imggs[$j]); ?>" alt="<?php echo e($sku); ?>"></div>
+                          <?php endfor; ?>					  
+						</div>
                       </div>
                     </div>
                     <div class="col-sm-6 sub-info">
                       <div class="product-name">
-                        <h5 class="text-primary text-uppercase">Guse duma liza</h5>
+                        <h5 class="text-primary text-uppercase"><?php echo e($sku); ?></h5>
                       </div>
                       <div class="product-review">
                         <p><a href="#"><small>Be the first to review this product</small></a></p>
                       </div>
                       <div class="product-description">
                         <h5 class="text-primary text-uppercase">Quick Overview</h5>
-                        <p> At vero eos et accusamus et iusto odio quos dolores sint occaecati cupiditate non provident, similique sunt in culpa dignis simos</p>
+                        <p> <?php echo e($description); ?></p>
                       </div>
                       <div class="product-availability in-stock">
-                        <p>Availability: <span class="text-info">In Stock</span></p>
+                        <p>Availability: <span class="text-info"><?php echo e($in_stock); ?></span></p>
                       </div>
-                      <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>$365</strong></span> <span class="pull-left btn btn-link"><del>$400</del></span> </div>
-                      <div class="product-size">
-                        <h5 class="text-primary text-uppercase">select size</h5>
-                        <form role="form">
-                          <fieldset>
-                            <div class="radio radio-inline">
-                              <input type="radio" id="inlineRadio-s" value="option1" name="radioInline" checked="">
-                              <label for="inlineRadio-s"> S </label>
-                            </div>
-                            <div class="radio radio-inline">
-                              <input type="radio" id="inlineRadio-m" value="option2" name="radioInline">
-                              <label for="inlineRadio-m"> M </label>
-                            </div>
-                            <div class="radio radio-inline">
-                              <input type="radio" id="inlineRadio-l" value="option3" name="radioInline">
-                              <label for="inlineRadio-l"> L </label>
-                            </div>
-                            <div class="radio radio-inline">
-                              <input type="radio" id="inlineRadio-xl" value="option0" name="radioInline0">
-                              <label for="inlineRadio-xl"> XL </label>
-                            </div>
-                            <span class="pull-right"><a href="javascript:void(0)" data-toggle="modal" data-target="#choosing-size-box"><small>Need help in choosing size?</small></a></span>
-                          </fieldset>
-                        </form>
-                        <div class="product-colors">
-                          <h5 class="text-primary text-uppercase">select color</h5>
-                          <select name="colorpicker-bootstrap3-form" id="colorpicker-bootstrap3-form" class="form-control" style="display: none;">
-                            <option value="#7bd148">Green</option>
-                            <option value="#5484ed">Bold blue</option>
-                            <option value="#a4bdfc">Blue</option>
-                            <option value="#46d6db">Turquoise</option>
-                            <option value="#7ae7bf">Light green</option>
-                            <option value="#51b749">Bold green</option>
-                            <option value="#fbd75b">Yellow</option>
-                            <option value="#ffb878">Orange</option>
-                            <option value="#ff887c">Red</option>
-                            <option value="#dc2127">Bold red</option>
-                            <option value="#dbadff">Purple</option>
-                            <option value="#e1e1e1">Gray</option>
-                          </select><span class="simplecolorpicker inline ionicons"><span class="color" title="Green" style="background-color: #7bd148;" data-color="#7bd148" data-selected="" role="button" tabindex="0"></span><span class="color" title="Bold blue" style="background-color: #5484ed;" data-color="#5484ed" role="button" tabindex="0"></span><span class="color" title="Blue" style="background-color: #a4bdfc;" data-color="#a4bdfc" role="button" tabindex="0"></span><span class="color" title="Turquoise" style="background-color: #46d6db;" data-color="#46d6db" role="button" tabindex="0"></span><span class="color" title="Light green" style="background-color: #7ae7bf;" data-color="#7ae7bf" role="button" tabindex="0"></span><span class="color" title="Bold green" style="background-color: #51b749;" data-color="#51b749" role="button" tabindex="0"></span><span class="color" title="Yellow" style="background-color: #fbd75b;" data-color="#fbd75b" role="button" tabindex="0"></span><span class="color" title="Orange" style="background-color: #ffb878;" data-color="#ffb878" role="button" tabindex="0"></span><span class="color" title="Red" style="background-color: #ff887c;" data-color="#ff887c" role="button" tabindex="0"></span><span class="color" title="Bold red" style="background-color: #dc2127;" data-color="#dc2127" role="button" tabindex="0"></span><span class="color" title="Purple" style="background-color: #dbadff;" data-color="#dbadff" role="button" tabindex="0"></span><span class="color" title="Gray" style="background-color: #e1e1e1;" data-color="#e1e1e1" role="button" tabindex="0"></span></span>
-                        </div>
-                      </div>
+                      <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>&#8358;<?php echo e(number_format($amount, 2)); ?></strong></span> <span class="pull-left btn btn-link"><del>&#8358;<?php echo e(number_format($amount + 1000, 2)); ?></del></span> </div>
+                     
                       <div class="product-quantity">
                         <h5 class="text-primary text-uppercase">select quantity</h5>
                         <div class="qty-btngroup clearfix pull-left">

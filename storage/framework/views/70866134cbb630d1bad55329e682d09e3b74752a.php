@@ -86,26 +86,8 @@
 			   $description = $pd['description'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
-			   
-			    $images = $n['imgs'];
-                                      $imggs = [];
-                         
-                                      if(count($images) < 1) { $imggs = ["img/no-image.png"]; }
-                                      else{
-                                      	$ird = $images[0]['url'];
-										if($ird == "none")
-										{
-											$imggs = ["img/no-image.png"];
-										}
-										else
-										{
-                                      	  for($x = 0; $x < count($images); $x++)
-										  {
-                                      	   $imgg = "https://res.cloudinary.com/dahkzo84h/image/upload/v1585236664/".$ird;
-                                           array_push($imggs,$imgg); 
-                                          }
-										}
-                                      }
+			   $imggs = $n['imggs'];
+			    
 		  ?>
 		    <!--start of product item container-->
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">

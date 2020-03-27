@@ -98,6 +98,15 @@ public $categories = [
 	     ]
   ];
   
+   public $categories_2 = ['watches' => "Watches",
+			                      'anklets' => "Anklets",
+								  'bracelets' => "Bracelets",
+								  'brooches' => "Brooches",
+								  'earrings' => "Ear Rings",
+								  'necklaces' => "Necklaces",
+								  'rings' => "Rings"
+								  ];
+  
   
   public $states = [
 			                       'abia' => 'Abia',
@@ -570,7 +579,8 @@ $subject = $data['subject'];
 				  $temp['sku'] = $product->sku;
 				  $temp['status'] = $product->status;
 				  $temp['pd'] = $this->getProductData($product->sku);
-				  $temp['imgs'] = $this->getProductImages($product->sku);
+				  $imgs = $this->getProductImages($product->sku);
+				  $temp['imggs'] = $this->getCloudinaryImages($imgs);
 				  $ret = $temp;
                }                         
                                                       
@@ -617,6 +627,33 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+		   function getCloudinaryImages($dt)
+		   {
+			   $ret = [];
+                         
+               if(count($dt) < 1) { $ret = ["img/no-image.png"]; }
+               
+			   else
+			   {
+                   $ird = $dt[0]['url'];
+				   if($ird == "none")
+					{
+					   $ret = ["img/no-image.png"];
+					}
+				   else
+					{
+                       for($x = 0; $x < count($dt); $x++)
+						 {
+							 $ird = $dt[$x]['url'];
+                            $imgg = "https://res.cloudinary.com/dahkzo84h/image/upload/v1585236664/".$ird;
+                            array_push($ret,$imgg); 
+                         }
+					}
+                }
+				
+				return $ret;
+		   }
 		   
 		   function getNewArrivals()
            {
