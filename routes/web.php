@@ -36,3 +36,5 @@ Route::get('signout', 'LoginController@getLogout');
 Route::get('dashboard', 'MainController@getDashboard');
 Route::get('profile', 'MainController@getProfile');
 Route::post('profile', 'MainController@postProfile');
+
+Route::post('add-review', 'MainController@postAddReview');

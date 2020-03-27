@@ -12,6 +12,7 @@ use App\Carts;
 use App\Products;
 use App\ProductData;
 use App\ProductImages;
+use App\Reviews;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -30,12 +31,14 @@ class Helper implements HelperContract
                      "update-status" => "Account updated!",
                      "config-status" => "Config added/updated!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
+                     "add-review-status" => "Thank you for your review!",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
 					 "signup-status-error" => "There was a problem creating your account, please contact support.",
 					 "profile-status-error" => "There was a problem updating your profile, please contact support.",
 					 "update-status-error" => "There was a problem updating the account, please contact support.",
 					 "contact-status-error" => "There was a problem sending your message, please contact support.",
+					 "add-review-status-error" => "There was a problem sending your review, please contact support.",
                     ]
                    ];
 
@@ -666,6 +669,45 @@ $subject = $data['subject'];
 				  {
 					  $pp = $this->getProduct($p->sku);
 					  array_push($ret,$pp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
+		   
+		   function createReview($data)
+           {
+           	$ret = Reviews::create(['user_id' => $data['user_id'], 
+                                                      'sku' => $data['sku'], 
+                                                      'price' => $data['price'], 
+                                                      'quality' => $data['quality'], 
+                                                      'value' => $data['value'],
+                                                      'name' => $data['name'],
+                                                      'review' => $data['review'],
+                                                      ]);
+                                                      
+                return $ret;
+           }
+		   
+		   function getReviews($sku)
+           {
+           	$ret = [];
+              $reviews = Reviews::where('sku',$sku)->get();
+ 
+              if($reviews != null)
+               {
+				  foreach($reviews as $r)
+				  {
+					  $temp = [];
+					  $temp['id'] = $r->id;
+					  $temp['user_id'] = $r->user_id;
+					  $temp['sku'] = $r->sku;
+					  $temp['price'] = $r->price;
+					  $temp['quality'] = $r->quality;
+					  $temp['value'] = $r->value;
+					  $temp['name'] = $r->name;
+					  $temp['review'] = $r->review;
+					  array_push($ret,$temp);
 				  }
                }                         
                                   

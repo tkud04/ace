@@ -91,9 +91,6 @@
                       <div class="product-name">
                         <h5 class="text-primary text-uppercase">{{$sku}}</h5>
                       </div>
-                      <div class="product-review">
-                        <p><a href="#"><small>Be the first to review this product</small></a></p>
-                      </div>
                       <div class="product-description">
                         <h5 class="text-primary text-uppercase">Quick Overview</h5>
                         <p> {{$description}}</p>
@@ -125,7 +122,7 @@
                     <!-- Nav tabs -->
                     
                     <ul id="product-tabs" class="nav nav-tabs text-uppercase" role="tablist">
-                      <li role="presentation" class="active"><a href="#descreption" aria-controls="descreption" role="tab" data-toggle="tab">Descreption</a></li>
+                      <li role="presentation" class="active"><a href="#descreption" aria-controls="descreption" role="tab" data-toggle="tab">Description</a></li>
                       <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
                       <li role="presentation"><a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Add your review</a></li>
                     </ul>
@@ -133,65 +130,50 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div role="tabpanel" class=" tab-pane product-pane fade in active clearfix" id="descreption">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ante. Mauris eleifend, quam a vulputate dictum, massa quam dapibus leo, eget vulputate orci purus ut lorem. In fringilla mi in ligula. Pellentesque aliquam quam vel dolor. Nunc adipiscing. Sed quam odio, tempus ac, aliquam molestie, varius ac, tellus. Vestibulum ut nulla aliquam risus rutrum interdum.</p>
-                        <p> Pellentesque lorem. Curabitur sit amet erat quis risus feugiat viverra. Pellentesque augue justo, sagittis et, lacinia at, venenatis non, arcu. Nunc nec libero. In cursus dictum risus. Etiam tristique nisl a
-                          
-                          Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which has since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. </p>
+                        <p>{{$description}} </p>
                       </div>
                       <div role="tabpanel" class=" tab-pane product-pane fade in clearfix" id="reviews">
+					   <?php
+						foreach($reviews as $r)
+						{
+							$name = $r['name'];
+							$review = $r['review'];
+						?>
                         <div class="single-review clearfix">
-                          <h5 class="text-primary">Aliquam lorem ante <small class=" text-info"><strong>20 minutes ago, 2015</strong></small> </h5>
+						<h5 class="text-primary">{{$name}} <small class=" text-info"><strong>{{date("jS F, Y")}}</strong></small> </h5>
                           <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
-                          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                          <p>{{$review}}</p>
                           <hr>
                         </div>
-                        <div class="single-review clearfix">
-                          <h5 class="text-primary">Client Review <small class=" text-info"><strong>February 18, 2015</strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit nisl in adipiscin</p>
-                          <hr>
-                        </div>
-                        <div class="single-review clearfix">
-                          <h5 class="text-primary">Client Review <small class=" text-info"><strong>February 21, 2015</strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit nisl in adipiscin</p>
-                          <hr>
-                        </div>
-                        <div class="single-review clearfix">
-                          <h5 class="text-primary">Client Review <small class=" text-info"><strong>March 17, 2015</strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit nisl in adipiscin</p>
-                          <hr>
-                        </div>
-                        <div class="single-review clearfix">
-                          <h5 class="text-primary">Client Review <small class=" text-info"><strong>March 17, 2015</strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit nisl in adipiscin</p>
-                        </div>
+                        <?php
+						}
+						?>
                       </div>
                       <div role="tabpanel" class=" tab-pane product-pane fade in clearfix" id="tags">
-                        <form role="form">
+                        <form role="form" method="post" action="{{url('add-review')}}">
+							{!! csrf_field() !!}
+							<input type="hidden" name="sku" value="{{$product['sku']}}">
                           <fieldset>
                             <h5 class="sub-title text-primary text-uppercase">price</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio1" value="option1" name="radioInline1">
+                                <input type="radio" id="inlineRadio1" value="1" name="price">
                                 <label class="control-label" for="inlineRadio5"> 1 Star</label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="option2" name="radioInline1">
+                                <input type="radio" id="inlineRadio2" value="2" name="price">
                                 <label class="control-label" for="inlineRadio2"> 2 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio3" value="option3" name="radioInline1">
+                                <input type="radio" id="inlineRadio3" value="3" name="price">
                                 <label class="control-label" for="inlineRadio3"> 3 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio4" value="option4" name="radioInline1">
+                                <input type="radio" id="inlineRadio4" value="4" name="price">
                                 <label class="control-label" for="inlineRadio4"> 4 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio5" value="option5" name="radioInline1">
+                                <input type="radio" id="inlineRadio5" value="5" name="price">
                                 <label class="control-label" for="inlineRadio5"> 5 Stars </label>
                               </div>
                             </div>
@@ -200,23 +182,23 @@
                             <h5 class="sub-title text-primary text-uppercase">quality</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio6" value="option6" name="radioInline2">
+                                <input type="radio" id="inlineRadio6" value="1" name="quality">
                                 <label class="control-label" for="inlineRadio6"> 1 Star</label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio7" value="option7" name="radioInline2">
+                                <input type="radio" id="inlineRadio7" value="2" name="quality">
                                 <label class="control-label" for="inlineRadio7"> 2 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio8" value="option8" name="radioInline2">
+                                <input type="radio" id="inlineRadio8" value="3" name="quality">
                                 <label class="control-label" for="inlineRadio8"> 3 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio9" value="option9" name="radioInline2">
+                                <input type="radio" id="inlineRadio9" value="4" name="quality">
                                 <label class="control-label" for="inlineRadio9"> 4 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio10" value="option10" name="radioInline2">
+                                <input type="radio" id="inlineRadio10" value="5" name="quality">
                                 <label class="control-label" for="inlineRadio10"> 5 Stars </label>
                               </div>
                             </div>
@@ -225,23 +207,23 @@
                             <h5 class="sub-title text-primary text-uppercase">value</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio11" value="option11" name="radioInline3">
+                                <input type="radio" id="inlineRadio11" value="1" name="value">
                                 <label class="control-label" for="inlineRadio11"> 1 Star</label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio12" value="option12" name="radioInline3">
+                                <input type="radio" id="inlineRadio12" value="2" name="value">
                                 <label class="control-label" for="inlineRadio12"> 2 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio13" value="option13" name="radioInline3">
+                                <input type="radio" id="inlineRadio13" value="3" name="value">
                                 <label class="control-label" for="inlineRadio13"> 3 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio14" value="option14" name="radioInline3">
+                                <input type="radio" id="inlineRadio14" value="4" name="value">
                                 <label class="control-label" for="inlineRadio14"> 4 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio15" value="option15" name="radioInline3">
+                                <input type="radio" id="inlineRadio15" value="5" name="value">
                                 <label class="control-label" for="inlineRadio15"> 5 Stars </label>
                               </div>
                             </div>
@@ -251,22 +233,18 @@
                             <div class="col-sm-12">
                               <div class="form-group">
                                 <label class="control-label" for="exampleInputName">Your Name <span class="req">*</span></label>
-                                <input type="text" placeholder="" id="exampleInputName" class="form-control txt">
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label" for="exampleInputSummary">Summary <span class="req">*</span></label>
-                                <input type="text" placeholder="" id="exampleInputSummary" class="form-control txt">
+                                <input type="text" placeholder="" name="name" id="exampleInputName" class="form-control txt">
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="control-label" for="exampleInputReview">Review <span class="req">*</span></label>
-                                <textarea placeholder="" rows="4" id="exampleInputReview" class="form-control"></textarea>
+                                <textarea placeholder="" rows="4" name="review" id="exampleInputReview" class="form-control"></textarea>
                               </div>
                             </div>
                           </div>
                           <div class="action">
-                            <button class="btn btn-primary hvr-underline-from-center-primary">SUBMIT REVIEW</button>
+                            <button type="submit" class="btn btn-primary hvr-underline-from-center-primary">SUBMIT REVIEW</button>
                           </div>
                         </form>
                       </div>
@@ -285,67 +263,48 @@
                     </div>
                     <!--end of big title--> 
                     <!--start of product item container-->
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4  product-item-container effect-wrap effect-animate">
-                      <div class="product-main">
-                        <div class="product-view">
-                          <figure class="double-img"><a href="#"><img class="btm-img" src="images/product-1-h.jpg" width="215" height="240" alt=""> <img class="top-img" src="images/product-3.jpg" width="215" height="240" alt=""></a></figure>
-                          <span class="label offer-label-left">big deal</span> <span class="label offer-label-right">10% sold</span> </div>
-                        <div class="product-btns  effect-content-inner">
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
-                          <p class="effect-icon"> <a data-toggle="modal" data-target="#quick-view-box" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a></p>
+                    <?php
+		   for($i = 0; $i < 3 && $i < count($related); $i++)
+		   {
+			   $n = $related[$i];
+			   $sku = $n['sku'];
+			   $uu = url('product')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku;
+			   $wu = url('add-to-wishlist')."?sku=".$sku;
+			   $ccu = url('add-to-compare')."?sku=".$sku;
+			   $pd = $n['pd'];
+			   $description = $pd['description'];
+			   $in_stock = $pd['in_stock'];
+			   $amount = $pd['amount'];
+			   $imggs = $n['imggs'];
+			    
+		  ?>
+		    <!--start of product item container-->
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
+                          <div class="product-main">
+                            <div class="product-view">
+                              <figure class="double-img"><a href="{{$uu}}"><img class="btm-img" src="{{$imggs[0]}}" width="215" height="240"  alt=""/> <img class="top-img" src="{{$imggs[1]}}" width="215" height="240"  alt=""/></a></figure>
+                            </div>
+                            <div class="product-btns  effect-content-inner">
+                              <p class="effect-icon"> <a href="{{$cu}}" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+                              <p class="effect-icon"> <a href="{{$wu}}" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
+                              <p class="effect-icon"> <a href="{{$ccu}}" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
+                              <p class="effect-icon">
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV('{{$sku}}','{{$description}}','{{$amount}}','{{$amount + 1000}}','{{ucwords($in_stock)}}','{{$imggs[0]}}')" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+							  </p>
+                            </div>
+                          </div>
+                          <div class="product-info">
+                            <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                            <p class="group inner list-group-item-text">{{$description}}</p>
+                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> </div>
+                            <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="product-info">
-                        <h3 class="product-name"><a href="product-details.html">Draped-front wool cardigan</a></h3>
-                      </div>
-                      <div class="product-price"><span class="real-price text-info"><strong>$75.00</strong></span> <span class="old-price">$75.00</span> </div>
-                      <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
-                    </div>
-                    <!--end of product item container--> 
-                    
-                    <!--start of product item container-->
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4  product-item-container effect-wrap effect-animate">
-                      <div class="product-main">
-                        <div class="product-view">
-                          <figure class="double-img"><a href="#"><img class="btm-img" src="images/product-1-h.jpg" width="215" height="240" alt=""> <img class="top-img" src="images/product-1.jpg" width="215" height="240" alt=""></a></figure>
-                          <span class="label offer-label-left">big deal</span> <span class="label offer-label-right">10% sold</span> </div>
-                        <div class="product-btns  effect-content-inner">
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
-                          <p class="effect-icon"> <a data-toggle="modal" data-target="#quick-view-box" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a></p>
-                        </div>
-                      </div>
-                      <div class="product-info">
-                        <h3 class="product-name"><a href="product-details.html">Draped-front wool cardigan</a></h3>
-                      </div>
-                      <div class="product-price"><span class="real-price text-info"><strong>$75.00</strong></span> <span class="old-price">$75.00</span> </div>
-                      <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
-                    </div>
-                    <!--end of product item container--> 
-                    
-                    <!--start of product item container-->
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4  product-item-container effect-wrap effect-animate">
-                      <div class="product-main">
-                        <div class="product-view">
-                          <figure class="double-img"><a href="#"><img class="btm-img" src="images/product-1-h.jpg" width="215" height="240" alt=""> <img class="top-img" src="images/product-2.jpg" width="215" height="240" alt=""></a></figure>
-                          <span class="label offer-label-left">big deal</span> <span class="label offer-label-right">10% sold</span> </div>
-                        <div class="product-btns  effect-content-inner">
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                          <p class="effect-icon"> <a href="#" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
-                          <p class="effect-icon"> <a data-toggle="modal" data-target="#quick-view-box" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a></p>
-                        </div>
-                      </div>
-                      <div class="product-info">
-                        <h3 class="product-name"><a href="product-details.html">Draped-front wool cardigan</a></h3>
-                      </div>
-                      <div class="product-price"><span class="real-price text-info"><strong>$75.00</strong></span> <span class="old-price">$75.00</span> </div>
-                      <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
-                    </div>
-                    <!--end of product item container--> 
+                        <!--end of product item container-->
+			<?php
+			}
+			?>
                     
                   </div>
                 </div>

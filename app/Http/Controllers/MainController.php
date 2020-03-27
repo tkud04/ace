@@ -116,8 +116,10 @@ class MainController extends Controller {
                  else
                  {
 					 $product = $this->helpers->getProduct($req["sku"]);
+					 $reviews = $this->helpers->getReviews($req["sku"]);
+					 $related = $this->helpers->getProducts();
 					// dd($product);
-                    return view("product",compact(['user','cart','c','cc','product','signals']));			 
+                    return view("product",compact(['user','cart','c','cc','reviews','related','product','signals']));			 
                  }			 
     	
     }
@@ -371,6 +373,49 @@ class MainController extends Controller {
          	$this->helpers->updateProfile($user, $req);
 	        session()->flash("profile-status","ok");
 			return redirect()->intended('profile');
+         }        
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postAddReview(Request $request)
+    {
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+		else
+        {
+        	return redirect()->intended('login?return=dashboard');
+        }
+        
+        $req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'price' => 'required',
+                             'quality' => 'required',
+                             'value' => 'required',
+                             'name' => 'required',
+							 'review' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$req["user_id"] = $user->id; 
+         	$this->helpers->createReview($req);
+	        session()->flash("add-review-status","ok");
+			return redirect()->back();
          }        
     }
 	
