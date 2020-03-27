@@ -5,6 +5,10 @@
     margin-bottom: 40px;
 }
 
+a.text-white{
+  color: #fff !important;	
+}
+
 .whatsapp-box .modal-header{
     background: #189d0e;
 }

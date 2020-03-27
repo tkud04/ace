@@ -13,8 +13,6 @@ class ProductData extends Model
      * @var array
      */
     protected $fillable = [
-        'sku', 'description', 'amount', 'colors', 'size', 'in_stock', 'min_bid'
+        'id', 'sku', 'amount', 'description', 'in_stock', 'category'
     ];
-    
-    #protected $table = 'deal_datas';
 }

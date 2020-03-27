@@ -9,6 +9,9 @@ use Auth;
 use App\ShippingDetails;
 use App\User;
 use App\Carts;
+use App\Products;
+use App\ProductData;
+use App\ProductImages;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -537,6 +540,100 @@ $subject = $data['subject'];
 					
            }		   
 		   
+		     function getProducts()
+           {
+           	$ret = [];
+              $products = Products::where('id','>',"0")->get();
+ 
+              if($products != null)
+               {
+				  foreach($products as $p)
+				  {
+					  $pp = $this->getProduct($p->id);
+					  array_push($ret,$pp);
+				  }
+               }                         
+                                                      
+                return $ret;
+           }
+		   
+		   function getProduct($id)
+           {
+           	$ret = [];
+              $product = Products::where('id',$id)
+			                 ->orWhere('sku',$id)->first();
+ 
+              if($product != null)
+               {
+				  $temp = [];
+				  $temp['id'] = $product->id;
+				  $temp['sku'] = $product->sku;
+				  $temp['status'] = $product->status;
+				  $temp['pd'] = $this->getProductData($product->sku);
+				  $temp['imgs'] = $this->getProductImages($product->sku);
+				  $ret = $temp;
+               }                         
+                                                      
+                return $ret;
+           }
+
+		   function getProductData($sku)
+           {
+           	$ret = [];
+              $pd = ProductData::where('sku',$sku)->first();
+ 
+              if($pd != null)
+               {
+				  $temp = [];
+				  $temp['id'] = $pd->id;
+				  $temp['sku'] = $pd->sku;
+				  $temp['amount'] = $pd->amount;
+				  $temp['description'] = $pd->description;
+				  $temp['in_stock'] = $pd->in_stock;
+				  $temp['category'] = $pd->category;
+				  $ret = $temp;
+               }                         
+                                                      
+                return $ret;
+           }
+
+		   function getProductImages($sku)
+           {
+           	$ret = [];
+              $pis = ProductImages::where('sku',$sku)->get();
+ 
+            
+              if($pis != null)
+               {
+				  foreach($pis as $pi)
+				  {
+				    $temp = [];
+				    $temp['id'] = $pi->id;
+				    $temp['sku'] = $pi->sku;
+				    $temp['url'] = $pi->url;
+				    array_push($ret,$temp);
+				  }
+               }                         
+                                                      
+                return $ret;
+           }
+		   
+		   function getNewArrivals()
+           {
+           	$ret = [];
+              $pds = ProductData::where('in_stock',"new")->get();
+ 
+              if($pds != null)
+               {
+				  foreach($pds as $p)
+				  {
+					  $pp = $this->getProduct($p->sku);
+					  array_push($ret,$pp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
    
 }
 ?>

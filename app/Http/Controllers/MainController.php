@@ -35,9 +35,12 @@ class MainController extends Controller {
 		}
 		
 		$c = $this->helpers->categories;
+		$bs = $this->helpers->getProducts();
+		//dd($bs);
 		$signals = $this->helpers->signals;
-		
-    	return view("index-2",compact(['user','cart','c','signals']));
+		$na = $this->helpers->getNewArrivals();
+		//dd($na);
+    	return view("index-2",compact(['user','cart','c','bs','na','signals']));
     }
 	
 	/**
@@ -47,8 +50,14 @@ class MainController extends Controller {
 	 */
 	public function getShop(Request $request)
     {
-		$secure = 'false';
-        $ret = null;
+		$user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		
 		$req = $request->all();
 		
 	  $validator = Validator::make($req, [
@@ -64,7 +73,9 @@ class MainController extends Controller {
                 
                  else
                  {
-                    return view("shop",compact(['secure']));					 
+					 $c = $this->helpers->categories;
+					 $signals = $this->helpers->signals;
+                    return view("shop",compact(['user','cart','c','signals']));			 
                  }	
     }
 	

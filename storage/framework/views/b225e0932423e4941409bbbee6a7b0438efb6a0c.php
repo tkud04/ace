@@ -536,23 +536,23 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-primary text-uppercase" id="quickviewboxLabel">Draped-front wool cardigan</h4>
+          <h4 class="modal-title text-primary text-uppercase" id="quickviewboxLabel">product sku</h4>
         </div>
         <div class="modal-body product-details">
           <div class="row">
-            <div class="col-sm-7"> <img class="img-responsive" src="images/p-details-z-1.jpg" width="700" height="700"  alt=""/> </div>
+            <div class="col-sm-7"> <img id="quickviewboxImg" class="img-responsive" src="images/p-details-z-1.jpg" width="700" height="700"  alt=""/> </div>
             <div class="col-sm-5 sub-info">
               <div class="product-review">
                 <p><span class="text-info"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i></span> <span class="pull-right"><small>8 Reviews</small></span> </p>
               </div>
               <div class="product-description">
                 <h5 class="text-primary text-uppercase">Quick Overview</h5>
-                <p> At vero eos et accusamus et iusto odio quos dolores sint occaecati cupiditate non provident, similique sunt in culpa dignis simos</p>
+                <p id="quickviewboxDescription"> Product description goes here</p>
               </div>
               <div class="product-availability in-stock">
-                <p>Availability: <span class="text-info">In Stock</span></p>
+                <p>Availability: <span class="text-info" id="quickviewboxInStock"></span></p>
               </div>
-              <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>$365</strong></span> <span class="pull-left btn btn-link"><del>$400</del></span> </div>
+              <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>&#8358;<span id="quickviewboxAmount">0.00</span></strong></span> <span class="pull-left btn btn-link"><del>&#8358;<span id="quickviewboxOldAmount">0.00</span></del></span> </div>
             </div>
           </div>
         </div>
@@ -560,10 +560,6 @@
           <ul class="soc pull-left">
             <li><a class="soc-twitter" href="#"></a></li>
             <li><a class="soc-facebook" href="#"></a></li>
-            <li><a class="soc-google" href="#"></a></li>
-            <li><a class="soc-pinterest" href="#"></a></li>
-            <li><a class="soc-linkedin" href="#"></a></li>
-            <li><a class="soc-rss" href="#"></a></li>
             <li><a class="soc-whatsapp soc-icon-last" href="#"></a></li>
           </ul>
           <button class="btn btn-default hvr-underline-from-center-default">full details</button>
