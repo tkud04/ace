@@ -33,6 +33,7 @@ class Helper implements HelperContract
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
                      "add-review-status" => "Thank you for your review!",
                      "add-to-cart-status" => "Added to cart!",
+                     "remove-from-cart-status" => "Removed from cart!",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
 					 "signup-status-error" => "There was a problem creating your account, please contact support.",
@@ -749,6 +750,46 @@ $subject = $data['subject'];
 				$ret = $item;
 			}			
                 return $ret;
+           }
+		   
+		    function updateCart($cart, $quantities)
+           {
+           	#$ret = ["subtotal" => 0, "delivery" => 0, "total" => 0];
+              
+              if($cart != null && count($cart) > 0)
+               {
+               	for($c = 0; $c < count($quantities); $c++) 
+                    {
+                    	$ccc = $cart[$c];
+                    	$cc = Carts::where('id', $ccc['id'])->first();
+                   
+                        if($cc != null)
+                        {
+                        	$cc->update(['qty' => $quantities[$c] ]);
+                        }
+                   }
+                   
+                   return "ok";
+               }                                 
+                                                      
+                return $ret;
+           }	
+           function removeFromCart($user, $sku)
+           {
+           	#$ret = ["subtotal" => 0, "delivery" => 0, "total" => 0];
+               $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
+			   $cc = Carts::where('user_id', $userId)->get();
+			
+			if(!is_null($cc))
+			{
+			  foreach($cc as $c)
+                            {
+                            	if($c->sku == $sku || $c->id == $sku){$c->delete(); break; }
+                            }
+            }
+			                         
+                                                      
+                return "ok";
            }
    
 }

@@ -79,7 +79,7 @@
 		   {
 			   $sku = $n['sku'];
 			   $uu = url('product')."?sku=".$sku;
-			   $cu = url('add-to-cart')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $n['pd'];

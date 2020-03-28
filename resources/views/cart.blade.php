@@ -34,6 +34,8 @@
                 <div class="col-sm-12">
                   <ul class="item-list list-group">
 				    <?php
+					
+					
 				    for($a = 0; $a < count($cart); $a++)
 				    {
 					  $item = $cart[$a]['product'];
@@ -43,6 +45,7 @@
 					  $itemAmount = $item['pd']['amount'];
 					  $itemDescription = $item['pd']['description'];
 					  $imggs = $item['imggs'];
+					  $ru = url('remove-from-cart').'?sku='.$item['sku'];
 				    ?>
                     <li class="item list-group-item  clearfix">
                       <div class="item-information">
@@ -59,7 +62,7 @@
                         <div class="row">
                           <div class="col-sm-2 item-quantity"> <a class="js-item-increase btn btn-primary hvr-underline-from-center-primary" title="Add another copy"></a> <a class="js-item-decrease decrease-disabled  btn btn-primary hvr-underline-from-center-primary" title="Remove a copy"></a> </div>
                           <div class="col-sm-8 text-info"><span data-quantity="{{$qty}}"> <strong>{{$qty}}</strong> {{$itemText}} </span></div>
-                          <div class="col-sm-2 item-remove"><a class=" js-item-remove hint-top btn btn-primary " data-hint="Remove"></a> </div>
+                          <div class="col-sm-2 item-remove"><a href="{{$ru}}" class=" js-item-remove hint-top btn btn-primary " data-hint="Remove"></a> </div>
                         </div>
                       </div>
                     </li>
