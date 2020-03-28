@@ -27,13 +27,12 @@ class MainController extends Controller {
 	public function getIndex(Request $request)
     {
 		$user = null;
-		$cart = [];
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$bs = $this->helpers->getProducts();
 		//dd($bs);
@@ -51,13 +50,12 @@ class MainController extends Controller {
 	public function getShop(Request $request)
     {
 		$user = null;
-		$cart = [];
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$req = $request->all();
 		
 	  $validator = Validator::make($req, [
@@ -91,9 +89,8 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
@@ -136,9 +133,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("cart",compact(['user','cart','c','signals']));					 
@@ -156,9 +153,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("checkout",compact(['user','cart','c','signals']));								 
@@ -176,9 +173,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("contact",compact(['user','cart','c','signals']));							 
@@ -196,9 +193,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		
@@ -244,9 +241,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("terms",compact(['user','cart','c','signals']));	
@@ -264,9 +261,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("track",compact(['user','cart','c','signals']));	
@@ -433,9 +430,9 @@ class MainController extends Controller {
     	if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user);
+			
 		}
-		
+		$cart = $this->helpers->getCart($user);
         $req = $request->all();
         //dd($req);
         
@@ -453,8 +450,7 @@ class MainController extends Controller {
          
          else
          {
-         	$req["user_id"] = $user->id; 
-         	$this->helpers->addToCart($req);
+         	$this->helpers->addToCart($user,$req);
 	        session()->flash("add-to-cart-status","ok");
 			return redirect()->back();
          }        

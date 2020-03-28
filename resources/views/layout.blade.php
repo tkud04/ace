@@ -101,10 +101,19 @@
 		   ?>
             <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">{{$cc}}</span> </a>
               <ul role="menu" class="dropdown-menu">
+                <?php
+				for($a = 0; $a < $cc; $a++)
+				{
+					$item = $cart[$a]['product'];
+					$qty = $cart[$a]['qty'];
+					$itemAmount = $item['pd']['amount'];
+				?>
                 <li>
-                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> 0 products added. <span class="lnt-cart-total">&#8356;0.00</span> </div>
+                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> {{$item['sku']}} <b>x{{$qty}}</b><span class="lnt-cart-total">&#8358;{{number_format($itemAmount * $qty, 2)}}</span> </div>
                 </li>
-               
+               <?php
+			   }
+			   ?>
                 <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="{{url('cart')}}">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="{{url('checkout')}}">Checkout</a> </li>
               </ul>
             </li>

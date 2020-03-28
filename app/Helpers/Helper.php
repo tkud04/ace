@@ -409,19 +409,29 @@ $subject = $data['subject'];
 		   function getCart($user)
            {
            	$ret = [];
-               $cart = Carts::where('user_id',$user->id)->get();
+			$uu = "";
+			  if(is_null($user))
+			  {
+				  $uu = $this->generateTempUserID();
+			  }
+              else
+			  {
+				$uu = $user->id;  
+			  }
+
+			  $cart = Carts::where('user_id',$uu)->get();
               if($cart != null)
                {
                	foreach($cart as $c) 
                     {
                     	$temp = [];
                	     $temp['id'] = $c->id; 
-                        $temp['sku'] = $c->sku; 
+                        $temp['product'] = $this->getProduct($c->sku); 
                         $temp['qty'] = $c->qty; 
                         array_push($ret, $temp); 
                    }
                }                                 
-                                                      
+              			  
                 return $ret;
            }
            function clearCart($user)
@@ -711,14 +721,33 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   
-		   function addToCart($data)
+		   function generateTempUserID()
            {
-           	$ret = Carts::create(['user_id' => $data['user_id'], 
+           	$ret = "user_".getenv("REMOTE_ADDR");
+                                                      
+                return $ret;
+           }
+		   
+		   
+		   function addToCart($user,$data)
+           {
+			 $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
+			 //dd($userId);
+			 $item = Carts::where('user_id',$userId)
+			              ->where('sku',$data['sku'])->first();
+			
+			if(is_null($item))
+			{
+           	    $ret = Carts::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
                                                       ]);
-                                                      
+            }
+            else
+			{
+				$item->update(['qty' => $data['qty']]);
+				$ret = $item;
+			}			
                 return $ret;
            }
    

@@ -1,3 +1,14 @@
+<?php
+if(is_null($user)
+{
+  $user = null;	
+  $cart = [];	
+}
+
+?>
+
+
+
 <?php $__env->startSection('title',"Not Found"); ?>
 
 <?php $__env->startSection('content'); ?>
