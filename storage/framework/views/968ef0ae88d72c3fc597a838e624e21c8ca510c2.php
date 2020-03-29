@@ -1,4 +1,4 @@
-<?php $__env->startSection('title',"Cart"); ?>
+<?php $__env->startSection('title',"Checkout"); ?>
 
 <?php $__env->startSection('content'); ?>
    <!--start of middle sec-->
@@ -23,16 +23,15 @@
                 <section class="col-sm-12">
                   <h5 class="sub-title text-info text-uppercase">order summary</h5>
                   <ul class="list-group summary">
-                    <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> 4</span></strong></li>
-                    <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> $8.99</span></strong></li>
-                    <li class="list-group-item text-uppercase"><strong>taxes (5%): <span class="pull-right">$0.45</span></strong></li>
-                    <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">$5</span></strong></li>
+                    <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> <?php echo e($totals['items']); ?></span></strong></li>
+                    <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></span></strong></li>
+                    <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;<?php echo e(number_format($totals['delivery'],2)); ?></span></strong></li>
                   </ul>
                 </section>
                 <section class="col-sm-12">
                   <h5 class="sub-title text-info text-uppercase">total price</h5>
-                  <div class=" summary sum js-total text-center"> <strong> $114.44</strong> </div>
-                  <button class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</button>
+                  <div class=" summary sum js-total text-center"> <strong> &#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></strong> </div>
+                  <a href="<?php echo e(url('cart')); ?>" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
               </div>
             </div>
@@ -42,8 +41,7 @@
                 <!--start of breadcrumb-->
                 <div class="col-sm-12">
                   <ol class="breadcrumb dashed-border row">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">shopping cart</a></li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
                     <li class="active">checkout</li>
                   </ol>
                 </div>

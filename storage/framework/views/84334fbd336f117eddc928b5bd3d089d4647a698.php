@@ -58,8 +58,7 @@
                       </div>
                       <div class="item-interactions">
                         <div class="row">
-                          <div class="col-sm-2 item-quantity"> <a class="js-item-increase btn btn-primary hvr-underline-from-center-primary" title="Add another copy"></a> <a class="js-item-decrease decrease-disabled  btn btn-primary hvr-underline-from-center-primary" title="Remove a copy"></a> </div>
-                          <div class="col-sm-8 text-info"><span data-quantity="<?php echo e($qty); ?>"> <strong><?php echo e($qty); ?></strong> <?php echo e($itemText); ?> </span></div>
+                          <div class="col-sm-10 text-info"><span data-quantity="<?php echo e($qty); ?>"> <strong><?php echo e($qty); ?></strong> <?php echo e($itemText); ?> </span></div>
                           <div class="col-sm-2 item-remove"><a href="<?php echo e($ru); ?>" class=" js-item-remove hint-top btn btn-primary " data-hint="Remove"></a> </div>
                         </div>
                       </div>
@@ -81,15 +80,15 @@
                   <section class="col-sm-12">
                     <h5 class="sub-title text-info text-uppercase">order summary</h5>
                     <ul class="list-group summary">
-                      <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> 4</span></strong></li>
-                      <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> $8.99</span></strong></li>
-                      <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;1000.00</span></strong></li>
+                      <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> <?php echo e($totals['items']); ?></span></strong></li>
+                      <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></span></strong></li>
+                      <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;<?php echo e(number_format($totals['delivery'],2)); ?></span></strong></li>
                     </ul>
                   </section>
                   <section class="col-sm-12">
                     <h5 class="sub-title text-info text-uppercase">total price</h5>
-                    <div class=" summary sum js-total text-center"> <strong> $114.44</strong> </div>
-                    <button class="btn btn-block btn-default hvr-underline-from-center-default">Checkout</button>
+                    <div class=" summary sum js-total text-center"> <strong> &#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></strong> </div>
+                    <a href="<?php echo e(url('checkout')); ?>" class="btn btn-block btn-default hvr-underline-from-center-default">Checkout</a>
                   </section>
                 </div>
               </div>

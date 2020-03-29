@@ -72,8 +72,11 @@ class MainController extends Controller {
                  else
                  {
 					 $c = $this->helpers->categories;
+					 $cc = $this->helpers->categories_2;
+					 $category = $req['category'];
 					 $signals = $this->helpers->signals;
-                    return view("shop",compact(['user','cart','c','signals']));			 
+					 $products = $this->helpers->getProducts();
+                    return view("shop",compact(['user','cart','products','c','cc','category','signals']));			 
                  }	
     }
 	
@@ -136,9 +139,11 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
+		$totals = $this->helpers->getCartTotals($cart);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
-		return view("cart",compact(['user','cart','c','signals']));					 
+		//dd($totals);
+		return view("cart",compact(['user','cart','totals','c','signals']));					 
     }
 	
 	/**
@@ -156,9 +161,10 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
+		$totals = $this->helpers->getCartTotals($cart);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
-		return view("checkout",compact(['user','cart','c','signals']));								 
+		return view("checkout",compact(['user','cart','totals','c','signals']));								 
     }
 	
 	/**
@@ -380,15 +386,12 @@ class MainController extends Controller {
 	 */
     public function postAddReview(Request $request)
     {
+		$user = null;
     	if(Auth::check())
 		{
 			$user = Auth::user();
 		}
-		else
-        {
-        	return redirect()->intended('login?return=dashboard');
-        }
-        
+		
         $req = $request->all();
         //dd($req);
         
@@ -409,8 +412,7 @@ class MainController extends Controller {
          
          else
          {
-         	$req["user_id"] = $user->id; 
-         	$this->helpers->createReview($req);
+         	$this->helpers->createReview($user,$req);
 	        session()->flash("add-review-status","ok");
 			return redirect()->back();
          }        
@@ -529,7 +531,7 @@ class MainController extends Controller {
          else
          {
          	$this->helpers->removeFromCart($user, $req['sku']);
-	        $request->session()->flash("remove-cart-status","ok");
+	        session()->flash("remove-from-cart-status","ok");
 			return redirect()->back();
          }       
     }

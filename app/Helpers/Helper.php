@@ -42,6 +42,7 @@ class Helper implements HelperContract
 					 "contact-status-error" => "There was a problem sending your message, please contact support.",
 					 "add-review-status-error" => "There was a problem sending your review, please contact support.",
 					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please contact support.",
+					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please contact support.",
                     ]
                    ];
 
@@ -683,9 +684,10 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   function createReview($data)
+		   function createReview($user,$data)
            {
-           	$ret = Reviews::create(['user_id' => $data['user_id'], 
+			   $userId = $user == null ? $this->generateTempUserID() : $user->id;
+           	$ret = Reviews::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'price' => $data['price'], 
                                                       'quality' => $data['quality'], 
@@ -791,6 +793,32 @@ $subject = $data['subject'];
                                                       
                 return "ok";
            }
+		   
+		   function getDeliveryFee()
+		   {
+			   return 1000;
+		   }
+				
+          function getCartTotals($cart)
+           {
+           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
+              // dd($cart);
+              if($cart != null && count($cart) > 0)
+               {           	
+               	foreach($cart as $c) 
+                    {
+						$amount = $c['product']['pd']['amount'];
+						$qty = $c['qty'];
+                    	$ret['items'] += $qty;
+						$ret['subtotal'] += ($amount * $qty);	
+                    }
+                   
+                   $ret['delivery'] = $this->getDeliveryFee();
+                  
+               }                                 
+                                                      
+                return $ret;
+           }	
    
 }
 ?>
