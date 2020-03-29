@@ -14,7 +14,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!--custom styles-->
 <link href="css/custom.css" rel="stylesheet" />
-<link href="css/custom-pink.css" rel="stylesheet" />
+<link href="css/custom-pink.css" rel="stylesheet"/>
 <link href="css/custom-turquoise.css" rel="stylesheet" />
 <link href="css/custom-purple.css" rel="stylesheet" />
 <link href="css/custom-orange.css" rel="stylesheet" />
