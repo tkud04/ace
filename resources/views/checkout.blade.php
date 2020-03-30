@@ -20,6 +20,11 @@
         </div>
         <div class="col-sm-12 equal-height-container">
           <div class="row">
+		    @if(is_null($user))
+            <div class="col-sm-12">
+			  <div class="alert alert-info" role="alert"><i class="ion-information-circled"></i> Returning customer? <a href="{{url('login')}}">Click here to login</a></div>
+			</div>
+			@endif
             <div class="col-sm-4 col-md-3 sub-data-left sub-equal">
               <div id="sticky">
                 <section class="col-sm-12">
@@ -31,13 +36,40 @@
                   </ul>
                 </section>
                 <section class="col-sm-12">
-                  <h5 class="sub-title text-info text-uppercase">total price</h5>
+                  <h5 class="sub-title text-info text-uppercase">total</h5>
                   <div class=" summary sum js-total text-center"> <strong> &#8358;{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</strong> </div>
                   <a href="{{url('cart')}}" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
+				<section class="col-sm-12">
+				<br>
+				   <div class="accordion">
+                  <div aria-multiselectable="true" role="tablist" id="accordion-one" class="panel-group">
+                    <div class="panel panel-default">
+                      <div id="headingOne" role="tab" class="panel-heading">
+                        <h4 class="panel-title"> <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion-one" data-toggle="collapse" class=""><span class="badge">1</span> Direct bank transfer </a> </h4>
+                      </div>
+                      <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse in" id="collapseOne" aria-expanded="true" style="">
+                        <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.. </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div id="headingTwo" role="tab" class="panel-heading">
+                        <h4 class="panel-title"> <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion-one" data-toggle="collapse" class="collapsed"><span class="badge">2</span> Pay online</a> </h4>
+                      </div>
+                      <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
+                        <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+				</section>
               </div>
+			  <br>
+			 
+			
             </div>
             <div class="col-sm-8 col-md-9 sub-data-left main-sec">
+			@if(is_null($user))
               <div class="row"> 
                 
                 <!--start of breadcrumb-->
@@ -55,18 +87,36 @@
                     <div class="row"> 
                       
                       <!-- START Presonal information -->
-                      <fieldset class="col-md-6">
-                        <legend>Personal information</legend>
+                      <fieldset class="col-md-12">
+                        <legend>Billing Details</legend>
                         
                         <!-- Name -->
-                        <div class="form-group">
-                          <label class="control-label" for="name">Name</label>
-                          <input type="text" id="name" class="form-control">
-                        </div>
+                         <div class="row">
+                          <div class="col-sm-6 form-group">
+                            <label class="control-label" for="fname">First Name</label>
+                            <input type="text" id="fname" name="fname" class="form-control">
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="lname">Last Name</label>
+                            <input type="text" id="lname" name="lname" class="form-control">
+						  </div>
+                         </div>
+						 
+						 <!-- Email and phone -->
+                         <div class="row">
+                          <div class="col-sm-6 form-group">
+                            <label class="control-label" for="email">Email address</label>
+                            <input type="text" id="email" name="email" class="form-control">
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="lname">Phone number</label>
+                            <input type="text" id="phone" name="phone" class="form-control">
+						  </div>
+                         </div>
                         
                         <!-- Address -->
                         <div class="form-group">
-                          <label class="control-label" for="address">Billing address</label>
+                          <label class="control-label" for="address">Shipping address</label>
                           <input type="text" id="address" class="form-control">
                         </div>
                         
@@ -75,22 +125,17 @@
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="country">Country</label>
                             <select class="selectpicker" id="country" style="display: none;">
-                              <option>My Country-1</option>
-                              <option>My Country-2</option>
-                              <option>My Country-3</option>
-                              <option>My Country-4</option>
-                              <option>My Country-5</option>
-                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="country" title="My Country-1"><span class="filter-option pull-left">My Country-1</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">My Country-1</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">My Country-2</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">My Country-3</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">My Country-4</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">My Country-5</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+                              <option>Nigeria</option>
+                            </select>
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
-                            <select class="selectpicker" id="state" style="display: none;">
-                              <option>My State-1</option>
-                              <option>My State-2</option>
-                              <option>My State-3</option>
-                              <option>My State-4</option>
-                              <option>My State-5</option>
-                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="state" title="My State-1"><span class="filter-option pull-left">My State-1</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">My State-1</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">My State-2</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">My State-3</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">My State-4</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">My State-5</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+                            <select class="selectpicker" id="state" name="state" style="display: none;">
+							<option value="none">Select state</option>
+							@foreach($states as $key => $value)
+                              <option value="{{$key}}">{{ucwords($value)}}</option>
+							@endforeach                     
+                            </select>
                           </div>
                         </div>
                         
@@ -98,78 +143,16 @@
                         <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="city">City</label>
-                            <select class="selectpicker" id="city" style="display: none;">
-                              <option>My City-1</option>
-                              <option>My City-2</option>
-                              <option>My City-3</option>
-                              <option>My City-4</option>
-                              <option>My City-5</option>
-                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="city" title="My City-1"><span class="filter-option pull-left">My City-1</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">My City-1</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">My City-2</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">My City-3</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">My City-4</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">My City-5</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+                            <input type="text" id="city" name="city" class="form-control">
                           </div>
                           <div class="col-sm-6 form-group">
-                            <label class="control-label" for="zipcode">Zip Code</label>
-                            <input type="text" id="zipcode" class="form-control">
+                            <label class="control-label" for="zipcode">Zip</label>
+                            <input type="text" id="zip" name="zip" class="form-control">
                           </div>
                         </div>
                       </fieldset>
-                      <!-- END Personal information--> 
-                      
-                      <!-- START Payment infromation -->
-                      <fieldset class="col-md-6">
-                        <legend>Payment information</legend>
-                        
-                        <!-- Name -->
-                        <div class="form-group">
-                          <label class="control-label" for="name-card">Name on card</label>
-                          <input type="text" id="name-card" class="form-control">
-                        </div>
-                        
-                        <!-- Card type -->
-                        <div class="form-group">
-                          <label class="control-label" for="card">Card Type</label>
-                          <select class="selectpicker" id="card" style="display: none;">
-                            <option>MasterCard</option>
-                            <option>Visa</option>
-                            <option>Other</option>
-                          </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="card" title="MasterCard"><span class="filter-option pull-left">MasterCard</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">MasterCard</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">Visa</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">Other</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                        </div>
-                        
-                        <!-- Card number -->
-                        <div class="form-group">
-                          <label class="control-label" for="card-number">Card number</label>
-                          <input type="text" id="card-number" class="form-control">
-                        </div>
-                        
-                        <!-- Expriation and CCV -->
-                        <div class="row">
-                          <div class="col-sm-5 form-group">
-                            <label class="control-label" for="month">Month</label>
-                            <select class="selectpicker" id="month" style="display: none;">
-                              <option>January</option>
-                              <option>February</option>
-                              <option>March</option>
-                              <option>April</option>
-                              <option>May</option>
-                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="month" title="January"><span class="filter-option pull-left">January</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">January</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">February</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">March</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">April</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">May</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                          </div>
-                          <div class="col-sm-4 form-group">
-                            <label class="control-label" for="year">Year</label>
-                            <select class="selectpicker" id="year" style="display: none;">
-                              <option>2015</option>
-                              <option>2016</option>
-                              <option>2017</option>
-                              <option>2018</option>
-                              <option>2019</option>
-                              <option>2020</option>
-                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-select" data-toggle="dropdown" data-id="year" title="2015"><span class="filter-option pull-left">2015</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">2015</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="1"><a tabindex="0" class="" style=""><span class="text">2016</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="2"><a tabindex="0" class="" style=""><span class="text">2017</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="3"><a tabindex="0" class="" style=""><span class="text">2018</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="4"><a tabindex="0" class="" style=""><span class="text">2019</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li><li rel="5"><a tabindex="0" class="" style=""><span class="text">2020</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
-                          </div>
-                          <div class="col-sm-3 form-group">
-                            <label class="control-label" for="ccv">CCV <i title="" data-placement="top" data-toggle="tooltip" class="fa fa-question-circle help-icon" data-original-title="This number is printed on your cards in the signature area of the back of the card."></i></label>
-                            <input type="text" maxlength="3" id="ccv" class="form-control">
-                          </div>
-                        </div>
-                      </fieldset>
-                      <!-- END Payment information--> 
+                      <!-- END Personal information-->                      
+                   
                     </div>
                     
                     <!-- Agree checkbox and Continue button -->
@@ -177,7 +160,7 @@
                       <div class="col-sm-12">
                         <fieldset>
                           <legend>order notes</legend>
-                          <textarea class="form-control" rows="5" cols="40" name="comment[body]" id="comment-body" required=""></textarea><span class="help-block">350/350</span>
+                          <textarea class="form-control" rows="5" cols="40" name="notes" id="notes" required=""></textarea><span class="help-block">350 characters maximum</span>
                           <hr>
                         </fieldset>
                       </div>
@@ -197,6 +180,7 @@
                 <!--end of checkout--> 
                 
               </div>
+			  @endif
             </div>
           </div>
         </div>

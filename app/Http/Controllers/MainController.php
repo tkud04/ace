@@ -163,8 +163,9 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$totals = $this->helpers->getCartTotals($cart);
 		$c = $this->helpers->categories;
+		$states = $this->helpers->states;
 		$signals = $this->helpers->signals;
-		return view("checkout",compact(['user','cart','totals','c','signals']));								 
+		return view("checkout",compact(['user','cart','totals','states','c','signals']));								 
     }
 	
 	/**
