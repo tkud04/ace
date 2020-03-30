@@ -63,13 +63,32 @@
                   </div>
                 </div>
 				</section>
+				<section class="col-sm-12">
+				  <br>
+				  <center>
+				  <button class="btn btn-primary hvr-underline-from-center-primary " type="button">proceed to payment</button>
+				  </center>
+				</section>
               </div>
 			  <br>
 			 
 			
             </div>
             <div class="col-sm-8 col-md-9 sub-data-left main-sec">
-			@if(is_null($user))
+			<?php
+			  $fname = ""; $lname = "";
+			  $email = ""; $phone = "";
+			  $address = ""; $country = "";
+			  $state = "none"; $city = ""; $zip = ""; $notes = "";
+			  
+			  if(!is_null($user))
+			  {
+				$fname = $user->fname; $lname = $user->lname;
+			    $email = $user->email; $phone = $user->phone;
+			    $address = $ss['address']; $state = "none"; 
+				$city = $ss['city']; $zip = $ss['zipcode']; $notes = "";  
+			  }
+		    ?>
               <div class="row"> 
                 
                 <!--start of breadcrumb-->
@@ -94,11 +113,11 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="fname">First Name</label>
-                            <input type="text" id="fname" name="fname" class="form-control">
+                            <input type="text" id="fname" name="fname" value="{{$fname}}" class="form-control">
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Last Name</label>
-                            <input type="text" id="lname" name="lname" class="form-control">
+                            <input type="text" id="lname" name="lname" value="{{$lname}}" class="form-control">
 						  </div>
                          </div>
 						 
@@ -106,18 +125,18 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="email">Email address</label>
-                            <input type="text" id="email" name="email" class="form-control">
+                            <input type="text" id="email" name="email" value="{{$email}}" class="form-control">
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Phone number</label>
-                            <input type="text" id="phone" name="phone" class="form-control">
+                            <input type="text" id="phone" name="phone" value="{{$phone}}" class="form-control">
 						  </div>
                          </div>
                         
                         <!-- Address -->
                         <div class="form-group">
                           <label class="control-label" for="address">Shipping address</label>
-                          <input type="text" id="address" class="form-control">
+                          <input type="text" id="address" value="{{$address}}" class="form-control">
                         </div>
                         
                         <!-- Country and state -->
@@ -130,7 +149,7 @@
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
-                            <select class="selectpicker" id="state" name="state" style="display: none;">
+                            <select class="selectpicker" id="state" name="state" value="{{$state}}" style="display: none;">
 							<option value="none">Select state</option>
 							@foreach($states as $key => $value)
                               <option value="{{$key}}">{{ucwords($value)}}</option>
@@ -143,11 +162,11 @@
                         <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="city">City</label>
-                            <input type="text" id="city" name="city" class="form-control">
+                            <input type="text" id="city" name="city" value="{{$city}}" class="form-control">
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="zipcode">Zip</label>
-                            <input type="text" id="zip" name="zip" class="form-control">
+                            <input type="text" id="zipcode" name="zipcode" value="{{$zip}}" class="form-control">
                           </div>
                         </div>
                       </fieldset>
@@ -171,7 +190,7 @@
                         </div>
                       </div>
                       <div class="col-sm-6 text-right">
-                        <button class="btn btn-primary hvr-underline-from-center-primary " type="button">complete checkout</button>
+                        
                       </div>
                     </div>
                   </form>
@@ -180,7 +199,7 @@
                 <!--end of checkout--> 
                 
               </div>
-			  @endif
+
             </div>
           </div>
         </div>

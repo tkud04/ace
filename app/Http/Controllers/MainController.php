@@ -140,6 +140,7 @@ class MainController extends Controller {
 		}
 		$cart = $this->helpers->getCart($user);
 		$totals = $this->helpers->getCartTotals($cart);
+		
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		//dd($totals);
@@ -155,17 +156,30 @@ class MainController extends Controller {
     {
         $user = null;
 		$cart = [];
+		$shipping = [];
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			
+		    $shipping = $this->helpers->getShippingDetails($user);	
 		}
 		$cart = $this->helpers->getCart($user);
 		$totals = $this->helpers->getCartTotals($cart);
+		
+
+			$ss = ['company' => "",
+			       'address' => "",
+			       'city' => "",
+			       'state' => "",
+			       'zipcode' => "",
+			       'id' => "",
+			       'date' => ""
+			    ];
+				
+		   if(count($shipping) > 0) $ss = $shipping[0];
 		$c = $this->helpers->categories;
 		$states = $this->helpers->states;
 		$signals = $this->helpers->signals;
-		return view("checkout",compact(['user','cart','totals','states','c','signals']));								 
+		return view("checkout",compact(['user','cart','totals','ss','states','c','signals']));								 
     }
 	
 	/**
