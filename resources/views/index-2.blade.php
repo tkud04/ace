@@ -17,7 +17,6 @@
           <img class="img-responsive visible-xs" src="images/wide-ad-img-small.png" width="1920" height="275" alt=""/>
             <figcaption>
               <h2>Enjoy our <span>free shipping</span> for any order</h2>
-              <p>Maecenas nec odio et ante tincidunt tempus</p>
               <a href="#">View more</a> </figcaption>
           </figure>
         </div>
@@ -30,13 +29,13 @@
       <div class="row">
 	  <?php
 	  $cc = [
-	         ['name' => "<span>watches</span>",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>ear</span>rings",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>brace</span>lets",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>anklets</span>",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>brooches</span>",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>neck</span>laces",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
-	         ['name' => "<span>rings</span>",'copy' => "Maecenas nec odio et ante tincidunt tempus",'url' => "#"],
+	         ['name' => "<span>watches</span>",'copy' => "",'url' => "shop/watches"],
+	         ['name' => "<span>ear</span>rings",'copy' => "",'url' => "shop/earrings"],
+	         ['name' => "<span>brace</span>lets",'copy' => "",'url' => "shop/bracelets"],
+	         ['name' => "<span>anklets</span>",'copy' => "",'url' => "anklets"],
+	         ['name' => "<span>brooches</span>",'copy' => "",'url' => "brooches"],
+	         ['name' => "<span>neck</span>laces",'copy' => "",'url' => "necklaces"],
+	         ['name' => "<span>rings</span>",'copy' => "",'url' => "rings"],
 			];
 	  $ccBackgrounds = ["images/ad-box-1.jpg","images/ad-box-2.jpg","images/ad-box-3.jpg"];
 	    shuffle($cc);
@@ -123,58 +122,13 @@
     </section>
     <!--end of new arrivals--> 
 
-    <!--start of brands-->
-    <section class="container" data-speed="6">
-      <div class="row"> 
-        <!--start of big title-->
-        <div class="col-sm-12 big-title text-uppercase text-center">
-          <h3 class="text-primary">our brands</h3>
-          <small>Maecenas nec odio et ante tincidunt tempus</small>
-          <p><span class="ion-android-star-outline"></span></p>
-        </div>
-        <!--end of big title-->
-        <div id="brands" class="col-sm-12 opacity-eff wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
-          <div><a  href="#">
-            <figure><img  src="images/brand-1.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-2.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-3.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-4.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-5.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-1.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-2.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-3.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-4.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-          <div><a  href="#">
-            <figure><img src="images/brand-5.jpg" width="200" height="100" alt=""/></figure>
-            </a></div>
-        </div>
-      </div>
-    </section>
-    <!--end of brands--> 
     
     <!--start of parallax subscribtion-->
     <div id="parallax" class="" data-speed="4">
       <section class="container">
         <div class="row">
           <div class="subscribe col-sm-12">
-            <h3><span>lookbook sunglasses</span> <small>Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus</small> </h3>
+            <h3><span>lookbook sunglasses</span> <small>. Donec vitae sapien ut libero venenatis faucibus</small> </h3>
             <div class="subscribe-icn"> <a class="btn btn-primary hvr-underline-from-center-primary" href="#">Discover Now</a> </div>
           </div>
         </div>
@@ -189,96 +143,45 @@
         <!--start of big title-->
         <div class="col-sm-12 big-title text-uppercase text-center">
           <h3 class="text-primary">best selling</h3>
-          <small>Maecenas nec odio et ante tincidunt tempus</small>
+          <small></small>
           <p><span class="ion-android-star-outline"></span></p>
         </div>
         <!--end of big title-->
         <div class="col-sm-12">
           <ul class="row list-inline best-selling wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
+		   <?php
+		   foreach($bs as $b)
+		   {
+			   $sku = $b['sku'];
+			   $uu = url('product')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
+			   $wu = url('add-to-wishlist')."?sku=".$sku;
+			   $ccu = url('add-to-compare')."?sku=".$sku;
+			   $pd = $b['pd'];
+			   $description = $pd['description'];
+			   $in_stock = $pd['in_stock'];
+			   $amount = $pd['amount'];
+			   $imggs = $b['imggs'];
+			    
+		  ?>
             <li class="col-sm-6 col-md-4">
               <div>
                 <div class="row">
                   <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-1.jpg" width="200" height="230" alt=""/></figure>
+                    <figure><img class="img-responsive" src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
+                    <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                    <div class="product-price"> <span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <span class="old-price"><del>&#8358;{{number_format($amount + 1000,2)}}</del></span> </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>
                 </div>
               </div>
             </li>
-            <li class="col-sm-6 col-md-4">
-              <div>
-                <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-2.jpg" width="200" height="230" alt=""/></figure>
-                  </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
-                    <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span> </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-sm-6 col-md-4">
-              <div>
-                <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-3.jpg" width="200" height="230" alt=""/></figure>
-                  </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
-                    <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-sm-6 col-md-4">
-              <div>
-                <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-4.jpg" width="200" height="230" alt=""/></figure>
-                  </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
-                    <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-sm-6 col-md-4">
-              <div>
-                <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-5.jpg" width="200" height="230" alt=""/></figure>
-                  </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
-                    <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span> </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-sm-6 col-md-4">
-              <div>
-                <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="images/s-6.jpg" width="200" height="230" alt=""/></figure>
-                  </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="#">Lorem ipsum dolor sit amet</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>$600</strong></span> <span class="old-price"><del>$790</del></span> </div>
-                    <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span> </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+			<?php
+		   }
+			?>
+           
           </ul>
         </div>
       </div>

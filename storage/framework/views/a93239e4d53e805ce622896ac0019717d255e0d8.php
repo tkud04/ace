@@ -1,12 +1,8 @@
 <?php
-if(is_null($user)
-{
-  $user = null;	
-  $cart = [];	
-}
-
+$user = null;
+$c = [];
+$cart = [];
 ?>
-
 
 
 <?php $__env->startSection('title',"Not Found"); ?>

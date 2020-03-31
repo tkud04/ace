@@ -1,12 +1,8 @@
 <?php
-if(is_null($user)
-{
-  $user = null;	
-  $cart = [];	
-}
-
+$user = null;
+$c = [];
+$cart = [];
 ?>
-
 @extends('layout')
 
 @section('title',"Not Found")

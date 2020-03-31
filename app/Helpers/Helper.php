@@ -9,6 +9,7 @@ use Auth;
 use App\ShippingDetails;
 use App\User;
 use App\Carts;
+use App\Categories;
 use App\Products;
 use App\ProductData;
 use App\ProductImages;
@@ -683,6 +684,23 @@ $subject = $data['subject'];
                                   
                 return $ret;
            }
+
+		   function getBestSellers()
+           {
+           	$ret = [];
+              $pds = ProductData::where('in_stock',"new")->get();
+ 
+              if($pds != null)
+               {
+				  foreach($pds as $p)
+				  {
+					  $pp = $this->getProduct($p->sku);
+					  array_push($ret,$pp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
 		   
 		   function createReview($user,$data)
            {
@@ -815,6 +833,40 @@ $subject = $data['subject'];
                    
                    $ret['delivery'] = $this->getDeliveryFee();
                   
+               }                                 
+                                                      
+                return $ret;
+           }
+		   
+		   function addCategory($data)
+           {
+           	$category = Categories::create([
+			   'name' => $data['name'],
+			   'category' => $data['category'],
+			   'special' => $data['special'],
+			   'status' => $data['status'],
+			]);                          
+            return $ret;
+           }
+		   
+		   function getCategories()
+           {
+           	$ret = [];
+           	$categories = Categories::where('id','>','0')->get();
+              // dd($cart);
+			  
+              if($categories != null)
+               {           	
+               	foreach($categories as $c) 
+                    {
+						$temp = [];
+						$temp['name'] = $c->name;
+						$temp['category'] = $c->category;
+						$temp['special'] = $c->special;
+						$temp['status'] = $c->status;
+						array_push($ret,$temp);
+                    }
+                   
                }                                 
                                                       
                 return $ret;

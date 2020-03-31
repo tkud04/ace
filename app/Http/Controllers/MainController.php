@@ -33,11 +33,11 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
-		$bs = $this->helpers->getProducts();
+		$c = $this->helpers->getCategories();
 		//dd($bs);
 		$signals = $this->helpers->signals;
 		$na = $this->helpers->getNewArrivals();
+		$bs = $this->helpers->getBestSellers();
 		//dd($na);
     	return view("index-2",compact(['user','cart','c','bs','na','signals']));
     }
@@ -71,7 +71,7 @@ class MainController extends Controller {
                 
                  else
                  {
-					 $c = $this->helpers->categories;
+					 $c = $this->helpers->getCategories();
 					 $cc = $this->helpers->categories_2;
 					 $category = $req['category'];
 					 $signals = $this->helpers->signals;
@@ -94,7 +94,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
 		
@@ -141,7 +141,7 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$totals = $this->helpers->getCartTotals($cart);
 		
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		//dd($totals);
 		return view("cart",compact(['user','cart','totals','c','signals']));					 
@@ -176,7 +176,7 @@ class MainController extends Controller {
 			    ];
 				
 		   if(count($shipping) > 0) $ss = $shipping[0];
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$states = $this->helpers->states;
 		$signals = $this->helpers->signals;
 		return view("checkout",compact(['user','cart','totals','ss','states','c','signals']));								 
@@ -197,7 +197,7 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		return view("contact",compact(['user','cart','c','signals']));							 
     }
@@ -217,7 +217,7 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		
 		$req = $request->all();
@@ -265,7 +265,7 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		return view("terms",compact(['user','cart','c','signals']));	
     }
@@ -285,7 +285,7 @@ class MainController extends Controller {
 			
 		}
 		$cart = $this->helpers->getCart($user);
-		$c = $this->helpers->categories;
+		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		return view("track",compact(['user','cart','c','signals']));	
     }
@@ -301,7 +301,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 			$cart = $this->helpers->getCart($user);
-			$c = $this->helpers->categories;
+			$c = $this->helpers->getCategories();
 		    $signals = $this->helpers->signals;
 		    return view("dashboard",compact(['user','cart','c','signals']));			
 		}
@@ -323,7 +323,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 			$cart = $this->helpers->getCart($user);
-			$c = $this->helpers->categories;
+			$c = $this->helpers->getCategories();
 		    $signals = $this->helpers->signals;
 		    $states = $this->helpers->states;
 			$account = $this->helpers->getUser($user->email);

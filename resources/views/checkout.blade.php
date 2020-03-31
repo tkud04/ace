@@ -60,7 +60,7 @@
                       </div>
                       <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
                         <div class="panel-body"> 
-						  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. <br><br>
+						<img class="img img-responsive" src="images/ps.png"> <br><br>
 						  <center> <button onclick="payCard(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay with card</button></center>
 						</div>
                       </div>

@@ -206,19 +206,20 @@
                 <ul class="lnt-category list-unstyled">
 				<?php
 				 $i = 0;
-				 foreach($c as $key => $value)
+				 foreach($c as $cc)
 				 {
+					 $ccu = url('shop')."/".$cc['category'];
 					 $cl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
 					 $spp = "";
-					 if($special['hot'] == $key || $special['popular'] == $key || $special['trending'] == $key)
+					 if($cc['special'] == "hot" || $cc['special'] == "special" || $cc['special'] == "trending")
 					 {
-						 if($special['hot'] == $key) $spp = '<span class="label label-danger">Hot</span></a>';
-						 if($special['popular'] == $key) $spp = '<span class="label label-info">Popular</span></a>';
-						 if($special['trending'] == $key) $spp = '<span class="label label-primary">Trending</span></a>';
+						 if($cc['special'] == "hot") $spp = '<span class="label label-danger">Hot</span></a>';
+						 if($cc['special'] == "special") $spp = '<span class="label label-info">Popular</span></a>';
+						 if($cc['special'] == "trending") $spp = '<span class="label label-primary">Trending</span></a>';
 					 }
 				?>
-                  <li{{$cl}}><a href="#{{$key}}">{{ucwords($key)}} {!!$spp!!}</a></li>
+                  <li{{$cl}}><a href="{{$ccu}}">{{ucwords($cc['category'])}} {!!$spp!!}</a></li>
 				<?php
 				 }
 				?>
@@ -237,42 +238,10 @@
                     <div class="lnt-subcategory col-sm-8 col-md-8">
                       <h3 class="lnt-category-name text-info text-uppercase">{{$key}}</h3>
 					 
-                      <ul class="list-unstyled col-sm-6">
-					  	<?php
-				         for($x = 0; $x < 3; $x++)
-				         {
-							 $nn = $value[$x];
-	                       $npp = "";
-					       if($nn['special'] == 'hot' || $nn['special'] == 'popular' || $nn['special'] == 'trending')
-					       {
-						     if($nn['special'] == 'hot') $npp = "<span class='label label-danger'>Hot</span>";
-						     if($nn['special'] == 'popular') $npp = "<span class='label label-info'>Popular</span>";
-						     if($nn['special'] == 'trending') $npp = "<span class='label label-primary'>Trending</span>";
-					       }
-				         ?>
-                        <li{{$cl}}><a href="#{{$nn['url']}}">{{$nn['name']}} {!!$npp!!}</a></li>
-						<?php
-						 }
-						 ?>
-                      </ul>
-                      <ul class="list-unstyled col-sm-6">
-                      <?php
-				         for($x = 3; $x < 6; $x++)
-				         {
-							 $nn = $value[$x];
-	                       $npp = "";
-					       if($nn['special'] == 'hot' || $nn['special'] == 'popular' || $nn['special'] == 'trending')
-					       {
-						     if($nn['special'] == 'hot') $npp = '<span class="label label-danger">Hot</span>';
-						     if($nn['special'] == 'popular') $npp = '<span class="label label-info">Popular</span>';
-						     if($nn['special'] == 'trending') $npp = '<span class="label label-primary">Trending</span>';
-					       }
-				         ?>
-                        <li{{$cl}}><a href="#{{$nn['url']}}">{{$nn['name']}} {!!$npp!!}</a></li>
-						<?php
-						 }
-						 ?>
-                      </ul>
+                      <section class="col-sm-12">
+					  	
+                      </section>
+                     
                     </div>
                     <!-- Carousel -->
                     <div class="col-sm-4 col-md-4">
@@ -302,8 +271,6 @@
           <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
           <li><a href="#">NEW ARRIVALS</a></li>
           <li><a href="#">BEST SELLER</a></li>
-          <li><span class="nav-span hot-sale">20% OFF</span><a href="#">hot sale</a></li>
-          <li><a href="#">BLOG</a></li>
           <li><a href="{{url('contact')}}">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
@@ -413,9 +380,14 @@
             <div class="col-md-3 col-sm-6">
               <h5 class="text-info text-uppercase">Categories</h5>
               <ul class="list-unstyled nudge">
-			  @foreach($c as $key => $value)
-                <li><a href="#">{{ucwords($key)}}</a> </li>
-			  @endforeach
+			  <?php
+			  foreach($c as $cc){
+				   $ccu = url('shop')."/".$cc['category'];
+			  ?>
+                <li><a href="{{$ccu}}">{{ucwords($cc['category'])}}</a> </li>
+			  <?php
+			  }
+			  ?>
               </ul>
             </div>
             <div class="col-sm-12 col-md-6">
