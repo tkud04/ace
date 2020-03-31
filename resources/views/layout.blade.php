@@ -408,12 +408,6 @@
                 <li><a href="#">FAQ</a> </li>
                 <li><a href="{{url('contact')}}">Contact us</a> </li>
               </ul>
-              <hr>
-              <h5 class="text-info text-uppercase">User section</h5>
-              <ul class="list-unstyled nudge">
-                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#login-box">Sign in</a> </li>
-                <li><a href="{{url('register')}}">Create account</a> </li>
-              </ul>
               <hr class="hidden-md hidden-lg hidden-sm">
             </div>
             <div class="col-md-3 col-sm-6">
@@ -527,7 +521,7 @@
         </div>
         <div class="modal-body">
           <ul class="list-inline row">
-            <li class="col-sm-12"> <a href="https://web.whatsapp.com/send?phone=2347054291601" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
+            <li class="col-sm-12"> <a href="https://web.whatsapp.com/send?phone=2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
           </ul>
         </div>
         <div class="modal-footer">

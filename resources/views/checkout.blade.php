@@ -8,7 +8,6 @@
     <div class="page-header">
       <div class="container text-center">
         <h2 class="text-primary text-uppercase">checkout</h2>
-        <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
       </div>
     </div>
     <section class="container">
@@ -22,7 +21,7 @@
           <div class="row">
 		    @if(is_null($user))
             <div class="col-sm-12">
-			  <div class="alert alert-info" role="alert"><i class="ion-information-circled"></i> Returning customer? <a href="{{url('login')}}">Click here to login</a></div>
+			  <div class="alert alert-info" role="alert"><i class="ion-information-circled"></i> Returning customer? <a href="javascript:void(0)" data-toggle="modal" data-target="#login-box">Click here to login</a></div>
 			</div>
 			@endif
             <div class="col-sm-4 col-md-3 sub-data-left sub-equal">
@@ -49,7 +48,10 @@
                         <h4 class="panel-title"> <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion-one" data-toggle="collapse" class=""><span class="badge">1</span> Direct bank transfer </a> </h4>
                       </div>
                       <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse in" id="collapseOne" aria-expanded="true" style="">
-                        <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.. </div>
+                        <div class="panel-body"> 
+						   Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account. <br><br>
+						  <center> <button onclick="payBank(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
+						</div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -57,17 +59,14 @@
                         <h4 class="panel-title"> <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion-one" data-toggle="collapse" class="collapsed"><span class="badge">2</span> Pay online</a> </h4>
                       </div>
                       <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
-                        <div class="panel-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. </div>
+                        <div class="panel-body"> 
+						  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. <br><br>
+						  <center> <button onclick="payCard(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay with card</button></center>
+						</div>
                       </div>
                     </div>
                   </div>
                 </div>
-				</section>
-				<section class="col-sm-12">
-				  <br>
-				  <center>
-				  <button class="btn btn-primary hvr-underline-from-center-primary " type="button">proceed to payment</button>
-				  </center>
 				</section>
               </div>
 			  <br>
@@ -85,10 +84,32 @@
 			  {
 				$fname = $user->fname; $lname = $user->lname;
 			    $email = $user->email; $phone = $user->phone;
-			    $address = $ss['address']; $state = "none"; 
+			    $address = $ss['address']; $state = $ss['state']; 
 				$city = $ss['city']; $zip = $ss['zipcode']; $notes = "";  
 			  }
 		    ?>
+				 <input type="hidden" id="bank-action" value="{{url('checkout')}}">
+                            	<input type="hidden" id="card-action" value="{{url('pay')}}">
+                            	
+                             <script>
+                             	let mc = {
+                             	                'type': 'checkout',
+                                                 'comment': '',
+                                                 'address': "{{$address}}",
+                                                 'city': "{{$city}}",
+                                                 'state': "{{$state}}",
+                                                 'zip': "{{$zip}}"
+                                             };
+                             
+                             </script>
+                            <!-- payment form -->
+                            	<input type="hidden" name="email" value="{{$email}}"> {{-- required --}}
+                            	<input type="hidden" name="amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
+                            	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            
+                                <input type="hidden" id="meta-comment" value="">  
+                            <!-- End payment form -->
+							
               <div class="row"> 
                 
                 <!--start of breadcrumb-->
@@ -151,9 +172,15 @@
                             <label class="control-label" for="state">State</label>
                             <select class="selectpicker" id="state" name="state" value="{{$state}}" style="display: none;">
 							<option value="none">Select state</option>
-							@foreach($states as $key => $value)
-                              <option value="{{$key}}">{{ucwords($value)}}</option>
-							@endforeach                     
+							<?php
+							 foreach($states as $key => $value)
+							 {
+								 $ss = $key == $state ? " selected='selected'" : "";
+						    ?>
+                              <option value="{{$key}}"{{$ss}}>{{ucwords($value)}}</option>
+							<?php
+							 }
+                            ?>							
                             </select>
                           </div>
                         </div>

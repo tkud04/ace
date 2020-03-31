@@ -323,3 +323,14 @@ function addToCart(){
 	   console.log("cu: ",cu);
 	   window.location = cu;
 }
+
+function payBank(){
+	console.log("pay to bank account");
+}
+
+function payCard(){
+	 mc['comment'] = $('#comment').val();
+	$('#nd').val(JSON.stringify(mc));
+	console.log($('#nd').val());
+	//setPaymentAction("card");
+}

@@ -43,3 +43,6 @@ Route::post('add-review', 'MainController@postAddReview');
 
 Route::get('add-to-cart', 'MainController@getAddToCart');
 Route::get('remove-from-cart', 'MainController@getRemoveFromCart');
+
+Route::get('payment/callback', 'PaymentController@getPaymentCallback');
+Route::post('pay', 'PaymentController@postRedirectToGateway');
