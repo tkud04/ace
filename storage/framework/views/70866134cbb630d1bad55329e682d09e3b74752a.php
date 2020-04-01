@@ -26,15 +26,21 @@
     <section class="container">
       <div class="row">
 	  <?php
-	  $cc = [
-	         ['name' => "<span>watches</span>",'copy' => "",'url' => "shop/watches"],
-	         ['name' => "<span>ear</span>rings",'copy' => "",'url' => "shop/earrings"],
-	         ['name' => "<span>brace</span>lets",'copy' => "",'url' => "shop/bracelets"],
-	         ['name' => "<span>anklets</span>",'copy' => "",'url' => "anklets"],
-	         ['name' => "<span>brooches</span>",'copy' => "",'url' => "brooches"],
-	         ['name' => "<span>neck</span>laces",'copy' => "",'url' => "necklaces"],
-	         ['name' => "<span>rings</span>",'copy' => "",'url' => "rings"],
-			];
+	  $cc = [];
+	  foreach($c as $ccc)
+	  {
+		  $temp = ['name' => "<span>".ucwords($ccc['category'])."</span>",'copy' => "",'url' => url('shop')."?category=".$ccc['category']];
+		  array_push($cc,$temp);
+	  }
+	  // $cc = [
+	         
+	         // ['name' => "<span>ear</span>rings",'copy' => "",'url' => "shop/earrings"],
+	         // ['name' => "<span>brace</span>lets",'copy' => "",'url' => "shop/bracelets"],
+	         // ['name' => "<span>anklets</span>",'copy' => "",'url' => "anklets"],
+	         // ['name' => "<span>brooches</span>",'copy' => "",'url' => "brooches"],
+	         // ['name' => "<span>neck</span>laces",'copy' => "",'url' => "necklaces"],
+	         // ['name' => "<span>rings</span>",'copy' => "",'url' => "rings"],
+			// ];
 	  $ccBackgrounds = ["images/ad-box-1.jpg","images/ad-box-2.jpg","images/ad-box-3.jpg"];
 	    shuffle($cc);
 		

@@ -35,6 +35,7 @@ class Helper implements HelperContract
                      "add-review-status" => "Thank you for your review!",
                      "add-to-cart-status" => "Added to cart!",
                      "remove-from-cart-status" => "Removed from cart!",
+                     "subscribe-status" => "Subscribed!",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
 					 "signup-status-error" => "There was a problem creating your account, please contact support.",
@@ -44,6 +45,7 @@ class Helper implements HelperContract
 					 "add-review-status-error" => "There was a problem sending your review, please contact support.",
 					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please contact support.",
 					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please contact support.",
+					 "subscribe-status-error" => "There was a problem subscribing, please contact support.",
                     ]
                    ];
 
@@ -579,6 +581,41 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
+		   function getProductsByCategory($cat)
+           {
+           	$ret = [];
+                 $pds = ProductData::where('category',$cat)->get();
+ 
+              if($pds != null)
+               {
+				  foreach($pds as $p)
+				  {
+					  $pp = $this->getProduct($p->sku);
+					  array_push($ret,$pp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
+		   
+		   function getProductsByType($t)
+           {
+			   //WORK NEEDS TO BE DONE HERE
+           	$ret = [];
+                 $pds = ProductData::where('id','>','0')->get();
+ 
+              if($pds != null)
+               {
+				  foreach($pds as $p)
+				  {
+					  $pp = $this->getProduct($p->sku);
+					  array_push($ret,$pp);
+				  }
+               }                         
+                                  
+                return $ret;
+           }
+		   
 		   function getProduct($id)
            {
            	$ret = [];
@@ -870,6 +907,28 @@ $subject = $data['subject'];
                }                                 
                                                       
                 return $ret;
+           }	
+		   
+		   function getFriendlyName($n)
+           {
+			   $rett = "";
+           	  $ret = explode('-',$n);
+			  //dd($ret);
+			  if(count($ret) == 1)
+			  {
+				  $rett = ucwords($ret[0]);
+			  }
+			  elseif(count($ret) > 1)
+			  {
+				  $rett = ucwords($ret[0]);
+				  
+				  for($i = 1; $i < count($ret); $i++)
+				  {
+					  $r = $ret[$i];
+					  $rett .= " ".ucwords($r);
+				  }
+			  }
+			  return $rett;
            }	
    
 }

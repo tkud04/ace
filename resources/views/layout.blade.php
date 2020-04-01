@@ -208,7 +208,7 @@
 				 $i = 0;
 				 foreach($c as $cc)
 				 {
-					 $ccu = url('shop')."/".$cc['category'];
+					 $ccu = url('shop')."?category=".$cc['category'];
 					 $cl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
 					 $spp = "";
@@ -261,6 +261,8 @@
                   </div>
 				  <?php
 				   }
+				   $nau = url('shop')."?type=new-arrivals";
+				   $bsu = url('shop')."?type=best-sellers";
 				  ?>
                 </div>
               </div>
@@ -269,8 +271,8 @@
         </ul>
         <ul class="nav navbar-nav main-nav">
           <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
-          <li><a href="#">NEW ARRIVALS</a></li>
-          <li><a href="#">BEST SELLER</a></li>
+          <li><a href="{{$nau}}">NEW ARRIVALS</a></li>
+          <li><a href="{{$bsu}}">BEST SELLERS</a></li>
           <li><a href="{{url('contact')}}">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
@@ -372,7 +374,7 @@
               <ul class="list-unstyled nudge">
                 <li><a href="{{url('about')}}">About us</a> </li>
                 <li><a href="{{url('terms')}}">Terms and conditions</a> </li>
-                <li><a href="#">FAQ</a> </li>
+                <li><a href="{{url('faq')}}">FAQ</a> </li>
                 <li><a href="{{url('contact')}}">Contact us</a> </li>
               </ul>
               <hr class="hidden-md hidden-lg hidden-sm">
@@ -382,7 +384,7 @@
               <ul class="list-unstyled nudge">
 			  <?php
 			  foreach($c as $cc){
-				   $ccu = url('shop')."/".$cc['category'];
+				   $ccu = url('shop')."?category=".$cc['category'];
 			  ?>
                 <li><a href="{{$ccu}}">{{ucwords($cc['category'])}}</a> </li>
 			  <?php
@@ -395,7 +397,8 @@
                 <div class="col-sm-12">
                   <h5 class="text-info text-uppercase">Get the news</h5>
                   <p class="text-muted">Subscribe for updates on our latest arrivals</p>
-                  <form action="#" method="post" id="newsletter">
+                  <form action="{{url('subscribe')}}" method="post" id="newsletter">
+					  {!! csrf_field() !!}
                     <div>
                       <input type="text" name="email" id="newsletter-mail" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address" autocomplete="off">
                       <button type="submit" title="Subscribe" class="btn btn-primary pull-right"><span>Subscribe</span></button>
@@ -427,7 +430,6 @@
           <div class="row">
             <div class="col-sm-12">
               <p class="pull-left">&copy; {{date("Y")}} Allrights reserved <a class="external" href="{{url('/')}}">Ace Luxury</a>.</p>
-              <p class="pull-right"><img class="img-responsive" src="images/payments.png" width="362" height="30" alt=""/></p>
             </div>
           </div>
         </div>

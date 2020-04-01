@@ -58,26 +58,41 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$req = $request->all();
 		
-	  $validator = Validator::make($req, [
-                             'category' => 'required'
-                   ]);
-         
-                 if($validator->fails())
-                  {
-					  $uu = "shop?category=necklaces";
-                      return redirect()->intended($uu);
+		$c = $this->helpers->getCategories();
+		$cc = $this->helpers->categories_2;
+		$signals = $this->helpers->signals;
+		$na = $this->helpers->getNewArrivals();
+		
+                 if(isset($req['type']) || isset($req['category']))
+				 {
+                    if(isset($req['type']))
+                     {
+					     $type = $req['type'];
+					   $products = $this->helpers->getProductsByType($type);
+					   // dd($products);
+					   $samba = $this->helpers->getFriendlyName($type);
+					   
+                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));
                        
-                 }
+                     }
                 
+                    if(isset($req['category']))
+                    {
+					   
+					   $category = $req['category'];
+					   $products = $this->helpers->getProductsByCategory($category);
+					 // dd($products);
+					 $samba = $this->helpers->getFriendlyName($category);
+                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));			 
+                    }
+				 }
                  else
-                 {
-					 $c = $this->helpers->getCategories();
-					 $cc = $this->helpers->categories_2;
-					 $category = $req['category'];
-					 $signals = $this->helpers->signals;
-					 $products = $this->helpers->getProducts();
-                    return view("shop",compact(['user','cart','products','c','cc','category','signals']));			 
-                 }	
+				 {
+					   $products = $this->helpers->getProducts();
+					 // dd($products);
+					 $samba = "Shop";
+                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));
+				 }				 
     }
 	
 	/**
@@ -268,6 +283,26 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		return view("terms",compact(['user','cart','c','signals']));	
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getFAQ()
+    {
+       $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+		}
+		$cart = $this->helpers->getCart($user);
+		$c = $this->helpers->getCategories();
+		$signals = $this->helpers->signals;
+		return view("faq",compact(['user','cart','c','signals']));	
     }
     
 	/**
@@ -549,6 +584,36 @@ class MainController extends Controller {
 	        session()->flash("remove-from-cart-status","ok");
 			return redirect()->back();
          }       
+    }
+	
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postSubscribe(Request $request)
+    {
+        $req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'email' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$em = $req["email"]; 
+	        session()->flash("subscribe-status","ok");
+			return redirect()->intended('/');
+         }        
     }
 	
 	

@@ -13,6 +13,8 @@
 
 Route::get('/', 'MainController@getIndex');
 Route::get('shop', 'MainController@getShop');
+Route::get('new-arrivals', 'MainController@getNewArrivals');
+Route::get('best-sellers', 'MainController@getBestSellers');
 Route::get('product', 'MainController@getProduct');
 
 Route::get('cart', 'MainController@getCart');
@@ -20,6 +22,7 @@ Route::get('cart', 'MainController@getCart');
 Route::get('checkout', 'MainController@getCheckout');
 Route::get('contact', 'MainController@getContact');
 Route::get('search', 'MainController@getSearch');
+Route::get('faq', 'MainController@getFAQ');
 Route::get('terms', 'MainController@getTerms');
 Route::get('track', 'MainController@getTrack');
 
@@ -46,3 +49,5 @@ Route::get('remove-from-cart', 'MainController@getRemoveFromCart');
 
 Route::get('payment/callback', 'PaymentController@getPaymentCallback');
 Route::post('pay', 'PaymentController@postRedirectToGateway');
+
+Route::post('subscribe', 'MainController@postSubscribe');
