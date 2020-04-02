@@ -37,10 +37,8 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-touch-icon-60x60.png">
-<link rel="icon" type="image/png" href="favicon/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="favicon/favicon-16x16.png" sizes="16x16">
+
+<link rel="icon" type="image/png" href="images/favicon.png" sizes="16x16">
 
 <style type="text/css">
 .overlay-effect {
