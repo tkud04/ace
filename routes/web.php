@@ -23,7 +23,7 @@ Route::get('checkout', 'MainController@getCheckout');
 Route::get('contact', 'MainController@getContact');
 Route::get('search', 'MainController@getSearch');
 Route::get('faq', 'MainController@getFAQ');
-Route::get('terms', 'MainController@getTerms');
+Route::get('privacy-policy', 'MainController@getPrivacyPolicy');
 Route::get('track', 'MainController@getTrack');
 
 Route::get('login', 'LoginController@getLogin');

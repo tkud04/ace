@@ -270,7 +270,7 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getTerms()
+	public function getPrivacyPolicy()
     {
        $user = null;
 		$cart = [];
@@ -282,7 +282,7 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
-		return view("terms",compact(['user','cart','c','signals']));	
+		return view("privacy-policy",compact(['user','cart','c','signals']));	
     }
 	
 	/**

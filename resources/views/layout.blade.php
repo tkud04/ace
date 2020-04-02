@@ -371,7 +371,7 @@
               <h5 class="text-info text-uppercase">useful pages</h5>
               <ul class="list-unstyled nudge">
                 <li><a href="{{url('about')}}">About us</a> </li>
-                <li><a href="{{url('terms')}}">Terms and conditions</a> </li>
+                <li><a href="{{url('privacy-policy')}}">Privacy Policy</a> </li>
                 <li><a href="{{url('faq')}}">FAQ</a> </li>
                 <li><a href="{{url('contact')}}">Contact us</a> </li>
               </ul>
