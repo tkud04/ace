@@ -39,7 +39,7 @@ class MainController extends Controller {
 		$na = $this->helpers->getNewArrivals();
 		$bs = $this->helpers->getBestSellers();
 		//dd($na);
-		$ads = $this->helpers->getAds();
+		$ads = $this->helpers->getAds("wide-ad");
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
     	return view("index-2",compact(['user','cart','c','bs','na','ad','signals']));

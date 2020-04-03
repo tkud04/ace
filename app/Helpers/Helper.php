@@ -706,6 +706,20 @@ $subject = $data['subject'];
 				return $ret;
 		   }
 		   
+		   function getCloudinaryImage($dt)
+		   {
+			   $ret = [];
+                  //dd($dt);       
+               if(is_null($dt)) { $ret = "img/no-image.png"; }
+               
+			   else
+			   {
+				    $ret = "https://res.cloudinary.com/dahkzo84h/image/upload/v1585236664/".$dt;
+                }
+				
+				return $ret;
+		   }
+		   
 		   function getNewArrivals()
            {
            	$ret = [];
@@ -942,18 +956,20 @@ $subject = $data['subject'];
                 return $ret;
            }
 
-           function getAds()
+           function getAds($type="wide-ad")
 		   {
 			   $ret = [];
-			   $ads = Ads::where('status',"enabled")->get();
-			   
+			   $ads = Ads::where('status',"enabled")
+			              ->where('type',$type)->get();
+			   #dd($ads);
 			   if(!is_null($ads))
 			   {
 				   foreach($ads as $ad)
 				   {
 					   $temp = [];
 					   $temp['id'] = $ad->id;
-					   $temp['img'] = $ad->img;
+					   $img = $ad->img;
+					   $temp['img'] = $this->getCloudinaryImage($img);
 					   $temp['type'] = $ad->type;
 					   $temp['status'] = $ad->status;
 					   array_push($ret,$temp);
@@ -961,7 +977,27 @@ $subject = $data['subject'];
 			   }
 			   
 			   return $ret;
-		   }
+		   }	
+
+             function getAd($id)
+		   {
+			   $ret = [];
+			   $ad = Ads::where('id',$id)->first();
+			   #dd($ads);
+
+			   if(!is_null($ad))
+			   {
+					   $temp = [];
+					   $temp['id'] = $ad->id;
+					   $img = $ad->img;
+					   $temp['img'] = $this->getCloudinaryImage($img);
+					   $temp['type'] = $ad->type;
+					   $temp['status'] = $ad->status;
+					   $ret = $temp;
+			   }
+			   
+			   return $ret;
+		   }		   
 
            function contact($data)
 		   {
