@@ -126,7 +126,7 @@
       
               </ul>
             </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/uk.png"> <span class="ion-android-arrow-dropdown"></span></a>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu">
 
               </ul>
