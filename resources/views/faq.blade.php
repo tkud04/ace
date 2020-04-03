@@ -15,7 +15,7 @@
       <div class="row"> 
         <!--start of inner add-->
         <div class="col-sm-12">
-          <div class="inner-ad"> <img width="1170" height="100" alt="" src="images/inner-ad.jpg" class="img-responsive"> </div>
+          <div class="inner-ad"> <img width="1170" height="100" alt="" src="{{$ad}}" class="img-responsive"> </div>
         </div>
         <!--end of inner add-->
         <div class="col-sm-12">

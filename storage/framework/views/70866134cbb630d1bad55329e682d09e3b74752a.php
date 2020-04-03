@@ -132,8 +132,8 @@
       <section class="container">
         <div class="row">
           <div class="subscribe col-sm-12">
-            <h3><span>lookbook sunglasses</span> <small>. Donec vitae sapien ut libero venenatis faucibus</small> </h3>
-            <div class="subscribe-icn"> <a class="btn btn-primary hvr-underline-from-center-primary" href="#">Discover Now</a> </div>
+            <h3><span>luxury accessories</span> <small>. Available for men and women</small> </h3>
+            <div class="subscribe-icn"> <a class="btn btn-primary hvr-underline-from-center-primary" href="<?php echo e(url('shop')); ?>">Discover Now</a> </div>
           </div>
         </div>
       </section>

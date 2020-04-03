@@ -17,12 +17,14 @@
                   <div class="row">
                 <div class="col-sm-12">
                       <ol class="breadcrumb  dashed-border">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
                     <li class="active">Contact us</li>
                   </ol>
                     </div>
                 <div class="col-sm-12">
                       <form method="post" id="contact-form" action="<?php echo e(url('contact')); ?>" accept-charset="UTF-8">
+						  <?php echo csrf_field(); ?>
+
                     <fieldset>
                           <legend>contact us</legend>
                         </fieldset>
@@ -56,7 +58,7 @@
                     <span class="small"> <span class="text-info text-capitalize"> <strong>Phone number</strong> :</span><br>
                         +234 809 703 9692<br>
                         <span class="text-info text-capitalize"> <strong>Email us</strong> :</span><br>
-                        support@aceluxurystores.com.com</span></p>
+                        support@aceluxurystores.com</span></p>
                     </section>
                 
               </div>

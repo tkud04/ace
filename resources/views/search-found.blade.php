@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col-sm-12 ">
           <div class="inner-ad">
-            <figure><img class="img-responsive" src="images/inner-ad.jpg" width="1170" height="100" alt=""></figure>
+            <figure><img class="img-responsive" src="{{$ad}}" width="1170" height="100" alt=""></figure>
           </div>
         </div>
         

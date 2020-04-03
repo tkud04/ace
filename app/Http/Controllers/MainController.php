@@ -39,7 +39,10 @@ class MainController extends Controller {
 		$na = $this->helpers->getNewArrivals();
 		$bs = $this->helpers->getBestSellers();
 		//dd($na);
-    	return view("index-2",compact(['user','cart','c','bs','na','signals']));
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+    	return view("index-2",compact(['user','cart','c','bs','na','ad','signals']));
     }
 	
 	/**
@@ -61,6 +64,9 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$na = $this->helpers->getNewArrivals();
 		
                  if(isset($req['type']) || isset($req['category']))
@@ -72,7 +78,7 @@ class MainController extends Controller {
 					   // dd($products);
 					   $samba = $this->helpers->getFriendlyName($type);
 					   
-                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));
                        
                      }
                 
@@ -83,7 +89,7 @@ class MainController extends Controller {
 					   $products = $this->helpers->getProductsByCategory($category);
 					 // dd($products);
 					 $samba = $this->helpers->getFriendlyName($category);
-                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));			 
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));			 
                     }
 				 }
                  else
@@ -91,7 +97,7 @@ class MainController extends Controller {
 					   $products = $this->helpers->getProducts();
 					 // dd($products);
 					 $samba = "Shop";
-                       return view("shop",compact(['user','cart','products','c','na','samba','signals']));
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));
 				 }				 
     }
 	
@@ -112,6 +118,9 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		
     	
 		
@@ -134,7 +143,7 @@ class MainController extends Controller {
 					 $reviews = $this->helpers->getReviews($req["sku"]);
 					 $related = $this->helpers->getProducts();
 					// dd($product);
-                    return view("product",compact(['user','cart','c','cc','reviews','related','product','signals']));			 
+                    return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','signals']));			 
                  }			 
     	
     }
@@ -158,8 +167,11 @@ class MainController extends Controller {
 		
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		//dd($totals);
-		return view("cart",compact(['user','cart','totals','c','signals']));					 
+		return view("cart",compact(['user','cart','totals','c','ad','signals']));					 
     }
 	
 	/**
@@ -193,8 +205,11 @@ class MainController extends Controller {
 		   if(count($shipping) > 0) $ss = $shipping[0];
 		$c = $this->helpers->getCategories();
 		$states = $this->helpers->states;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("checkout",compact(['user','cart','totals','ss','states','c','signals']));								 
+		return view("checkout",compact(['user','cart','totals','ss','ad','states','c','signals']));								 
     }
 	
 	/**
@@ -214,8 +229,50 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
-		return view("contact",compact(['user','cart','c','signals']));							 
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		return view("contact",compact(['user','cart','c','ad','signals']));							 
     }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postContact(Request $request)
+    {
+		$user = [];
+		
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+       
+        $req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'name' => 'required',
+                             'email' => 'required|email',
+                             'msg' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$this->helpers->contact($req);
+	        session()->flash("contact-status","ok");
+			return redirect()->intended('profile');
+         }        
+    }
+	
 	
 	/**
 	 * Show the application welcome screen to the user.
@@ -234,6 +291,9 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		
 		$req = $request->all();
 	    //dd($secure);
@@ -254,11 +314,11 @@ class MainController extends Controller {
 					 
 					 if(count($results) < 1)
 					 {
-						return view("search-not-found",compact(['user','cart','c','signals'])); 
+						return view("search-not-found",compact(['user','cart','c','ad','signals'])); 
 					 }
 				     else
 					 {
-						 return view("search-found", compact(['results','user','cart','c','signals'])); 
+						 return view("search-found", compact(['results','user','cart','c','ad','signals'])); 
 					 }
                     					 
                  }	 
@@ -266,6 +326,30 @@ class MainController extends Controller {
     
    
    /**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getAbout()
+    {
+       $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+		}
+		$cart = $this->helpers->getCart($user);
+		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		$signals = $this->helpers->signals;
+		#dd($ads);
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		return view("about",compact(['user','cart','c','ad','signals']));	
+    }
+
+	/**
 	 * Show the application welcome screen to the user.
 	 *
 	 * @return Response
@@ -281,8 +365,34 @@ class MainController extends Controller {
 		}
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("privacy-policy",compact(['user','cart','c','signals']));	
+		return view("privacy-policy",compact(['user','cart','c','ad','signals']));	
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getReturnPolicy()
+    {
+       $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+		}
+		$cart = $this->helpers->getCart($user);
+		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$signals = $this->helpers->signals;
+		return view("return-policy",compact(['user','cart','c','ad','signals']));	
     }
 	
 	/**
@@ -301,8 +411,11 @@ class MainController extends Controller {
 		}
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("faq",compact(['user','cart','c','signals']));	
+		return view("faq",compact(['user','cart','c','ad','signals']));	
     }
     
 	/**
@@ -321,8 +434,11 @@ class MainController extends Controller {
 		}
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("track",compact(['user','cart','c','signals']));	
+		return view("track",compact(['user','cart','c','ad','signals']));	
     }
 	
 	/**
@@ -337,8 +453,11 @@ class MainController extends Controller {
 			$user = Auth::user();
 			$cart = $this->helpers->getCart($user);
 			$c = $this->helpers->getCategories();
+			$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("dashboard",compact(['user','cart','c','signals']));			
+		    return view("dashboard",compact(['user','cart','c','ad','signals']));			
 		}
 		else
 		{
@@ -363,6 +482,9 @@ class MainController extends Controller {
 		    $states = $this->helpers->states;
 			$account = $this->helpers->getUser($user->email);
 			$shipping = $this->helpers->getShippingDetails($user);
+			$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 
 			$ss = ['company' => "",
 			       'address' => "",
@@ -374,7 +496,7 @@ class MainController extends Controller {
 			    ];
 				
 		   if(count($shipping) > 0) $ss = $shipping[0];
-		    return view("profile",compact(['user','cart','c','signals','account','ss','states']));			
+		    return view("profile",compact(['user','cart','c','signals','account','ad','ss','states']));			
 		}
 		else
 		{

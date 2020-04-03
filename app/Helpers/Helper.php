@@ -14,6 +14,7 @@ use App\Products;
 use App\ProductData;
 use App\ProductImages;
 use App\Reviews;
+use App\Ads;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -929,7 +930,43 @@ $subject = $data['subject'];
 				  }
 			  }
 			  return $rett;
-           }	
+           }
+		   
+		   function createAds($data)
+           {
+           	$ret = Ads::create(['img' => $data['img'], 
+                                                      'type' => $data['type'], 
+                                                      'status' => $data['status'] 
+                                                      ]);
+                                                      
+                return $ret;
+           }
+
+           function getAds()
+		   {
+			   $ret = [];
+			   $ads = Ads::where('status',"enabled")->get();
+			   
+			   if(!is_null($ads))
+			   {
+				   foreach($ads as $ad)
+				   {
+					   $temp = [];
+					   $temp['id'] = $ad->id;
+					   $temp['img'] = $ad->img;
+					   $temp['type'] = $ad->type;
+					   $temp['status'] = $ad->status;
+					   array_push($ret,$temp);
+				   }
+			   }
+			   
+			   return $ret;
+		   }
+
+           function contact($data)
+		   {
+			   dd($data);
+		   }		   
    
 }
 ?>

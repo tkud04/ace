@@ -372,6 +372,7 @@
               <ul class="list-unstyled nudge">
                 <li><a href="<?php echo e(url('about')); ?>">About us</a> </li>
                 <li><a href="<?php echo e(url('privacy-policy')); ?>">Privacy Policy</a> </li>
+                <li><a href="<?php echo e(url('returns')); ?>">Return Policy</a> </li>
                 <li><a href="<?php echo e(url('faq')); ?>">FAQ</a> </li>
                 <li><a href="<?php echo e(url('contact')); ?>">Contact us</a> </li>
               </ul>

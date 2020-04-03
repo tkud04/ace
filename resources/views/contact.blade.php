@@ -25,6 +25,7 @@
                     </div>
                 <div class="col-sm-12">
                       <form method="post" id="contact-form" action="{{url('contact')}}" accept-charset="UTF-8">
+						  {!! csrf_field() !!}
                     <fieldset>
                           <legend>contact us</legend>
                         </fieldset>
@@ -58,7 +59,7 @@
                     <span class="small"> <span class="text-info text-capitalize"> <strong>Phone number</strong> :</span><br>
                         +234 809 703 9692<br>
                         <span class="text-info text-capitalize"> <strong>Email us</strong> :</span><br>
-                        support@aceluxurystores.com.com</span></p>
+                        support@aceluxurystores.com</span></p>
                     </section>
                 
               </div>

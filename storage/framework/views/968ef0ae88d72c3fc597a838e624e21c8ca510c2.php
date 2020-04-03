@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="inner-ad">
-            <figure><img class="img-responsive" src="images/inner-ad.jpg" width="1170" height="100" alt=""></figure>
+            <figure><img class="img-responsive" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""></figure>
           </div>
         </div>
         <div class="col-sm-12 equal-height-container">
@@ -211,7 +211,7 @@
                       <div class="col-sm-6">
                         <div class="checkbox small">
                           <input type="checkbox" id="terms" value="option1" name="logincheckbox">
-                          <label for="terms">Do you agree to the <a href="#">terms and conditions?</a></label>
+                          <label for="terms">Do you agree to the <a href="<?php echo e(url('returns')); ?>">terms?</a></label>
                         </div>
                       </div>
                       <div class="col-sm-6 text-right">
