@@ -156,7 +156,7 @@
 							{!! csrf_field() !!}
 							<input type="hidden" name="sku" value="{{$product['sku']}}">
                           <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">price</h5>
+                            <h5 class="sub-title text-primary text-uppercase">rating</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
                                 <input type="radio" id="inlineRadio1" value="1" name="price">
@@ -180,56 +180,7 @@
                               </div>
                             </div>
                           </fieldset>
-                          <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">quality</h5>
-                            <div class="form-group">
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio6" value="1" name="quality">
-                                <label class="control-label" for="inlineRadio6"> 1 Star</label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio7" value="2" name="quality">
-                                <label class="control-label" for="inlineRadio7"> 2 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio8" value="3" name="quality">
-                                <label class="control-label" for="inlineRadio8"> 3 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio9" value="4" name="quality">
-                                <label class="control-label" for="inlineRadio9"> 4 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio10" value="5" name="quality">
-                                <label class="control-label" for="inlineRadio10"> 5 Stars </label>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">value</h5>
-                            <div class="form-group">
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio11" value="1" name="value">
-                                <label class="control-label" for="inlineRadio11"> 1 Star</label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio12" value="2" name="value">
-                                <label class="control-label" for="inlineRadio12"> 2 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio13" value="3" name="value">
-                                <label class="control-label" for="inlineRadio13"> 3 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio14" value="4" name="value">
-                                <label class="control-label" for="inlineRadio14"> 4 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio15" value="5" name="value">
-                                <label class="control-label" for="inlineRadio15"> 5 Stars </label>
-                              </div>
-                            </div>
-                          </fieldset>
+                          
                           <br>
                           <div class="row">
                             <div class="col-sm-12">

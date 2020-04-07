@@ -12,7 +12,7 @@
               <h1 class="title fadeInDownBig wow"> WOMEN COLLECTION 2015</h1>
               <p class="subtitle col-sm-9 fadeInUp wow hidden-xs">Donec pede justo fringilla vel aliquet nec vulputate eget arcu. In enim justo rhoncus ut imperdiet a venenatis vitae dictum felis eu pede mollis pretium integer tincidunt</p>
               <div class="clearfix"></div>
-              <a class="btn btn-primary fadeInUp wow hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Discover Now</span> </a> <a class="btn btn-default fadeInUp wow hvr-underline-from-center-default hidden-xs" href="#"> <i class="rm-icon ion-android-star"></i> <span>All Collections</span> </a> </div>
+              <a class="btn btn-primary fadeInUp wow hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Shop Now</span> </a>  </div>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
               <h1 data-animation="fadeInDownBig" class="title fadeInDownBig text-primary"> THE NEW COLLECTION</h1>
               <p data-animation="fadeInUp" class="subtitle col-sm-9  fadeInUp text-primary hidden-xs">Donec pede justo fringilla vel aliquet nec vulputate eget arcu. In enim justo rhoncus ut imperdiet a venenatis vitae dictum felis eu pede mollis pretium integer tincidunt</p>
               <div class="clearfix"></div>
-              <a data-animation="fadeIn" class="btn btn-primary  fadeInUp hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Discover Now</span> </a> <a data-animation="fadeIn" class="btn btn-default fadeInUp hvr-underline-from-center-default hidden-xs" href="#"> <i class="rm-icon ion-android-star"></i> <span>All Collections</span> </a> </div>
+              <a data-animation="fadeIn" class="btn btn-primary  fadeInUp hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Shop Now</span> </a>  </div>
           </div>
         </div>
       </div>

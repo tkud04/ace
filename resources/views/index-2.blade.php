@@ -43,6 +43,11 @@
 	         // ['name' => "<span>neck</span>laces",'copy' => "",'url' => "necklaces"],
 	         // ['name' => "<span>rings</span>",'copy' => "",'url' => "rings"],
 			// ];
+	$cc = [
+	    ['name' => "<span>".ucwords("earrings")."</span>",'copy' => "",'url' => url('shop')."?category=earrings"],
+	    ['name' => "<span>".ucwords("brooches")."</span>",'copy' => "",'url' => url('shop')."?category=brooches"],
+	    ['name' => "<span>".ucwords("rings")."</span>",'copy' => "",'url' => url('shop')."?category=rings"],
+	];
 	  $ccBackgrounds = ["images/ad-box-1.jpg","images/ad-box-2.jpg","images/ad-box-3.jpg"];
 	    shuffle($cc);
 		

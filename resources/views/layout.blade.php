@@ -116,7 +116,7 @@
               </ul>
             </li>
            @if(is_null($user))
-            <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> login</a></li>
+            <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
 		   @else
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
             <li><a href="{{url('signout')}}">Sign out</a></li>
@@ -158,23 +158,36 @@
   <header>
     <div class="container">
       <div class="row"> <!--start of logo-->
-        <div class="col-sm-12 col-md-4 col-lg-3 "> <a href="{{url('/')}}" class="navbar-brand"></a></div>
+        
         <!--end of logo--> <!--start of features-->
-        <div class="col-sm-12 col-md-8 col-lg-9 feature hidden-xs">
+        <div class="col-sm-12 col-md-5 col-lg-5 feature hidden-xs">
           <div class="row">
-            <div class="col-sm-4 feature-box ion-chatbubble-working">
+            <div class="col-sm-6 feature-box ion-chatbubble-working">
               <dl  class="text-primary text-capitalize">
                 <dt>Online Support</dt>
                 <dd class="text-muted">24/7 if you need any help</dd>
               </dl>
             </div>
-            <div class="col-sm-4 feature-box ion-android-sync">
+            <div class="col-sm-6 feature-box ion-android-sync">
               <dl  class="text-primary text-capitalize">
                 <dt>2 Days Free Return</dt>
                 <dd class="text-muted">For defective products </dd>
               </dl>
             </div>
-            <div class="col-sm-4 feature-box ion-lock-combination">
+          </div>
+        </div>
+		<div class="col-sm-12 col-md-3 col-lg-3 ">
+		   <a href="{{url('/')}}" class="navbar-brand"></a>
+		</div>
+		<div class="col-sm-12 col-md-4 col-lg-4 feature hidden-xs">
+          <div class="row">
+            <div class="col-sm-6 feature-box ion-lock-combination">
+              <dl  class="text-primary text-capitalize">
+                <dt>Secure Payment</dt>
+                <dd class="text-muted">We don't store your details</dd>
+              </dl>
+            </div>
+			<div class="col-sm-6 feature-box ion-lock-combination">
               <dl  class="text-primary text-capitalize">
                 <dt>Secure Payment</dt>
                 <dd class="text-muted">We don't store your details</dd>
