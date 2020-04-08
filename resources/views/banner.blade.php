@@ -1,14 +1,22 @@
 <!--start of banner-->
   <div id="banner">
+  <?php
+    foreach($banners as $b)
+	{
+	  $img = $b['img'];
+	  $subtitle = $b['subtitle'];
+	  $title = $b['title'];
+	  $copy = $b['copy'];
+  ?>
     <div class="item">
 	 <div class="row">
 	<div class="col-md-3 col-sm-12">
-	  <section>
-                <h5 class="sub-title text-info text-uppercase">Categories</h5>
-                <ul class="list-group nudge">
+	  <section style="margin-left: 10px;">
+                <h5 class="sub-title text-info text-uppercase text-center">Categories</h5>
+                <ul class="list-group nudge" style="text-align: center;">
 				<?php
 				  $i = 0;
-				 for($i = 0; $i < 5; $i++)
+				 for($i = 0; $i < 4; $i++)
 				 {
 					 $k = $c[$i];
 					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
@@ -18,22 +26,22 @@
 				<?php
 				 }
 				?>
-                  
+                  <li class="list-group-item"><a href="{{url('shop')}}">View more</a></li>
                 </ul>
               </section> 
 	</div>
 	<div class="col-md-9 col-sm-12">
-	<img class="img-responsive hidden-xs" src="images/j-5.jpg" width="1920" height="550" alt=""/>
-    <img class="img-responsive visible-xs" src="images/images/j-5.jpg" width="1920" height="550" alt=""/>
+	<img class="img-responsive hidden-xs" src="{{$img}}" width="1920" height="550" alt=""/>
+    <img class="img-responsive visible-xs" src="{{$img}}" width="1920" height="550" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-sm-8 col-lg-6 caption-body">
-              <h2 class="title fadeInDownBig wow" >NEW PRODUCTS</h2>
-              <h1 class="title fadeInDownBig wow"> WOMEN COLLECTION 2015</h1>
-              <p class="subtitle col-sm-9 fadeInUp wow hidden-xs">Donec pede justo fringilla vel aliquet nec vulputate eget arcu. In enim justo rhoncus ut imperdiet a venenatis vitae dictum felis eu pede mollis pretium integer tincidunt</p>
+              <h2 class="title fadeInDownBig wow" >{{strtoupper($subtitle)}}</h2>
+              <h1 class="title fadeInDownBig wow"> {{strtoupper($title)}}</h1>
+              <p class="subtitle col-sm-9 fadeInUp wow hidden-xs">{{strtoupper($copy)}}</p>
               <div class="clearfix"></div>
-              <a class="btn btn-primary fadeInUp wow hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Shop Now</span> </a> 
+              <a class="btn btn-primary fadeInUp wow hvr-underline-from-center-primary hidden-xs" href="{{url('shop')}}"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Shop Now</span> </a> 
 			  </div>
           </div>
         </div>
@@ -41,46 +49,8 @@
     </div>
     </div>
 	</div>
-    <div class="item"> 
-	<div class="row">
-	<div class="col-md-3 col-sm-12">
-	<section>
-                <h5 class="sub-title text-info text-uppercase">Categories</h5>
-                <ul class="list-group nudge">
-				<?php
-				  $i = 0;
-				 for($i = 0; $i < 5; $i++)
-				 {
-					 $k = $c[$i];
-					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
-					 $uu = url('shop')."?category=".$k['category'];
-				?>
-                  <li class="list-group-item"><a href="{{$uu}}"{{$style}}>{{$k['name']}}</a></li>
-				<?php
-				 }
-				?>
-                  
-                </ul>
-              </section> 
-	</div>
-	<div class="col-md-9 col-sm-12">
-	<img class="img-responsive hidden-xs" src="images/j-5.jpg" width="1920" height="540" alt=""/>
-    <img class="img-responsive visible-xs" src="images/j-5.jpg" width="1920" height="540" alt=""/>
-      <div class="slider-caption">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-8 col-lg-6 caption-body">
-              <h2 data-animation="fadeInLeft" class="title fadeInDownBig text-primary">ENJOY SHOPPING</h2>
-              <h1 data-animation="fadeInDownBig" class="title fadeInDownBig text-primary"> THE NEW COLLECTION</h1>
-              <p data-animation="fadeInUp" class="subtitle col-sm-9  fadeInUp text-primary hidden-xs">Donec pede justo fringilla vel aliquet nec vulputate eget arcu. In enim justo rhoncus ut imperdiet a venenatis vitae dictum felis eu pede mollis pretium integer tincidunt</p>
-              <div class="clearfix"></div>
-              <a data-animation="fadeIn" class="btn btn-primary  fadeInUp hvr-underline-from-center-primary hidden-xs" href="#"> <i class="rm-icon ion-android-checkmark-circle"></i> <span>Shop Now</span> </a> 
-			  </div>
-        </div>
-      </div>
-      </div>
-    </div>
-	</div>
-	</div>
+	<?php
+	}
+	?>
   </div>
   <!--end of banner--> 

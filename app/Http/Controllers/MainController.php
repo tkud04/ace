@@ -40,10 +40,11 @@ class MainController extends Controller {
 		$bs = $this->helpers->getBestSellers();
 		//dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
+		$banners = $this->helpers->getBanners();
 		shuffle($ads);
-		#dd($c);
+		#dd($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
-    	return view("index-2",compact(['user','cart','c','bs','na','ad','signals']));
+    	return view("index-2",compact(['user','cart','c','banners','bs','na','ad','signals']));
     }
 	
 	/**

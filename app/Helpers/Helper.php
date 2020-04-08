@@ -15,6 +15,7 @@ use App\ProductData;
 use App\ProductImages;
 use App\Reviews;
 use App\Ads;
+use App\Banners;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -1002,7 +1003,32 @@ $subject = $data['subject'];
            function contact($data)
 		   {
 			   dd($data);
-		   }		   
+		   }	
+
+             function getBanners()
+		   {
+			   $ret = [];
+			   $banners = Banners::where('id',">",'0')
+			                     ->where('status',"enabled")->get();
+			   #dd($ads);
+			   if(!is_null($banners))
+			   {
+				   foreach($banners as $b)
+				   {
+					   $temp = [];
+					   $temp['id'] = $b->id;
+					   $img = $b->img;
+					   $temp['img'] = $this->getCloudinaryImage($img);
+					   $temp['title'] = $b->title;
+					   $temp['subtitle'] = $b->subtitle;
+					   $temp['copy'] = $b->copy;
+					   $temp['status'] = $b->status;
+					   array_push($ret,$temp);
+				   }
+			   }
+			   
+			   return $ret;
+		   }	   		   
    
 }
 ?>
