@@ -140,10 +140,15 @@
 						{
 							$name = $r['name'];
 							$review = $r['review'];
+							$rating = $r['rating'];
 						?>
                         <div class="single-review clearfix">
 						<h5 class="text-primary">{{$name}} <small class=" text-info"><strong>{{date("jS F, Y")}}</strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
+                          <p><span class="reviews-ratings text-info">
+						  @for($x = 0; $x < $rating; $x++)
+						    <i class="ion-android-star"></i>
+						  @endfor
+						  </span></p>
                           <p>{{$review}}</p>
                           <hr>
                         </div>
@@ -159,23 +164,23 @@
                             <h5 class="sub-title text-primary text-uppercase">rating</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio1" value="1" name="price">
+                                <input type="radio" id="inlineRadio1" value="1" name="rating">
                                 <label class="control-label" for="inlineRadio5"> 1 Star</label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="2" name="price">
+                                <input type="radio" id="inlineRadio2" value="2" name="rating">
                                 <label class="control-label" for="inlineRadio2"> 2 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio3" value="3" name="price">
+                                <input type="radio" id="inlineRadio3" value="3" name="rating">
                                 <label class="control-label" for="inlineRadio3"> 3 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio4" value="4" name="price">
+                                <input type="radio" id="inlineRadio4" value="4" name="rating">
                                 <label class="control-label" for="inlineRadio4"> 4 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio5" value="5" name="price">
+                                <input type="radio" id="inlineRadio5" value="5" name="rating">
                                 <label class="control-label" for="inlineRadio5"> 5 Stars </label>
                               </div>
                             </div>

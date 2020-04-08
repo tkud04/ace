@@ -570,9 +570,7 @@ class MainController extends Controller {
         //dd($req);
         
         $validator = Validator::make($req, [
-                             'price' => 'required',
-                             'quality' => 'required',
-                             'value' => 'required',
+                             'rating' => 'required',
                              'name' => 'required',
 							 'review' => 'required'
          ]);

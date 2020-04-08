@@ -34,7 +34,7 @@ class Helper implements HelperContract
                      "update-status" => "Account updated!",
                      "config-status" => "Config added/updated!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
-                     "add-review-status" => "Thank you for your review!",
+                     "add-review-status" => "Thanks for your feedback! It will be visible after review by admins",
                      "add-to-cart-status" => "Added to cart!",
                      "remove-from-cart-status" => "Removed from cart!",
                      "subscribe-status" => "Subscribed!",
@@ -760,11 +760,10 @@ $subject = $data['subject'];
 			   $userId = $user == null ? $this->generateTempUserID() : $user->id;
            	$ret = Reviews::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
-                                                      'price' => $data['price'], 
-                                                      'quality' => $data['quality'], 
-                                                      'value' => $data['value'],
+                                                      'rating' => $data['rating'],
                                                       'name' => $data['name'],
                                                       'review' => $data['review'],
+                                                      'status' => "pending",
                                                       ]);
                                                       
                 return $ret;
@@ -773,7 +772,8 @@ $subject = $data['subject'];
 		   function getReviews($sku)
            {
            	$ret = [];
-              $reviews = Reviews::where('sku',$sku)->get();
+              $reviews = Reviews::where('sku',$sku)
+			                    ->where('status',"enabled")->get();
  
               if($reviews != null)
                {
@@ -783,9 +783,7 @@ $subject = $data['subject'];
 					  $temp['id'] = $r->id;
 					  $temp['user_id'] = $r->user_id;
 					  $temp['sku'] = $r->sku;
-					  $temp['price'] = $r->price;
-					  $temp['quality'] = $r->quality;
-					  $temp['value'] = $r->value;
+					 $temp['rating'] = $r->rating;
 					  $temp['name'] = $r->name;
 					  $temp['review'] = $r->review;
 					  array_push($ret,$temp);

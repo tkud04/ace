@@ -138,10 +138,15 @@
 						{
 							$name = $r['name'];
 							$review = $r['review'];
+							$rating = $r['rating'];
 						?>
                         <div class="single-review clearfix">
 						<h5 class="text-primary"><?php echo e($name); ?> <small class=" text-info"><strong><?php echo e(date("jS F, Y")); ?></strong></small> </h5>
-                          <p><span class="reviews-ratings text-info"><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></p>
+                          <p><span class="reviews-ratings text-info">
+						  <?php for($x = 0; $x < $rating; $x++): ?>
+						    <i class="ion-android-star"></i>
+						  <?php endfor; ?>
+						  </span></p>
                           <p><?php echo e($review); ?></p>
                           <hr>
                         </div>
@@ -155,80 +160,31 @@
 
 							<input type="hidden" name="sku" value="<?php echo e($product['sku']); ?>">
                           <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">price</h5>
+                            <h5 class="sub-title text-primary text-uppercase">rating</h5>
                             <div class="form-group">
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio1" value="1" name="price">
+                                <input type="radio" id="inlineRadio1" value="1" name="rating">
                                 <label class="control-label" for="inlineRadio5"> 1 Star</label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio2" value="2" name="price">
+                                <input type="radio" id="inlineRadio2" value="2" name="rating">
                                 <label class="control-label" for="inlineRadio2"> 2 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio3" value="3" name="price">
+                                <input type="radio" id="inlineRadio3" value="3" name="rating">
                                 <label class="control-label" for="inlineRadio3"> 3 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio4" value="4" name="price">
+                                <input type="radio" id="inlineRadio4" value="4" name="rating">
                                 <label class="control-label" for="inlineRadio4"> 4 Stars </label>
                               </div>
                               <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio5" value="5" name="price">
+                                <input type="radio" id="inlineRadio5" value="5" name="rating">
                                 <label class="control-label" for="inlineRadio5"> 5 Stars </label>
                               </div>
                             </div>
                           </fieldset>
-                          <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">quality</h5>
-                            <div class="form-group">
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio6" value="1" name="quality">
-                                <label class="control-label" for="inlineRadio6"> 1 Star</label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio7" value="2" name="quality">
-                                <label class="control-label" for="inlineRadio7"> 2 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio8" value="3" name="quality">
-                                <label class="control-label" for="inlineRadio8"> 3 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio9" value="4" name="quality">
-                                <label class="control-label" for="inlineRadio9"> 4 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio10" value="5" name="quality">
-                                <label class="control-label" for="inlineRadio10"> 5 Stars </label>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset>
-                            <h5 class="sub-title text-primary text-uppercase">value</h5>
-                            <div class="form-group">
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio11" value="1" name="value">
-                                <label class="control-label" for="inlineRadio11"> 1 Star</label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio12" value="2" name="value">
-                                <label class="control-label" for="inlineRadio12"> 2 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio13" value="3" name="value">
-                                <label class="control-label" for="inlineRadio13"> 3 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio14" value="4" name="value">
-                                <label class="control-label" for="inlineRadio14"> 4 Stars </label>
-                              </div>
-                              <div class="radio radio-inline">
-                                <input type="radio" id="inlineRadio15" value="5" name="value">
-                                <label class="control-label" for="inlineRadio15"> 5 Stars </label>
-                              </div>
-                            </div>
-                          </fieldset>
+                          
                           <br>
                           <div class="row">
                             <div class="col-sm-12">
