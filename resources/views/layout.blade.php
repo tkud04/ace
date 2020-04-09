@@ -460,13 +460,16 @@
         </div>
         <div class="modal-body">
           <ul class="list-inline row">
-            <li class="col-sm-4"> <a href="#" class="btn btn-block btn-facebook  " ><i class="ion-social-facebook"></i></a> </li>
-            <li class="col-sm-4"> <a href="#" class="btn btn-block btn-twitter" ><i class="ion-social-twitter"></i></a></li>
-            <li class="col-sm-4"> <a href="#" class="btn btn-block btn-google" ><i class="ion-social-google"></i></a></li>
+            <li class="col-sm-6"> <a href="#" class="btn btn-block btn-facebook  " ><i class="ion-social-facebook"></i></a> </li>
+            <li class="col-sm-6"> <a href="#" class="btn btn-block btn-google" ><i class="ion-social-google"></i></a></li>
           </ul>
           <hr>
           <form method="post" id="login-form" action="{{url('login')}}" accept-charset="UTF-8">
 		   {!! csrf_field() !!}
+		   <input type="hidden" id="href" name="u" value="">
+		   <script>
+		     document.querySelector('#href').value = document.location.href;
+		   </script>
             <div class=" form-group">
               <label class="control-label" for="login-name">Email address or phone number</label>
               <input type="text" class="form-control" value="" name="id" id="login-name" required>
@@ -501,7 +504,7 @@
         </div>
         <div class="modal-body">
           <ul class="list-inline row">
-            <li class="col-sm-12"> <a href="https://web.whatsapp.com/send?phone=2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
+            <li class="col-sm-12"> <a href="https://wa.me/2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
           </ul>
         </div>
         <div class="modal-footer">

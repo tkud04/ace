@@ -121,7 +121,17 @@
                 
                 <!--start of checkout-->
                 <div class="col-sm-12">
+				<?php if(is_null($user)): ?>
+                  <form role="form" action="<?php echo e(url('register')); ?>" method="post">
+			    <?php else: ?>
                   <form role="form">
+			    <?php endif; ?>
+				<?php echo csrf_field(); ?>
+
+				<input type="hidden" id="href" name="u" value="">
+		   <script>
+		     document.querySelector('#href').value = document.location.href;
+		   </script>
                     <div class="row"> 
                       
                       <!-- START Presonal information -->
@@ -155,7 +165,7 @@
                         <!-- Address -->
                         <div class="form-group">
                           <label class="control-label" for="address">Shipping address</label>
-                          <input type="text" id="address" value="<?php echo e($address); ?>" class="form-control">
+                          <input type="text" id="address" name="address" value="<?php echo e($address); ?>" class="form-control">
                         </div>
                         
                         <!-- Country and state -->
@@ -191,7 +201,7 @@
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="zipcode">Zip</label>
-                            <input type="text" id="zipcode" name="zipcode" value="<?php echo e($zip); ?>" class="form-control">
+                            <input type="text" id="zipcode" name="zip" value="<?php echo e($zip); ?>" class="form-control">
                           </div>
                         </div>
                       </fieldset>
@@ -201,6 +211,7 @@
                     
                     <!-- Agree checkbox and Continue button -->
                     <div class="row">
+					  <?php if(!is_null($user)): ?>
                       <div class="col-sm-12">
                         <fieldset>
                           <legend>order notes</legend>
@@ -208,9 +219,10 @@
                           <hr>
                         </fieldset>
                       </div>
+					  <?php endif; ?>
                       <div class="col-sm-6">
                         <div class="checkbox small">
-                          <input type="checkbox" id="terms" value="option1" name="logincheckbox">
+                          <input type="checkbox" id="terms" value="on" name="terms">
                           <label for="terms">Do you agree to the <a href="<?php echo e(url('returns')); ?>">terms?</a></label>
                         </div>
                       </div>
@@ -218,7 +230,30 @@
                         
                       </div>
                     </div>
+					
+					<?php if(is_null($user)): ?>
+					<!-- Email and phone -->
+                         <div class="row">
+                          <div class="col-sm-6 form-group">
+                            <label class="control-label" for="pass">Password</label>
+                            <input type="password" id="pass" name="pass" class="form-control">
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="pass_confirmation">Confirm password</label>
+                           <input type="password" id="pass_confirmation" name="pass_confirmation" class="form-control">
+						  </div>
+                         </div>
+						 
+					<div class="row" style="margin-bottom: 20px;">
+					  <div class="col-sm-12">
+					    <input type="submit" class="btn btn-primary" value="Submit">
+					  </div>
+					</div>
+                 </form>
+			    <?php else: ?>
                   </form>
+			    <?php endif; ?>
+                  
                 </div>
                 
                 <!--end of checkout--> 

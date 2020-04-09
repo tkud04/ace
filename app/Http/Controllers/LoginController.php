@@ -122,7 +122,7 @@ class LoginController extends Controller {
          else
          {
          	$remember = true; 
-             $return = isset($req['return']) ? $req['return'] : '/';
+             $return = isset($req['u']) ? $req['u'] : '/';
              
          	//authenticate this login
             if(Auth::attempt(['email' => $req['id'],'password' => $req['pass'],'status'=> "enabled"],$remember) || Auth::attempt(['phone' => $req['id'],'password' => $req['pass'],'status'=> "enabled"],$remember))
@@ -133,7 +133,7 @@ class LoginController extends Controller {
 				
              #  if($this->helpers->isAdmin($user)){return redirect()->intended('/');}
                #else{
-                  $rex = "/";
+                  $rex = isset($req['u']) ? $req['u'] : '/';
                   if($user->verified == "vendor") $rex = "my-store";
                   return redirect()->intended($rex);
               # }
@@ -222,7 +222,7 @@ class LoginController extends Controller {
     public function postRegister(Request $request)
     {
         $req = $request->all();
-       //dd($req);
+       #dd($req);
         
         $validator = Validator::make($req, [
                              'pass' => 'required|min:7|confirmed',
@@ -233,7 +233,8 @@ class LoginController extends Controller {
                              'address' => 'required',
                              'city' => 'required',
                              'state' => 'required',
-                             'zip' => 'required|numeric'
+                             'zip' => 'required|numeric',
+							 'terms' => "required|accepted"
          ]);
          
          if($validator->fails())
@@ -263,7 +264,8 @@ class LoginController extends Controller {
              //after creating the user, send back to the registration view with a success message
              #$this->helpers->sendEmail($user->email,'Welcome To Disenado!',['name' => $user->fname, 'id' => $user->id],'emails.welcome','view');
              session()->flash("signup-status", "success");
-             return redirect()->intended('/');
+			 $rex = isset($req['u']) ? $req['u'] : '/';
+             return redirect()->intended($rex);
           }
     }
 
