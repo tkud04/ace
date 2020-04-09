@@ -6,7 +6,7 @@
     <div class="page-header">
           <div class="container text-center">
         <h2 class="text-primary text-uppercase">contact us</h2>
-        <p>For any inquiries, suggestions or complaints</p>
+        <p>Let us know what you have in mind and we will get back to you in an instant!</p>
       </div>
         </div>
     <section class="container equal-height-container">
@@ -28,14 +28,28 @@
                     <fieldset>
                           <legend>contact us</legend>
                         </fieldset>
+						<?php
+						$name = ""; $phone = ""; $email = "";
+						
+						if($user != null)
+						{
+							$name = $user->fname." ".$user->lname;
+							$email = $user->email;
+							$phone = $user->phone;
+						}
+						?>
                     <ul class="row list-unstyled">
                           <li class="col-md-12">
                         <label class="control-label" for="comment-author">Your name <span class="req">*</span></label>
-                        <input type="text" class="form-control" value="" name="name" id="comment-author" required="">
+                        <input type="text" class="form-control" name="name"  value="<?php echo e($name); ?>" id="comment-author" required="">
                       </li>
                           <li class="col-md-12">
                         <label class="control-label" for="comment-email">Your email <span class="req">*</span></label>
-                        <input type="email" class="form-control" value="" name="email" id="comment-email" required="">
+                        <input type="email" class="form-control" name="email" value="<?php echo e($email); ?>" id="comment-email" required="">
+                      </li>
+					  <li class="col-md-12">
+                        <label class="control-label" for="comment-email">Your phone number <span class="req">*</span></label>
+                        <input type="email" class="form-control" name="email" value="<?php echo e($phone); ?>" id="comment-email" required="">
                       </li>
                           <li class="col-md-12">
                         <label class="control-label" for="comment-body">Your message <span class="req">*</span></label>
@@ -54,11 +68,11 @@
                   <div class="row">
                 <section class="col-sm-12">
                       <h5 class="sub-title text-info text-uppercase">Customer support</h5>
-                      <p>We'd be happy to hear from you!<br>
+                      <p>We are here to help any way we can. We continually strive to make your shopping experience as convenient and easy as possible.<br><br> Should you have any questions about our products, your orders or further enquiries; please feel free to contact us by phone or by email.<br><br> 
                     <span class="small"> <span class="text-info text-capitalize"> <strong>Phone number</strong> :</span><br>
-                        +234 809 703 9692<br>
+                        <a href="tel:2348097039692">+234 809 703 9692</a><br>
                         <span class="text-info text-capitalize"> <strong>Email us</strong> :</span><br>
-                        support@aceluxurystores.com</span></p>
+                        <a href="#">support@aceluxurystores.com</a></span></p>
                     </section>
                 
               </div>

@@ -13,7 +13,7 @@
       <div class="row"> 
         <!--start of inner add-->
         <div class="col-sm-12">
-          <div class="inner-ad"> <img width="1170" height="100" alt="" src="images/inner-ad.jpg" class="img-responsive"> </div>
+          <div class="inner-ad"> <img width="1170" height="100" alt="" src="<?php echo e($ad); ?>" class="img-responsive"> </div>
         </div>
         <!--end of inner add-->
         <div class="col-sm-12">
@@ -41,22 +41,23 @@
 EOT;
 			
 			  $set1 = [
-			    'Do you have a physical shop I can visit?' => "Ace Luxury Stores is an online store so we don't have a physical storefront. <br><br>If you need to speak with us please feel free to give us a call, chat up on Whatsapp or better yet fill out the form on our Contact page.",
-			    'Do you offer same-day deliveries?' => "We currently do not offer same-day deliveries. Kindly contact us via phone or Whatsapp for special cases.",
-			    'Can I order online and pickup at my own convenience?' => "You can order online and pickup whenever you are ready. Please give us a call to arrange this.",
-			    'Do you make deliveries to P.O boxes?' => "We currently do not make deliveries to P.O boxes. A valid shipping address will get your goods to you faster.",
-			    'Do you make deliveries on weekends?' => "We are open 7 days and do pack, prepare and ship orders over the weekend; however your package will not go out until Monday.",
-			    'How do I place orders?' => "Browse through our amazing items and add to your cart. When done, click on your shopping cart to view selected items and proceed to checkout.<br><br>Register as a new customer or login as a member, select your preferred mode of payment and confirm your order. From this point you will be guided on how to make payment and your delivery details!",
-			    'What are the payment modes available?' => "We currently accept secure online payment via <b>PayStack</b> or <b>bank transfer</b>",
-			    'Do you take phone orders?' => "Yes, we are always here to help. Please call us with your order.",
-			    'How often do you restock your items?' => "Most items that were very successful will usually be restocked right away.<br><br> For restock requests, please give us an email with the item number and we can give you a restocking date if any."			    
+			    'Do you have a showroom I can visit?' => "No, our business is strictly online but should you need to speak with a representative please feel free to give us a call or email us.",
+			    'Could we order online and pickup at our convenience?' => "Yes, please give us a call to arrange this.",
+			    'What is the latest time to place an order to get it out the same day?' => "We do not offer same day delivery option. Please give us a call for special cases.",			   
+				'Do you make deliveries to P.O boxes?' => "NO, we do not deliver to PO BOXES. A valid address with the correct house number, street and preferably landmark will get your goods to you faster.",
+			    'Do you ship out orders over the weekend?' => "We are open 7 days and do pack, prepare and ship orders over the weekend; however your package will not go out until Monday.",
+			    'How do I place orders on your website?' => "Please see below order process<br><br>Look through our lovely selection of fashion accessories<br>Add items to your cart<br>When done adding items to cart, click on your shopping cart to view all items selected<br>Proceed to check out<br>Register as a new customer or login as a member<br>Select mode of payment<br>select delivery option<br>Confirm your order.<br>This will generate a code<br>Make payment using this code<br>Once payment is received, you will get an email confirming your order and delivery details<br>",
+			    'How do I make payment for purchase on your site?' => "Please see below different payment options for items selected on our site<br><br><li>Online Transfer</li><li>Cash Deposit</li></ul>",
+			    'Do you take phone orders?' => "Yes, we are always here to help. Please call us with your orders. You must have ready your customer ID, phone number, the item numbers and quantity.<br><br> Please Note: This is not available if you do not have an order history with us.",
+			    'How do I add items to my existing order?' => "Please email or call us and one of our representatives will assist you adding or changing items to your existing order if it has not already shipped. Also, please note that the order will only be completed after payment is made.",
+			    'How often do you restock items?' => "Most items that were very successful will usually be restocked right away.<br><br>For restock requests, please send us an email with the item number and we can give you a restocking date if any."			    
 			  ];
 			  
 			  $set2 = [
-			    'How much are the delivery fees?' => "We currently charge a flat fee of &#8358;1000.00",
-			    'How long will it take to deliver my order?' => "Orders are delivered within 48hours in Lagos.<br><br>Orders outside Lagos are delivered between 4 – 7 days.",
-			    'How do I return an item?' => "Unless you received a defective item, <b>ALL sales are final.</b><br><br>Please inspect your items before the dispatch person leaves and if defective, return immediately.<br><br>Please call us or chat us up on Whatsapp on defective items for a refund or exchange.",
-			    'I have other questions' => "Please call us or chat us up on Whatsapp for any issues or complaints. We are always here to help."
+			    'How much are the delivery fees?' => "Delivery cost varies per location. We charge a flat fee of &#8358;1000 for deliveries within Lagos.",
+			    'How long will it take to deliver my order?' => "Orders are delivered within 48 hours in Lagos.<br><br>Orders outside Lagos are delivered between 4 – 7 days.",
+			    'How do I return an item?' => "Unless you received a defective item, ALL sales are final.<br><br>Please inspect your items before the dispatch person leaves and if defective, return immediately.<br><br>Please communicate to us by email on defective items for a refund or exchange.",
+			    'I have other questions' => "Please email or call us with any questions or concerns you may have. We are always here to help."
 			  ];
 			?>
             <div class="col-sm-12">

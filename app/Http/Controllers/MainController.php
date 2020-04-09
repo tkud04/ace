@@ -234,6 +234,7 @@ class MainController extends Controller {
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		//dd($user);
 		return view("contact",compact(['user','cart','c','ad','signals']));							 
     }
 	

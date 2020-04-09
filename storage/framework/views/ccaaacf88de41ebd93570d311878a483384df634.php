@@ -32,15 +32,15 @@
 				  <h1 class="text-primary text-uppercase" style="font-size: 3em;">welcome to <br><br><b class="text-info">ace luxury store</b></h1>
                 </div>
                 <div class="col-sm-6">
-				  <p>Ace Luxury Stores is a fast growing company that deals in luxury jewellery and accessories for men and women. Since 2017 Ace Luxury Stores have been offering quality products for their customers at unbeatable prices.</p><br>
-				  <p>We make it our mission to stock our storefront and provide our customers with the latest trends, covering a wide range of seasonal and stylish selections.</p><br>
-				  <p>You can purchase luxury products like earrings, necklaces, bracelets, rings, brooches, watches and other fashion accessories. With a lot of items available for sale on our website, you will definitley find your taste.</p><br>
-				  <p>Customer support is available to help you achieve a hassle-free shopping experience our website. You can call our support phone number or chat up on Whatsapp.</p><br>
-				  <p>We are social! You can follow us on Instagram and like our Facebook page for discounts and hidden prizes. Thank you for shopping with Ace Luxury Stores!</p><br>
+				  <p><a href="<?php echo e(url('/')); ?>">Ace Luxury Store</a> is a fast growing company that specializes in Fashion Accessories. Founded in 2018, our company’s continued pride is offering quality products at competitive prices. Committed to supplying our customers with the latest trends; we provide a wide range of seasonal and stylish selections.</p><br>
+				  <p>We are dedicated to providing you with topnotch customer experience. Our professional personnel is available to help you through a “<em>walk-in-the-park</em>” online shopping experience at <a href="<?php echo e(url('/')); ?>">aceluxurystore.com</a>.</p><br>
+				  <p>Please follow us on all our social networks.</p><br>
+				  <p>We appreciate your business.</p><br>
 				  <p>
 				  Ace Luxury Stores<br>
-				  Customer support: Call or Whatsapp  +234 809 703 9692<br>
-				  Email: support@aceluxurystores.com
+				  Tel: <a href="tel:2348097039692">+234 809 703 9692</a><br>
+				  Address: <em>3 Oshikomaiya Close, Demurin Road, Ketu, Lagos</em><br>
+				  Email: <a href="#">support@aceluxurystores.com</a>
 				  </p><br>
                 </div>
               </div>
