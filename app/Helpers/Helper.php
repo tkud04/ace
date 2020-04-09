@@ -805,21 +805,10 @@ $subject = $data['subject'];
            {
 			 $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
 			 //dd($userId);
-			 $item = Carts::where('user_id',$userId)
-			              ->where('sku',$data['sku'])->first();
-			
-			if(is_null($item))
-			{
-           	    $ret = Carts::create(['user_id' => $userId, 
+			 $ret = Carts::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
                                                       ]);
-            }
-            else
-			{
-				$item->update(['qty' => $data['qty']]);
-				$ret = $item;
-			}			
                 return $ret;
            }
 		   
