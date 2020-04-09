@@ -223,7 +223,10 @@
 					  @endif
                       <div class="col-sm-6">
                         <div class="checkbox small">
-                          <input type="checkbox" id="terms" value="on" name="terms">
+						<?php
+						$checked = is_null($user) ? "" : " checked";
+						?>
+                          <input type="checkbox" id="terms" value="on" name="terms"{{$checked}}>
                           <label for="terms">Do you agree to the <a href="{{url('returns')}}">terms?</a></label>
                         </div>
                       </div>
