@@ -281,9 +281,18 @@
           </li>
         </ul>
         <ul class="nav navbar-nav main-nav">
+		 <?php
+		   $cccc = [
+	    ['name' => "earrings",'url' => url('shop')."?category=earrings"],
+	    ['name' => "brooches",'url' => url('shop')."?category=brooches"],
+	    ['name' => "rings",'url' => url('shop')."?category=rings"]
+	    ];
+		 ?>
           <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
           <li><a href="{{$nau}}">NEW ARRIVALS</a></li>
-          <li><a href="{{$bsu}}">BEST SELLERS</a></li>
+		  @foreach($cccc as $xc)
+          <li><a href="{{$xc['url']}}">{{strtoupper($xc['name'])}}</a></li>
+		  @endforeach
           <li><a href="{{url('contact')}}">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
@@ -304,22 +313,7 @@
             </div>
           </div>
           <div class="lnt-search-suggestion">
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Leader mask in <span class="text-info">entertainment</span></a></li>
-              <li><a href="#">Plain leader bags in <span class="text-info">fashion</span></a></li>
-              <li><a href="#">Black leader shoes in <span class="text-info">fashion</span></a></li>
-              <li><a href="#">Covers in <span class="text-info">electronics</span></a></li>
-              <li><a href="#">Leader overcoat in <span class="text-info">fashion</span></a></li>
-              <li><a href="#">Hi motor in <span class="text-info">motors</span></a></li>
-              <li><a href="#">Fake leader bag in <span class="text-info">Electronics</span></a></li>
-              <li class="lnt-search-bottom-links">
-                <ul class="list-inline">
-                  <li><a href="#">All suggestions</a></li>
-                  <li><a href="#">New products</a></li>
-                  <li><a href="#">Popular products</a></li>
-                </ul>
-              </li>
-            </ul>
+            
           </div>
           <button type="submit" class="btn btn-xs btn-search"><span class="ion-android-search"></span></button>
         </form>
