@@ -58,7 +58,7 @@
 }
 
 .spinner-round div {
-    background-color: #ffab93;
+    background-color: #ff9bbc;
     height: 12px;
     width: 12px;
     margin-left: 3px;
@@ -120,7 +120,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,.05);
     overflow: hidden;
     white-space: nowrap;
-    background: #ffab93;
+    background: #ff9bbc;
     visibility: hidden;
     opacity: 0;
     -webkit-transition: opacity .3s 0s,visibility 0s .3s;
@@ -161,7 +161,7 @@
 }
 
 .no-touch .cd-top:hover {
-    background-color: #ffab93;
+    background-color: #ff9bbc;
     opacity: 1
 }
 
@@ -209,7 +209,7 @@
 }
 
 .big-title span {
-    color: #ffab93;
+    color: #ff9bbc;
     background: #fff;
     padding: 0 10px;
     font-size: 26px
@@ -256,7 +256,7 @@
 }
 
 .small-title span {
-    color: #ffab93;
+    color: #ff9bbc;
     background: #f2f2f2;
     padding: 0 10px;
     font-size: 26px
@@ -281,7 +281,7 @@
     left: 10px;
     position: absolute;
     width: 16px;
-    border-bottom: 2px solid #ffab93
+    border-bottom: 2px solid #ff9bbc
 }
 
 .dashed-border,.page-header {
@@ -351,8 +351,8 @@
 }
 
 .cd-pagination .current {
-    background-color: #ffab93;
-    border-color: #ffab93;
+    background-color: #ff9bbc;
+    border-color: #ff9bbc;
     color: #fff
 }
 
@@ -406,7 +406,7 @@
     background: #333;
     text-align: center;
     cursor: pointer;
-    border-bottom: 4px solid #ffab93
+    border-bottom: 4px solid #ff9bbc
 }
 
 .wide-ad figure img {
@@ -451,7 +451,7 @@
 .wide-ad figure h2 span {
     font-weight: 800;
     text-transform: uppercase;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .wide-ad figure h2,.wide-ad figure p {
@@ -491,7 +491,7 @@
     width: 100%;
     text-align: center;
     cursor: pointer;
-    border-top: 4px solid #ffab93
+    border-top: 4px solid #ff9bbc
 }
 
 .small-ad figure img {
@@ -513,7 +513,7 @@
 
 .small-ad figure .start-price {
     color: #fff;
-    background: #ffab93;
+    background: #ff9bbc;
     text-transform: uppercase;
     font-size: 14px;
     padding: 7px;
@@ -545,7 +545,7 @@
 .small-ad figure h3 span {
     font-weight: 800;
     text-transform: uppercase;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .small-ad figure h3,.small-ad figure p {
@@ -689,7 +689,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 
 .inner-ad {
     margin-bottom: 15px;
-    border-bottom: 4px solid #ffab93;
+    border-bottom: 4px solid #ff9bbc;
     height: 100px;
     overflow: hidden
 }
@@ -756,7 +756,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 }
 
 .close {
-    color: #ffab93;
+    color: #ff9bbc;
     opacity: 1
 }
 
@@ -882,7 +882,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 }
 
 .switcher-container .colors-panel .colors-list a.purple {
-    background-color: #ffab93
+    background-color: #ff9bbc
 }
 
 .switcher-container .colors-panel .colors-list a.turquoise {
@@ -894,7 +894,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 }
 
 #ascrail2000 div {
-    background: #ffab93!important
+    background: #ff9bbc!important
 }
 
 .navbar-brand {
@@ -926,7 +926,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 
 .feature-box:before {
     font-family: ionicons;
-    background: #ffab93;
+    background: #ff9bbc;
     color: #fff;
     font-size: 24px;
     width: 34px;
@@ -988,7 +988,7 @@ a {
 
 a:focus,a:hover {
     text-decoration: none;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 h1 {
@@ -1068,11 +1068,11 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .btn-primary {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .btn-primary.active,.btn-primary.focus,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.dropdown-toggle.btn-primary {
-    background: #ff9e82
+    background: #ffc1d6
 }
 
 .btn-success {
@@ -1096,7 +1096,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .btn-link:hover {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .hvr-underline-from-center-default,.hvr-underline-from-center-primary {
@@ -1129,7 +1129,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .hvr-underline-from-center-default:before {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .hvr-underline-from-center-primary:before {
@@ -1154,7 +1154,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .text-info {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .text-warning {
@@ -1221,7 +1221,7 @@ blockquote p,dt,th {
 }
 
 blockquote {
-    border-left-color: #ffab93
+    border-left-color: #ff9bbc
 }
 
 .left-bordered,.sub-data-right {
@@ -1276,7 +1276,7 @@ code {
 }
 
 .label-info {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .tags a,mark {
@@ -1284,7 +1284,7 @@ code {
 }
 
 abbr[data-original-title],abbr[title] {
-    border-bottom-color: #ffab93
+    border-bottom-color: #ff9bbc
 }
 
 .blog-info,.top-menu .dropdown .dropdown-menu li a {
@@ -1292,7 +1292,7 @@ abbr[data-original-title],abbr[title] {
 }
 
 mark {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .badge {
@@ -1341,7 +1341,7 @@ mark {
 }
 
 .soon {
-    color: #ffab93!important;
+    color: #ff9bbc!important;
     cursor: default!important;
     font-weight: 700!important;
     padding-left: 10px!important
@@ -1430,7 +1430,7 @@ body {
 
 .top-menu li a:focus,.top-menu li a:hover {
     background: #f8f8f8;
-    color: #ffab93!important
+    color: #ff9bbc!important
 }
 
 .top-menu .dropdown-toggle {
@@ -1459,7 +1459,7 @@ body {
 
 .bag-icn {
     font-size: 28px;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .rm-icon {
@@ -1509,7 +1509,7 @@ body {
 
 .navbar-default {
     background: #333;
-    border-top: 3px solid #ffab93;
+    border-top: 3px solid #ff9bbc;
     border-bottom: none
 }
 
@@ -1522,7 +1522,7 @@ body {
 }
 
 .navbar-default .main-nav li a:focus,.navbar-default .main-nav li a:hover {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .navbar-default .main-nav .active a,.navbar-default .main-nav .active a:focus {
@@ -1531,7 +1531,7 @@ body {
 }
 
 .navbar-default .main-nav .active a:hover {
-    color: #ffab93;
+    color: #ff9bbc;
     background: #484848
 }
 
@@ -1750,12 +1750,12 @@ body {
 }
 
 .line-navbar-two .dropdown-toggle {
-    background-color: #ffab93!important;
+    background-color: #ff9bbc!important;
     color: #fff!important
 }
 
 .line-navbar-two .dropdown-toggle:hover {
-    background-color: #ff9e82!important;
+    background-color: #ffc1d6!important;
     color: #fff!important
 }
 
@@ -1878,7 +1878,7 @@ body {
 .line-navbar-two .lnt-dropdown-mega-menu>.lnt-category>li>a:focus,.line-navbar-two .lnt-dropdown-mega-menu>.lnt-category>li>a:hover {
     text-decoration: none;
     background-color: #fff;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .line-navbar-two .lnt-dropdown-mega-menu>.lnt-category>li.active:before {
@@ -1936,7 +1936,7 @@ body {
 }
 
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a:hover {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .carousel-indicators li {
@@ -1948,7 +1948,7 @@ body {
 }
 
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .carousel-indicators li.active {
-    background: #ffab93;
+    background: #ff9bbc;
     border: 1px solid #fff
 }
 
@@ -2006,7 +2006,7 @@ body {
 }
 
 .line-navbar-two .lnt-search-form .btn-search:hover {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .line-navbar-two .lnt-search-form .lnt-search-category .dropdown-menu {
@@ -2068,7 +2068,7 @@ body {
 }
 
 .line-navbar-two .lnt-search-form .lnt-search-suggestion .lnt-search-bottom-links li a:hover {
-    color: #ffab93;
+    color: #ff9bbc;
     font-weight: 700;
     font-size: 11px
 }
@@ -2116,7 +2116,7 @@ body {
     width: 55px;
     height: 48px;
     margin-right: -1px;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .item-image,.item-price,.slider {
@@ -2192,7 +2192,7 @@ body {
 }
 
 .line-navbar-one .lnt-shopping-cart .lnt-cart-actions .btn-primary:hover {
-    background: #ff9e82!important;
+    background: #ffc1d6!important;
     color: #fff!important
 }
 
@@ -2443,7 +2443,7 @@ body {
     font-size: 0;
     cursor: pointer;
     border: none;
-    background: #ffab93;
+    background: #ff9bbc;
     color: #fff;
     top: 32%;
     padding: 0;
@@ -2707,11 +2707,11 @@ body {
 }
 
 #brands .slick-dots li button,.slick-dots li.slick-active button {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 #banner .slick-next:hover,#banner .slick-prev:hover {
-    background: #ffab93;
+    background: #ff9bbc;
     color: #fff;
     -moz-animation: pulse .5s ease-in;
     -webkit-animation: pulse .5s ease-in;
@@ -2829,7 +2829,7 @@ body {
 }
 
 .form-control:focus {
-    border-color: #ff9e82;
+    border-color: #ffc1d6;
     box-shadow: none
 }
 
@@ -2878,7 +2878,7 @@ body {
 .checkbox input[type=checkbox]:checked+label::after {
     font-family: ionicons;
     content: "\f383";
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .checkbox-danger input[type=checkbox]:checked+label::after,.checkbox-info input[type=checkbox]:checked+label::after,.checkbox-primary input[type=checkbox]:checked+label::after,.checkbox-success input[type=checkbox]:checked+label::after,.checkbox-warning input[type=checkbox]:checked+label::after {
@@ -3091,7 +3091,7 @@ body {
 
 .switch-h1.primary {
     border-color: #b362ca;
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .switch-h1.primary .circle-h1 {
@@ -3161,7 +3161,7 @@ legend {
 }
 
 legend::after {
-    color: #ffab93;
+    color: #ff9bbc;
     bottom: -17px;
     font-family: ionicons;
     font-size: 24px;
@@ -3194,7 +3194,7 @@ legend::after {
 }
 
 .centered-pills li a:hover,.help-block {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .bootstrap-select .dropdown-menu {
@@ -3227,7 +3227,7 @@ legend::after {
 .centered-pills {
     text-align: center;
     padding-bottom: 0;
-    border-bottom: 2px solid #ffab93;
+    border-bottom: 2px solid #ff9bbc;
     height: 100%;
     margin-bottom: 10px
 }
@@ -3242,7 +3242,7 @@ legend::after {
 }
 
 .centered-pills li.active a {
-    background: #ffab93;
+    background: #ff9bbc;
     border: none!important;
     border-radius: 0;
     -webkit-border-radius: 0;
@@ -3268,7 +3268,7 @@ legend::after {
 }
 
 .nav-pills>li.active>a,.nav-pills>li.active>a:focus,.nav-pills>li.active>a:hover {
-    background: #ffab93!important;
+    background: #ff9bbc!important;
     border: 0
 }
 
@@ -3279,7 +3279,7 @@ legend::after {
 }
 
 .nav-tabs>li>a:focus,.nav-tabs>li>a:hover {
-    color: #ffab93;
+    color: #ff9bbc;
     border: 0;
     border-radius: 0;
     background: #f2f2f2
@@ -3288,7 +3288,7 @@ legend::after {
 .nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover {
     border: none;
     color: #FFF!important;
-    background: #ffab93!important
+    background: #ff9bbc!important
 }
 
 .accordion .panel-title a,.soc li a {
@@ -3384,7 +3384,7 @@ legend::after {
 }
 
 .accordion .panel-default .panel-heading {
-    background: #ffab93;
+    background: #ff9bbc;
     border-bottom: 2px solid #333!important;
     height: 44px
 }
@@ -3449,7 +3449,7 @@ legend::after {
 }
 
 .flip .card .face .well {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .flip .card .back .well {
@@ -3577,7 +3577,7 @@ legend::after {
 }
 
 .opacity-eff figure {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .opacity-eff figure img {
@@ -3826,7 +3826,7 @@ legend::after {
 }
 
 .color-12 {
-    background-color: #ffab93
+    background-color: #ff9bbc
 }
 
 .color-13 {
@@ -3851,7 +3851,7 @@ legend::after {
 
 .qty-btngroup button:hover {
     color: #fff;
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .qty-btngroup input[type=text] {
@@ -3963,7 +3963,7 @@ legend::after {
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: #ffab93;
+    background-color: #ff9bbc;
     border: 0 solid transparent
 }
 
@@ -4015,7 +4015,7 @@ legend::after {
 .item-remove {
     cursor: pointer;
     font-family: ionicons;
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .item-quantity span {
@@ -4034,14 +4034,14 @@ legend::after {
 }
 
 .summary {
-    background: #ffab93;
+    background: #ff9bbc;
     color: #fff;
     padding: 0 15px
 }
 
 .summary .list-group-item {
     background: 0 0;
-    border-bottom-color: #ff9e82;
+    border-bottom-color: #ffc1d6;
     padding: 15px 0
 }
 
@@ -4094,7 +4094,7 @@ legend::after {
 }
 
 .product-name a:hover {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .product-btns {
@@ -4132,14 +4132,14 @@ legend::after {
 }
 
 .compare,.fav,.view {
-    background: #ffab93!important;
+    background: #ff9bbc!important;
     padding: 3px 6px;
     color: #fff;
     font-size: 22px
 }
 
 .offer-label-left,.offer-label-right {
-    background: #ffab93;
+    background: #ff9bbc;
     padding: 8px 6px;
     font-size: 11px
 }
@@ -4190,7 +4190,7 @@ legend::after {
 }
 
 .deal-end .deal-counter p {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .deal-end .product-btns {
@@ -4218,7 +4218,7 @@ legend::after {
 }
 
 .load-more a {
-    color: #ffab93;
+    color: #ff9bbc;
     display: inline-block;
     position: absolute
 }
@@ -4257,11 +4257,11 @@ legend::after {
 }
 
 .load-less a {
-    color: #ffab93
+    color: #ff9bbc
 }
 
 .load-less a:hover {
-    color: #ff9e82
+    color: #ffc1d6
 }
 
 .load-less:before {
@@ -4548,19 +4548,19 @@ legend::after {
 }
 
 .panel-default .panel-heading {
-    color: #ffab93;
+    color: #ff9bbc;
     font-weight: 700;
     border-bottom: 1px dashed #ededed!important;
     padding: 15px
 }
 
 .panel-default .panel-heading:hover {
-    background: #ff9e82
+    background: #ffc1d6
 }
 
 .panel-primary .panel-heading {
     color: #fff;
-    background: #ffab93;
+    background: #ff9bbc;
     font-weight: 700;
     border-bottom: 1px solid #ededed;
     padding: 10px 15px
@@ -4601,7 +4601,7 @@ legend::after {
 .footer-middle {
     background: #333;
     min-height: 200px;
-    border-bottom: 4px solid #ffab93
+    border-bottom: 4px solid #ff9bbc
 }
 
 .footer-middle .list-unstyled li {
@@ -4621,7 +4621,7 @@ legend::after {
 }
 
 .footer-middle-title {
-    color: #ffab93;
+    color: #ff9bbc;
     font-size: 14px;
     font-weight: 700
 }
@@ -4646,7 +4646,7 @@ footer hr {
 }
 
 .subscribe-icn .btn-primary:focus {
-    background: #ffab93
+    background: #ff9bbc
 }
 
 .subscribe-icn i {
@@ -4783,8 +4783,8 @@ footer hr {
 .coming-soon p {
     display: inline-block;
     padding: 20px 0;
-    background: #ffab93;
-    border: 4px solid #ff9e82;
+    background: #ff9bbc;
+    border: 4px solid #ffc1d6;
     height: 90px;
     width: 90px;
     margin-right: 15px
