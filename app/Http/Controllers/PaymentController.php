@@ -64,7 +64,8 @@ class PaymentController extends Controller {
          
          else
          {
-			 $request->reference = $paystack->genTranxRef();
+			 //$paystack = new Paystack();
+			 $request->reference = Paystack::genTranxRef();
              $request->key = config('paystack.secretKey');
             return Paystack::getAuthorizationUrl()->redirectNow();
          }        
@@ -111,6 +112,7 @@ class PaymentController extends Controller {
         //status, reference, metadata(order-id,items,amount,ssa), type
         if($paymentData['status'] == 'success')
         {
+			dd($paymentData);
         	$stt = $this->helpers->checkout($user,$paymentData,"paystack");
             $request->session()->flash("pay-card-status",$stt);
 			return redirect()->intended($successLocation);
