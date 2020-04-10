@@ -38,16 +38,11 @@ class PaymentController extends Controller {
         }
 		
 		$req = $request->all();
-        dd($req);
+        #dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
-        if($type->type == "kloudpay"){
-        	$validator = Validator::make($req, [
-                             'orig-amount' => 'required|filled',                       
-            ]);
-        }
-        else{
+   
         $validator = Validator::make($req, [
                              'fname' => 'required|filled',
                              'lname' => 'required|filled',
@@ -59,7 +54,6 @@ class PaymentController extends Controller {
                              'phone' => 'required|filled',
                              'terms' => 'required|accepted',
          ]);
-         }
          
          if($validator->fails())
          {

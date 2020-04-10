@@ -181,6 +181,7 @@ return [
 		 * Custom Service Providers...
 		 */
 		App\Providers\HelperServiceProvider::class, 
+		Unicodeveloper\Paystack\PaystackServiceProvider::class
 
     ],
 
