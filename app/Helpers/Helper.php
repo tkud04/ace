@@ -38,16 +38,18 @@ class Helper implements HelperContract
                      "add-to-cart-status" => "Added to cart!",
                      "remove-from-cart-status" => "Removed from cart!",
                      "subscribe-status" => "Subscribed!",
+                     "pay-card-status" => "Payment successful! Your order is being processed.",
                      ],
-                     'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
-					 "signup-status-error" => "There was a problem creating your account, please contact support.",
-					 "profile-status-error" => "There was a problem updating your profile, please contact support.",
-					 "update-status-error" => "There was a problem updating the account, please contact support.",
-					 "contact-status-error" => "There was a problem sending your message, please contact support.",
-					 "add-review-status-error" => "There was a problem sending your review, please contact support.",
-					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please contact support.",
-					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please contact support.",
-					 "subscribe-status-error" => "There was a problem subscribing, please contact support.",
+                     'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
+					 "signup-status-error" => "There was a problem creating your account, please try again.",
+					 "profile-status-error" => "There was a problem updating your profile, please try again.",
+					 "update-status-error" => "There was a problem updating the account, please try again.",
+					 "contact-status-error" => "There was a problem sending your message, please try again.",
+					 "add-review-status-error" => "There was a problem sending your review, please try again.",
+					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please try again.",
+					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please try again.",
+					 "subscribe-status-error" => "There was a problem subscribing, please try again.",
+					 "pay-card-status-error" => "There was a problem making payment, please try again.",
                     ]
                    ];
 
@@ -1016,7 +1018,12 @@ $subject = $data['subject'];
 			   }
 			   
 			   return $ret;
-		   }	   		   
+		   }
+
+           function checkout($u,$data)
+		   {
+			   dd($data);
+		   }		   
    
 }
 ?>
