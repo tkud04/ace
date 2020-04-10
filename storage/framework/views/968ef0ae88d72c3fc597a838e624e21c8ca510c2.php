@@ -127,7 +127,7 @@
 		   
                              	let mc = {
                              	                'type': 'checkout',
-                                                 'comment': '',
+                                                 'notes': '',
                                                  'address': "<?php echo e($address); ?>",
                                                  'city': "<?php echo e($city); ?>",
                                                  'state': "<?php echo e($state); ?>",
@@ -218,7 +218,7 @@
                       <div class="col-sm-12">
                         <fieldset>
                           <legend>order notes</legend>
-                          <textarea class="form-control" rows="5" cols="40" name="notes" id="notes" required=""></textarea><span class="help-block">350 characters maximum</span>
+                          <textarea class="form-control" rows="5" cols="40" name="notes" id="notes" required=""></textarea>
                           <hr>
                         </fieldset>
                       </div>

@@ -67,7 +67,16 @@ class PaymentController extends Controller {
 			 //$paystack = new Paystack();
 			 $request->reference = Paystack::genTranxRef();
              $request->key = config('paystack.secretKey');
-            return Paystack::getAuthorizationUrl()->redirectNow();
+			 
+			 try{
+				return Paystack::getAuthorizationUrl()->redirectNow(); 
+			 }
+			 catch(Exception $e)
+			 {
+				  $request->session()->flash("pay-card-status","error");
+			      return redirect()->intended("checkout");
+			 }
+            
          }        
         
         
@@ -100,8 +109,7 @@ class PaymentController extends Controller {
         {
         	case 'checkout':
               $successLocation = "orders";
-             $failureLocation = "checkout";
-             $this->helpers->clearCart($user);
+             $failureLocation = "checkout";           
             break; 
             
             case 'kloudpay':

@@ -330,7 +330,7 @@ function payBank(){
 }
 
 function payCard(){
-	 mc['comment'] = $('#comment').val();
+	 mc['notes'] = $('#notes').val();
 	$('#nd').val(JSON.stringify(mc));
 	console.log($('#nd').val());
 	setPaymentAction("card");

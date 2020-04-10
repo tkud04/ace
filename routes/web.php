@@ -27,8 +27,10 @@ Route::get('search', 'MainController@getSearch');
 Route::get('about', 'MainController@getAbout');
 Route::get('faq', 'MainController@getFAQ');
 Route::get('privacy-policy', 'MainController@getPrivacyPolicy');
-Route::get('track', 'MainController@getTrack');
 Route::get('returns', 'MainController@getReturnPolicy');
+
+Route::get('orders', 'MainController@getOrders');
+Route::get('track', 'MainController@getTrack');
 
 Route::get('login', 'LoginController@getLogin');
 Route::get('register', 'LoginController@getRegister');

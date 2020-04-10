@@ -128,7 +128,7 @@
 		   
                              	let mc = {
                              	                'type': 'checkout',
-                                                 'comment': '',
+                                                 'notes': '',
                                                  'address': "{{$address}}",
                                                  'city': "{{$city}}",
                                                  'state': "{{$state}}",
@@ -219,7 +219,7 @@
                       <div class="col-sm-12">
                         <fieldset>
                           <legend>order notes</legend>
-                          <textarea class="form-control" rows="5" cols="40" name="notes" id="notes" required=""></textarea><span class="help-block">350 characters maximum</span>
+                          <textarea class="form-control" rows="5" cols="40" name="notes" id="notes" required=""></textarea>
                           <hr>
                         </fieldset>
                       </div>

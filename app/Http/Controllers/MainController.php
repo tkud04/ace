@@ -599,6 +599,33 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getOrders()
+    {
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+			$c = $this->helpers->getCategories();
+			$ads = $this->helpers->getAds();
+			$orders = $this->helpers->getOrders($user);
+			dd($orders);
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		    $signals = $this->helpers->signals;
+		    return view("orders",compact(['user','cart','c','ad','signals']));			
+		}
+		else
+		{
+			return redirect()->intended('/');
+		}
+		
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
     public function postAddReview(Request $request)
     {
 		$user = null;

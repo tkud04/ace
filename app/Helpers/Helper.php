@@ -16,6 +16,8 @@ use App\ProductImages;
 use App\Reviews;
 use App\Ads;
 use App\Banners;
+use App\Orders;
+use App\OrderItems;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -572,7 +574,8 @@ $subject = $data['subject'];
 		     function getProducts()
            {
            	$ret = [];
-              $products = Products::where('id','>',"0")->get();
+              $products = Products::where('id','>',"0")
+			                       ->where('status',"enabled")->get();
  
               if($products != null)
                {
@@ -589,7 +592,8 @@ $subject = $data['subject'];
 		   function getProductsByCategory($cat)
            {
            	$ret = [];
-                 $pds = ProductData::where('category',$cat)->get();
+                 $pds = ProductData::where('category',$cat)
+			                       ->where('status',"enabled")->get();
  
               if($pds != null)
                {
@@ -607,7 +611,8 @@ $subject = $data['subject'];
            {
 			   //WORK NEEDS TO BE DONE HERE
            	$ret = [];
-                 $pds = ProductData::where('id','>','0')->get();
+                 $pds = ProductData::where('id','>','0')
+			                       ->where('status',"enabled")->get();
  
               if($pds != null)
                {
@@ -734,7 +739,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  array_push($ret,$pp);
+					  if($pp['status'] == "enabled") array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -751,7 +756,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  array_push($ret,$pp);
+					  if($pp['status'] == "enabled") array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -1020,10 +1025,212 @@ $subject = $data['subject'];
 			   return $ret;
 		   }
 
-           function checkout($u,$data)
+           function checkout($u,$data,$type="paystack")
 		   {
-			   dd($data);
-		   }		   
+			   #dd($data);
+			   
+			   switch($type)
+			   {
+			      case "bank":
+                 	$ret = $this->payWithBank($u, $data);
+                  break;
+				  case "paystack":
+                 	$ret = $this->payWithPayStack($u, $data);
+                  break;
+			   }
+		   }
+		   
+		   function getPaymentCode($r=null)
+		   {
+			   $ret = "";
+			   
+			   if(is_null($r))
+			   {
+				   $ret = "ACE_".rand(999,99999)."LX".rand(999,9999);
+			   }
+			   else
+			   {
+				   $ret = "ACE_".$r;
+			   }
+			   return $ret;
+		   }
+
+           function payWithBank($user, $dt)
+           { 
+              $md = $payStackResponse['metadata'];
+              $amount = $payStackResponse['amount'] / 100;
+              $ref = $payStackResponse['reference'];
+              $type = $md['type'];
+              $dt = [];
+              
+              if($type == "checkout"){
+               	$dt['amount'] = $amount;
+				$dt['ref'] = $ref;
+				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
+				$dt['payment_code'] = $this->getPaymentCode();
+				$dt['type'] = "bank";
+				$dt['status'] = "unpaid";
+              }
+              
+              #create order
+
+              $this->addOrder($user,$dt);
+                return "ok";
+           }
+		   
+		   function payWithPayStack($user, $payStackResponse)
+           { 
+              $md = $payStackResponse['metadata'];
+              $amount = $payStackResponse['amount'] / 100;
+              $ref = $payStackResponse['reference'];
+              $type = $md['type'];
+              $dt = [];
+              
+              if($type == "checkout"){
+               	$dt['amount'] = $amount;
+				$dt['ref'] = $ref;
+				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
+				$dt['payment_code'] = $this->getPaymentCode($ref);
+				$dt['type'] = "card";
+				$dt['status'] = "paid";
+              }
+              
+              #create order
+
+              $this->addOrder($user,$dt);
+                return "ok";
+           }
+
+           function addOrder($user,$data)
+           {
+           	$cart = $this->getCart($user);
+               
+           	   $order = $this->createOrder($user, $data);
+               
+               #create order details
+               foreach($cart as $c)
+               {
+				   $dt = [];
+                   $dt['sku'] = $c['product']['sku'];
+				   $dt['qty'] = $c['qty'];
+				   $dt['order_id'] = $order->id;
+                   $oi = $this->createOrderItems($dt);                    
+               }
+
+               #send transaction email to admin
+               //$this->sendEmail("order",$order);  
+               
+			   
+			   //clear cart
+			   $this->clearCart($user);
+           }
+
+           function createOrder($user, $dt)
+		   {
+			   $ret = Orders::create(['user_id' => $user->id,
+			                          'reference' => $dt['ref'],
+			                          'amount' => $dt['amount'],
+			                          'type' => $dt['type'],
+			                          'payment_code' => $dt['payment_code'],
+			                          'notes' => $dt['notes'],
+			                          'status' => $dt['status'],
+			                 ]);
+			  return $ret;
+		   }
+
+		   function createOrderItems($dt)
+		   {
+			   $ret = OrderItems::create(['order_id' => $dt['order_id'],
+			                          'sku' => $dt['sku'],
+			                          'qty' => $dt['qty']
+			                 ]);
+			  return $ret;
+		   }
+
+           function getOrderTotals($items)
+           {
+           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
+              // dd($cart);
+              if($items != null && count($items) > 0)
+               {           	
+               	foreach($items as $i) 
+                    {
+						$amount = $i['product']['pd']['amount'];
+						$qty = $i['qty'];
+                    	$ret['items'] += $qty;
+						$ret['subtotal'] += ($amount * $qty);	
+                    }
+                   
+                   $ret['delivery'] = $this->getDeliveryFee();
+                  
+               }                                 
+                                                      
+                return $ret;
+           }
+
+           function getOrders($user)
+           {
+           	$ret = [];
+
+			  $orders = Orders::where('user_id',$user->id)->get();
+			  #dd($uu);
+              if($orders != null)
+               {
+               	  foreach($orders as $o) 
+                    {
+                    	$temp = $this->getOrder($o->reference);
+                        array_push($ret, $temp); 
+                    }
+               }                                 
+              			  
+                return $ret;
+           }
+		   
+		   function getOrder($ref)
+           {
+           	$ret = [];
+
+			  $o = Orders::where('id',$ref)
+			                  ->orWhere('reference',$ref)->first();
+			  #dd($uu);
+              if($o != null)
+               {
+				  $temp = [];
+                  $temp['id'] = $o->id;
+                  $temp['reference'] = $o->reference;
+                  $temp['amount'] = $o->amount;
+                  $temp['type'] = $o->type;
+                  $temp['payment_code'] = $o->payment_code;
+                  $temp['notes'] = $o->notes;
+                  $temp['status'] = $o->status;
+                  $temp['items'] = $this->getOrderItems($o->id);
+                  $ret = $temp; 
+               }                                 
+              			  
+                return $ret;
+           }
+
+
+           function getOrderItems($id)
+           {
+           	$ret = [];
+
+			  $items = OrderItems::where('order_id',$id)->get();
+			  #dd($uu);
+              if($items != null)
+               {
+               	  foreach($items as $i) 
+                    {
+						$temp = [];
+                    	$temp['id'] = $i->id; 
+                        $temp['product'] = $this->getProduct($i->sku); 
+                        $temp['qty'] = $i->qty; 
+                        array_push($ret, $temp); 
+                    }
+               }                                 
+              			  
+                return $ret;
+           }		   
    
 }
 ?>
