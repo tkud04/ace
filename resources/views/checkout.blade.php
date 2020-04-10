@@ -39,6 +39,7 @@
                   <div class=" summary sum js-total text-center"> <strong> &#8358;{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</strong> </div>
                   <a href="{{url('cart')}}" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
+				@if(!is_null($user))
 				<section class="col-sm-12">
 				<br>
 				   <div class="accordion">
@@ -68,6 +69,7 @@
                   </div>
                 </div>
 				</section>
+				@endif
               </div>
 			  <br>
 			 
@@ -91,24 +93,7 @@
 				 <input type="hidden" id="bank-action" value="{{url('checkout')}}">
                             	<input type="hidden" id="card-action" value="{{url('pay')}}">
                             	
-                             <script>
-                             	let mc = {
-                             	                'type': 'checkout',
-                                                 'comment': '',
-                                                 'address': "{{$address}}",
-                                                 'city': "{{$city}}",
-                                                 'state': "{{$state}}",
-                                                 'zip': "{{$zip}}"
-                                             };
                              
-                             </script>
-                            <!-- payment form -->
-                            	<input type="hidden" name="email" value="{{$email}}"> {{-- required --}}
-                            	<input type="hidden" name="amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
-                            	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-                            
-                                <input type="hidden" id="meta-comment" value="">  
-                            <!-- End payment form -->
 							
               <div class="row"> 
                 
@@ -126,13 +111,31 @@
 				@if(is_null($user))
                   <form role="form" action="{{url('register')}}" method="post">
 			    @else
-                  <form role="form">
+                  <form role="form" id="checkout-form" method="post">
+			                <!-- payment form -->
+                            	<input type="hidden" name="email" value="{{$email}}"> {{-- required --}}
+                            	<input type="hidden" name="amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
+                            	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            
+                                <input type="hidden" id="meta-comment" value="">  
+                            <!-- End payment form -->
+
 			    @endif
 				{!! csrf_field() !!}
 				<input type="hidden" id="href" name="u" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
-		   </script>
+		   
+                             	let mc = {
+                             	                'type': 'checkout',
+                                                 'comment': '',
+                                                 'address': "{{$address}}",
+                                                 'city': "{{$city}}",
+                                                 'state': "{{$state}}",
+                                                 'zip': "{{$zip}}"
+                                             };
+                             
+           </script>
                     <div class="row"> 
                       
                       <!-- START Presonal information -->

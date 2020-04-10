@@ -219,6 +219,46 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+    public function postCheckout(Request $request)
+    {
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+			$cart = $this->helpers->getCart($user);
+		}
+		else
+        {
+        	return redirect()->intended('/');
+        }
+        $req = $request->all();
+        dd($req);
+        
+        $validator = Validator::make($req, [
+                             'quantity' => 'required|array|min:1',
+                             'quantity.*' => 'required|numeric'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$quantities = $req["quantity"]; 
+             $this->helpers->updateCart($cart, $quantities);
+	        session()->flash("update-cart-status","ok");
+			return redirect()->intended('cart');
+         }        
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
 	public function getContact()
     {
         $user = null;

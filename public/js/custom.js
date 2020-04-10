@@ -326,11 +326,95 @@ function addToCart(){
 
 function payBank(){
 	console.log("pay to bank account");
+	setPaymentAction("cod");
 }
 
 function payCard(){
 	 mc['comment'] = $('#comment').val();
 	$('#nd').val(JSON.stringify(mc));
 	console.log($('#nd').val());
-	//setPaymentAction("card");
+	setPaymentAction("card");
+}
+
+function setPaymentAction(type){
+	let paymentURL = "";
+	
+	if(type == "cod"){
+		paymentURL = $("#bank-action").val();  
+   }
+   else if(type == "card"){
+		paymentURL = $("#card-action").val();  
+   }
+   
+   //alert(paymentURL);
+   $('#checkout-form').attr('action',paymentURL);
+   $('#checkout-form').submit();
+}
+
+function bomb(dt,url){
+
+	//create request
+	const req = new Request(url,{method: 'POST', headers: {'Content-Type': 'application/json'}, body: dt});
+	//console.log(req);
+	
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   //console.log(response);
+			   
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error:", message: "Network error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+	   })
+	   .then(res => {
+		   console.log(res);
+		   let ev = true;
+			
+		   if(res.status == "ok"){
+			   if(res.message === "finished"){
+			      alert("All messages have been sent. To send more messages you need to delete the old leads and select new ones");
+				  ev = false;
+				  $("#stop-btn").hide();
+		          $("#send-btn").fadeIn();
+			    }
+				else{
+				  let ug = res.ug;
+		          let bdg = $('#bdg-' + ug);
+			      $('#rmk-' + ug).html("Message Sent!");			  
+			      bdg.removeClass(bdg.attr("data-badge"));
+			      bdg.addClass("badge-success");
+                  bdg.html("sent");				  
+				}
+		   }
+		   else if(res.status == "error"){
+			   if(res.message == "Network error"){
+				     alert("An unknown network error has occured. Please refresh the app or try again later");
+                     ev = false;					 
+			   }
+			   else{
+			   let ug = res.ug;
+		       let bdg = $('#bdg-' + ug);
+			   $('#rmk-' + ug).html("Failed to send message: " + res.message);
+			   bdg.removeClass(bdg.attr("data-badge"));
+			   bdg.addClass("badge-danger");
+			   bdg.html("failed");
+			   }
+		   }
+		   
+		   if(ev === true){
+		      setTimeout(function(){
+		       bomb(dt,url);
+		      },5000);
+		    }
+		   
+	   }).catch(error => {
+		    alert("Failed to send message: " + error);			
+	   });
 }

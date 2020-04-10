@@ -37,6 +37,7 @@
                   <div class=" summary sum js-total text-center"> <strong> &#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></strong> </div>
                   <a href="<?php echo e(url('cart')); ?>" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
+				<?php if(!is_null($user)): ?>
 				<section class="col-sm-12">
 				<br>
 				   <div class="accordion">
@@ -66,6 +67,7 @@
                   </div>
                 </div>
 				</section>
+				<?php endif; ?>
               </div>
 			  <br>
 			 
@@ -89,24 +91,7 @@
 				 <input type="hidden" id="bank-action" value="<?php echo e(url('checkout')); ?>">
                             	<input type="hidden" id="card-action" value="<?php echo e(url('pay')); ?>">
                             	
-                             <script>
-                             	let mc = {
-                             	                'type': 'checkout',
-                                                 'comment': '',
-                                                 'address': "<?php echo e($address); ?>",
-                                                 'city': "<?php echo e($city); ?>",
-                                                 'state': "<?php echo e($state); ?>",
-                                                 'zip': "<?php echo e($zip); ?>"
-                                             };
                              
-                             </script>
-                            <!-- payment form -->
-                            	<input type="hidden" name="email" value="<?php echo e($email); ?>"> 
-                            	<input type="hidden" name="amount" value="<?php echo e(($totals['subtotal'] + $totals['delivery']) * 100); ?>"> 
-                            	<input type="hidden" name="metadata" id="nd" value="" > 
-                            
-                                <input type="hidden" id="meta-comment" value="">  
-                            <!-- End payment form -->
 							
               <div class="row"> 
                 
@@ -124,14 +109,32 @@
 				<?php if(is_null($user)): ?>
                   <form role="form" action="<?php echo e(url('register')); ?>" method="post">
 			    <?php else: ?>
-                  <form role="form">
+                  <form role="form" id="checkout-form" method="post">
+			                <!-- payment form -->
+                            	<input type="hidden" name="email" value="<?php echo e($email); ?>"> 
+                            	<input type="hidden" name="amount" value="<?php echo e(($totals['subtotal'] + $totals['delivery']) * 100); ?>"> 
+                            	<input type="hidden" name="metadata" id="nd" value="" > 
+                            
+                                <input type="hidden" id="meta-comment" value="">  
+                            <!-- End payment form -->
+
 			    <?php endif; ?>
 				<?php echo csrf_field(); ?>
 
 				<input type="hidden" id="href" name="u" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
-		   </script>
+		   
+                             	let mc = {
+                             	                'type': 'checkout',
+                                                 'comment': '',
+                                                 'address': "<?php echo e($address); ?>",
+                                                 'city': "<?php echo e($city); ?>",
+                                                 'state': "<?php echo e($state); ?>",
+                                                 'zip': "<?php echo e($zip); ?>"
+                                             };
+                             
+           </script>
                     <div class="row"> 
                       
                       <!-- START Presonal information -->
