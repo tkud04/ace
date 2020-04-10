@@ -592,15 +592,14 @@ $subject = $data['subject'];
 		   function getProductsByCategory($cat)
            {
            	$ret = [];
-                 $pds = ProductData::where('category',$cat)
-			                       ->where('status',"enabled")->get();
+                 $pds = ProductData::where('category',$cat)->get();
  
               if($pds != null)
                {
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  array_push($ret,$pp);
+					  if($pp['status'] == "enabled") array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -611,15 +610,14 @@ $subject = $data['subject'];
            {
 			   //WORK NEEDS TO BE DONE HERE
            	$ret = [];
-                 $pds = ProductData::where('id','>','0')
-			                       ->where('status',"enabled")->get();
+                 $pds = ProductData::where('id','>','0')->get();
  
               if($pds != null)
                {
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  array_push($ret,$pp);
+					  if($pp['status'] == "enabled") array_push($ret,$pp);
 				  }
                }                         
                                   
