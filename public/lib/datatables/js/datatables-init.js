@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	   let tables = ['.ace-table'];
 	   for(var i=0; i<tables.length;i++){
+		   //console.log(`making ${tables[i]} data-table`);
           $(tables[i]).DataTable();
         }
     });

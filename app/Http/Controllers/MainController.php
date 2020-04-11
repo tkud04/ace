@@ -608,11 +608,11 @@ class MainController extends Controller {
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
 			$orders = $this->helpers->getOrders($user);
-			dd($orders);
+			#dd($orders);
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("orders",compact(['user','cart','c','ad','signals']));			
+		    return view("orders",compact(['user','cart','c','ad','orders','signals']));			
 		}
 		else
 		{

@@ -66,6 +66,7 @@
 <script src="js/jquery.min.js"></script> 
 <!--SweetAlert--> 
 <script src="lib/sweet-alert/all.js"></script>
+
 </head>
 <body>
 <!--start of loader-->
@@ -566,7 +567,7 @@
 
 <!--start of js--> 
 
-
+<?php echo $__env->yieldContent('scripts'); ?>
 <!--custom js--> 
 <script src="js/custom.js"></script> 
 <!--style switcher--> 
@@ -607,7 +608,7 @@
 <!--tab collapse--> 
 <script src="js/bootstrap-tabcollapse.js"></script> 
 
-<?php echo $__env->yieldContent('scripts'); ?>
+
 <!--end of js-->
 </body>
 </html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>

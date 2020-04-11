@@ -1148,7 +1148,7 @@ $subject = $data['subject'];
            function getOrderTotals($items)
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
-              // dd($cart);
+              #dd($items);
               if($items != null && count($items) > 0)
                {           	
                	foreach($items as $i) 
@@ -1202,6 +1202,8 @@ $subject = $data['subject'];
                   $temp['notes'] = $o->notes;
                   $temp['status'] = $o->status;
                   $temp['items'] = $this->getOrderItems($o->id);
+                  $temp['totals'] = $this->getOrderTotals( $temp['items']);
+                  $temp['date'] = $o->created_at->format("jS F, Y");
                   $ret = $temp; 
                }                                 
               			  
