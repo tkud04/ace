@@ -466,7 +466,7 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getTrack()
+	public function getTrack(Request $request)
     {
        $user = null;
 		$cart = [];
@@ -481,7 +481,25 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("track",compact(['user','cart','c','ad','signals']));	
+		$req = $request->all();
+		
+		if(isset($req['o']))
+		{
+			$trackings = $this->helpers->getTrackings($req['o']);
+			if($trackings == [] || $trackings == null){
+				session()->flash("track-order-status","error");
+			    return redirect()->intended('orders');	
+			}
+			else
+			{
+				return view("track-results",compact(['user','cart','trackings','c','ad','signals']));
+			}			
+		}
+		else
+		{
+			return view("track",compact(['user','cart','c','ad','signals']));
+		}
+			
     }
 	
 	/**
@@ -497,10 +515,11 @@ class MainController extends Controller {
 			$cart = $this->helpers->getCart($user);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
+			$orders = $this->helpers->getOrders($user);
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("dashboard",compact(['user','cart','c','ad','signals']));			
+		    return view("dashboard",compact(['user','cart','c','ad','orders','signals']));			
 		}
 		else
 		{

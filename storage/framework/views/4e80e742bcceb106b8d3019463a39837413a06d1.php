@@ -1,4 +1,4 @@
-<?php $__env->startSection('title',"Orders"); ?>
+<?php $__env->startSection('title',"Track Your Order"); ?>
 
 <?php $__env->startSection('styles'); ?>
   <!-- DataTables CSS -->
@@ -12,7 +12,7 @@
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">your orders</h2>
+        <h2 class="text-primary text-uppercase">Track your order</h2>
       </div>
     </div>
     <section class="container">
@@ -29,65 +29,24 @@
             <div class="col-sm-12">
               <ol class="breadcrumb dashed-border row">
                 <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
-                <li class="active">your orders</li>
+                <li class="active">track your order</li>
               </ol>
             </div>
             <!--start of columns-->
             <div class="col-sm-12">
               <div class="row extra-btm-padding">
-                <div class="table-responsive m-t-40 wow fadeInUp">
-                	   <table class="table ace-table">
-				   <thead>
-                        <tr>
-                                    <th>Date</th>
-                                    <th>Reference #</th>
-                                    <th>Items</th>
-                                    <th>Amount</th>
-                                    <th>Payment code</th>
-                                    <th>Status</th>                                                                       
-                                    <th>Actions</th>                                                                       
-                                </tr>
-                       </thead>
-					<tbody>
-					<?php
-					  if(count($orders) > 0)
-					  {
-						 foreach($orders as $o)
-						 {
-							 $items = $o['items'];
-							 $totals = $o['totals'];
-							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
-							 $uu = "#";
-				    ?>
-					 <tr>
-					   <td><?php echo e($o['date']); ?></td>
-					   <td><?php echo e($o['reference']); ?></td>
-					    <td>
-						<?php
-						 foreach($items as $i)
-						 {
-							 $product = $i['product'];
-							 $qty = $i['qty'];
-							 $pu = url('product')."?sku=".$product['sku'];
-							 $tu = url('track')."?o=".$o['reference'];
-						 ?>
-						 <a href="<?php echo e($pu); ?>" target="_blank"><?php echo e($product['sku']); ?></a> (x<?php echo e($qty); ?>)<br>
-						 <?php
-						 }
-						?>
-					   </td>
-					   <td>&#8358;<?php echo e(number_format($o['amount'],2)); ?></td>		  
-					   <td><?php echo e($o['payment_code']); ?></td>
-					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
-					   <td><a class="btn btn-primary" href="<?php echo e($tu); ?>">Track</span></td>
-					 </tr>
-					<?php
-						 }  
-					  }
-                    ?>						  
-					</tbody>
-				  </table>
-				</div>
+                <div class="col-sm-3">
+                  <h5 class="text-primary text-uppercase">One Fourth</h5>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
+                <div class="col-sm-3">
+                  <h5 class="text-primary text-uppercase">One Fourth</h5>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
+                <div class="col-sm-3">
+                  <h5 class="text-primary text-uppercase">One Fourth</h5>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
+                <div class="col-sm-3">
+                  <h5 class="text-primary text-uppercase">One Fourth</h5>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
               </div>
             
             </div>
@@ -113,4 +72,4 @@
     <script src="lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="lib/datatables/js/datatables-init.js"></script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/orders.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/track-results.blade.php ENDPATH**/ ?>

@@ -18,6 +18,7 @@ use App\Ads;
 use App\Banners;
 use App\Orders;
 use App\OrderItems;
+use App\Trackings;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -52,6 +53,7 @@ class Helper implements HelperContract
 					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please try again.",
 					 "subscribe-status-error" => "There was a problem subscribing, please try again.",
 					 "pay-card-status-error" => "There was a problem making payment, please try again.",
+					 "track-order-status-error" => "Invalid reference number, please try again.",
                     ]
                    ];
 
@@ -1230,7 +1232,31 @@ $subject = $data['subject'];
                }                                 
               			  
                 return $ret;
-           }		   
+           }
+
+          function getTrackings($reference="")
+		   {
+			   $ret = [];
+			   if($trackings == "") $trackings = Trackings::where('id','>',"0")->get();
+			   else $trackings = Trackings::where('reference',$reference)->get();
+			   
+			   if(!is_null($trackings))
+			   {
+				   foreach($trackings as $t)
+				   {
+					   $temp = [];
+					   $temp['id'] = $t->id;
+					   $temp['user_id'] = $t->user_id;
+					   $temp['reference'] = $t->reference;
+					   $temp['description'] = $t->description;
+					   $temp['status'] = $t->status;
+					   $temp['date'] = $t->created_at->format("jS F, Y h:i A");
+					   array_push($ret,$temp);
+				   }
+			   }
+			   
+			   return $ret;
+		   }   
    
 }
 ?>

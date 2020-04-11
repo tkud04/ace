@@ -7,16 +7,13 @@
       <div id="not-found" class="wow fadeInDown text-center container animated animated" style="visibility: visible;">
         <div class="reset">
           <h2 class="text-primary text-uppercase">Track your order</h2>
-          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <form method="post" id="track-order" action="#" accept-charset="UTF-8">
+          <p>Stay up to date with the deliovery of your order.</p>
+          <form id="track-order" action="<?php echo e(url('track')); ?>" accept-charset="UTF-8">
             <div class=" form-group">
               <label class="sr-only" for="order-id">Order ID</label>
-              <input type="text" class="form-control" value="" name="" id="order-id" placeholder="Order ID" required="">
+              <input type="text" class="form-control" value="" name="o" id="order-id" placeholder="Order ID" required="">
             </div>
-            <div class=" form-group">
-              <label class="sr-only" for="billing-mail">Billing Email</label>
-              <input type="email" class="form-control" value="" name="" id="billing-mail" placeholder="Billing Email" required="">
-            </div>
+            
             <button class="btn btn-primary hvr-underline-from-center-primary" id="reset-submit" type="submit">track</button>
           </form>
         </div>

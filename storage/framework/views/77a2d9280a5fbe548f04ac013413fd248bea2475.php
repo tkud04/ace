@@ -49,17 +49,62 @@
                   <div class="">
                     <h5 class="card-title"><i class="fa fa-briefcase fa-2x" aria-hidden="true"></i></h5>
                     <p class="card-text">Recent Orders as at <?=date("jS F, Y")?></p>
-                    <div class="card-body table-responsive">
-                      <table class="table ace-table  table-hover">
-                        <thead class="text-warning">
-                           <th>Order #</th>
-                           <th>Description</th>
-                           <th>Amount</th>
-                           <th>Date Ordered</th>
-                           <th>Status</th>
-                        </thead>
-					  </table>
-					 </div>
+                    <div class="card-body table-responsive m-t-40 wow fadeInUp">
+                	   <table class="table ace-table">
+				   <thead>
+                        <tr>
+                                    <th>Date</th>
+                                    <th>Reference #</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Payment code</th>
+                                    <th>Status</th>                                                                       
+                                    <th>Actions</th>                                                                       
+                                </tr>
+                       </thead>
+					<tbody>
+					<?php
+					  if(count($orders) > 0)
+					  {
+						 foreach($orders as $o)
+						 {
+							 if($o['date'] == date("jS F, Y"))
+							 {
+							 $items = $o['items'];
+							 $totals = $o['totals'];
+							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
+							 $uu = "#";
+				    ?>
+					 <tr>
+					   <td><?php echo e($o['date']); ?></td>
+					   <td><?php echo e($o['reference']); ?></td>
+					    <td>
+						<?php
+						 foreach($items as $i)
+						 {
+							 $product = $i['product'];
+							 $qty = $i['qty'];
+							 $pu = url('product')."?sku=".$product['sku'];
+							 $tu = url('track')."?o=".$o['reference'];
+						 ?>
+						 <a href="<?php echo e($pu); ?>" target="_blank"><?php echo e($product['sku']); ?></a> (x<?php echo e($qty); ?>)<br>
+						 <?php
+						 }
+						?>
+					   </td>
+					   <td>&#8358;<?php echo e(number_format($o['amount'],2)); ?></td>		  
+					   <td><?php echo e($o['payment_code']); ?></td>
+					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
+					   <td><a class="btn btn-primary" href="<?php echo e($tu); ?>">Track</span></td>
+					 </tr>
+					<?php
+						 }
+						 }  
+					  }
+                    ?>						  
+					</tbody>
+				  </table>
+				</div>
                   </div>
                </div>
              </div>

@@ -1,18 +1,20 @@
-<?php $__env->startSection('title',"Orders"); ?>
+@extends('layout')
 
-<?php $__env->startSection('styles'); ?>
+@section('title',"Track Your Order")
+
+@section('styles')
   <!-- DataTables CSS -->
   <link href="lib/datatables/css/buttons.bootstrap.min.css" rel="stylesheet" /> 
   <link href="lib/datatables/css/buttons.dataTables.min.css" rel="stylesheet" /> 
   <link href="lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" /> 
-<?php $__env->stopSection(); ?>
+@stop
 
-<?php $__env->startSection('content'); ?>
+@section('content')
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">your orders</h2>
+        <h2 class="text-primary text-uppercase">Tracking order #{{$trackings['reference']}}</h2>
       </div>
     </div>
     <section class="container">
@@ -22,14 +24,14 @@
             <div class="col-sm-12">
               <div class="inner-ad">
                 <figure>
-                  <figure><img class="img-responsive" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""></figure>
+                  <figure><img class="img-responsive" src="{{$ad}}" width="1170" height="100" alt=""></figure>
                 </figure>
               </div>
             </div>
             <div class="col-sm-12">
               <ol class="breadcrumb dashed-border row">
-                <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
-                <li class="active">your orders</li>
+                <li><a href="{{url('/')}}">Home</a></li>
+                <li class="active">track your order</li>
               </ol>
             </div>
             <!--start of columns-->
@@ -40,46 +42,21 @@
 				   <thead>
                         <tr>
                                     <th>Date</th>
-                                    <th>Reference #</th>
-                                    <th>Items</th>
-                                    <th>Amount</th>
-                                    <th>Payment code</th>
                                     <th>Status</th>                                                                       
-                                    <th>Actions</th>                                                                       
+                                    <th>Description</th>                                                                       
                                 </tr>
                        </thead>
 					<tbody>
 					<?php
-					  if(count($orders) > 0)
+					  if(count($trackings) > 0)
 					  {
-						 foreach($orders as $o)
+						 foreach($trackings as $t)
 						 {
-							 $items = $o['items'];
-							 $totals = $o['totals'];
-							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
-							 $uu = "#";
 				    ?>
 					 <tr>
-					   <td><?php echo e($o['date']); ?></td>
-					   <td><?php echo e($o['reference']); ?></td>
-					    <td>
-						<?php
-						 foreach($items as $i)
-						 {
-							 $product = $i['product'];
-							 $qty = $i['qty'];
-							 $pu = url('product')."?sku=".$product['sku'];
-							 $tu = url('track')."?o=".$o['reference'];
-						 ?>
-						 <a href="<?php echo e($pu); ?>" target="_blank"><?php echo e($product['sku']); ?></a> (x<?php echo e($qty); ?>)<br>
-						 <?php
-						 }
-						?>
-					   </td>
-					   <td>&#8358;<?php echo e(number_format($o['amount'],2)); ?></td>		  
-					   <td><?php echo e($o['payment_code']); ?></td>
-					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
-					   <td><a class="btn btn-primary" href="<?php echo e($tu); ?>">Track</span></td>
+					   <td>{{$t['date']}}</td>
+					   <td>{{$t['status']}}</td>
+					   <td>{{$t['description']}}</td>
 					 </tr>
 					<?php
 						 }  
@@ -99,9 +76,9 @@
   </div>
   <!--end of middle sec--> 
     
-<?php $__env->stopSection(); ?>
+@stop
 
-<?php $__env->startSection('scripts'); ?>
+@section('scripts')
     <!-- DataTables js -->
        <script src="lib/datatables/js/datatables.min.js"></script>
     <script src="lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -112,5 +89,4 @@
     <script src="lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="lib/datatables/js/datatables-init.js"></script>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/orders.blade.php ENDPATH**/ ?>
+@stop
