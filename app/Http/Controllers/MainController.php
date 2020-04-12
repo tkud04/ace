@@ -266,6 +266,54 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getReceipt(Request $request)
+    {
+         $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			
+		}
+		$cart = $this->helpers->getCart($user);
+		$c = $this->helpers->getCategories();
+		$signals = $this->helpers->signals;
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		
+		$req = $request->all();
+	    //dd($secure);
+		$validator = Validator::make($req, [
+                             'r' => 'required'
+                   ]);
+         
+                 if($validator->fails())
+                  {
+					  return redirect()->intended('orders');
+                       
+                 }
+                
+                 else
+                 {
+					 $order = $this->helpers->getOrder($req['r']);
+					 if(is_null($order) || $order == [])
+					 {
+						return redirect()->intended('orders'); 
+					 }
+				     else
+					 {
+						 return view("receipt", compact(['user','cart','c','ad','order','signals'])); 
+					 }
+                    					 
+                 }	 
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
 	public function getContact()
     {
         $user = null;

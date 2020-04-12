@@ -72,6 +72,7 @@
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
 							 $tu = url('track')."?o=".$o['reference'];
+							 $iu = url('receipt')."?r=".$o['reference'];
 						 ?>
 						 <a href="{{$pu}}" target="_blank">{{$product['sku']}}</a> (x{{$qty}})<br>
 						 <?php
@@ -81,7 +82,10 @@
 					   <td>&#8358;{{number_format($o['amount'],2)}}</td>		  
 					   <td>{{$o['payment_code']}}</td>
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
-					   <td><a class="btn btn-primary" href="{{$tu}}">Track</span></td>
+					   <td>
+					     <a class="btn btn-primary" href="{{$tu}}">Track</span>
+					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</span>
+					   </td>
 					 </tr>
 					<?php
 						 }  
