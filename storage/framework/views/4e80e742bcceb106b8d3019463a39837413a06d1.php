@@ -55,18 +55,20 @@
 					 <tr>
 					   <td><?php echo e($t['date']); ?></td>
 					   <td><?php echo e($t['status']); ?></td>
-					   <td><?php echo e($t['description']); ?></td>
+					   <td><?php echo e(strtoupper($t['description'])); ?></td>
 					 </tr>
 					<?php
 						 }  
 					  }
 					  else
 					  {
+						  $descc = "Your order is being processed and will be dispatched soon.";
+						  if($paidStatus == "unpaid") $descc = "We are yet to receive payment for your order. Please ensure to add your reference number <b>$r</b> if you are paying via bank transfer.<br><br>If you have made payment please be patient your order will be processed as soon as your payment is cleared.";
 				    ?>
 					<tr>
 					   <td><?php echo e(date("jS F Y h:i A")); ?></td>
 					   <td>In Progress</td>
-					   <td>Your order is being processed and will be dispatched soon.</td>
+					   <td><?php echo $descc; ?></td>
 					 </tr>
 					<?php
 					  }

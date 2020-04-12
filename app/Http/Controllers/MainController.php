@@ -485,10 +485,12 @@ class MainController extends Controller {
 		
 		if(isset($req['o']))
 		{
+			$o = $this->helpers->getOrder($req['o']);
 			$trackings = $this->helpers->getTrackings($req['o']);
 			$r = $req['o'];
+			$paidStatus = $o['status'];
 			#dd($trackings);
-			return view("track-results",compact(['user','cart','trackings','c','r','ad','signals']));			
+			return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals']));			
 		}
 		else
 		{
