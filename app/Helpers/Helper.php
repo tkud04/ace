@@ -1043,6 +1043,16 @@ $subject = $data['subject'];
 			   return $ret;
 		   }
 		   
+		   function getRandomString($length_of_string) 
+           { 
+  
+              // String of all alphanumeric character 
+              $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+  
+              // Shufle the $str_result and returns substring of specified length 
+              return substr(str_shuffle($str_result),0, $length_of_string); 
+            } 
+		   
 		   function getPaymentCode($r=null)
 		   {
 			   $ret = "";
@@ -1058,26 +1068,18 @@ $subject = $data['subject'];
 			   return $ret;
 		   }
 
-           function payWithBank($user, $dt)
-           {
-              dd($dt);			   
-              $md = $payStackResponse['metadata'];
-              $amount = $payStackResponse['amount'] / 100;
-              $ref = $payStackResponse['reference'];
-              $type = $md['type'];
-              $dt = [];
-              
-              if($type == "checkout"){
-               	$dt['amount'] = $amount;
-				$dt['ref'] = $ref;
+           function payWithBank($user, $md)
+           {			   
+                $dt = [];
+               	$dt['amount'] = $md['amount'] / 100;
+				$dt['ref'] = $this->getRandomString(25);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
-				$dt['payment_code'] = $this->getPaymentCode();
+				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
 				$dt['type'] = "bank";
 				$dt['status'] = "unpaid";
-              }
               
               #create order
-
+              #dd($dt);
               $this->addOrder($user,$dt);
                 return "ok";
            }
