@@ -486,14 +486,9 @@ class MainController extends Controller {
 		if(isset($req['o']))
 		{
 			$trackings = $this->helpers->getTrackings($req['o']);
-			if($trackings == [] || $trackings == null){
-				session()->flash("track-order-status","error");
-			    return redirect()->intended('orders');	
-			}
-			else
-			{
-				return view("track-results",compact(['user','cart','trackings','c','ad','signals']));
-			}			
+			$r = $req['o'];
+			#dd($trackings);
+			return view("track-results",compact(['user','cart','trackings','c','r','ad','signals']));			
 		}
 		else
 		{

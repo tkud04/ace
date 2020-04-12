@@ -7,12 +7,13 @@
   <link href="lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" /> 
 <?php $__env->stopSection(); ?>
 
+
 <?php $__env->startSection('content'); ?>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">Track your order</h2>
+        <h2 class="text-primary text-uppercase">Tracking order #<?php echo e($r); ?></h2>
       </div>
     </div>
     <section class="container">
@@ -35,18 +36,44 @@
             <!--start of columns-->
             <div class="col-sm-12">
               <div class="row extra-btm-padding">
-                <div class="col-sm-3">
-                  <h5 class="text-primary text-uppercase">One Fourth</h5>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-                <div class="col-sm-3">
-                  <h5 class="text-primary text-uppercase">One Fourth</h5>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-                <div class="col-sm-3">
-                  <h5 class="text-primary text-uppercase">One Fourth</h5>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-                <div class="col-sm-3">
-                  <h5 class="text-primary text-uppercase">One Fourth</h5>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
+                <div class="table-responsive m-t-40 wow fadeInUp">
+                	   <table class="table ace-table">
+				   <thead>
+                        <tr>
+                                    <th>Date</th>
+                                    <th>Status</th>                                                                       
+                                    <th>Description</th>                                                                       
+                                </tr>
+                       </thead>
+					<tbody>
+					<?php
+					  if(count($trackings) > 0)
+					  {
+						 foreach($trackings as $t)
+						 {
+				    ?>
+					 <tr>
+					   <td><?php echo e($t['date']); ?></td>
+					   <td><?php echo e($t['status']); ?></td>
+					   <td><?php echo e($t['description']); ?></td>
+					 </tr>
+					<?php
+						 }  
+					  }
+					  else
+					  {
+				    ?>
+					<tr>
+					   <td><?php echo e(date("jS F Y h:i A")); ?></td>
+					   <td>In Progress</td>
+					   <td>Your order is being processed and will be dispatched soon.</td>
+					 </tr>
+					<?php
+					  }
+                    ?>						  
+					</tbody>
+				  </table>
+				</div>
               </div>
             
             </div>

@@ -9,12 +9,13 @@
   <link href="lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" /> 
 @stop
 
+
 @section('content')
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">Tracking order #{{$trackings['reference']}}</h2>
+        <h2 class="text-primary text-uppercase">Tracking order #{{$r}}</h2>
       </div>
     </div>
     <section class="container">
@@ -60,6 +61,16 @@
 					 </tr>
 					<?php
 						 }  
+					  }
+					  else
+					  {
+				    ?>
+					<tr>
+					   <td>{{date("jS F Y h:i A")}}</td>
+					   <td>In Progress</td>
+					   <td>Your order is being processed and will be dispatched soon.</td>
+					 </tr>
+					<?php
 					  }
                     ?>						  
 					</tbody>
