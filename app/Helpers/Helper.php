@@ -1028,6 +1028,7 @@ $subject = $data['subject'];
            function checkout($u,$data,$type="paystack")
 		   {
 			   #dd($data);
+			   $ret = "";
 			   
 			   switch($type)
 			   {
@@ -1038,6 +1039,8 @@ $subject = $data['subject'];
                  	$ret = $this->payWithPayStack($u, $data);
                   break;
 			   }
+			   
+			   return $ret;
 		   }
 		   
 		   function getPaymentCode($r=null)
@@ -1056,7 +1059,8 @@ $subject = $data['subject'];
 		   }
 
            function payWithBank($user, $dt)
-           { 
+           {
+              dd($dt);			   
               $md = $payStackResponse['metadata'];
               $amount = $payStackResponse['amount'] / 100;
               $ref = $payStackResponse['reference'];

@@ -231,11 +231,19 @@ class MainController extends Controller {
         	return redirect()->intended('/');
         }
         $req = $request->all();
-        dd($req);
+        #dd($req);
         
         $validator = Validator::make($req, [
-                             'quantity' => 'required|array|min:1',
-                             'quantity.*' => 'required|numeric'
+                             'email' => 'required|email',
+                             'amount' => 'required|numeric',
+                             'fname' => 'required',
+                             'lname' => 'required',
+                             'phone' => 'required|numeric',
+                             'address' => 'required',
+                             'state' => 'required',
+                             'city' => 'required',
+                             'zip' => 'required',
+                             'terms' => 'accepted'
          ]);
          
          if($validator->fails())
@@ -247,10 +255,9 @@ class MainController extends Controller {
          
          else
          {
-         	$quantities = $req["quantity"]; 
-             $this->helpers->updateCart($cart, $quantities);
-	        session()->flash("update-cart-status","ok");
-			return redirect()->intended('cart');
+         	$stt = $this->helpers->checkout($user,$req,"bank");
+            $request->session()->flash("pay-bank-status",$stt);
+			return redirect()->intended('orders');
          }        
     }
 	
