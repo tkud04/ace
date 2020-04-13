@@ -418,3 +418,65 @@ function bomb(dt,url){
 		    alert("Failed to send message: " + error);			
 	   });
 }
+
+function printElem(html)
+{
+    let mywindow = window.open('', 'PRINT');
+    let content = `
+<html><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${document.title}</title>
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<!-- Ionicons font -->
+<link href="css/ionicons.min.css" rel="stylesheet">
+<!-- Bootstrap styles-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--custom styles-->
+<link href="css/custom.css" rel="stylesheet" />
+<link href="css/custom-pink.css" rel="stylesheet"/>
+<link href="css/custom-turquoise.css" rel="stylesheet" />
+<link href="css/custom-purple.css" rel="stylesheet" />
+<link href="css/custom-orange.css" rel="stylesheet" />
+<link href="css/custom-blue.css" rel="stylesheet" />
+<link href="css/custom-green.css" rel="stylesheet" />
+<link href="css/custom-red.css" rel="stylesheet" />
+<link href="css/custom-gold.css" rel="stylesheet" id="style">
+<!--tooltiop-->
+<link href="css/hint.css" rel="stylesheet">
+<!-- animation -->
+<link href="css/animate.css" rel="stylesheet" />
+<!--select-->
+<link href="css/bootstrap-select.min.css" rel="stylesheet">
+<!--color picker-->
+<link href="css/jquery.simplecolorpicker.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+<!-- favicon -->
+
+<link rel="icon" type="image/png" href="images/favicon.png" sizes="16x16">
+
+<!--jQuery--> 
+<script src="js/jquery.min.js"></script> 
+<!--SweetAlert--> 
+<script src="lib/sweet-alert/all.js"></script>
+</head><body>
+${html}
+</body></html>
+	`;
+    
+	mywindow.document.write(content);
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    //mywindow.print();
+    //mywindow.close();
+
+    return true;
+}

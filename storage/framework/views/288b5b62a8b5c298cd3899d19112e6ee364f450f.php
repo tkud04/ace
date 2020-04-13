@@ -171,11 +171,14 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+<?php
+$ru = url('receipt')."?r=".$order['reference']."&print=1";
+?>
 <div id="invoice">
 
     <div class="toolbar hidden-print">
         <div class="text-right">
-            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+            <a id="printInvoicee" href="<?php echo e($ru); ?>" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
             <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
         </div>
         <hr>
@@ -192,12 +195,12 @@
                     <div class="col company-details">
                         <h2 class="name">
                             <a target="_blank" href="#">
-                            Arboshiki
+                            Ace Luxury Stores
                             </a>
                         </h2>
-                        <div>455 Foggy Heights, AZ 85004, US</div>
-                        <div>(123) 456-789</div>
-                        <div>company@example.com</div>
+                        <div>3 Oshikomaiya Close, Demurin Road, Ketu, Lagos</div>
+                        <div>(+234 809 703 9692</div>
+                        <div>info@aceluxurystores.com</div>
                     </div>
                 </div>
             </header>
@@ -205,91 +208,74 @@
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">RECEIPT</div>
-                        <h2 class="to">John Doe</h2>
-                        <div class="address">796 Silver Harbour, TX 79273, US</div>
-                        <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                        <h2 class="to"><?php echo e($buyer['fname']." ".$buyer['lname']); ?></h2>
+                        <div class="address"><?php echo e($buyer['phone']); ?></div>
+                        <div class="email"><a href="mailto:<?php echo e($buyer['email']); ?>"><?php echo e($buyer['email']); ?></a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                        <div class="date">Date of Invoice: 01/10/2018</div>
-                        <div class="date">Due Date: 30/10/2018</div>
+                        <h1 class="invoice-id"><?php echo e(strtoupper($order['status'])); ?></h1>
+                        <div class="date">Receipt generated on: <?php echo e($order['date']); ?></div>
+                        <div class="date">Reference #: <?php echo e($order['reference']); ?></div>
                     </div>
                 </div>
                 <table border="0" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th class="text-left">DESCRIPTION</th>
-                            <th class="text-right">HOUR PRICE</th>
-                            <th class="text-right">HOURS</th>
+                            <th class="text-left">ITEM</th>
+                            <th class="text-right">QTY</th>
                             <th class="text-right">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
+					 <?php
+					   if(isset($order['items'])){
+						   $x = 0;
+					   foreach($order['items'] as $i){
+						   ++$x;
+						   $product = $i['product'];
+						   $pd = $product['pd'];
+						   $pu = url('product')."?sku=".$product['sku'];
+					   ?>
                         <tr>
-                            <td class="no">04</td>
-                            <td class="text-left"><h3>
-                                <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                Youtube channel
-                                </a>
-                                </h3>
-                               <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                   Useful videos
-                               </a> 
-                               to improve your Javascript skills. Subscribe and stay tuned :)
+                            <td class="no"><?php echo e($x); ?></td>
+                            <td class="text-left">
+							   <h3><a target="_blank" href="<?php echo e($pu); ?>"><?php echo e($product['sku']); ?></a></h3>
                             </td>
-                            <td class="unit">$0.00</td>
-                            <td class="qty">100</td>
-                            <td class="total">$0.00</td>
+                            <td class="unit"><?php echo e($i['qty']); ?></td>
+                            <td class="total">&#8358;<?php echo e(number_format($pd['amount'] * $i['qty'],2)); ?></td>
                         </tr>
-                        <tr>
-                            <td class="no">01</td>
-                            <td class="text-left"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-                            <td class="unit">$40.00</td>
-                            <td class="qty">30</td>
-                            <td class="total">$1,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">02</td>
-                            <td class="text-left"><h3>Website Development</h3>Developing a Content Management System-based Website</td>
-                            <td class="unit">$40.00</td>
-                            <td class="qty">80</td>
-                            <td class="total">$3,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">03</td>
-                            <td class="text-left"><h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
-                            <td class="unit">$40.00</td>
-                            <td class="qty">20</td>
-                            <td class="total">$800.00</td>
-                        </tr>
+                       <?php
+					   }
+					   }
+					   ?>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">SUBTOTAL</td>
-                            <td>$5,200.00</td>
+                            <td colspan="1">SUBTOTAL</td>
+                            <td>&#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">TAX 25%</td>
-                            <td>$1,300.00</td>
+                            <td colspan="1">DELIVERY</td>
+                            <td>&#8358;<?php echo e(number_format($totals['delivery'],2)); ?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
-                            <td colspan="2">GRAND TOTAL</td>
-                            <td>$6,500.00</td>
+                            <td colspan="1">TOTAL</td>
+                            <td>&#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></td>
                         </tr>
                     </tfoot>
                 </table>
                 <div class="thanks">Thank you!</div>
                 <div class="notices">
                     <div>NOTICE:</div>
-                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                    <div class="notice">Your order will only be processed after payment is cleared.</div>
                 </div>
             </main>
             <footer>
-                Invoice was created on a computer and is valid without the signature and seal.
+                This receipt was created automatically and is valid without the signature and seal.
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
@@ -299,14 +285,20 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
+
 <script>
  $('#printInvoice').click(function(){
-            Popup($('.invoice')[0].outerHTML);
+            /**
+			Popup($('.invoice')[0].outerHTML);
             function Popup(data) 
             {
                 window.print();
                 return true;
             }
+			
+			printElem($('.invoice')[0].outerHTML);
+			**/
+			
         });
 </script>
 <?php $__env->stopSection(); ?>

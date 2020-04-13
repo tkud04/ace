@@ -1218,6 +1218,21 @@ $subject = $data['subject'];
                 return $ret;
            }
 
+		   function getBuyer($ref)
+           {
+           	$ret = [];
+
+			  $o = Orders::where('id',$ref)
+			                  ->orWhere('reference',$ref)->first();
+			  #dd($uu);
+              if($o != null)
+               { 
+                  $ret = $this->getUser($o['user_id']); 
+               }                                 
+              			  
+                return $ret;
+           }
+
 
            function getOrderItems($id)
            {

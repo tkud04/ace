@@ -1,8 +1,6 @@
-@extends('layout')
-
-@section('title',"Receipt")
-
-@section('styles')
+<html>
+<head>
+<title>Receipt</title>
 <style type="text/css">
   #invoice{
     padding: 30px;
@@ -153,7 +151,7 @@
     padding: 8px 0
 }
 
-@media print {
+@media  print {
     .invoice {
         font-size: 11px!important;
         overflow: hidden!important
@@ -170,28 +168,17 @@
     }
 }
 </style>
-@stop
-
-@section('content')
-<?php
-$ru = url('receipt')."?r=".$order['reference']."&print=1";
-?>
+</head>
+<body>
 <div id="invoice">
 
-    <div class="toolbar hidden-print">
-        <div class="text-right">
-            <a id="printInvoicee" href="{{$ru}}" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
-            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
-        </div>
-        <hr>
-    </div>
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
             <header>
                 <div class="row">
                     <div class="col">
-                        <a target="_blank" href="{{url('/')}}">
-                            <img src="images/logoo.png" data-holder-rendered="true" />
+                        <a target="_blank" href="http://localhost:8000">
+                            <img src="images/logoo.png" data-holder-rendered="true">
                             </a>
                     </div>
                     <div class="col company-details">
@@ -210,14 +197,14 @@ $ru = url('receipt')."?r=".$order['reference']."&print=1";
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">RECEIPT</div>
-                        <h2 class="to">{{$buyer['fname']." ".$buyer['lname']}}</h2>
-                        <div class="address">{{$buyer['phone']}}</div>
-                        <div class="email"><a href="mailto:{{$buyer['email']}}">{{$buyer['email']}}</a></div>
+                        <h2 class="to">Barbie Sandy</h2>
+                        <div class="address">08023324554</div>
+                        <div class="email"><a href="mailto:barbie@yahoo.com">barbie@yahoo.com</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">{{strtoupper($order['status'])}}</h1>
-                        <div class="date">Receipt generated on: {{$order['date']}}</div>
-                        <div class="date">Reference #: {{$order['reference']}}</div>
+                        <h1 class="invoice-id">UNPAID</h1>
+                        <div class="date">Receipt generated on: 10th April, 2020</div>
+                        <div class="date">Reference #: VQxhyzbBUzIvDqyEeeIlLHOu3</div>
                     </div>
                 </div>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -230,43 +217,38 @@ $ru = url('receipt')."?r=".$order['reference']."&print=1";
                         </tr>
                     </thead>
                     <tbody>
-					 <?php
-					   if(isset($order['items'])){
-						   $x = 0;
-					   foreach($order['items'] as $i){
-						   ++$x;
-						   $product = $i['product'];
-						   $pd = $product['pd'];
-						   $pu = url('product')."?sku=".$product['sku'];
-					   ?>
-                        <tr>
-                            <td class="no">{{$x}}</td>
+					                         <tr>
+                            <td class="no">1</td>
                             <td class="text-left">
-							   <h3><a target="_blank" href="{{$pu}}">{{$product['sku']}}</a></h3>
+							   <h3><a target="_blank" href="http://localhost:8000/product?sku=ACE7759LX464">ACE7759LX464</a></h3>
                             </td>
-                            <td class="unit">{{$i['qty']}}</td>
-                            <td class="total">&#8358;{{number_format($pd['amount'] * $i['qty'],2)}}</td>
+                            <td class="unit">3</td>
+                            <td class="total">₦12,000.00</td>
                         </tr>
-                       <?php
-					   }
-					   }
-					   ?>
-                    </tbody>
+                                               <tr>
+                            <td class="no">2</td>
+                            <td class="text-left">
+							   <h3><a target="_blank" href="http://localhost:8000/product?sku=ACE2078LX616">ACE2078LX616</a></h3>
+                            </td>
+                            <td class="unit">1</td>
+                            <td class="total">₦3,500.00</td>
+                        </tr>
+                                           </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">SUBTOTAL</td>
-                            <td>&#8358;{{number_format($totals['subtotal'],2)}}</td>
+                            <td>₦15,500.00</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">DELIVERY</td>
-                            <td>&#8358;{{number_format($totals['delivery'],2)}}</td>
+                            <td>₦1,000.00</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">TOTAL</td>
-                            <td>&#8358;{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</td>
+                            <td>₦16,500.00</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -284,23 +266,5 @@ $ru = url('receipt')."?r=".$order['reference']."&print=1";
         <div></div>
     </div>
 </div>
-@stop
-
-@section('scripts')
-
-<script>
- $('#printInvoice').click(function(){
-            /**
-			Popup($('.invoice')[0].outerHTML);
-            function Popup(data) 
-            {
-                window.print();
-                return true;
-            }
-			
-			printElem($('.invoice')[0].outerHTML);
-			**/
-			
-        });
-</script>
-@stop
+</body>
+</html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/print-receipt.blade.php ENDPATH**/ ?>

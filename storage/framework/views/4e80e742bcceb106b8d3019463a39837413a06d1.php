@@ -67,7 +67,7 @@
 				    ?>
 					<tr>
 					   <td><?php echo e(date("jS F Y h:i A")); ?></td>
-					   <td>In Progress</td>
+					   <td><span style="color: red;">Pending</span></td>
 					   <td><?php echo $descc; ?></td>
 					 </tr>
 					<?php

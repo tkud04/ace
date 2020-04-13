@@ -69,7 +69,7 @@
 				    ?>
 					<tr>
 					   <td>{{date("jS F Y h:i A")}}</td>
-					   <td>In Progress</td>
+					   <td><span style="color: red;">Pending</span></td>
 					   <td>{!!$descc!!}</td>
 					 </tr>
 					<?php

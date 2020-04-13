@@ -272,8 +272,7 @@ class MainController extends Controller {
 		$cart = [];
 		if(Auth::check())
 		{
-			$user = Auth::user();
-			
+			$user = Auth::user();	
 		}
 		$cart = $this->helpers->getCart($user);
 		$c = $this->helpers->getCategories();
@@ -290,22 +289,32 @@ class MainController extends Controller {
          
                  if($validator->fails())
                   {
-					  return redirect()->intended('orders');
-                       
-                 }
+					  return redirect()->intended('orders');     
+                  }
                 
                  else
                  {
 					 $order = $this->helpers->getOrder($req['r']);
+					 $buyer = $this->helpers->getBuyer($req['r']);
+					
 					 if(is_null($order) || $order == [])
 					 {
 						return redirect()->intended('orders'); 
 					 }
 				     else
 					 {
-						 return view("receipt", compact(['user','cart','c','ad','order','signals'])); 
-					 }
-                    					 
+						 $totals = $this->helpers->getOrderTotals($order['items']);
+						 # dd($totals);
+						 if(isset($req['print']) && $req['print'] == "1")
+						 {
+						   return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+						 }
+						 else
+						 {
+						    return view("receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+						 }
+						  
+					 }					 
                  }	 
     }
 	
