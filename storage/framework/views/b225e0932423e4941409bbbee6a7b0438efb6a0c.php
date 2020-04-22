@@ -163,16 +163,10 @@
         <!--end of logo--> <!--start of features-->
         <div class="col-sm-12 col-md-5 col-lg-5 feature hidden-xs">
           <div class="row">
-            <div class="col-sm-6 feature-box ion-chatbubble-working">
+            <div class="col-sm-12 feature-box ion-chatbubble-working">
               <dl  class="text-primary text-capitalize">
                 <dt>Online Support</dt>
                 <dd class="text-muted">24/7 if you need any help</dd>
-              </dl>
-            </div>
-            <div class="col-sm-6 feature-box ion-android-sync">
-              <dl  class="text-primary text-capitalize">
-                <dt>2 Days Free Return</dt>
-                <dd class="text-muted">For defective products </dd>
               </dl>
             </div>
           </div>
@@ -182,13 +176,7 @@
 		</div>
 		<div class="col-sm-12 col-md-4 col-lg-4 feature hidden-xs">
           <div class="row">
-            <div class="col-sm-6 feature-box ion-lock-combination">
-              <dl  class="text-primary text-capitalize">
-                <dt>Secure Payment</dt>
-                <dd class="text-muted">We don't store your details</dd>
-              </dl>
-            </div>
-			<div class="col-sm-6 feature-box ion-lock-combination">
+			<div class="col-sm-12 feature-box ion-lock-combination">
               <dl  class="text-primary text-capitalize">
                 <dt>Secure Payment</dt>
                 <dd class="text-muted">We don't store your details</dd>
