@@ -65,8 +65,12 @@
 <!--jQuery--> 
 <script src="js/jquery.min.js"></script> 
 <!--SweetAlert--> 
-<script src="lib/sweet-alert/all.js"></script>
-
+<link href="lib/sweet-alert/sweetalert2.css" rel="stylesheet">
+<script src="lib/sweet-alert/sweetalert2.js"></script>
+<!--wow animation--> 
+<script src="js/wow.min.js"></script> 
+<!--Bootstrap js--> 
+<script src="js/bootstrap.min.js"></script> 
 </head>
 <body>
 <!--start of loader-->
@@ -169,13 +173,13 @@
                 <dd class="text-muted">24/7 if you need any help</dd>
               </dl>
             </div>
-          </div>
+          </div>		  
         </div>
-		<div class="col-sm-12 col-md-3 col-lg-3 ">
+		<div class="col-sm-12 col-md-2 col-lg-2 ">
 		   <a href="<?php echo e(url('/')); ?>" class="navbar-brand"></a>
 		</div>
-		<div class="col-sm-12 col-md-4 col-lg-4 feature hidden-xs">
-          <div class="row">
+		<div class="col-sm-12 col-md-5 col-lg-5 feature hidden-xs">
+          <div class="row pull-right">
 			<div class="col-sm-12 feature-box ion-lock-combination">
               <dl  class="text-primary text-capitalize">
                 <dt>Secure Payment</dt>
@@ -457,7 +461,6 @@
           <form method="post" id="login-form" action="<?php echo e(url('login')); ?>" accept-charset="UTF-8">
 		   <?php echo csrf_field(); ?>
 
-		   <input type="hidden" id="href" name="u" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   </script>
@@ -504,7 +507,32 @@
       </div>
     </div>
   </div>
-  <!--end of login box--> 
+  <!--end of whatsapp box--> 
+  
+  <!-- hidden toggle for cart success box -->
+  <a href="javascript:void(0)" data-toggle="modal" id="csb-toggle" data-target="#cart-successful-box"></a>
+  
+  <!--start of cart successful box-->
+  <div class="modal fade" id="cart-successful-box" tabindex="-1" role="dialog" aria-labelledby="cartSuccessfulLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="tw">&times;</span></button>
+          <h4 class="modal-title tw text-uppercase" id="cartSuccessfulLabel" >start a conversation</h4>
+		  <h6 class="tw">Added to cart!</h6>
+        </div>
+        <div class="modal-body">
+          <ul class="list-inline row">
+            <li class="col-sm-12"> <a href="https://wa.me/2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <p class="text-center"><small>The team usually reply in a few minutes</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end of cart successful box--> 
   
   <!--start of quick view box-->
   <div class="modal fade" id="quick-view-box" tabindex="-1" role="dialog" aria-labelledby="quickviewboxLabel" aria-hidden="true">
@@ -564,10 +592,6 @@
 <script src="js/switches.js"></script> 
 <!--slick carousel--> 
 <script src="js/slick.js"></script> 
-<!--wow animation--> 
-<script src="js/wow.min.js"></script> 
-<!--Bootstrap js--> 
-<script src="js/bootstrap.min.js"></script> 
 <!--navigation js--> 
 <script src="js/jquery.highlight.js"></script> 
 <script src="js/jquery.touchSwipe.min.js"></script> 

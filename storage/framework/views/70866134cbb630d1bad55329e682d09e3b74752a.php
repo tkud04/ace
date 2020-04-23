@@ -175,6 +175,11 @@
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $b['imggs'];
+			   
+			    if(count($imggs) < 2){
+				   $oll = $imggs[0];
+				   array_push($imggs,$oll);
+			   }
 			    
 		  ?>
             <li class="col-sm-6 col-md-4">

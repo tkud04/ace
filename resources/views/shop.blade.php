@@ -112,6 +112,10 @@
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
+			   if(count($imggs) < 2){
+				   $oll = $imggs[0];
+				   array_push($imggs,$oll);
+			   }
 			    
 		  ?>
 		    <!--start of product item container-->
@@ -180,6 +184,10 @@
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
+			   if(count($imggs) < 2){
+				   $oll = $imggs[0];
+				   array_push($imggs,$oll);
+			   }
 			    
 		  ?>
 		    <!--start of product item container-->

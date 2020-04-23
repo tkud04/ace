@@ -174,10 +174,8 @@
                         <!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-6 form-group">
-                            <label class="control-label" for="country">Country</label>
-                            <select class="selectpicker" id="country" style="display: none;">
-                              <option>Nigeria</option>
-                            </select>
+                            <label class="control-label" for="city">City</label>
+                            <input type="text" id="city" name="city" value="<?php echo e($city); ?>" class="form-control">
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
@@ -198,13 +196,11 @@
                         
                         <!-- City and Zip code -->
                         <div class="row">
-                          <div class="col-sm-6 form-group">
-                            <label class="control-label" for="city">City</label>
-                            <input type="text" id="city" name="city" value="<?php echo e($city); ?>" class="form-control">
-                          </div>
-                          <div class="col-sm-6 form-group">
-                            <label class="control-label" for="zipcode">Zip</label>
-                            <input type="text" id="zipcode" name="zip" value="<?php echo e($zip); ?>" class="form-control">
+						  <div class="col-sm-12 form-group">
+                            <label class="control-label" for="country">Country</label>
+                            <select class="selectpicker" id="country" style="display: none;">
+                              <option>Nigeria</option>
+                            </select>
                           </div>
                         </div>
                       </fieldset>

@@ -64,3 +64,13 @@ a.text-white{
 .tw{
 	color: #fff !important;
 }
+
+ul.error-list{
+	
+}
+
+ul.error-list li{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	list-style-type: none;
+}

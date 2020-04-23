@@ -774,7 +774,7 @@ class MainController extends Controller {
          {
          	$this->helpers->addToCart($user,$req);
 	        session()->flash("add-to-cart-status","ok");
-			return redirect()->back();
+			return redirect()->intended('cart');
          }        
     }
 	
@@ -852,7 +852,7 @@ class MainController extends Controller {
          {
          	$this->helpers->removeFromCart($user, $req['sku']);
 	        session()->flash("remove-from-cart-status","ok");
-			return redirect()->back();
+			return redirect()->intended('cart');
          }       
     }
 	
