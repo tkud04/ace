@@ -122,7 +122,7 @@ class PaymentController extends Controller {
         {
 			#dd($paymentData);
         	$stt = $this->helpers->checkout($user,$paymentData);
-            $request->session()->flash("pay-card-status",$stt);
+            $request->session()->flash("pay-card-status",$stt['status']);
 			return redirect()->intended($successLocation);
         }
         else

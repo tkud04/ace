@@ -42,6 +42,7 @@ class Helper implements HelperContract
                      "remove-from-cart-status" => "Removed from cart!",
                      "subscribe-status" => "Subscribed!",
                      "pay-card-status" => "Payment successful! Your order is being processed.",
+                     "pay-bank-status" => "Payment successful! Your order is being processed.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -53,6 +54,7 @@ class Helper implements HelperContract
 					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please try again.",
 					 "subscribe-status-error" => "There was a problem subscribing, please try again.",
 					 "pay-card-status-error" => "There was a problem making payment, please try again.",
+					 "pay-bank-status-error" => "There was a problem making payment, please try again.",
 					 "track-order-status-error" => "Invalid reference number, please try again.",
                     ]
                    ];
@@ -1028,7 +1030,7 @@ $subject = $data['subject'];
            function checkout($u,$data,$type="paystack")
 		   {
 			   #dd($data);
-			   $ret = "";
+			   $ret = [];
 			   
 			   switch($type)
 			   {
@@ -1081,7 +1083,7 @@ $subject = $data['subject'];
               #create order
               #dd($dt);
               $this->addOrder($user,$dt);
-                return "ok";
+                return ['status' => "ok",'dt' => $dt];
            }
 		   
 		   function payWithPayStack($user, $payStackResponse)
@@ -1104,7 +1106,7 @@ $subject = $data['subject'];
               #create order
 
               $this->addOrder($user,$dt);
-                return "ok";
+                return ['status' => "ok",'dt' => $dt];
            }
 
            function addOrder($user,$data)

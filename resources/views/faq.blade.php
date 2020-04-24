@@ -48,7 +48,7 @@ EOT;
 			    'What is the latest time to place an order to get it out the same day?' => "We do not offer same day delivery option. Please give us a call for special cases.",			   
 				'Do you make deliveries to P.O boxes?' => "NO, we do not deliver to PO BOXES. A valid address with the correct house number, street and preferably landmark will get your goods to you faster.",
 			    'Do you ship out orders over the weekend?' => "We are open 7 days and do pack, prepare and ship orders over the weekend; however your package will not go out until Monday.",
-			    'How do I place orders on your website?' => "Please see below order process<br><br>Look through our lovely selection of fashion accessories<br>Add items to your cart<br>When done adding items to cart, click on your shopping cart to view all items selected<br>Proceed to check out<br>Register as a new customer or login as a member<br>Select mode of payment<br>select delivery option<br>Confirm your order.<br>This will generate a code<br>Make payment using this code<br>Once payment is received, you will get an email confirming your order and delivery details<br>",
+			    'How do I place orders on your website?' => "Please see below order process<br><br>Look through our lovely selection of fashion accessories<br><br>Add items to your cart<br><br>When done adding items to cart, click on your shopping cart to view all items selected<br><br>Proceed to check out<br><br>Register as a new customer or login as a member<br>Select mode of payment<br><br>For <b>card payments</b> enter your card details and complete payment.<br><br>For <b>bank payments</b> a payment code will be generated. Make payment to our bank account using this code as reference<br><br>Once payment is received via either method, you will get an email confirming your order and delivery details<br>",
 			    'How do I make payment for purchase on your site?' => "Please see below different payment options for items selected on our site<br><br><li>Online Transfer</li><li>Cash Deposit</li></ul>",
 			    'Do you take phone orders?' => "Yes, we are always here to help. Please call us with your orders. You must have ready your customer ID, phone number, the item numbers and quantity.<br><br> Please Note: This is not available if you do not have an order history with us.",
 			    'How do I add items to my existing order?' => "Please email or call us and one of our representatives will assist you adding or changing items to your existing order if it has not already shipped. Also, please note that the order will only be completed after payment is made.",
@@ -87,7 +87,7 @@ EOT;
                                 </div>
                               </div>
                               <div class="face back">
-                                <div class="well well-sm inner"> {!! $value !!}</div>
+                                <div class="well well-sm inner" style="overflow: auto !important;"> {!! $value !!}</div>
                               </div>
                             </div>
                           </div>

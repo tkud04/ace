@@ -9,18 +9,28 @@
        $pop .= "-error";
 	 $icon = "error";
    $title = "<strong>Oops...</strong>";
-   } 
+   }
+
+   $bankHTML = "";   
+   $amount = "0";
+   
+   if($pop == "pay-bank-status")
+   {
+	  $vv = json_decode($val);
+      $dt = $vv->dt;	  
+      $amount = $dt->amount;	  
+   }
   ?>                
   
   <script>
 if("<?php echo e($pop); ?>" == "add-to-cart-status"){
 	let x1 = "<?php echo e(url('shop')); ?>",x2 = "<?php echo e(url('checkout')); ?>";
 	Swal.fire({
-  title: '<strong>Added to cart!</strong>',
+  title: "<strong>Added to cart!</strong>",
   icon: 'info',
   html:
     '<em>What would you like to do next?</em>',
-  showCloseButton: true,
+	showCloseButton: true,
   showCancelButton: true,
   focusConfirm: false,
   confirmButtonText:
@@ -30,6 +40,21 @@ if("<?php echo e($pop); ?>" == "add-to-cart-status"){
      "<a class='text-white ion-wallet' href="+x2+">Checkout</a>",
   cancelButtonAriaLabel: 'Checkout'
 })
+}
+else if("<?php echo e($pop); ?>" == "pay-bank-status"){
+	let x3 = "<?php echo e(url('/')); ?>";
+	let vv = <?php echo $val; ?>;
+	let dt = vv.dt;
+	//console.log("vv: ",vv);
+	
+	Swal.fire({
+    title: "You've placed your order. Now make payment:",
+  icon: 'info',
+  showCloseButton: true,
+  html:
+     "<h4>Payment code<br><b>" + dt.payment_code + "</b></h4><h5 class='text-danger'><b>NOTE: </b>Make sure you include your payment code as reference when making payment.</h5><p class='text-primary'>Bank name: GTBank</p><p class='text-primary'>Account number: 0123456789</p><p class='text-primary'>Amount: &#8358;<?php echo e(number_format($amount,2)); ?></p>"
+});
+
 }
 else{
 Swal.fire({

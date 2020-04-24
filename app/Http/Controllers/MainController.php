@@ -231,6 +231,7 @@ class MainController extends Controller {
         	return redirect()->intended('/');
         }
         $req = $request->all();
+		$req['zip'] = "";
         #dd($req);
         
         $validator = Validator::make($req, [
@@ -242,7 +243,6 @@ class MainController extends Controller {
                              'address' => 'required',
                              'state' => 'required',
                              'city' => 'required',
-                             'zip' => 'required',
                              'terms' => 'accepted'
          ]);
          
@@ -256,7 +256,7 @@ class MainController extends Controller {
          else
          {
          	$stt = $this->helpers->checkout($user,$req,"bank");
-            $request->session()->flash("pay-bank-status",$stt);
+            session()->flash("pay-bank-status",json_encode($stt));
 			return redirect()->intended('orders');
          }        
     }

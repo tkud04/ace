@@ -461,6 +461,7 @@
           <form method="post" id="login-form" action="<?php echo e(url('login')); ?>" accept-charset="UTF-8">
 		   <?php echo csrf_field(); ?>
 
+		   <input type="hidden" id="href" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   </script>
