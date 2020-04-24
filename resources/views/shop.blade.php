@@ -7,8 +7,8 @@
   <div class="middle-sec wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">products catalogue</h2>
-        <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+        <h2 class="text-primary text-uppercase">Shop</h2>
+        <p>Browse through ur catalog of amazing products! </p>
       </div>
     </div>
     <section class="container">

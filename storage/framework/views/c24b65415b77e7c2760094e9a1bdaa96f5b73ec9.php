@@ -69,7 +69,7 @@
 							 $product = $i['product'];
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
-							 $tu = url('track')."?o=".$o['reference'];
+							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
 						 ?>
 						 <a href="<?php echo e($pu); ?>" target="_blank"><?php echo e($product['sku']); ?></a> (x<?php echo e($qty); ?>)<br>
@@ -81,7 +81,7 @@
 					   <td><?php echo e($o['payment_code']); ?></td>
 					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
 					   <td>
-					     <a class="btn btn-primary" href="<?php echo e($tu); ?>">Track</span>
+					     <a class="btn btn-primary" href="<?php echo e($tru); ?>">Track</span>
 					     <a class="btn btn-info" href="<?php echo e($iu); ?>" target="_blank">Receipt</span>
 					   </td>
 					 </tr>
