@@ -303,15 +303,16 @@ $(document).ready(function() {
     })
 });
 
-
-function populateQV(sku,description,amount,oldAmount,inStock,img){
-	console.log("skju",sku);
-        $("#quickviewboxLabel").html(sku);
-        $("#quickviewboxDescription").html(description);
-        $("#quickviewboxAmount").html(amount);
-        $("#quickviewboxInStock").html(inStock);
-        $("#quickviewboxOldAmount").html(oldAmount);
-        $("#quickviewboxImg").attr("src",img);
+//populateQV({sku:'{{$sku}}',description:'{{$description}}',amount:'{{$amount}}',oldAmount:'{{$amount + 1000}}',inStock:'{{ucwords($in_stock)}}',imgg:'{{$imggs[0]}}'})
+				
+function populateQV(dt){
+	console.log("skju",dt.sku);
+        $("#quickviewboxLabel").html(dt.sku);
+        $("#quickviewboxDescription").html(dt.description);
+        $("#quickviewboxAmount").html(dt.amount);
+        $("#quickviewboxInStock").html(dt.inStock);
+        $("#quickviewboxOldAmount").html(dt.oldAmount);
+        $("#quickviewboxImg").attr("src",dt.imgg);
 }
 
 function addToCart(){

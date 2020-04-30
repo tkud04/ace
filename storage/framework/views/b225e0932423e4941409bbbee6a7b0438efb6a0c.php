@@ -550,6 +550,8 @@
               <div class="product-review">
                 <p><span class="text-info"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i></span> <span class="pull-right"><small>8 Reviews</small></span> </p>
               </div>
+			    
+				
               <div class="product-description">
                 <h5 class="text-primary text-uppercase">Quick Overview</h5>
                 <p id="quickviewboxDescription"> Product description goes here</p>

@@ -256,8 +256,8 @@
                               <p class="effect-icon"> <a href="<?php echo e($wu); ?>" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
                               <p class="effect-icon"> <a href="<?php echo e($ccu); ?>" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
                               <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV('<?php echo e($sku); ?>','<?php echo e($description); ?>','<?php echo e($amount); ?>','<?php echo e($amount + 1000); ?>','<?php echo e(ucwords($in_stock)); ?>','<?php echo e($imggs[0]); ?>')" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
-							  </p>
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'<?php echo e($sku); ?>',description:'<?php echo e($description); ?>',amount:'<?php echo e($amount); ?>',oldAmount:'<?php echo e($amount + 1000); ?>',inStock:'<?php echo e(ucwords($in_stock)); ?>',imgg:'<?php echo e($imggs[0]); ?>'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		  				  </p>
                             </div>
                           </div>
                           <div class="product-info">
