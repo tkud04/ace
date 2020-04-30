@@ -202,7 +202,7 @@
                             </div>
                           </div>
                           <div class="action">
-                            <button type="submit" class="btn btn-primary hvr-underline-from-center-primary">SUBMIT REVIEW</button>
+                            <button type="submit" class="btn btn-primary hvr-underline-from-center-primary">SUBMIT</button>
                           </div>
                         </form>
                       </div>
@@ -222,9 +222,14 @@
                     <!--end of big title--> 
                     <!--start of product item container-->
                     <?php
+					shuffle($related);
 		   for($i = 0; $i < 3 && $i < count($related); $i++)
 		   {
 			   $n = $related[$i];
+			   
+			   
+			   if($n['sku'] != $product['sku'])
+			   {
 			   $sku = $n['sku'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
@@ -235,6 +240,10 @@
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
+			   if(count($imggs) < 2){
+				   $oll = $imggs[0];
+				   array_push($imggs,$oll);
+			   }
 			    
 		  ?>
 		    <!--start of product item container-->
@@ -262,6 +271,7 @@
                         <!--end of product item container-->
 			<?php
 			}
+		   }
 			?>
                     
                   </div>
