@@ -34,8 +34,8 @@
             </div>
             <!--start of columns-->
             <div class="col-sm-12">
-              <div class="row extra-btm-padding" style="overflow-x: auto;">
-			  <ul class="list-group list-group-horizontal" style="display: inline-block;">
+              <div class="row extra-btm-padding">
+			  <ul class="list-group list-group-horizontal">
 			    <?php
 					  if(count($compares) > 0)
 					  {

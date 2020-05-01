@@ -825,10 +825,24 @@ $subject = $data['subject'];
            {
 			 $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
 			 //dd($userId);
-			 $ret = Carts::create(['user_id' => $userId, 
+			 $ret = null;
+			 
+			 $c = Carts::where('user_id',$userId)
+			           ->where('sku',$data['sku'])->first();
+			 
+			 if(is_null($c))
+			 {
+				$ret = Carts::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
-                                                      ]);
+                                                      ]); 
+			 }
+			 else
+			 {
+				 $c->update(['qty' => $data['qty']]);
+				 $ret = $c;
+			 }
+			 
                 return $ret;
            }
 		   
