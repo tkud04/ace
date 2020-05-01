@@ -55,9 +55,11 @@ Route::get('add-to-cart', 'MainController@getAddToCart');
 Route::get('remove-from-cart', 'MainController@getRemoveFromCart');
 
 
+Route::get('wishlist', 'MainController@getWishlist');
 Route::get('add-to-wishlist', 'MainController@getAddToWishlist');
 Route::get('remove-from-wishlist', 'MainController@getRemoveFromWishlist');
 Route::get('add-to-compare', 'MainController@getAddToCompare');
+Route::get('remove-from-compare', 'MainController@getRemoveFromCompare');
 Route::get('compare', 'MainController@getCompare');
 
 Route::get('payment/callback', 'PaymentController@getPaymentCallback');

@@ -56,6 +56,42 @@ else if("{{$pop}}" == "pay-bank-status"){
 });
 
 }
+else if("{{$pop}}" == "add-to-wishlist-status"){
+	let x1 = "{{url('shop')}}",x2 = "{{url('wishlist')}}";
+	Swal.fire({
+  title: "<strong>Added to wishlist!</strong>",
+  icon: 'info',
+  html:
+    '<em>What would you like to do next?</em>',
+	showCloseButton: true,
+  showCancelButton: true,
+  focusConfirm: false,
+  confirmButtonText:
+    "<a class='text-white ion-basket-outline' href="+x1+">Continue shopping</a>",
+  confirmButtonAriaLabel: 'Continue shopping',
+  cancelButtonText:
+     "<a class='text-white ion-heart' href="+x2+">Go to wishlist</a>",
+  cancelButtonAriaLabel: 'Go to wishlist'
+})
+}
+else if("{{$pop}}" == "add-to-compare-status"){
+	let x1 = "{{url('shop')}}",x2 = "{{url('compare')}}";
+	Swal.fire({
+  title: "<strong>Added to compare list!</strong>",
+  icon: 'info',
+  html:
+    '<em>What would you like to do next?</em>',
+	showCloseButton: true,
+  showCancelButton: true,
+  focusConfirm: false,
+  confirmButtonText:
+    "<a class='text-white ion-basket-outline' href="+x1+">Continue shopping</a>",
+  confirmButtonAriaLabel: 'Continue shopping',
+  cancelButtonText:
+     "<a class='text-white ion-ios-search-strong' href="+x2+">Compare</a>",
+  cancelButtonAriaLabel: 'Compare'
+})
+}
 else{
 Swal.fire({
   icon: '{{$icon}}',

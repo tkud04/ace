@@ -69,8 +69,16 @@ ul.error-list{
 	
 }
 
-ul.error-list li{
+ul.error-list li, ul.compare-list li{
 	margin-top: 5px;
 	margin-bottom: 5px;
 	list-style-type: none;
+}
+
+ul.list-group-horizontal{
+	 text-align: center;
+}
+
+li.list-group-horizontal-li{
+	 display: inline-block;
 }

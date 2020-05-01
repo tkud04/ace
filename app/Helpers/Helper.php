@@ -19,6 +19,8 @@ use App\Banners;
 use App\Orders;
 use App\OrderItems;
 use App\Trackings;
+use App\Wishlists;
+use App\Comparisons;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
@@ -43,6 +45,10 @@ class Helper implements HelperContract
                      "subscribe-status" => "Subscribed!",
                      "pay-card-status" => "Payment successful! Your order is being processed.",
                      "pay-bank-status" => "Payment successful! Your order is being processed.",
+                     "add-to-wishlist-status" => "Added to wishlist!",
+                     "add-to-compare-status" => "Added to compare list!",
+					 "remove-from-wishlist-status" => "Removed from wishlist!",
+					 "remove-from-compare-status" => "Removed from compare list!",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -55,6 +61,10 @@ class Helper implements HelperContract
 					 "subscribe-status-error" => "There was a problem subscribing, please try again.",
 					 "pay-card-status-error" => "There was a problem making payment, please try again.",
 					 "pay-bank-status-error" => "There was a problem making payment, please try again.",
+					 "add-to-compare-status-error" => "There was a problem adding to compare list.",
+					 "add-to-wishlist-status-error" => "There was a problem adding to wishlist.",
+					 "remove-from-wishlist-status-error" => "There was a problem removing item from wishlist.",
+					 "remove-from-compare-status-error" => "There was a problem removing item from compare list.",
 					 "track-order-status-error" => "Invalid reference number, please try again.",
                     ]
                    ];
@@ -1279,7 +1289,107 @@ $subject = $data['subject'];
 			   }
 			   
 			   return $ret;
-		   }   
+		   }
+
+         function createWishlist($dt)
+		   {
+			   $ret = null;
+			   
+			   $w = Wishlists::where('user_id',$dt['user_id'])
+			                        ->where('sku',$dt['sku'])->first();
+			   
+			   if(is_null($w))
+			   {
+				 $ret = Wishlists::create(['user_id' => $dt['user_id'],
+			                          'sku' => $dt['sku']
+			                 ]);
+			   }
+			   
+			   
+			  return $ret;
+		   }		   
+
+       function getWishlist($user)
+		   {
+			   $ret = [];
+			   $wishlist = Wishlists::where('user_id',$user->id)->get();
+			   
+			   if(!is_null($wishlist))
+			   {
+				   foreach($wishlist as $w)
+				   {
+					   $temp = [];
+					   $temp['id'] = $w->id;
+					   $temp['product'] = $this->getProduct($w->sku);
+					   $temp['date'] = $w->created_at->format("jS F, Y h:i A");
+					   array_push($ret,$temp);
+				   }
+			   }
+			   //dd($ret);
+			   return $ret;
+		   }
+		   
+		function removeFromWishlist($dt)
+		   {
+			   $ret = [];
+			   $w = Wishlists::where('user_id',$dt['user_id'])
+			                        ->where('sku',$dt['sku'])->first();
+			   
+			   if(!is_null($w))
+			   {
+				  $w->delete();
+			   }
+		   }
+		   
+		   
+	  function createComparison($dt)
+		   {
+			   $ret = null;
+			   
+			   $c = Comparisons::where('user_id',$dt['user_id'])
+			                        ->where('sku',$dt['sku'])->first();
+			   
+			   if(is_null($c))
+			   {
+				 $ret = Comparisons::create(['user_id' => $dt['user_id'],
+			                          'sku' => $dt['sku']
+			                 ]);
+			   }
+			   
+			  return $ret;
+		   }
+		   
+       function getComparisons($user)
+		   {
+			   $ret = [];
+			   $comparisons = Comparisons::where('user_id',$user->id)->get();
+			   
+			   if(!is_null($comparisons))
+			   {
+				   foreach($comparisons as $c)
+				   {
+					   $temp = [];
+					   $temp['id'] = $c->id;
+					   $temp['product'] = $this->getProduct($c->sku);
+					   $temp['date'] = $c->created_at->format("jS F, Y h:i A");
+					   array_push($ret,$temp);
+				   }
+			   }
+			   
+			   return $ret;
+		   }
+
+     function removeFromComparisons($dt)
+		   {
+			   $ret = [];
+			   $c = Comparisons::where('user_id',$dt['user_id'])
+			                        ->where('sku',$dt['sku'])->first();
+			   
+			   if(!is_null($c))
+			   {
+				  $c->delete();
+			   }
+		   }		   
    
 }
 ?>

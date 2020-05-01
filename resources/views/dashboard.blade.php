@@ -19,7 +19,7 @@
           <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details</p>
 		  <br><br><br>
            <div class="row" style="margin-top: 10px;">
-		    <div class="col-lg-6 col-md-6 col-sm-12">
+		    <div class="col-lg-3 col-md-3 col-sm-12">
               <div class="card text-center" style="">
                 <div class="card-body">         
                   <div class="">
@@ -30,7 +30,28 @@
                </div>
              </div>
             </div>
-			<div class="col-lg-6 col-md-6 col-sm-12">
+			<div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card text-center" style="">
+                <div class="card-body">         
+                  <div class="">
+                    <h5 class="card-title"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></h5>
+                    <p class="card-text">View your wishlist</p>
+                    <a href="{{url('wishlist')}}" class="btn btn-primary">wishlist</a>
+                  </div>
+               </div>
+             </div>
+            </div>
+			<div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card text-center" style="">
+                <div class="card-body">         
+                  <div class="">
+                    <h5 class="card-title"><i class="fa fa-briefcase fa-2x" aria-hidden="true"></i></h5>
+                    <p class="card-text">View your compare list</p>
+                    <a href="{{url('compare')}}" class="btn btn-primary">compare</a>
+                  </div>
+               </div>
+             </div>
+            </div><div class="col-lg-3 col-md-3 col-sm-12">
               <div class="card text-center" style="">
                 <div class="card-body">         
                   <div class="">
