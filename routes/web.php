@@ -54,6 +54,12 @@ Route::post('add-review', 'MainController@postAddReview');
 Route::get('add-to-cart', 'MainController@getAddToCart');
 Route::get('remove-from-cart', 'MainController@getRemoveFromCart');
 
+
+Route::get('add-to-wishlist', 'MainController@getAddToWishlist');
+Route::get('remove-from-wishlist', 'MainController@getRemoveFromWishlist');
+Route::get('add-to-compare', 'MainController@getAddToCompare');
+Route::get('compare', 'MainController@getCompare');
+
 Route::get('payment/callback', 'PaymentController@getPaymentCallback');
 Route::post('pay', 'PaymentController@postRedirectToGateway');
 

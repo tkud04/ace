@@ -7,8 +7,8 @@
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">search result found</h2>
-        <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+        <h2 class="text-primary text-uppercase">search results</h2>
+        <p>we found a few things based on your search.</p>
       </div>
     </div>
     <section class="container">
@@ -26,7 +26,7 @@
             <div class="col-sm-12">
               <ol class="breadcrumb  dashed-border">
                 <li><a href="#">Home</a></li>
-                <li class="active">search result found</li>
+                <li class="active">search results</li>
               </ol>
             </div>
             <div class="col-sm-12">
