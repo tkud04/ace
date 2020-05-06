@@ -460,7 +460,7 @@ $subject = $data['subject'];
 			  if(is_null($user))
 			  {
 				 $g = $r->session()->get('cart');
-				  //dd($g);
+				  dd($g);
 			  }
               else
 			  {
