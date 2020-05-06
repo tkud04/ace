@@ -33,7 +33,6 @@ class MainController extends Controller {
 			
 		}
 		$ip =  $request->ip();
-		$this->helpers->setIP($ip);
 		$cart = $this->helpers->getCart($user,$request);
 		$c = $this->helpers->getCategories();
 		//dd($bs);

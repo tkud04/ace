@@ -22,6 +22,7 @@ use App\OrderItems;
 use App\Trackings;
 use App\Wishlists;
 use App\Comparisons;
+use App\Guests;
 use \Swift_Mailer;
 use \Swift_SmtpTransport;
 use \Cloudinary\Api;
