@@ -459,8 +459,7 @@ $subject = $data['subject'];
 			
 			  if(is_null($user))
 			  {
-				  if($r != null)$uu = $ip;
-				  $g = $this->getGuest($ip);
+				 $g = $r->session()->get('cart');
 				  dd($g);
 			  }
               else
@@ -908,6 +907,10 @@ $subject = $data['subject'];
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
                                                       ]); 
+													  
+				$jret = ['sku' => $data['sku'],'qty' => $data['qty'] ];
+				$r = $data['r'];
+				$r->session()->put('cart',json_encode($jret));
 			 }
 			 else
 			 {

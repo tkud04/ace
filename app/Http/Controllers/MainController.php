@@ -773,6 +773,7 @@ class MainController extends Controller {
          else
          {
 			 $req['user_id'] = is_null($user) ? $request->ip() : $user->id;
+			 $req['r'] = $request;
          	$this->helpers->addToCart($req);
 			if(isset($req['from_wishlist']) && $req['from_wishlist'] == "yes")
 			{
