@@ -459,6 +459,8 @@ $subject = $data['subject'];
 			  if(is_null($user))
 			  {
 				  if($r != null)$uu = $ip;
+				  $g = $this->getGuest($ip);
+				  dd($g);
 			  }
               else
 			  {
@@ -874,6 +876,21 @@ $subject = $data['subject'];
 			   $i = $r->ip();
 			   dd("i: ".$i);
 			  return $this->ip;
+		   }
+
+		   function getGuest($ip)
+		   {
+			   $ret = Guests::where('ip',$ip)->first();
+			   
+			   if(is_null($ret))
+			   {
+				   $ret = Guests::create([
+				     'ip' => $ip,
+					 'status' => "ok"
+				   ]);
+			   }
+			   
+			   return $ret;
 		   }
 		   
 		   function addToCart($data)
