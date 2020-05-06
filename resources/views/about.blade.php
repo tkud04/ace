@@ -35,14 +35,16 @@
                 </div>
                 <div class="col-sm-6">
 				  <p><a href="{{url('/')}}">Ace Luxury Store</a> is a fast growing company that specializes in Fashion Accessories. Founded in 2018, our company’s continued pride is offering quality products at competitive prices. Committed to supplying our customers with the latest trends; we provide a wide range of seasonal and stylish selections.</p><br>
+				  <p>We supply fashion jewelry such as earrings, bracelets, rings, brooches, necklaces, wristwatches and other fashion accessories. With hundreds of items available for sale on our website; you will be fit for the runway in no time.</p><br>
 				  <p>We are dedicated to providing you with topnotch customer experience. Our professional personnel is available to help you through a “<em>walk-in-the-park</em>” online shopping experience at <a href="{{url('/')}}">aceluxurystore.com</a>.</p><br>
-				  <p>Please follow us on all our social networks.</p><br>
+				  <p>Please follow us on all our social networks.</p><br>				 
 				  <p>We appreciate your business.</p><br>
+				  <p>Thank you.</p><br>
 				  <p>
-				  Ace Luxury Stores<br>
+				  Ace Luxury Store<br>
 				  Tel: <a href="tel:2348097039692">+234 809 703 9692</a><br>
 				  Address: <em>3 Oshikomaiya Close, Demurin Road, Ketu, Lagos</em><br>
-				  Email: <a href="#">support@aceluxurystores.com</a>
+				  Email: <a href="#">support@aceluxurystore.com</a>
 				  </p><br>
                 </div>
               </div>

@@ -54,7 +54,7 @@ EOT;
 			  ];
 			  
 			  $set2 = [
-			    'How much are the delivery fees?' => "Delivery cost varies per location. We charge a flat fee of &#8358;1000 for deliveries within Lagos.",
+			    'How much are the delivery fees?' => "Delivery cost varies per location. We charge a flat fee of &#8358;1000 for deliveries within Lagos and environs (Epe, Ikorodu, Ogun, Oyo) and &#8358;2000 for other states.",
 			    'How long will it take to deliver my order?' => "Orders are delivered within 48 hours in Lagos.<br><br>Orders outside Lagos are delivered between 4 – 7 days.",
 			    'How do I return an item?' => "Unless you received a defective item, ALL sales are final.<br><br>Please inspect your items before the dispatch person leaves and if defective, return immediately.<br><br>Please communicate to us by email on defective items for a refund or exchange.",
 			    'I have other questions' => "Please email or call us with any questions or concerns you may have. We are always here to help."

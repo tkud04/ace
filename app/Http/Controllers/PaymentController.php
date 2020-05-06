@@ -50,7 +50,6 @@ class PaymentController extends Controller {
                              'address' => 'required|filled',
                              'city' => 'required|filled',
                              'state' => 'required|not_in:none',
-                             'zip' => 'required|filled',
                              'phone' => 'required|filled',
                              'terms' => 'required|accepted',
          ]);

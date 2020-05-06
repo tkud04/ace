@@ -459,8 +459,7 @@ $subject = $data['subject'];
 			
 			  if(is_null($user))
 			  {
-				 $g = $r->session()->get('cart');
-				  dd($g);
+				
 			  }
               else
 			  {
@@ -1173,7 +1172,7 @@ $subject = $data['subject'];
            {			   
                 $dt = [];
                	$dt['amount'] = $md['amount'] / 100;
-				$dt['ref'] = $this->getRandomString(25);
+				$dt['ref'] = $this->getRandomString(5);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
 				$dt['type'] = "bank";
