@@ -1466,7 +1466,7 @@ $subject = $data['subject'];
 			   else
 			   {
 				   $uu = $user->id;
-				 //check if guest mode has any wishlist items
+				 //check if guest mode has any compare items
                 $guestComparisons = Comparisons::where('user_id',$ip)->get();
                 //dd($guestCart);
                 if(count($guestComparisons) > 0)
@@ -1480,7 +1480,7 @@ $subject = $data['subject'];
 				}  
 			   }
 			   
-			   $comparisons = Comparisons::where('user_id',$userId)->get();
+			   $comparisons = Comparisons::where('user_id',$uu)->get();
 			   
 			   if(!is_null($comparisons))
 			   {
