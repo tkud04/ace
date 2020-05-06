@@ -32,6 +32,7 @@ Route::get('returns', 'MainController@getReturnPolicy');
 Route::get('orders', 'MainController@getOrders');
 Route::get('receipt', 'MainController@getReceipt');
 Route::get('track', 'MainController@getTrack');
+Route::get('confirm-payment', 'MainController@getConfirmPayment');
 
 Route::get('login', 'LoginController@getLogin');
 Route::get('register', 'LoginController@getRegister');

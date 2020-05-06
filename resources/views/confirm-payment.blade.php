@@ -1,14 +1,14 @@
 @extends('layout')
 
-@section('title',"Create Account")
+@section('title',"Confirm Bank Payment")
 
 @section('content')
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">register</h2>
-        <p>Create an account to enjoy shopping on our website.</p>
+        <h2 class="text-primary text-uppercase">confirm payment</h2>
+        <p>Confirm your bank payment for your order.</p>
       </div>
     </div>
     <section class="container">
@@ -71,7 +71,10 @@
                           <label class="control-label" for="mail">email address <span class="req">*</span></label>
                           <input type="text" id="mail" name="email" class="form-control" placeholder="We promise not to share your email with anyone." required>
                         </div>
-                        
+                        <div class="form-group">
+                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
+                          <input type="text" id="phone" name="phone" class="form-control" required>
+                        </div>
                       </fieldset>
                       <!-- END Personal information--> 
                       
@@ -87,27 +90,10 @@
                           <input type="text" id="address-two" name="city" class="form-control">
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
-                          <input type="text" id="phone" name="phone" class="form-control" required>
+                          <label class="control-label" for="postal-code">postal code<span class="req">*</span></label>
+                          <input type="text" id="postal-code" name="zip" class="form-control" required>
                         </div>
                       </fieldset>
-					   <fieldset class="col-md-12">
-					    <div class="form-group">
-                          <label class="control-label" for="year">State<span class="req">*</span></label>
-                          <select id="year" name="state" class="selectpicker">
-						  <option value="none">Select state</option>
-						  <?php 
-						  $state = "";
-                             foreach($states as $key => $value){
-                                   $selectedText = ($key == $state) ? "selected='selected'" : "";                                           
-                          ?>
-                            <option value="{{$key}}" {{$selectedText}}>{{$value}}</option>
-						  <?php 
-                              }
-                          ?>
-                          </select>
-                        </div>
-					   </fieldset>
                       <!-- END Payment information--> 
                     </div>
                     <div class="row">

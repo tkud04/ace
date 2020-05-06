@@ -1,21 +1,19 @@
-@extends('layout')
+<?php $__env->startSection('title',"Confirm Bank Payment"); ?>
 
-@section('title',"Create Account")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase">register</h2>
-        <p>Create an account to enjoy shopping on our website.</p>
+        <h2 class="text-primary text-uppercase">confirm payment</h2>
+        <p>Confirm your bank payment for your order.</p>
       </div>
     </div>
     <section class="container">
       <div class="row">
         <div class="col-sm-12">
           <div class="inner-ad">
-            <figure><img class="img-responsive" src="{{$ad}}" width="1170" height="100" alt=""/></figure>
+            <figure><img class="img-responsive" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/></figure>
           </div>
         </div>
         <div class="col-sm-12 equal-height-container">
@@ -43,7 +41,7 @@
                 <!--start of breadcrumb-->
                 <div class="col-sm-12">
                   <ol class="breadcrumb dashed-border row">
-                    <li><a href="{{url('/')}}">Home</a></li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
                     <li><a href="#">Account</a></li>
                     <li class="active">Register</li>
                   </ol>
@@ -52,8 +50,9 @@
                 
                 <!--start of checkout-->
                 <div class="col-sm-12">
-                  <form role="form" method="post" action="{{url('register')}}">
-				   {!! csrf_field() !!}
+                  <form role="form" method="post" action="<?php echo e(url('register')); ?>">
+				   <?php echo csrf_field(); ?>
+
                     <div class="row"> 
                       
                       <!-- START Presonal information -->
@@ -71,7 +70,10 @@
                           <label class="control-label" for="mail">email address <span class="req">*</span></label>
                           <input type="text" id="mail" name="email" class="form-control" placeholder="We promise not to share your email with anyone." required>
                         </div>
-                        
+                        <div class="form-group">
+                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
+                          <input type="text" id="phone" name="phone" class="form-control" required>
+                        </div>
                       </fieldset>
                       <!-- END Personal information--> 
                       
@@ -87,27 +89,10 @@
                           <input type="text" id="address-two" name="city" class="form-control">
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
-                          <input type="text" id="phone" name="phone" class="form-control" required>
+                          <label class="control-label" for="postal-code">postal code<span class="req">*</span></label>
+                          <input type="text" id="postal-code" name="zip" class="form-control" required>
                         </div>
                       </fieldset>
-					   <fieldset class="col-md-12">
-					    <div class="form-group">
-                          <label class="control-label" for="year">State<span class="req">*</span></label>
-                          <select id="year" name="state" class="selectpicker">
-						  <option value="none">Select state</option>
-						  <?php 
-						  $state = "";
-                             foreach($states as $key => $value){
-                                   $selectedText = ($key == $state) ? "selected='selected'" : "";                                           
-                          ?>
-                            <option value="{{$key}}" {{$selectedText}}>{{$value}}</option>
-						  <?php 
-                              }
-                          ?>
-                          </select>
-                        </div>
-					   </fieldset>
                       <!-- END Payment information--> 
                     </div>
                     <div class="row">
@@ -138,7 +123,7 @@
                           <div class="col-sm-6">
                             <fieldset>
                               <legend>terms & conditions</legend>
-                              <p class="switch-label">By clicking REGISTER you accept our <a href="{{url('terms')}}">terms & conditions</a></p>
+                              <p class="switch-label">By clicking REGISTER you accept our <a href="<?php echo e(url('terms')); ?>">terms & conditions</a></p>
                               <div id="switch-accept" class="switch-h1 switch-accept">
                                 <div class="circle-h1"></div>
                               </div>
@@ -167,4 +152,5 @@
   </div>
   <!--end of middle sec--> 
     
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/confirm-payment.blade.php ENDPATH**/ ?>

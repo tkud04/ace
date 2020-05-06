@@ -25,7 +25,7 @@ class LoginController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getRegister()
+	public function getRegister(Request $request)
     {
 		 $user = null;
 		$cart = [];
@@ -33,30 +33,21 @@ class LoginController extends Controller {
 		{
 			return redirect()->intended('dashboard');
 		}
-		
-		$c = $this->helpers->categories;
+		$cart = $this->helpers->getCart($user,$request);
+		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		$states = $this->helpers->states;
-		return view("register",compact(['user','cart','c','signals','states']));
+		return view("register",compact(['user','cart','c','ad','signals','states']));
     }
 	/**
 	 * Show the application welcome screen to the user.
 	 *
 	 * @return Response
 	 */
-	public function getMerchantRegister()
-    {
-       $user = null;
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			if($user->verified == "vendor") return redirect()->intended('/');
-		}
-		$layoutAd = $this->helpers->getAds();
-    	return view('mregister',compact(['layoutAd','user']));
-    }
-    
+	 
     /**
 	 * Show the application welcome screen to the user.
 	 *
@@ -71,32 +62,13 @@ class LoginController extends Controller {
 			return redirect()->intended('dashboard');
 		}
 		
+		$cart = $this->helpers->getCart($user,$request);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
 		return view("login",compact(['user','cart','c','signals']));	
     }
 
-    /**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-	public function getMerchantLogin(Request $request)
-    {
-       $user = null;
-       $req = $request->all();
-       $return = isset($req['return']) ? $req['return'] : '/';
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			//return redirect()->intended($return);
-		}
-		$signals = $this->helpers->signals;
-		$layoutAd = $this->helpers->getAds();
-    	return view('mlogin',compact(['layoutAd','user','return','signals']));
-    }
-
+  
 	/**
 	 * Show the application welcome screen to the user.
 	 *
@@ -149,75 +121,7 @@ class LoginController extends Controller {
 
 
     
-        /**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-	public function getAdminLogin(Request $request)
-    {
-       $user = null;
-       $req = $request->all();
-       $return = isset($req['return']) ? $req['return'] : '/';
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			$return = 'dashboard';
-			if($this->helpers->isAdmin($user)) $return = 'cobra';
-			
-			return redirect()->intended($return);
-		} else{
-			$signals = $this->helpers->signals;
-			$layoutAd = $this->helpers->getAds();
-         	return view('admin.login',compact(['layoutAd','user','return','signals']));
-          }
-    }
-
-	/**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-    public function postAdminLogin(Request $request)
-    {
-        $req = $request->all();
-        //dd($req);
-        
-        $validator = Validator::make($req, [
-                             'pass' => 'required|min:6',
-                             'id' => 'required'
-         ]);
-         
-         if($validator->fails())
-         {
-             $messages = $validator->messages();
-             return redirect()->back()->withInput()->with('errors',$messages);
-             //dd($messages);
-         }
-         
-         else
-         {
-         	$remember = true; 
-             $return = isset($req['return']) ? $req['return'] : '/';
-             
-         	//authenticate this login
-            if(Auth::attempt(['email' => $req['id'],'password' => $req['pass'],'status'=> "enabled"],$remember) || Auth::attempt(['phone' => $req['id'],'password' => $req['pass'],'status'=> "enabled"],$remember))
-            {
-            	//Login successful               
-               $user = Auth::user();          
-                #dd($user); 
-               if($this->helpers->isAdmin($user)){return redirect()->intended('cobra');}
-               else{return redirect()->intended("dashboard");}
-            }
-			
-			else
-			{
-				session()->flash("login-status","error");
-				return redirect()->intended('admin');
-			}
-         }        
-    }
+    
 	
     public function postRegister(Request $request)
     {
@@ -233,7 +137,6 @@ class LoginController extends Controller {
                              'address' => 'required',
                              'city' => 'required',
                              'state' => 'required',
-                             'zip' => 'required|numeric',
 							 'terms' => "required|accepted"
          ]);
          
@@ -269,87 +172,7 @@ class LoginController extends Controller {
           }
     }
 
-    public function postMerchantRegister(Request $request)
-    {
-        $req = $request->all();
-        //dd($req);
-        $user = User::where('phone',$req['phone'])->first();
-        if(!is_null($user))
-       {
-       	$req['pass'] = $user->password; 
-           $req['pass_confirmation'] = $user->password; 
-      }
-        $validator = Validator::make($req, [
-                             #'pass' => 'required|confirmed',
-                             'email' => 'required|email',                            
-                             'phone' => 'required|numeric',
-                             'fname' => 'required',
-                             'lname' => 'required',
-                             'sname' => 'required',
-                             'flink' => 'required',
-                             'description' => 'required',
-                             'img' => 'required',
-                             #'g-recaptcha-response' => 'required',
-                           # 'terms' => 'accepted',
-         ]);
-         
-         if($validator->fails())
-         {
-             $messages = $validator->messages();
-             //dd($messages);
-             
-             return redirect()->back()->withInput()->with('errors',$messages);
-         }
-         
-         else
-         {
-            $req['role'] = "user";    
-            $req['status'] = "enabled";           
-            $req['verified'] = "vendor";           
-            
-                       #dd($req);            
-            
-                //if user doesn't exist, create user first
-                if(is_null($user))
-                {
-                        $user =  $this->helpers->createUser($req); 
-                        $req['user_id'] = $user->id;
-                        $shippingDetails =  $this->helpers->createShippingDetails($req); 
-                       $wallet =  $this->helpers->createWallet($req); 
-                       $bank =  $this->helpers->createBankAccount(['user_id' => $user->id,
-                                                       'bank' => '',
-                                                      'acname' => '',                                                     
-                                                      'acnum' => ''
-                                                    ]); 
-                }
-                else
-               {
-               	$user->update(['verified' => "vendor"]);
-               }
-            
-			    //if store doesn't exist, create store
-			    $store = $this->helpers->getUserStore($user);
-			    if(count($store) > 0) return redirect()->intended('my-store');
-				$req['user_id'] = $user->id;
-				
-				//upload deal images 
-             $img = $request->file('img');
-                 #dd($img);                  
-             	$ret = $this->helpers->uploadCloudImage($img->getRealPath());                
-				
-				$req['img'] = $ret['public_id'];
-				#$req['sname'] = $req["fname"]."'s Store";
-			    $this->helpers->createStore($req);
-							  
-             //after creating the store, send to the store view with a success message
-             #$this->helpers->sendEmail($user->email,'Welcome To Disenado!',['name' => $user->fname, 'id' => $user->id],'emails.welcome','view');
-             session()->flash("vendor-signup-status", "success");
-             $flink = "stores/".$req['flink'];
-             return redirect()->intended($flink);
-          }
-    }
-	
-	
+   
 	public function getForgotUsername()
     {
 		$layoutAd = $this->helpers->getAds();
@@ -459,71 +282,7 @@ class LoginController extends Controller {
                   
     }    
     
-    public function getAdminForgotPassword()
-    {
-    	$user = null;
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			return redirect()->intended('/');
-		}
-		$signals = $this->helpers->signals;
-		$layoutAd = $this->helpers->getAds();
-         return view('admin.forgot-password', compact(['layoutAd','user','signals']));
-    }
-    
-    /**
-     * Send username to the given user.
-     * @param  \Illuminate\Http\Request  $request
-     */
-    public function postAdminForgotPassword(Request $request)
-    {
-    	$req = $request->all(); 
-        $validator = Validator::make($req, [
-                             'id' => 'required'
-                  ]);
-                  
-        if($validator->fails())
-         {
-             $messages = $validator->messages();
-             //dd($messages);
-             
-             return redirect()->back()->withInput()->with('errors',$messages);
-         }
-         
-         else{
-         	$ret = $req['id'];
-
-                $user = User::where('email',$ret)
-                                  ->orWhere('phone',$ret)->first();
-
-                if(is_null($user) || ($user->role == 'user'))
-                {
-                        return redirect()->back()->withErrors("No admin account exists with that email or phone number!","errors"); 
-                }
-                
-                //get the reset code 
-                $code = $this->helpers->getPasswordResetCode($user);
-              
-                //Configure the smtp sender
-                $sender = $this->helpers->emailConfig;              
-                $sender['sn'] = 'KloudTransact Support'; 
-               # $sender['se'] = 'kloudtransact@gmail.com'; 
-                $sender['em'] = $user->email; 
-                $sender['subject'] = 'Reset Your Password'; 
-                $sender['link'] = 'www.kloudtransact.com'; 
-                $sender['ll'] = url('reset').'?code='.$code; 
-                
-                //Send password reset link
-                $this->helpers->sendEmailSMTP($sender,'emails.password','view');                                                         
-            session()->flash("cobra-forgot-password-status","ok");           
-            return redirect()->intended('cobra-forgot-password');
-
-      }
-                  
-    }    
-    
+  
     /**
 	 * Show the application welcome screen to the user.
 	 *

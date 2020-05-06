@@ -6,6 +6,7 @@ use Crypt;
 use Carbon\Carbon; 
 use Mail;
 use Auth;
+use Illuminate\Http\Request;
 use App\ShippingDetails;
 use App\User;
 use App\Carts;
@@ -176,7 +177,9 @@ public $categories = [
 			                       'yobe' => 'Yobe',
 			                       'zamfara' => 'Zamfara',
 			                       'fct' => 'FCT'  
-			];         
+			];    
+
+  public $ip = "";			
 
 
           /**
@@ -401,7 +404,23 @@ $subject = $data['subject'];
               return $ret; 
            }
 		   
-		   
+		   function signInAsGuest($data)
+		   {
+			   
+			   
+			   $uu = User::where('phone',$data['phone'])
+			            ->where('password',$data['phone']."@aceluxurystore.com")->first();
+			   $remember = true;			
+			
+			  // dd($uu);
+				if(is_null($uu))
+				{
+					$uu = $this->createUser($data);
+				}
+				
+				
+				return $uu;
+		   }
 		   
            function createUser($data)
            {
@@ -431,17 +450,32 @@ $subject = $data['subject'];
            }
 		   
 		   
-		   function getCart($user)
+		   function getCart($user,$r)
            {
            	$ret = [];
 			$uu = "";
+			$ip = $r->ip();
+			
 			  if(is_null($user))
 			  {
-				  $uu = $this->generateTempUserID();
+				  if($r != null)$uu = $ip;
 			  }
               else
 			  {
-				$uu = $user->id;  
+				$uu = $user->id;
+
+                //check if guest mode has any cart items
+                $guestCart = Carts::where('user_id',$ip)->get();
+                //dd($guestCart);
+                if(count($guestCart) > 0)
+				{
+					foreach($guestCart as $gc)
+					{
+						$temp = ['user_id' => $uu,'sku' => $gc->sku,'qty' => $gc->qty];
+						$this->addToCart($temp);
+						$gc->delete();
+					}
+				}				
 			  }
 
 			  $cart = Carts::where('user_id',$uu)->get();
@@ -462,8 +496,17 @@ $subject = $data['subject'];
            }
            function clearCart($user)
            {
+			  if(is_null($user))
+			  {
+				  $uu = $this->getIP();
+			  }
+              else
+			  {
+				$uu = $user->id;  
+			  }
+			   
            	$ret = [];
-               $cart = Carts::where('user_id',$user->id)->get();
+               $cart = Carts::where('user_id',$uu)->get();
  
               if($cart != null)
                {
@@ -820,11 +863,22 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
+		   function setIP($ip)
+		   {
+			  $this->ip = $ip;
+		   }
 		   
-		   function addToCart($user,$data)
+		   function getIP()
+		   {
+			   $r = new Request();
+			   $i = $r->ip();
+			   dd("i: ".$i);
+			  return $this->ip;
+		   }
+		   
+		   function addToCart($data)
            {
-			 $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
-			 //dd($userId);
+			 $userId = $data['user_id'];
 			 $ret = null;
 			 
 			 $c = Carts::where('user_id',$userId)
@@ -868,17 +922,17 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }	
-           function removeFromCart($user, $sku)
+           function removeFromCart($data)
            {
            	#$ret = ["subtotal" => 0, "delivery" => 0, "total" => 0];
-               $userId = is_null($user) ? $this->generateTempUserID() : $user->id;
+               $userId = $data['user_id'];
 			   $cc = Carts::where('user_id', $userId)->get();
 			
 			if(!is_null($cc))
 			{
 			  foreach($cc as $c)
                             {
-                            	if($c->sku == $sku || $c->id == $sku){$c->delete(); break; }
+                            	if($c->sku == $data['sku'] || $c->id == $data['sku']){$c->delete(); break; }
                             }
             }
 			                         
@@ -1323,10 +1377,35 @@ $subject = $data['subject'];
 			  return $ret;
 		   }		   
 
-       function getWishlist($user)
+       function getWishlist($user,$r)
 		   {
 			   $ret = [];
-			   $wishlist = Wishlists::where('user_id',$user->id)->get();
+			   $ip = $r->ip();
+			   $uu = null;
+			   
+			   if(is_null($user))
+			   {
+				   $uu = $ip;
+			   }
+			   else
+			   {
+				   $uu = $user->id;
+				 //check if guest mode has any wishlist items
+                $guestWishlists = Wishlists::where('user_id',$ip)->get();
+                //dd($guestCart);
+                if(count($guestWishlists) > 0)
+				{
+					foreach($guestWishlists as $gw)
+					{
+						$temp = ['user_id' => $uu,'sku' => $gw->sku];
+						$this->createWishlist($temp);
+						$gw->delete();
+					}
+				}  
+			   }
+			   
+			   
+			   $wishlist = Wishlists::where('user_id',$uu)->get();
 			   
 			   if(!is_null($wishlist))
 			   {
@@ -1373,10 +1452,35 @@ $subject = $data['subject'];
 			  return $ret;
 		   }
 		   
-       function getComparisons($user)
+       function getComparisons($user,$r)
 		   {
 			   $ret = [];
-			   $comparisons = Comparisons::where('user_id',$user->id)->get();
+			   
+			   $ip = $r->ip();
+			   $uu = null;
+			   
+			   if(is_null($user))
+			   {
+				   $uu = $ip;
+			   }
+			   else
+			   {
+				   $uu = $user->id;
+				 //check if guest mode has any wishlist items
+                $guestComparisons = Comparisons::where('user_id',$ip)->get();
+                //dd($guestCart);
+                if(count($guestComparisons) > 0)
+				{
+					foreach($guestComparisons as $gc)
+					{
+						$temp = ['user_id' => $uu,'sku' => $gw->sku];
+						$this->createComparison($temp);
+						$gc->delete();
+					}
+				}  
+			   }
+			   
+			   $comparisons = Comparisons::where('user_id',$userId)->get();
 			   
 			   if(!is_null($comparisons))
 			   {

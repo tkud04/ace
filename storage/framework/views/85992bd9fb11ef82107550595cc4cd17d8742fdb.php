@@ -13,7 +13,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="inner-ad">
-            <figure><img class="img-responsive" src="images/inner-ad.jpg" width="1170" height="100" alt=""/></figure>
+            <figure><img class="img-responsive" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/></figure>
           </div>
         </div>
         <div class="col-sm-12 equal-height-container">
@@ -70,10 +70,7 @@
                           <label class="control-label" for="mail">email address <span class="req">*</span></label>
                           <input type="text" id="mail" name="email" class="form-control" placeholder="We promise not to share your email with anyone." required>
                         </div>
-                        <div class="form-group">
-                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
-                          <input type="text" id="phone" name="phone" class="form-control" required>
-                        </div>
+                        
                       </fieldset>
                       <!-- END Personal information--> 
                       
@@ -89,6 +86,12 @@
                           <input type="text" id="address-two" name="city" class="form-control">
                         </div>
                         <div class="form-group">
+                          <label class="control-label" for="phone">phone number <span class="req">*</span></label>
+                          <input type="text" id="phone" name="phone" class="form-control" required>
+                        </div>
+                      </fieldset>
+					   <fieldset class="col-md-12">
+					    <div class="form-group">
                           <label class="control-label" for="year">State<span class="req">*</span></label>
                           <select id="year" name="state" class="selectpicker">
 						  <option value="none">Select state</option>
@@ -103,11 +106,7 @@
                           ?>
                           </select>
                         </div>
-                        <div class="form-group">
-                          <label class="control-label" for="postal-code">postal code<span class="req">*</span></label>
-                          <input type="text" id="postal-code" name="zip" class="form-control" required>
-                        </div>
-                      </fieldset>
+					   </fieldset>
                       <!-- END Payment information--> 
                     </div>
                     <div class="row">
