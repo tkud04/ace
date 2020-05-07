@@ -73,7 +73,7 @@
                     <span class="small"> <span class="text-info text-capitalize"> <strong>Phone number</strong> :</span><br>
                         <a href="tel:2348097039692">+234 809 703 9692</a><br>
                         <span class="text-info text-capitalize"> <strong>Email us</strong> :</span><br>
-                        <a href="#">support@aceluxurystores.com</a></span></p>
+                        <a href="#">support@aceluxurystore.com</a></span></p>
                     </section>
                 
               </div>

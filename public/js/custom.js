@@ -2,7 +2,17 @@ $(document).ready(function() {
     "use strict";
     $(window).load(function() {
         $("#status").delay(350).fadeOut(),
-        $("#preloader").delay(350).fadeOut("slow")
+        $("#preloader").delay(350).fadeOut("slow");
+		
+		/**
+		getCart()
+		.then(res => {
+			console.log("getCart(): ",res);
+		})
+		.catch(err =>{
+			console.log("err: ",err);
+		});
+		**/
     }),
     $(".colors-panel").styleSwitcher({
         useCookie: !0
@@ -300,6 +310,13 @@ $(document).ready(function() {
     }),
     $("#comment-body").characterCounter({
         counterCssClass: "help-block"
+    }),
+	 $("#add-to-cart-btn").on("click", function(e) {
+        e.preventDefault();
+       let qty = $('#qty').val();
+	   console.log("qty: ",qty);
+	   
+	  
     })
 });
 
@@ -315,15 +332,6 @@ function populateQV(dt){
         $("#quickviewboxImg").attr("src",dt.imgg);
 }
 
-function addToCart(){
-       let qty = $('#qty').val();
-	   console.log("qty: ",qty);
-	   
-	   let cu = $('#cu').val();
-	   cu += "&qty=" + qty;
-	   console.log("cu: ",cu);
-	   window.location = cu;
-}
 
 function payBank(){
 	console.log("pay to bank account");
@@ -480,4 +488,109 @@ ${html}
     //mywindow.close();
 
     return true;
+}
+
+function supportsLocalStorage(){
+	try{
+	  return 'localStorage' in window && window['localStorage'] !== null;
+	}
+	catch(e){
+		return false;
+	}
+}
+
+const generateRandomString = (length) => {
+	let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	let ret = '';
+	
+	for(let i = length; i > 0; --i){
+		ret += chars[Math.floor(Math.random() * chars.length)];
+	}
+	return ret;
+}
+
+function addToCart(dt)
+{
+	    try{
+		let c = getCart();
+		console.log("c: ",c);
+		
+		if(c.length < 1){
+			c.push(dt);
+		}
+		else{
+			let inCart = false;
+			for(let i = 0; i < c.length; i++){
+				let cc = c[i];
+				if(cc.sku == dt.sku){
+					cc.qty = dt.qty;
+					cc.amount = dt.amount;
+					cc.imgg = dt.imgg;
+					inCart = true;
+					break;
+				}
+			}
+		}
+		console.log("c in addtocart: ",c);
+		localStorage.setItem('cart',JSON.stringify(c));
+	}
+	
+	catch(err){
+		console.log("err in addToCart(dt): ",err);
+	}
+}
+
+const getCart = () => {
+	let cart = null;
+	
+    try{
+		let c = localStorage.getItem('cart');
+		if(c){
+			cart = JSON.parse(c);
+			console.log("cart: ",cart);
+		}
+		else{
+			cart = [];
+		}
+	}
+	
+	catch(err){
+		console.log("err in getCart(): ",err);
+		cart = [];
+	}
+	
+	return cart;
+}
+
+const setCartData = (cart) => {
+	document.querySelector('#cart-badge').innerHTML = cart.length;
+			let cartMenu = document.querySelector('#cart-menu');
+			let htt = cartMenu.innerHTML;
+			
+			for(let j = 0; j < cart.length; j++){
+				let cc = cart[j];
+				htt += `
+                  <li><div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> {{$item['sku']}} <b>x{{$qty}}</b><span class="lnt-cart-total">&#8358;{{number_format($itemAmount * $qty, 2)}}</span> </div></li>
+				 `; 
+				 
+			}
+			htt += `<li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="{{url('cart')}}">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="{{url('checkout')}}">Checkout</a> </li>`;
+			cartMenu.innerHTML = htt;
+}
+
+const setCookie = (k,v) => {
+	var d = new Date;
+            d.setTime(d.getTime() + 24 * 60 * 60 * 60 * 1e3);
+            var e = "; expires=" + d.toGMTString();
+	 document.cookie = k + "=" + v + e;
+}
+
+const getCookie = (a) => {
+	for (var b = a + "=", c = document.cookie.split(";"), d = 0; d < c.length; d++) {
+            for (var e = c[d]; " " == e.charAt(0); )
+                e = e.substring(1, e.length);
+            if (0 == e.indexOf(b))
+                return e.substring(b.length, e.length)
+        }
+        return null;
 }

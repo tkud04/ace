@@ -146,7 +146,16 @@ class MainController extends Controller {
 					 $reviews = $this->helpers->getReviews($req["sku"]);
 					 $related = $this->helpers->getProducts();
 					// dd($product);
-                    return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','signals']));			 
+					
+					if(isset($req['type']) && $req['type'] == "json")
+					{
+						return json_encode($product);
+					}
+					else
+					{
+						return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','signals']));
+					}
+                    			 
                  }			 
     	
     }

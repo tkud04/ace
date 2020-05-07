@@ -71,6 +71,8 @@
 <script src="js/wow.min.js"></script> 
 <!--Bootstrap js--> 
 <script src="js/bootstrap.min.js"></script> 
+<!--custom js--> 
+<script src="js/custom.js"></script> 
 </head>
 <body>
 <!--start of loader-->
@@ -93,7 +95,31 @@
       </div>
       <div class="row">
 	  <?php
-       $welcomeText = (is_null($user)) ? "Welcome to our online store!" : "Welcome back, ".$user->fname."!";	  
+	  if(is_null($user))
+	  {
+		$welcomeText = "Welcome to our online store!";
+      ?>
+        <script>
+		   let gid = getCookie("gid");
+
+		  console.log("gid: ",gid);
+		  
+		  if(gid){
+			  console.log("gid is set");
+		  }
+		  else{
+			  console.log("gid is not set");
+			  gid = generateRandomString(20);
+			  setCookie("gid",gid);
+		  }
+		 
+		</script>
+      <?php	  
+	  }
+	  else
+	  {
+		 $welcomeText = "Welcome back, ".$user->fname."!";
+	  }
 	  ?>
         <div class="col-sm-4 welcome-msg hidden-xs">{{$welcomeText}}</div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -102,8 +128,8 @@
 		   <?php
 			$cc = (isset($cart)) ? count($cart) : 0;
 		   ?>
-            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">{{$cc}}</span> </a>
-              <ul role="menu" class="dropdown-menu">
+            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge" id="cart-badge">{{$cc}}</span> </a>
+              <ul role="menu" class="dropdown-menu" id="cart-menu">
                 <?php
 				for($a = 0; $a < $cc; $a++)
 				{
@@ -585,8 +611,7 @@
 <!--start of js--> 
 
 @yield('scripts')
-<!--custom js--> 
-<script src="js/custom.js"></script> 
+
 <!--style switcher--> 
 <script src="js/style-switcher.js"></script> 
 <!--switches--> 

@@ -109,7 +109,7 @@
                           <input type="text" id="qty" value="1">
                           <button type="button" class="plus">+</button>
                         </div>
-                        <a href="#" id="add-to-cart-btn" onclick="addToCart(); return false;" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
+                        <a href="{{$cu}}" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
                     </div>
                   </div>
                   <hr>

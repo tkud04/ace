@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?php echo $__env->yieldContent('title'); ?> | Ace Luxury Store - Online Luxury Fashion Accessories Store in Lagos, Nigeria</title>
+<title>@yield('title') | Ace Luxury Store - Online Luxury Fashion Accessories Store in Lagos, Nigeria</title>
 <!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!-- Ionicons font -->
@@ -61,7 +61,7 @@
 }
 
 </style>
-<?php echo $__env->yieldContent('styles'); ?>
+@yield('styles')
 <!--jQuery--> 
 <script src="js/jquery.min.js"></script> 
 <!--SweetAlert--> 
@@ -71,8 +71,6 @@
 <script src="js/wow.min.js"></script> 
 <!--Bootstrap js--> 
 <script src="js/bootstrap.min.js"></script> 
-<!--custom js--> 
-<script src="js/custom.js"></script> 
 </head>
 <body>
 <!--start of loader-->
@@ -95,41 +93,17 @@
       </div>
       <div class="row">
 	  <?php
-	  if(is_null($user))
-	  {
-		$welcomeText = "Welcome to our online store!";
-      ?>
-        <script>
-		   let gid = getCookie("gid");
-
-		  console.log("gid: ",gid);
-		  
-		  if(gid){
-			  console.log("gid is set");
-		  }
-		  else{
-			  console.log("gid is not set");
-			  gid = generateRandomString(20);
-			  setCookie("gid",gid);
-		  }
-		 
-		</script>
-      <?php	  
-	  }
-	  else
-	  {
-		 $welcomeText = "Welcome back, ".$user->fname."!";
-	  }
+       $welcomeText = (is_null($user)) ? "Welcome to our online store!" : "Welcome back, ".$user->fname."!";	  
 	  ?>
-        <div class="col-sm-4 welcome-msg hidden-xs"><?php echo e($welcomeText); ?></div>
+        <div class="col-sm-4 welcome-msg hidden-xs">{{$welcomeText}}</div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="col-sm-8 collapse navbar-collapse navbar-right" id="line-navbar-collapse-1">
           <ul class="nav navbar-nav top-menu">
 		   <?php
 			$cc = (isset($cart)) ? count($cart) : 0;
 		   ?>
-            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge" id="cart-badge"><?php echo e($cc); ?></span> </a>
-              <ul role="menu" class="dropdown-menu" id="cart-menu">
+            <li class="dropdown lnt-shopping-cart visible-lg visible-md"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="ion-bag bag-icn"></span> <span class="cart-item-quantity badge cart-badge">{{$cc}}</span> </a>
+              <ul role="menu" class="dropdown-menu">
                 <?php
 				for($a = 0; $a < $cc; $a++)
 				{
@@ -138,20 +112,20 @@
 					$itemAmount = $item['pd']['amount'];
 				?>
                 <li>
-                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> <?php echo e($item['sku']); ?> <b>x<?php echo e($qty); ?></b><span class="lnt-cart-total">&#8358;<?php echo e(number_format($itemAmount * $qty, 2)); ?></span> </div>
+                  <div class="lnt-cart-products text-success"><i class="ion-android-checkmark-circle icon"></i> {{$item['sku']}} <b>x{{$qty}}</b><span class="lnt-cart-total">&#8358;{{number_format($itemAmount * $qty, 2)}}</span> </div>
                 </li>
                <?php
 			   }
 			   ?>
-                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="<?php echo e(url('cart')); ?>">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="<?php echo e(url('checkout')); ?>">Checkout</a> </li>
+                <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="{{url('cart')}}">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="{{url('checkout')}}">Checkout</a> </li>
               </ul>
             </li>
-           <?php if(is_null($user)): ?>
+           @if(is_null($user))
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
-		   <?php else: ?>
-            <li><a href="<?php echo e(url('dashboard')); ?>">Dashboard</a></li>
-            <li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>
-		   <?php endif; ?>
+		   @else
+            <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+            <li><a href="{{url('signout')}}">Sign out</a></li>
+		   @endif
             <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu" role="menu">
       
@@ -202,7 +176,7 @@
           </div>		  
         </div>
 		<div class="col-sm-12 col-md-2 col-lg-2 ">
-		   <a href="<?php echo e(url('/')); ?>" class="navbar-brand"></a>
+		   <a href="{{url('/')}}" class="navbar-brand"></a>
 		</div>
 		<div class="col-sm-12 col-md-5 col-lg-5 feature hidden-xs">
           <div class="row pull-right">
@@ -249,7 +223,7 @@
 						 if($cc['special'] == "trending") $spp = '<span class="label label-primary">Trending</span></a>';
 					 }
 				?>
-                  <li<?php echo e($cl); ?>><a href="<?php echo e($ccu); ?>"><?php echo e(ucwords($cc['category'])); ?> <?php echo $spp; ?></a></li>
+                  <li{{$cl}}><a href="{{$ccu}}">{{ucwords($cc['category'])}} {!!$spp!!}</a></li>
 				<?php
 				 }
 				?>
@@ -263,10 +237,10 @@
 					 $dl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
 			    ?>
-                  <div id="<?php echo e($key); ?>"<?php echo e($dl); ?>> 
+                  <div id="{{$key}}"{{$dl}}> 
                     <!-- Sub categories list-->
                     <div class="lnt-subcategory col-sm-8 col-md-8">
-                      <h3 class="lnt-category-name text-info text-uppercase"><?php echo e($key); ?></h3>
+                      <h3 class="lnt-category-name text-info text-uppercase">{{$key}}</h3>
 					 
                       <section class="col-sm-12">
 					  	
@@ -307,25 +281,25 @@
 	    ['name' => "rings",'url' => url('shop')."?category=rings"]
 	    ];
 		 ?>
-          <li class="active"><a href="<?php echo e(url('/')); ?>" class="ion-ios-home"></a></li>
-          <li><a href="<?php echo e($nau); ?>">NEW ARRIVALS</a></li>
-		  <?php $__currentLoopData = $cccc; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $xc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <li><a href="<?php echo e($xc['url']); ?>"><?php echo e(strtoupper($xc['name'])); ?></a></li>
-		  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-          <li><a href="<?php echo e(url('contact')); ?>">CONTACT</a></li>
+          <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
+          <li><a href="{{$nau}}">NEW ARRIVALS</a></li>
+		  @foreach($cccc as $xc)
+          <li><a href="{{$xc['url']}}">{{strtoupper($xc['name'])}}</a></li>
+		  @endforeach
+          <li><a href="{{url('contact')}}">CONTACT</a></li>
         </ul>
         <ul class="nav navbar-nav visible-xs">
-          <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+          <li><a href="{{url('/')}}">Home</a></li>
         </ul>
-        <form class="navbar-form navbar-right lnt-search-form" action="<?php echo e(url('search')); ?>" role="search">
+        <form class="navbar-form navbar-right lnt-search-form" action="{{url('search')}}" role="search">
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-btn lnt-search-category">
                 <button type="button" class="btn btn-default dropdown-toggle selected-category-btn" data-toggle="dropdown" aria-expanded="false"> <span class="selected-category-text">All </span> <span class="ion-android-arrow-dropdown"></span> </button>
                 <ul class="dropdown-menu " role="menu">
-				<?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                  <li><a href="#"><?php echo e(ucwords($key)); ?></a></li>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>         
+				@foreach($c as $key => $value)
+                  <li><a href="#">{{ucwords($key)}}</a></li>
+				@endforeach         
                 </ul>
               </div>
               <input type="text" class="form-control lnt-search-input" name="q" aria-label="Search" placeholder="Find Your Product">
@@ -342,7 +316,7 @@
   <!-- end of navigation --> 
   
    <!--------- Cookie consent-------------->
-        	<?php echo $__env->make('cookie-consent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        	@include('cookie-consent')
         
         <!--------- Session notifications-------------->
         	<?php
@@ -361,16 +335,16 @@
               
              ?> 
 
-                 <?php if($pop != "" && $val != ""): ?>
-                   <?php echo $__env->make('session-status',['pop' => $pop, 'val' => $val], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                 <?php endif; ?>
+                 @if($pop != "" && $val != "")
+                   @include('session-status',['pop' => $pop, 'val' => $val])
+                 @endif
         	<!--------- Input errors -------------->
-                    <?php if(count($errors) > 0): ?>
-                          <?php echo $__env->make('input-errors', ['errors'=>$errors], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                     <?php endif; ?> 
+                    @if (count($errors) > 0)
+                          @include('input-errors', ['errors'=>$errors])
+                     @endif 
   
   
- <?php echo $__env->yieldContent('content'); ?>
+ @yield('content')
  
 
     
@@ -396,11 +370,11 @@
             <div class="col-md-3 col-sm-6">
               <h5 class="text-info text-uppercase">useful pages</h5>
               <ul class="list-unstyled nudge">
-                <li><a href="<?php echo e(url('about')); ?>">About us</a> </li>
-                <li><a href="<?php echo e(url('privacy-policy')); ?>">Privacy Policy</a> </li>
-                <li><a href="<?php echo e(url('returns')); ?>">Return Policy</a> </li>
-                <li><a href="<?php echo e(url('faq')); ?>">FAQ</a> </li>
-                <li><a href="<?php echo e(url('contact')); ?>">Contact us</a> </li>
+                <li><a href="{{url('about')}}">About us</a> </li>
+                <li><a href="{{url('privacy-policy')}}">Privacy Policy</a> </li>
+                <li><a href="{{url('returns')}}">Return Policy</a> </li>
+                <li><a href="{{url('faq')}}">FAQ</a> </li>
+                <li><a href="{{url('contact')}}">Contact us</a> </li>
               </ul>
               <hr class="hidden-md hidden-lg hidden-sm">
             </div>
@@ -411,7 +385,7 @@
 			  foreach($c as $cc){
 				   $ccu = url('shop')."?category=".$cc['category'];
 			  ?>
-                <li><a href="<?php echo e($ccu); ?>"><?php echo e(ucwords($cc['category'])); ?></a> </li>
+                <li><a href="{{$ccu}}">{{ucwords($cc['category'])}}</a> </li>
 			  <?php
 			  }
 			  ?>
@@ -422,9 +396,8 @@
                 <div class="col-sm-12">
                   <h5 class="text-info text-uppercase">Get the news</h5>
                   <p class="text-muted">Subscribe for updates on our latest arrivals</p>
-                  <form action="<?php echo e(url('subscribe')); ?>" method="post" id="newsletter">
-					  <?php echo csrf_field(); ?>
-
+                  <form action="{{url('subscribe')}}" method="post" id="newsletter">
+					  {!! csrf_field() !!}
                     <div>
                       <input type="text" name="email" id="newsletter-mail" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address" autocomplete="off">
                       <button type="submit" title="Subscribe" class="btn btn-primary pull-right"><span>Subscribe</span></button>
@@ -455,7 +428,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
-              <p class="pull-left">&copy; <?php echo e(date("Y")); ?> Allrights reserved <a class="external" href="<?php echo e(url('/')); ?>">Ace Luxury</a>.</p>
+              <p class="pull-left">&copy; {{date("Y")}} Allrights reserved <a class="external" href="{{url('/')}}">Ace Luxury</a>.</p>
             </div>
           </div>
         </div>
@@ -484,9 +457,8 @@
             <li class="col-sm-6"> <a href="#" class="btn btn-block btn-google" ><i class="ion-social-google"></i></a></li>
           </ul>
           <hr>
-          <form method="post" id="login-form" action="<?php echo e(url('login')); ?>" accept-charset="UTF-8">
-		   <?php echo csrf_field(); ?>
-
+          <form method="post" id="login-form" action="{{url('login')}}" accept-charset="UTF-8">
+		   {!! csrf_field() !!}
 		   <input type="hidden" id="href" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
@@ -612,8 +584,9 @@
 
 <!--start of js--> 
 
-<?php echo $__env->yieldContent('scripts'); ?>
-
+@yield('scripts')
+<!--custom js--> 
+<script src="js/custom.js"></script> 
 <!--style switcher--> 
 <script src="js/style-switcher.js"></script> 
 <!--switches--> 
@@ -651,4 +624,4 @@
 
 <!--end of js-->
 </body>
-</html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
+</html>
