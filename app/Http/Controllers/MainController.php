@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Contracts\HelperContract; 
 use Auth;
 use Session; 
+use Cookie;
 use Validator; 
 use Carbon\Carbon; 
 use App\Products;
@@ -32,8 +33,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$ip =  $request->ip();
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		//dd($bs);
 		$signals = $this->helpers->signals;
@@ -45,6 +47,7 @@ class MainController extends Controller {
 		shuffle($ads);
 		#dd($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+
     	return view("index-2",compact(['user','cart','c','banners','bs','na','ad','signals']));
     }
 	
@@ -61,8 +64,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
 		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
@@ -117,7 +121,9 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
@@ -174,7 +180,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$totals = $this->helpers->getCartTotals($cart);
 		
 		$c = $this->helpers->getCategories();
@@ -201,7 +209,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 		    $shipping = $this->helpers->getShippingDetails($user);	
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$totals = $this->helpers->getCartTotals($cart);
 		
 
@@ -233,7 +243,7 @@ class MainController extends Controller {
     	if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$request);
+			$cart = $this->helpers->getCart($user,$gid);
 		}
 		else
         {
@@ -283,7 +293,9 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();	
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
@@ -341,7 +353,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
@@ -404,7 +418,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
@@ -455,7 +471,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		$signals = $this->helpers->signals;
@@ -479,7 +497,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
@@ -502,7 +522,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
@@ -525,7 +547,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
@@ -548,7 +572,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
@@ -582,7 +608,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$request);
+			$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
 			$orders = $this->helpers->getOrders($user);
@@ -608,7 +636,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$request);
+			$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 		    $signals = $this->helpers->signals;
 		    $states = $this->helpers->states;
@@ -693,7 +723,9 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$request);
+			$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
 			$orders = $this->helpers->getOrders($user);
@@ -763,7 +795,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
         $req = $request->all();
         //dd($req);
         
@@ -781,8 +815,7 @@ class MainController extends Controller {
          
          else
          {
-			 $req['user_id'] = is_null($user) ? $request->ip() : $user->id;
-			 $req['r'] = $request;
+			 $req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->addToCart($req);
 			if(isset($req['from_wishlist']) && $req['from_wishlist'] == "yes")
 			{
@@ -804,7 +837,7 @@ class MainController extends Controller {
     	if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$request);
+			
 		}
 		else
         {
@@ -851,7 +884,8 @@ class MainController extends Controller {
 		}
 		
         $req = $request->all();
-        //dd($req);
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -866,7 +900,7 @@ class MainController extends Controller {
          
          else
          {
-			 $req['user_id'] = is_null($user) ? $request->ip() : $user->id;
+			 $req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->removeFromCart($req);
 	        session()->flash("remove-from-cart-status","ok");
 			return redirect()->intended('cart');
@@ -889,7 +923,9 @@ class MainController extends Controller {
 			
 		}
 		
-        $req = $request->all();
+       $req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
         //dd($req);
         $ret = [];
 		
@@ -906,7 +942,7 @@ class MainController extends Controller {
          
          else
          {
-			 $req['user_id'] = is_null($user) ? $request->ip() : $user->id;
+			 $req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->createWishlist($req);
 	        session()->flash("add-to-wishlist-status","ok");
 			return redirect()->back();
@@ -926,11 +962,12 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 		}
-		 $userId = is_null($user) ? $request->ip() : $user->id;
-			$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
-			$wishlist = $this->helpers->getWishlist($user,$request);
+			$wishlist = $this->helpers->getWishlist($user,$gid);
 
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
@@ -955,8 +992,8 @@ class MainController extends Controller {
 			
 		}
 		
-        $req = $request->all();
-        //dd($req);
+       $req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -971,7 +1008,8 @@ class MainController extends Controller {
          
          else
          {
-			$req['user_id'] = is_null($user) ? $request->ip() : $user->id;
+			 
+			$req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->removeFromWishlist($req);
 	        session()->flash("remove-from-wishlist-status","ok");
 			return redirect()->intended('wishlist');
@@ -993,9 +1031,9 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$request);
+		$cart = $this->helpers->getCart($user,$gid);
         $req = $request->all();
-        //dd($req);
+		$gid = isset($req['gid']) ? $req['gid'] : "";
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -1010,7 +1048,7 @@ class MainController extends Controller {
          
          else
          {
-			 $req['user_id'] = is_null($user) ? $request->ip() : $user->id;
+			 $req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->createComparison($req);
 	        session()->flash("add-to-compare-status","ok");
 			return redirect()->back();
@@ -1030,11 +1068,12 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 		}
-		$userId = is_null($user) ? $request->ip() : $user->id;
-			$cart = $this->helpers->getCart($user,$request);
+		$req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
-			$compares = $this->helpers->getComparisons($user,$request);
+			$compares = $this->helpers->getComparisons($user,$gid);
 
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
@@ -1060,7 +1099,7 @@ class MainController extends Controller {
 		}
 		
         $req = $request->all();
-        //dd($req);
+		$gid = isset($req['gid']) ? $req['gid'] : "";
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -1075,7 +1114,7 @@ class MainController extends Controller {
          
          else
          {
-			$req['user_id'] = $user->id;
+			$req['user_id'] = is_null($user) ? $gid : $user->id;
          	$this->helpers->removeFromComparisons($req);
 	        session()->flash("remove-from-compare-status","ok");
 			return redirect()->intended('compare');
@@ -1103,8 +1142,9 @@ class MainController extends Controller {
 			
 		}
 		
-        $req = $request->all();
-        //dd($req);
+       $req = $request->all();
+		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
         
         $validator = Validator::make($req, [
                              'order' => 'required'
@@ -1156,7 +1196,33 @@ class MainController extends Controller {
     }
 	
 	
-	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function postSyncData(Request $request)
+    {
+       $req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'gid' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             return ['status' => "error", 'message' => "validation"];
+         }
+         
+         else
+         {
+         	$gid = isset($req['gwx']) ? $req['gwx'] : "";
+		    //$request->session()->put('gid',$gid);
+			$cookie = Cookie::forever('gid', $gid);
+			return ['status' => "ok"];
+         }  
+    }
 	
 	
 	/**

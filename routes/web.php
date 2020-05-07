@@ -67,3 +67,5 @@ Route::get('payment/callback', 'PaymentController@getPaymentCallback');
 Route::post('pay', 'PaymentController@postRedirectToGateway');
 
 Route::post('subscribe', 'MainController@postSubscribe');
+
+Route::post('sync-data', 'MainController@postSyncData');

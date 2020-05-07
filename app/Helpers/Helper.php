@@ -454,19 +454,18 @@ $subject = $data['subject'];
 		   function getCart($user,$r)
            {
            	$ret = [];
-			$uu = "";
-			$ip = $r->ip();
+			$uu = "";		
 			
 			  if(is_null($user))
 			  {
-				
+				$uu = $r;
 			  }
               else
 			  {
 				$uu = $user->id;
 
                 //check if guest mode has any cart items
-                $guestCart = Carts::where('user_id',$ip)->get();
+                $guestCart = Carts::where('user_id',$r)->get();
                 //dd($guestCart);
                 if(count($guestCart) > 0)
 				{
@@ -907,9 +906,6 @@ $subject = $data['subject'];
                                                       'qty' => $data['qty']
                                                       ]); 
 													  
-				$jret = ['sku' => $data['sku'],'qty' => $data['qty'] ];
-				$r = $data['r'];
-				$r->session()->put('cart',json_encode($jret));
 			 }
 			 else
 			 {

@@ -110,7 +110,7 @@
                               <figure class="double-img"><a href="<?php echo e($uu); ?>"><img class="btm-img" src="<?php echo e($imggs[0]); ?>" width="215" height="240"  alt=""/> <img class="top-img" src="<?php echo e($imggs[1]); ?>" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
-		   <p class="effect-icon"> <a href="<?php echo e($cu); ?>" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+		   <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCart({sku:'<?php echo e($sku); ?>',qty:'1'})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
                               <p class="effect-icon"> <a href="<?php echo e($wu); ?>" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
                               <p class="effect-icon"> <a href="<?php echo e($ccu); ?>" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
                                <p class="effect-icon">

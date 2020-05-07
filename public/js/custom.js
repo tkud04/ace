@@ -511,33 +511,9 @@ const generateRandomString = (length) => {
 
 function addToCart(dt)
 {
-	    try{
-		let c = getCart();
-		console.log("c: ",c);
-		
-		if(c.length < 1){
-			c.push(dt);
-		}
-		else{
-			let inCart = false;
-			for(let i = 0; i < c.length; i++){
-				let cc = c[i];
-				if(cc.sku == dt.sku){
-					cc.qty = dt.qty;
-					cc.amount = dt.amount;
-					cc.imgg = dt.imgg;
-					inCart = true;
-					break;
-				}
-			}
-		}
-		console.log("c in addtocart: ",c);
-		localStorage.setItem('cart',JSON.stringify(c));
-	}
-	
-	catch(err){
-		console.log("err in addToCart(dt): ",err);
-	}
+  let cu = `add-to-cart?sku=${dt.sku}&qty=1&gid=${gid}`;
+  console.log("cu: ",cu);
+  window.location = cu;
 }
 
 const getCart = () => {
@@ -593,4 +569,44 @@ const getCookie = (a) => {
                 return e.substring(b.length, e.length)
         }
         return null;
+}
+
+const getParameterByName = (name, url) => {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+const syncData = (dt) => {
+    let url = "sync-data";
+	//create request
+	const req = new Request(url,{method: "POST",body: dt});
+	console.log("dt: ",dt);
+	
+	
+	//fetch request
+	return fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   //console.log(response);
+			   
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error:", message: "Network error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+	   })
+	   .then(res => {
+		   console.log("syncData returned: ",res);
+		   
+	   }).catch(error => {
+		    alert("Failed to call getProducts: " + error);			
+	   });
 }
