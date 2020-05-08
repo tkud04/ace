@@ -451,7 +451,7 @@ $subject = $data['subject'];
            }
 		   
 		   
-		   function getCart($user,$r)
+		   function getCart($user,$r="")
            {
            	$ret = [];
 			$uu = "";		
@@ -486,6 +486,7 @@ $subject = $data['subject'];
                     {
                     	$temp = [];
                	     $temp['id'] = $c->id; 
+               	     $temp['user_id'] = $c->user_id; 
                         $temp['product'] = $this->getProduct($c->sku); 
                         $temp['qty'] = $c->qty; 
                         array_push($ret, $temp); 
@@ -856,6 +857,29 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
+		   function getRating($sku)
+		   {
+			   $ret = 0;
+			   
+			   $reviews = $this->getReviews($sku);
+			   
+			   if($reviews != null && count($reviews) > 0)
+			   {
+				  $sum = 0; $count = 0;
+                  foreach($reviews as $r)
+				  {
+					  $sum += $r['rating']; ++$count;
+				  }
+                  
+                  if($sum > 0 && $count > 0)
+				  {
+					  $ret = floor($sum / $count);
+				  }				  
+			   }
+			   
+			   return $ret;
+		   }
+		   
 		   function generateTempUserID()
            {
            	$ret = "user_".getenv("REMOTE_ADDR");
@@ -956,26 +980,36 @@ $subject = $data['subject'];
                 return "ok";
            }
 		   
-		   function getDeliveryFee()
+		   function getDeliveryFee($u=null)
 		   {
-			   return 1000;
+			   $ret = 2000;
+			   if(!is_null($u))
+			   {
+				  $shipping = $this->getShippingDetails($u);
+                  $s = $shipping[0];				  
+				  if($s['state'] == "lagos" || $s['state'] == "ogun" || $s['state'] == "oyo") $ret = 1000; 
+			   } 
+			   return $ret;
 		   }
 				
           function getCartTotals($cart)
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
               // dd($cart);
+			  $userId = null;
+			  
               if($cart != null && count($cart) > 0)
                {           	
                	foreach($cart as $c) 
                     {
+						if(is_null($userId)) $userId = $c['user_id'];
 						$amount = $c['product']['pd']['amount'];
 						$qty = $c['qty'];
                     	$ret['items'] += $qty;
 						$ret['subtotal'] += ($amount * $qty);	
                     }
-                   
-                   $ret['delivery'] = $this->getDeliveryFee();
+                   $u = User::where('id',$userId)->first();
+                   $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
                                                       
@@ -1521,6 +1555,43 @@ $subject = $data['subject'];
 			   {
 				  $c->delete();
 			   }
+		   }	
+
+    function search($q)
+		   {
+			   $ret = [];
+			   $uu = null;
+			   
+			   $results1 = Products::where('sku',"LIKE","%".$q."%")->get();
+			   $results2 = ProductData::where('description',"LIKE","%".$q."%")
+			                          ->orWhere('amount',"LIKE","%".$q."%")
+			                          ->orWhere('in_stock',"LIKE","%".$q."%")
+			                          ->orWhere('category',"LIKE","%".$q."%")->get();
+			   
+			   if(!is_null($results1))
+			   {
+				   foreach($results1 as $r1)
+				   {
+					   $temp = [];
+					   $temp['product'] = $this->getProduct($r1->sku);
+					   $temp['rating'] = $this->getRating($r1->sku);
+					   array_push($ret,$temp);
+				   }
+			   }
+			   
+			   if(!is_null($results2))
+			   {
+				   foreach($results2 as $r2)
+				   {
+					   $temp = [];
+					   $temp['product'] = $this->getProduct($r2->sku);
+					    $temp['rating'] = $this->getRating($r2->sku);
+					   array_push($ret,$temp);
+				   }
+			   }
+
+			   //dd($ret);
+			   return $ret;
 		   }		   
    
 }

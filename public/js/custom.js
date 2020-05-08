@@ -313,7 +313,7 @@ $(document).ready(function() {
     }),
 	 $("#add-to-cart-btn").on("click", function(e) {
         e.preventDefault();
-       let qty = $('#qty').val();
+       let qty = $($(this).attr('data-qty')).val();
 	   console.log("qty: ",qty);
 	   
 	  
@@ -513,7 +513,8 @@ const generateRandomString = (length) => {
 function addToCart(dt)
 {
 	if(!dt.fromWishlist) dt.fromWishlist = "no";
-  let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=1&gid=${gid}`;
+	if(!dt.qty) dt.qty = 1;
+  let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   window.location = cu;
 }
@@ -643,4 +644,10 @@ const syncData = (dt) => {
 	   }).catch(error => {
 		    alert("Failed to call getProducts: " + error);			
 	   });
+}
+
+const searchToCart = (s) => {
+	 let qty = $(`#search-qty-${s}`).val();
+	   //console.log("qty: ",qty);
+	   addToCart({sku: s,qty: qty});
 }

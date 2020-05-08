@@ -178,7 +178,6 @@ class MainController extends Controller {
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			
 		}
 		$req = $request->all();
 		$gid = isset($req['gid']) ? $req['gid'] : "";
@@ -244,7 +243,7 @@ class MainController extends Controller {
     	if(Auth::check())
 		{
 			$user = Auth::user();
-			$cart = $this->helpers->getCart($user,$gid);
+			
 		}
 		else
         {
@@ -443,7 +442,7 @@ class MainController extends Controller {
                 
                  else
                  {
-					 $results = ['test'];
+					 $results = $this->helpers->search($req['q']);
 					 
 					 if(count($results) < 1)
 					 {

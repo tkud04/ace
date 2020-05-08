@@ -17,7 +17,7 @@
                 <li><i class="ion-android-checkmark-circle"></i> Check your spelling.</li>
                 <li><i class="ion-android-checkmark-circle"></i> Try more general words.</li>
                 <li><i class="ion-android-checkmark-circle"></i> Try different words that mean the same thing.</li>
-                <li><i class="ion-android-checkmark-circle"></i> <a href="#">Post a request</a> and we will help you.</li>
+                <li><i class="ion-android-checkmark-circle"></i> <a href="{{url('shop')}}">Check our shop</a> instead.</li>
               </ul>
             </div>
           </div>

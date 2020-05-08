@@ -6,7 +6,7 @@
     <div class="page-header">
       <div class="container text-center">
         <h2 class="text-primary text-uppercase">search results</h2>
-        <p>we found a few things based on your search.</p>
+        <p>we found some products based on your search.</p>
       </div>
     </div>
     <section class="container">
@@ -27,93 +27,61 @@
                 <li class="active">search results</li>
               </ol>
             </div>
+			 <?php
+			$rc = (isset($results)) ? count($results) : 0;
+		   ?>
             <div class="col-sm-12">
-              <h4 class="sub-title text-primary text-uppercase">we found <span class="text-info">(3) </span>results:</h4>
+              <h4 class="sub-title text-primary text-uppercase">results found: <span class="text-info">(<?php echo e($rc); ?>) </span></h4>
               <ul class="item-list list-group">
+			  <?php
+			    for($i = 0; $i < $rc; $i++)
+				{
+					$p = $results[$i]['product'];
+					$r = $results[$i]['rating'];
+					$pd = $p['pd']; $imggs = $p['imggs'];
+					$pu = url('product')."?sku=".$p['sku'];
+					$sqty = "search-qty-".$p['sku'];
+			  ?>
                 <li class="item list-group-item  clearfix">
                   <div class="item-information">
                     <div class="row">
-                      <div class="item-image col-sm-2"> <img class="img-responsive" src="images/s-3.jpg" width="126" height="144" alt=""> </div>
+                      <div class="item-image col-sm-2"> <img class="img-responsive" src="<?php echo e($imggs[0]); ?>" width="126" height="144" alt=""> </div>
                       <div class="item-body col-sm-8">
-                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="#">Etiam sit amet orci eget eros faucibus</a></h5>
-                        <p class="item-description">Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
-                          <mark>Vivamus elementum</mark>
-                          semper nisi.<br>
-                          Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. </p>
+                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="<?php echo e($pu); ?>"><?php echo e($p['sku']); ?></a></h5>
+                        <p class="item-description"><?php echo $pd['description']; ?> </p>
                       </div>
-                      <div class="item-price js-item-price col-sm-2 text-info text-center" data-price="11.99"> <strong>$1199</strong> </div>
+                      <div class="item-price js-item-price col-sm-2 text-info text-center"> <strong>&#8358;<?php echo e(number_format($pd['amount'],2)); ?></strong> </div>
                     </div>
                   </div>
                   <div class="item-interactions">
                     <div class="row">
-                      <div class="col-sm-2 text-info text-center right-bordered"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i> </div>
+                      <div class="col-sm-2 text-info text-center right-bordered">
+					   <?php
+					   $iclass="";
+					   for($j = 0; $j < 5; $j++)
+					   {
+						  $iclass = "ion-android-star-outline";
+						  if($j < $r) $iclass = "ion-android-star";
+					   ?>
+					    <i class="<?php echo e($iclass); ?>"></i>
+					   <?php
+					   }
+					   ?>
+					  </div>
                       <div class="col-sm-8">
                         <div class="qty-btngroup clearfix pull-left">
                           <button class="minus" type="button">-</button>
-                          <input type="text" value="1">
+                          <input type="text" value="1" id="<?php echo e($sqty); ?>">
                           <button class="plus" type="button">+</button>
                         </div>
                       </div>
-                      <div class="col-sm-2 text-center left-bordered"> <a class="btn btn-primary hvr-underline-from-center-primary">add to cart</a> </div>
+                      <div class="col-sm-2 text-center left-bordered"> <a href="javascript:void(0)" onclick="searchToCart('<?php echo e($p['sku']); ?>')" class="search-add-to-cart btn btn-primary hvr-underline-from-center-primary">add to cart</a> </div>
                     </div>
                   </div>
                 </li>
-                <li class="item list-group-item  clearfix">
-                  <div class="item-information">
-                    <div class="row">
-                      <div class="item-image col-sm-2"> <img class="img-responsive" src="images/s-4.jpg" width="126" height="144" alt=""> </div>
-                      <div class="item-body col-sm-8">
-                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="#">Etiam sit amet orci eget eros faucibus</a></h5>
-                        <p class="item-description">
-                          <mark>Nullam</mark>
-                          dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.<br>
-                          Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. </p>
-                      </div>
-                      <div class="item-price js-item-price col-sm-2 text-info text-center" data-price="11.99"> <strong>$1199</strong> </div>
-                    </div>
-                  </div>
-                  <div class="item-interactions">
-                    <div class="row">
-                      <div class="col-sm-2 text-info text-center right-bordered"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i> </div>
-                      <div class="col-sm-8">
-                        <div class="qty-btngroup clearfix pull-left">
-                          <button class="minus" type="button">-</button>
-                          <input type="text" value="1">
-                          <button class="plus" type="button">+</button>
-                        </div>
-                      </div>
-                      <div class="col-sm-2 text-center left-bordered"> <a class="btn btn-primary hvr-underline-from-center-primary">add to cart</a> </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item list-group-item  clearfix">
-                  <div class="item-information">
-                    <div class="row">
-                      <div class="item-image col-sm-2"> <img class="img-responsive" src="images/s-1.jpg" width="126" height="144" alt=""> </div>
-                      <div class="item-body col-sm-8">
-                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="#">Etiam sit amet orci eget eros faucibus</a></h5>
-                        <p class="item-description">Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.<br>
-                          Aenean vulputate eleifend tellus.
-                          <mark>Aenean leo</mark>
-                          ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. </p>
-                      </div>
-                      <div class="item-price js-item-price col-sm-2 text-info text-center" data-price="11.99"> <strong>$1199</strong> </div>
-                    </div>
-                  </div>
-                  <div class="item-interactions">
-                    <div class="row">
-                      <div class="col-sm-2 text-info text-center right-bordered"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i> </div>
-                      <div class="col-sm-8">
-                        <div class="qty-btngroup clearfix pull-left">
-                          <button class="minus" type="button">-</button>
-                          <input type="text" value="1">
-                          <button class="plus" type="button">+</button>
-                        </div>
-                      </div>
-                      <div class="col-sm-2 text-center left-bordered"> <a class="btn btn-primary hvr-underline-from-center-primary">add to cart</a> </div>
-                    </div>
-                  </div>
-                </li>
+                <?php
+				}
+				?>
               </ul>
             </div>
             
