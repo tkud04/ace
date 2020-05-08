@@ -512,7 +512,8 @@ const generateRandomString = (length) => {
 
 function addToCart(dt)
 {
-  let cu = `add-to-cart?sku=${dt.sku}&qty=1&gid=${gid}`;
+	if(!dt.fromWishlist) dt.fromWishlist = "no";
+  let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=1&gid=${gid}`;
   console.log("cu: ",cu);
   window.location = cu;
 }
@@ -522,6 +523,31 @@ function removeFromCart(dt)
   let ru = `remove-from-cart?sku=${dt.sku}&gid=${gid}`;
   console.log("ru: ",ru);
   window.location = ru;
+}
+
+function addToWishlist(dt)
+{
+  let wu = `add-to-wishlist?sku=${dt.sku}&gid=${gid}`;
+  console.log("wu: ",wu);
+  window.location = wu;
+}
+
+function removeFromWishlist(dt)
+{
+  let wu = `remove-from-wishlist?sku=${dt.sku}&gid=${gid}`;
+  window.location = wu;
+}
+
+function addToCompare(dt)
+{
+  let cu = `add-to-compare?sku=${dt.sku}&gid=${gid}`;
+  window.location = cu;
+}
+
+function removeFromCompare(dt)
+{
+  let wu = `remove-from-compare?sku=${dt.sku}&gid=${gid}`;
+  window.location = wu;
 }
 
 const getCart = () => {

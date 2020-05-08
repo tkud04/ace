@@ -94,12 +94,7 @@
         <button class="lno-btn-toggle"> <span class="fa fa-bars"></span> </button>
       </div>
       <div class="row">
-	  <?php
-	  if(is_null($user))
-	  {
-		$welcomeText = "Welcome to our online store!";
-      ?>
-        <script>
+	   <script>
 		   let gid = getCookie("gid");
 
 		  if(gid){
@@ -119,9 +114,12 @@
 			  uu.searchParams.append("gid",gid);
 			   window.location =  uu;
 		  }
-		   
-		</script>
-      <?php	  
+	</script>
+	  <?php
+	  
+	  if(is_null($user))
+	  {
+		$welcomeText = "Welcome to our online store!";
 	  }
 	  else
 	  {

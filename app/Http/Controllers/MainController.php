@@ -191,6 +191,7 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		//dd($totals);
+		session()->reflash();
 		return view("cart",compact(['user','cart','totals','c','ad','signals']));					 
     }
 	
@@ -1031,9 +1032,11 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		$cart = $this->helpers->getCart($user,$gid);
-        $req = $request->all();
+		
+		$req = $request->all();
 		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+        
         
         $validator = Validator::make($req, [
                              'sku' => 'required'

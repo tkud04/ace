@@ -1396,18 +1396,17 @@ $subject = $data['subject'];
        function getWishlist($user,$r)
 		   {
 			   $ret = [];
-			   $ip = $r->ip();
 			   $uu = null;
 			   
 			   if(is_null($user))
 			   {
-				   $uu = $ip;
+				   $uu = $r;
 			   }
 			   else
 			   {
 				   $uu = $user->id;
 				 //check if guest mode has any wishlist items
-                $guestWishlists = Wishlists::where('user_id',$ip)->get();
+                $guestWishlists = Wishlists::where('user_id',$r)->get();
                 //dd($guestCart);
                 if(count($guestWishlists) > 0)
 				{
@@ -1472,24 +1471,23 @@ $subject = $data['subject'];
 		   {
 			   $ret = [];
 			   
-			   $ip = $r->ip();
 			   $uu = null;
 			   
 			   if(is_null($user))
 			   {
-				   $uu = $ip;
+				   $uu = $r;
 			   }
 			   else
 			   {
 				   $uu = $user->id;
 				 //check if guest mode has any compare items
-                $guestComparisons = Comparisons::where('user_id',$ip)->get();
+                $guestComparisons = Comparisons::where('user_id',$r)->get();
                 //dd($guestCart);
                 if(count($guestComparisons) > 0)
 				{
 					foreach($guestComparisons as $gc)
 					{
-						$temp = ['user_id' => $uu,'sku' => $gw->sku];
+						$temp = ['user_id' => $uu,'sku' => $gc->sku];
 						$this->createComparison($temp);
 						$gc->delete();
 					}

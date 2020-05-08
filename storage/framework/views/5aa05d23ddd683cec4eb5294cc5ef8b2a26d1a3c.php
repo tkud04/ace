@@ -81,8 +81,8 @@
 					   <td>&#8358;<?php echo e(number_format($pd['amount'],2)); ?></td>		  
 					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($pd['in_stock'])); ?></span></td>
 					   <td>
-					     <a class="btn btn-info" href="<?php echo e($uu); ?>">Add to cart</span></a>
-					     <a class="btn btn-danger" href="<?php echo e($du); ?>"><span class="ion-android-delete"></span></a>
+					     <a class="btn btn-info" href="javascript:void(0)" onclick="addToCart({sku:'<?php echo e($sku); ?>',fromWishlist:'yes',qty:'1'})">Add to cart</span></a>
+					     <a class="btn btn-danger" href="javascript:void(0)" onclick="removeFromWishlist({sku:'<?php echo e($sku); ?>'})"><span class="ion-android-delete"></span></a>
 					   </td>
 					 </tr>
 					<?php
