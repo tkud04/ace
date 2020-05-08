@@ -39,20 +39,21 @@
 				    for($a = 0; $a < count($cart); $a++)
 				    {
 					  $item = $cart[$a]['product'];
-					  $uu = url('product')."?sku=".$item['sku'];
+					  $sku = $item['sku'];
+					  $uu = url('product')."?sku=".$sku;
 					  $qty = $cart[$a]['qty'];
 					  $itemText = $qty == 1 ? "Item" : "Items";
 					  $itemAmount = $item['pd']['amount'];
 					  $itemDescription = $item['pd']['description'];
 					  $imggs = $item['imggs'];
-					  $ru = url('remove-from-cart').'?sku='.$item['sku'];
+					  $ru = url('remove-from-cart').'?sku='.$sku;
 				    ?>
                     <li class="item list-group-item  clearfix">
                       <div class="item-information">
                         <div class="row">
                           <div class="item-image col-sm-2"> <img class="img-responsive" src="{{$imggs[0]}}" width="126" height="144" alt=""> </div>
                           <div class="item-body col-sm-8">
-                            <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$uu}}">{{$item['sku']}}</a></h5>
+                            <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$uu}}">{{$sku}}</a></h5>
                             <p class="item-description">{{$itemDescription}}</p>
                           </div>
                           <div class="item-price js-item-price col-sm-2 text-info text-center" data-price="11.99"> <strong>&#8358;{{number_format($itemAmount * $qty, 2)}}</strong> </div>
@@ -61,7 +62,7 @@
                       <div class="item-interactions">
                         <div class="row">
                           <div class="col-sm-10 text-info"><span data-quantity="{{$qty}}"> <strong>{{$qty}}</strong> {{$itemText}} </span></div>
-                          <div class="col-sm-2 item-remove"><a href="{{$ru}}" class=" js-item-remove hint-top btn btn-primary " data-hint="Remove"></a> </div>
+                          <div class="col-sm-2 item-remove"><a href="javascript:void(0)" onclick="removeFromCart({sku:'{{$sku}}'})" class=" js-item-remove hint-top btn btn-primary " data-hint="Remove"></a> </div>
                         </div>
                       </div>
                     </li>

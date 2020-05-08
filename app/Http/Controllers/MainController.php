@@ -1219,9 +1219,10 @@ class MainController extends Controller {
          {
          	$gid = isset($req['gwx']) ? $req['gwx'] : "";
 		    //$request->session()->put('gid',$gid);
-			$cookie = Cookie::forever('gid', $gid);
+			session()->reflash();
 			return ['status' => "ok"];
-         }  
+         } 
+         return redirect()->back();		 
     }
 	
 	

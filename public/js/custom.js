@@ -509,11 +509,19 @@ const generateRandomString = (length) => {
 	return ret;
 }
 
+
 function addToCart(dt)
 {
   let cu = `add-to-cart?sku=${dt.sku}&qty=1&gid=${gid}`;
   console.log("cu: ",cu);
   window.location = cu;
+}
+
+function removeFromCart(dt)
+{
+  let ru = `remove-from-cart?sku=${dt.sku}&gid=${gid}`;
+  console.log("ru: ",ru);
+  window.location = ru;
 }
 
 const getCart = () => {
