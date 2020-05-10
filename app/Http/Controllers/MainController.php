@@ -274,9 +274,10 @@ class MainController extends Controller {
          
          else
          {
-         	$stt = $this->helpers->checkout($user,$req,"bank");
-            session()->flash("pay-bank-status",json_encode($stt));
-			return redirect()->intended('orders');
+         	$ret = $this->helpers->checkout($user,$req,"bank");
+           //session()->flash("pay-bank-status",$ret);
+		   $uu = url('confirm-payment')."?oid=".$ret->id;
+			return redirect()->intended($uu);
          }        
     }
 	
@@ -1153,28 +1154,85 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
+		else
+		{
+			return redirect()->intended('/');
+		}
 		
        $req = $request->all();
 		$gid = isset($req['gid']) ? $req['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         
         $validator = Validator::make($req, [
-                             'order' => 'required'
+                             'oid' => 'required'
          ]);
          
          if($validator->fails())
          {
              $messages = $validator->messages();
-             return redirect()->intended('/');
+             return redirect()->intended('orders');
              //dd($messages);
          }
          
          else
          {
-			$order_id = $req['order'];
-			return view("confirm-payment",compact(['user','cart','c','ad','order_id','signals']));		
+			$order = $this->helpers->getOrder($req['oid']);
+			//dd($order);
+			if($order['status'] == "unpaid" && $order['type'] == "bank")
+			{
+				return view("confirm-payment",compact(['user','cart','c','ad','order','signals']));
+			}
+			else
+			{
+				
+             return redirect()->intended('orders');
+			}
+					
          }       
     }
+	
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postConfirmPayment(Request $request)
+    {
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+			
+		}
+		else
+        {
+        	return redirect()->intended('/');
+        }
+        $req = $request->all();
+        dd($req);
+        
+        $validator = Validator::make($req, [
+                             'quantity' => 'required|array|min:1',
+                             'quantity.*' => 'required|numeric'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$quantities = $req["quantity"]; 
+             $this->helpers->updateCart($cart, $quantities);
+	        session()->flash("update-cart-status","ok");
+			return redirect()->intended('cart');
+         }        
+    }
+	
+	
 	
 	
 	

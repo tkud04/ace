@@ -21,16 +21,18 @@
             <div class="col-sm-4 col-md-3 col-lg-3 sub-data-left sub-equal">
               <div id="sticky">
                 <section>
-                  <h5 class="sub-title text-info text-uppercase">why register?</h5>
-                  <p>With an account you can enjoy lots of benefits </p>
-                  <dl>
-                    <dt>Saving Time</dt>
-                    <dd>A description list is perfect for defining terms.</dd>
-                    <dt>Save Your Shipping Address</dt>
-                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                    <dt>Home Delivery</dt>
-                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                  <h5 class="sub-title text-info text-uppercase">confirm your payment</h5>
+                  <p class="text-danger"><b>NOTE: </b>Make sure you include your payment code as reference when making payment. </p>
+                  <p class="text-danger"><b>NOTE: </b>Your order would only be processed AFTER your payments have been cleared from our end. </p>
+                  <br>
+				  <dl>
+                    <dt>Steps to take</dt>
+                    <dd style="color:#777;">Make your payment to our bank account as displayed on this page.</dd>
+                    <dd style="color:#777;">Add your payment code <b><?php echo e($order['payment_code']); ?></b> as reference when making a deposit or a transfer.</dd>
+                    <dd style="color:#777;">After making payment, fill the form on the right and click Submit.</dd>
+                    <dd style="color:#777;">Once your payment has been cleared your order will be processed.</dd>
+                    <dd style="color:#777;">You have a maximum of 24 hours to confirm your payment or your order will be cancelled.</dd>
+                   
                   </dl>
                 </section>
               </div>
@@ -42,99 +44,77 @@
                 <div class="col-sm-12">
                   <ol class="breadcrumb dashed-border row">
                     <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
-                    <li><a href="#">Account</a></li>
-                    <li class="active">Register</li>
+                    <li><a href="#">Orders</a></li>
+                    <li class="active">Confirm Payment</li>
                   </ol>
                 </div>
                 <!--end of breadcrumb--> 
                 
                 <!--start of checkout-->
-                <div class="col-sm-12">
-                  <form role="form" method="post" action="<?php echo e(url('register')); ?>">
+                <div class="col-sm-12" style="color: #000;">
+                  <form role="form" method="post" action="<?php echo e(url('confirm-payment')); ?>">
 				   <?php echo csrf_field(); ?>
 
                     <div class="row"> 
                       
-                      <!-- START Presonal information -->
+                      <!-- START Order information -->
                       <fieldset class="col-md-6">
-                        <legend>Personal information</legend>
+                        <legend>Order information</legend>
                         <div class="form-group">
-                          <label class="control-label" for="first-name">first name <span class="req">*</span></label>
-                          <input type="text" id="first-name" name="fname" class="form-control"  placeholder="" required>
+                          <label class="control-label" for="first-name">Order date</label>
+                           <h4 class="form-control-plaintext"><?php echo e($order['date']); ?></h4>
+                        </div><br>
+                        <div class="form-group">
+                          <label class="control-label" for="last-name">details</label>
+						  <?php
+						  $totals = $order['totals'];
+						   $items = $totals['items'];
+						  ?>
+                          <h4 class="form-control-plaintext"><?php echo e($items); ?> items<br><br>Total: <b>&#8358;<?php echo e(number_format($order['amount'],2)); ?></b></h4>
+                        </div><br>
+                        <div class="form-group">
+                          <label class="control-label" for="mail">payment code <span class="req">*</span></label>
+                          <h4 class="form-control-plaintext"><?php echo e($order['payment_code']); ?></h4>
+                        </div><br>
+						<div class="form-group">
+                          <label class="control-label" for="mail">please make payment to:</label>
+                          <h4 class="form-control-plaintext" style="color: #000;">Bank: GTBank<br><br>Account name: Ace Luxury Store<br><br>Account number: 0134569244</h4>
+                        </div>
+                      </fieldset>
+                      <!-- END Order information-->
+					  <!-- START Bank information -->
+                      <fieldset class="col-md-6">
+                        <legend>Bank information</legend>
+                        <div class="form-group">
+                          <label class="control-label" for="bname">bank <span class="req">*</span></label>
+                          <select id="bname" name="bname" class="form-control" required>
+						    <option value="none">Select bank</option>
+						  </select>
+                          <input type="text" id="bname-other" name="bname-other" class="form-control"  placeholder="Enter bank name" required>
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="last-name">last name <span class="req">*</span></label>
-                          <input type="text" id="last-name" name="lname" class="form-control" required>
+                          <label class="control-label" for="acname">account name <span class="req">*</span></label>
+                          <input type="text" class="form-control" name="acname" placeholder="Enter account name" required>
+                        </div>
+						<div class="form-group">
+                          <label class="control-label" for="acnum">account number <span class="req">*</span></label>
+                          <input type="number" class="form-control" name="acnum" placeholder="Enter account number" required>
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="mail">email address <span class="req">*</span></label>
-                          <input type="text" id="mail" name="email" class="form-control" placeholder="We promise not to share your email with anyone." required>
+                          <input type="text" id="mail" name="email" class="form-control" value="<?php echo e($user['email']); ?>" readonly>
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="phone">phone number <span class="req">*</span></label>
-                          <input type="text" id="phone" name="phone" class="form-control" required>
+                          <input type="text" id="phone" name="phone" class="form-control" value="<?php echo e($user['phone']); ?>" readonly>
                         </div>
                       </fieldset>
                       <!-- END Personal information--> 
-                      
-                      <!-- START Payment infromation -->
-                      <fieldset class="col-md-6">
-                        <legend>address</legend>
-                        <div class="form-group">
-                          <label class="control-label" for="address-one">address<span class="req">*</span></label>
-                          <input type="text" id="address-one" name="address" class="form-control" placeholder="This will be your shipping address" required>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label" for="address-two">City<span class="req">*</span></label>
-                          <input type="text" id="address-two" name="city" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label" for="postal-code">postal code<span class="req">*</span></label>
-                          <input type="text" id="postal-code" name="zip" class="form-control" required>
-                        </div>
-                      </fieldset>
-                      <!-- END Payment information--> 
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <fieldset>
-                          <legend>choose password</legend>
-                          <div class="form-group">
-                            <label class="control-label" for="card-number">password <span class="req">*</span></label>
-                            <input type="password" id="card-number" name="pass" class="form-control"  placeholder="Use at least one lowercase letter, one numeral, and seven characters" required>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label" for="password-confirm">confirm password <span class="req">*</span></label>
-                            <input type="password" id="password-confirm" name="pass_confirmation" class="form-control">
-                          </div>
-                        </fieldset>
-                      </div>
-                      <div class="col-sm-12">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <fieldset>
-                              <legend>NEWSLETTER</legend>
-                              <p class="switch-label">Subscribe to our weekly newsletter</p>
-                              <div id="switch-subscribe" class="switch-h1 switch-subscribe">
-                                <div class="circle-h1"></div>
-                              </div>
-                            </fieldset>
-                          </div>
-                          <div class="col-sm-6">
-                            <fieldset>
-                              <legend>terms & conditions</legend>
-                              <p class="switch-label">By clicking REGISTER you accept our <a href="<?php echo e(url('terms')); ?>">terms & conditions</a></p>
-                              <div id="switch-accept" class="switch-h1 switch-accept">
-                                <div class="circle-h1"></div>
-                              </div>
-                            </fieldset>
-                          </div>
-                        </div>
-                        <hr>
-                      </div>
-                      <div class="col-sm-12">
-                        <button class="btn btn-primary hvr-underline-from-center-primary " type="submit">register</button>
-                        <br>
+					  <div class="col-sm-12">
+					    <center>
+                        <button class="btn btn-primary hvr-underline-from-center-primary " type="submit">submit</button>
+                        </center>
+						<br>
                         <br>
                       </div>
                     </div>

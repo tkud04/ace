@@ -1266,8 +1266,8 @@ $subject = $data['subject'];
               
               #create order
               #dd($dt);
-              $this->addOrder($user,$dt);
-                return ['status' => "ok",'dt' => $dt];
+              $o = $this->addOrder($user,$dt);
+                return $o;
            }
 		   
 		   function payWithPayStack($user, $payStackResponse)
@@ -1329,6 +1329,7 @@ $subject = $data['subject'];
 			   
 			   //clear cart
 			   $this->clearCart($user);
+			   return $order;
            }
 
            function createOrder($user, $dt)

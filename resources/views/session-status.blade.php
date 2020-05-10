@@ -14,7 +14,7 @@
    $bankHTML = "";   
    $amount = "0";
    
-   if($pop == "pay-bank-status")
+   if($pop == "payy-bank-status")
    {
 	  $vv = json_decode($val);
       $dt = $vv->dt;	  
@@ -41,10 +41,8 @@ if("{{$pop}}" == "add-to-cart-status"){
   cancelButtonAriaLabel: 'Checkout'
 })
 }
-else if("{{$pop}}" == "pay-bank-status"){
+else if("{{$pop}}" == "payy-bank-status"){
 	let x3 = "{{url('/')}}";
-	let vv = {!! $val !!};
-	let dt = vv.dt;
 	//console.log("vv: ",vv);
 	
 	Swal.fire({

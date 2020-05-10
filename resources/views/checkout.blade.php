@@ -146,11 +146,11 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="fname">First Name</label>
-                            <input type="text" id="fname" name="fname" value="{{$fname}}" class="form-control">
+                            <input type="text" id="fname" name="fname" value="{{$fname}}" class="form-control" readonly>
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Last Name</label>
-                            <input type="text" id="lname" name="lname" value="{{$lname}}" class="form-control">
+                            <input type="text" id="lname" name="lname" value="{{$lname}}" class="form-control" readonly>
 						  </div>
                          </div>
 						 
@@ -158,36 +158,44 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="email">Email address</label>
-                            <input type="text" id="email" name="email" value="{{$email}}" class="form-control">
+                            <input type="text" id="email" name="email" value="{{$email}}" class="form-control" readonly>
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Phone number</label>
-                            <input type="text" id="phone" name="phone" value="{{$phone}}" class="form-control">
+                            <input type="text" id="phone" name="phone" value="{{$phone}}" class="form-control" readonly>
 						  </div>
                          </div>
                         
                         <!-- Address -->
                         <div class="form-group">
                           <label class="control-label" for="address">Shipping address</label>
-                          <input type="text" id="address" name="address" value="{{$address}}" class="form-control">
+                          <input type="text" id="address" name="address" value="{{$address}}" class="form-control" readonly>
                         </div>
                         
                         <!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="city">City</label>
-                            <input type="text" id="city" name="city" value="{{$city}}" class="form-control">
+                            <input type="text" id="city" name="city" value="{{$city}}" class="form-control" readonly>
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
                             <select class="selectpicker" id="state" name="state" value="{{$state}}" style="display: none;">
 							<option value="none">Select state</option>
 							<?php
+							 if(is_null($user))
+							 {
 							 foreach($states as $key => $value)
 							 {
-								 $ss = $key == $state ? " selected='selected'" : "";
 						    ?>
                               <option value="{{$key}}"{{$ss}}>{{ucwords($value)}}</option>
+							<?php
+							 }
+							 }
+							 else
+							 {
+							?>
+							   <option value="{{$state}}" selected>{{$states[$state]}}</option>
 							<?php
 							 }
                             ?>							
