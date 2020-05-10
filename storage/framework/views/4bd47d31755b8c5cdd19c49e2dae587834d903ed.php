@@ -107,7 +107,7 @@
                           <input type="text" id="qty" value="1">
                           <button type="button" class="plus">+</button>
                         </div>
-                        <a href="javascript:void(0)"  onclick="addToCart({sku:'<?php echo e($sku); ?>',qty:'1'})" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
+                        <a href="javascript:void(0)"  onclick="addToCart({sku:'<?php echo e($sku); ?>'})" class="btn btn-primary pull-left hvr-underline-from-center-primary">Add To Cart</a> </div>
                     </div>
                   </div>
                   <hr>

@@ -522,11 +522,8 @@ function addToCart(dt)
 	if(!dt.fromWishlist) dt.fromWishlist = "no";
     
 	if(!dt.qty){
-		dt.qty = 1;
-	}
-    else{
 		dt.qty = document.querySelector('#qty').value;
-	}	
+	}
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   window.location = cu;
