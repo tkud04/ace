@@ -79,9 +79,11 @@
 			  $email = ""; $phone = "";
 			  $address = ""; $country = "";
 			  $state = "none"; $city = ""; $zip = ""; $notes = "";
+			  $rd = "";
 			  
 			  if(!is_null($user))
 			  {
+				 $rd = "readonly";
 				$fname = $user->fname; $lname = $user->lname;
 			    $email = $user->email; $phone = $user->phone;
 			    $address = $ss['address']; $state = $ss['state']; 
@@ -145,11 +147,11 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="fname">First Name</label>
-                            <input type="text" id="fname" name="fname" value="<?php echo e($fname); ?>" class="form-control" readonly>
+                            <input type="text" id="fname" name="fname" value="<?php echo e($fname); ?>" class="form-control" <?php echo e($rd); ?>>
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Last Name</label>
-                            <input type="text" id="lname" name="lname" value="<?php echo e($lname); ?>" class="form-control" readonly>
+                            <input type="text" id="lname" name="lname" value="<?php echo e($lname); ?>" class="form-control" <?php echo e($rd); ?>>
 						  </div>
                          </div>
 						 
@@ -157,25 +159,25 @@
                          <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="email">Email address</label>
-                            <input type="text" id="email" name="email" value="<?php echo e($email); ?>" class="form-control" readonly>
+                            <input type="text" id="email" name="email" value="<?php echo e($email); ?>" class="form-control" <?php echo e($rd); ?>>
 						  </div>
 						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="lname">Phone number</label>
-                            <input type="text" id="phone" name="phone" value="<?php echo e($phone); ?>" class="form-control" readonly>
+                            <input type="text" id="phone" name="phone" value="<?php echo e($phone); ?>" class="form-control" <?php echo e($rd); ?>>
 						  </div>
                          </div>
                         
                         <!-- Address -->
                         <div class="form-group">
                           <label class="control-label" for="address">Shipping address</label>
-                          <input type="text" id="address" name="address" value="<?php echo e($address); ?>" class="form-control" readonly>
+                          <input type="text" id="address" name="address" value="<?php echo e($address); ?>" class="form-control" <?php echo e($rd); ?>>
                         </div>
                         
                         <!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="city">City</label>
-                            <input type="text" id="city" name="city" value="<?php echo e($city); ?>" class="form-control" readonly>
+                            <input type="text" id="city" name="city" value="<?php echo e($city); ?>" class="form-control" <?php echo e($rd); ?>>
                           </div>
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
@@ -186,8 +188,9 @@
 							 {
 							 foreach($states as $key => $value)
 							 {
+								 $sss = $key == $state ? "selected='selected'" : "";
 						    ?>
-                              <option value="<?php echo e($key); ?>"<?php echo e($ss); ?>><?php echo e(ucwords($value)); ?></option>
+                              <option value="<?php echo e($key); ?>"<?php echo e($sss); ?>><?php echo e(ucwords($value)); ?></option>
 							<?php
 							 }
 							 }

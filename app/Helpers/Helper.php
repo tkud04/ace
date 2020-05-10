@@ -51,6 +51,8 @@ class Helper implements HelperContract
                      "add-to-compare-status" => "Added to compare list!",
 					 "remove-from-wishlist-status" => "Removed from wishlist!",
 					 "remove-from-compare-status" => "Removed from compare list!",
+					 "select-bank-status" => "Please select your bank",
+					 "confirm-payment-status" => "Your request has been received, your order will be approved shortly.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -178,7 +180,58 @@ public $categories = [
 			                       'yobe' => 'Yobe',
 			                       'zamfara' => 'Zamfara',
 			                       'fct' => 'FCT'  
-			];    
+			];  
+
+/**
+
+ 
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+ 
+ 
+ 
+
+
+**/
+
+ public $banks = [
+      'access' => "Access Bank", 
+      'citibank' => "Citibank", 
+      'ecobank' => "Ecobank", 
+      'fidelity' => "Fidelity Bank", 
+      'fbn' => "First Bank", 
+      'fcmb' => "FCMB", 
+      'globus' => "Globus Bank", 
+      'gtb' => "GTBank", 
+      'heritage' => "Heritage Bank", 
+      'jaiz' => "Jaiz Bank", 
+      'keystone' => "KeyStone Bank", 
+      'polaris' => "Polaris Bank", 
+      'providus' => "Providus Bank", 
+      'stanbic' => "Stanbic IBTC Bank", 
+      'standard-chartered' => "Standard Chartered Bank", 
+      'sterling' => "Sterling Bank", 
+      'suntrust' => "SunTrust Bank", 
+      'titan-trust' => "Titan Trust Bank", 
+      'union' => "Union Bank", 
+      'uba' => "UBA", 
+      'unity' => "Unity Bank", 
+      'wema' => "Wema Bank", 
+      'zenith' => "Zenith Bank"
+ ];			
 
   public $ip = "";			
 
@@ -1663,7 +1716,12 @@ $subject = $data['subject'];
 
 			   //dd($ret);
 			   return $ret;
-		   }		   
+		   }
+
+    function confirmPayment($data)
+	{
+		dd($data);
+	}		   
    
 }
 ?>

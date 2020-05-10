@@ -4,6 +4,9 @@ $(document).ready(function() {
         $("#status").delay(350).fadeOut(),
         $("#preloader").delay(350).fadeOut("slow");
 		
+		
+        $("#bname-other").hide();
+		
 		/**
 		getCart()
 		.then(res => {
@@ -323,7 +326,6 @@ $(document).ready(function() {
        let qty = $("#qty").val();
 	   console.log("qty: ",qty);
 	   
-	  
     })
 });
 
@@ -433,6 +435,16 @@ function bomb(dt,url){
 	   }).catch(error => {
 		    alert("Failed to send message: " + error);			
 	   });
+}
+
+function selectBank(){
+       let bname = $("#bname").val();
+	   if(bname == "other"){
+		   $('#bname-other').fadeIn();
+	   }
+	   else{
+		   $('#bname-other').hide();
+	   }
 }
 
 function printElem(html)

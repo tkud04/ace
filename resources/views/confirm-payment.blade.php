@@ -88,10 +88,19 @@
                         <legend>Bank information</legend>
                         <div class="form-group">
                           <label class="control-label" for="bname">bank <span class="req">*</span></label>
-                          <select id="bname" name="bname" class="form-control" required>
+                          <select id="bname" name="bname" class="form-control" onchange="selectBank();" required>
 						    <option value="none">Select bank</option>
+							<?php
+							 foreach($banks as $key => $value)
+							 {
+							?>
+							 <option value="{{$key}}">{{$value}}</option>
+							<?php
+							 }
+							?>
+							<option value="other">Other</option>
 						  </select>
-                          <input type="text" id="bname-other" name="bname-other" class="form-control"  placeholder="Enter bank name" required>
+                          <input type="text" id="bname-other" name="bname-other" class="form-control" value="" placeholder="Enter bank name">
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="acname">account name <span class="req">*</span></label>

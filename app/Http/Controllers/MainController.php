@@ -1149,6 +1149,7 @@ class MainController extends Controller {
 			shuffle($ads);
 		    $ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 			 $signals = $this->helpers->signals;
+			 $banks = $this->helpers->banks;
     	if(Auth::check())
 		{
 			$user = Auth::user();
@@ -1180,7 +1181,7 @@ class MainController extends Controller {
 			//dd($order);
 			if($order['status'] == "unpaid" && $order['type'] == "bank")
 			{
-				return view("confirm-payment",compact(['user','cart','c','ad','order','signals']));
+				return view("confirm-payment",compact(['user','cart','c','ad','order','banks','signals']));
 			}
 			else
 			{
@@ -1209,11 +1210,14 @@ class MainController extends Controller {
         	return redirect()->intended('/');
         }
         $req = $request->all();
-        dd($req);
+        //dd($req);
         
         $validator = Validator::make($req, [
-                             'quantity' => 'required|array|min:1',
-                             'quantity.*' => 'required|numeric'
+                             'bname' => 'required',
+                             'acname' => 'required',
+                             'acnum' => 'required',
+                             'email' => 'required|email',
+                             'phone' => 'required|numeric',
          ]);
          
          if($validator->fails())
@@ -1225,10 +1229,18 @@ class MainController extends Controller {
          
          else
          {
-         	$quantities = $req["quantity"]; 
-             $this->helpers->updateCart($cart, $quantities);
-	        session()->flash("update-cart-status","ok");
-			return redirect()->intended('cart');
+			 if($req['bname'] == "other")
+			 {
+				 if(!isset($req['bname-other']) || is_null($req['bname-other']))
+				 {
+					  session()->flash("select-bank-status","ok");
+					  return redirect()->back();
+				 }
+			 }
+			 
+             $ret = $this->helpers->confirmPayment($req);
+	        session()->flash("confirm-payment-status",$ret);
+			return redirect()->intended('orders');
          }        
     }
 	
