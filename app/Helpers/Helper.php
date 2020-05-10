@@ -58,7 +58,7 @@ class Helper implements HelperContract
 					 "update-status-error" => "There was a problem updating the account, please try again.",
 					 "contact-status-error" => "There was a problem sending your message, please try again.",
 					 "add-review-status-error" => "There was a problem sending your review, please try again.",
-					 "add-to-cart-status-error" => "There was a problem adding this product to your cart, please try again.",
+					 "add-to-cart-status-error" => "Stock not sufficient.",
 					 "remove-from-cart-status-error" => "There was a problem removing this product from your cart, please try again.",
 					 "subscribe-status-error" => "There was a problem subscribing, please try again.",
 					 "pay-card-status-error" => "There was a problem making payment, please try again.",
@@ -693,9 +693,10 @@ $subject = $data['subject'];
 				  $temp = [];
 				  $temp['id'] = $product->id;
 				  $temp['sku'] = $product->sku;
+				  $temp['qty'] = $product->qty;
 				  $temp['status'] = $product->status;
 				  $temp['pd'] = $this->getProductData($product->sku);
-				  $imgs = $this->getProductImages($product->sku);
+				  $imgs = $this->getImages($product->sku);
 				  $temp['imggs'] = $this->getCloudinaryImages($imgs);
 				  $ret = $temp;
                }                         
@@ -736,6 +737,7 @@ $subject = $data['subject'];
 				    $temp = [];
 				    $temp['id'] = $pi->id;
 				    $temp['sku'] = $pi->sku;
+					$temp['cover'] = $pi->cover;
 				    $temp['url'] = $pi->url;
 				    array_push($ret,$temp);
 				  }
@@ -743,6 +745,51 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+		   function isCoverImage($img)
+		   {
+			   return $img['cover'] == "yes";
+		   }
+		   
+		   function getImage($pi)
+           {
+       	         $temp = [];
+				 $temp['id'] = $pi->id;
+				 $temp['sku'] = $pi->sku;
+			     $temp['cover'] = $pi->cover;
+				 $temp['url'] = $pi->url;
+				 
+                return $temp;
+           }
+		   
+		   function getImages($sku)
+		   {
+			   $ret = [];
+			   $records = $this->getProductImages($sku);
+			   
+			   $coverImage = ProductImages::where('sku',$sku)
+			                              ->where('cover',"yes")->first();
+										  
+               $otherImages = ProductImages::where('sku',$sku)
+			                              ->where('cover',"!=","yes")->get();
+			  
+               if($coverImage != null)
+			   {
+				   $temp = $this->getImage($coverImage);
+				   array_push($ret,$temp);
+			   }
+
+               if($otherImages != null)
+			   {
+				   foreach($otherImages as $oi)
+				   {
+					   $temp = $this->getImage($oi);
+				       array_push($ret,$temp);
+				   }
+			   }
+			   
+			   return $ret;
+		   }
 		   
 		   function getCloudinaryImages($dt)
 		   {
@@ -918,23 +965,32 @@ $subject = $data['subject'];
 		   function addToCart($data)
            {
 			 $userId = $data['user_id'];
-			 $ret = null;
+			 $ret = "error";
 			 
 			 $c = Carts::where('user_id',$userId)
 			           ->where('sku',$data['sku'])->first();
+
+			 $p = Products::where('sku',$data['sku'])->first();
 			 
-			 if(is_null($c))
+			 if(!is_null($p))
 			 {
-				$ret = Carts::create(['user_id' => $userId, 
+				if($data['qty'] <= $p->qty)
+				{
+					
+			      if(is_null($c))
+			      {
+				     $ret = Carts::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
                                                       ]); 
 													  
-			 }
-			 else
-			 {
-				 $c->update(['qty' => $data['qty']]);
-				 $ret = $c;
+			      }
+			      else
+			      {
+				     $c->update(['qty' => $data['qty']]);
+			      }
+				  $ret = "ok";
+			    }
 			 }
 			 
                 return $ret;
@@ -1189,7 +1245,7 @@ $subject = $data['subject'];
 			   
 			   if(is_null($r))
 			   {
-				   $ret = "ACE_".rand(999,99999)."LX".rand(999,9999);
+				   $ret = "ACE_".rand(1,99)."LX".rand(1,99);
 			   }
 			   else
 			   {
@@ -1236,6 +1292,19 @@ $subject = $data['subject'];
               $this->addOrder($user,$dt);
                 return ['status' => "ok",'dt' => $dt];
            }
+		   
+		   function updateStock($s,$q)
+		   {
+			   $p = Products::where('sku',$s)->first();
+			   
+			   if($p != null)
+			   {
+				   $oldQty = ($p->qty == "" || $p->qty < 0) ? 0: $p->qty;
+				   $qty = $p->qty - $q;
+				   if($qty < 0) $qty = 0;
+				   $p->update(['qty' => $qty]);
+			   }
+		   }
 
            function addOrder($user,$data)
            {
@@ -1250,6 +1319,7 @@ $subject = $data['subject'];
                    $dt['sku'] = $c['product']['sku'];
 				   $dt['qty'] = $c['qty'];
 				   $dt['order_id'] = $order->id;
+				   $this->updateStock($dt['sku'],$dt['qty']);
                    $oi = $this->createOrderItems($dt);                    
                }
 

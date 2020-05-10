@@ -317,6 +317,13 @@ $(document).ready(function() {
 	   console.log("qty: ",qty);
 	   
 	  
+    }),
+	$("#add-to-cart-btn-2").on("click", function(e) {
+        e.preventDefault();
+       let qty = $("#qty").val();
+	   console.log("qty: ",qty);
+	   
+	  
     })
 });
 
@@ -513,7 +520,13 @@ const generateRandomString = (length) => {
 function addToCart(dt)
 {
 	if(!dt.fromWishlist) dt.fromWishlist = "no";
-	if(!dt.qty) dt.qty = 1;
+    
+	if(!dt.qty){
+		dt.qty = 1;
+	}
+    else{
+		dt.qty = document.querySelector('#qty').value;
+	}	
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   window.location = cu;

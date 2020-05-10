@@ -95,7 +95,7 @@ else if("{{$pop}}" == "add-to-compare-status"){
 else{
 Swal.fire({
   icon: '{{$icon}}',
-  title: '{{$title}}',
+  title: '{!!$title!!}',
   text: '{{$signal[$pop]}}',
 });
 }

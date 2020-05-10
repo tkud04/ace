@@ -95,7 +95,7 @@ else if("<?php echo e($pop); ?>" == "add-to-compare-status"){
 else{
 Swal.fire({
   icon: '<?php echo e($icon); ?>',
-  title: '<?php echo e($title); ?>',
+  title: '<?php echo $title; ?>',
   text: '<?php echo e($signal[$pop]); ?>',
 });
 }

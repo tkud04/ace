@@ -816,13 +816,23 @@ class MainController extends Controller {
          else
          {
 			 $req['user_id'] = is_null($user) ? $gid : $user->id;
-         	$this->helpers->addToCart($req);
-			if(isset($req['from_wishlist']) && $req['from_wishlist'] == "yes")
+         	$ret = $this->helpers->addToCart($req);
+			//dd($ret);
+			session()->flash("add-to-cart-status",$ret);
+			
+			if($ret == "ok")
 			{
-				$this->helpers->removeFromWishlist($req);
+				if(isset($req['from_wishlist']) && $req['from_wishlist'] == "yes")
+			    {
+				  $this->helpers->removeFromWishlist($req);
+		   	    }
+				
+				return redirect()->intended('cart');
 			}
-	        session()->flash("add-to-cart-status","ok");
-			return redirect()->intended('cart');
+			elseif($ret == "error")
+			{
+				return redirect()->back();
+			}
          }        
     }
 	
