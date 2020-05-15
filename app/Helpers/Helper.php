@@ -12,6 +12,7 @@ use App\User;
 use App\Carts;
 use App\Categories;
 use App\Products;
+use App\Discounts;
 use App\ProductData;
 use App\ProductImages;
 use App\Reviews;
@@ -210,6 +211,7 @@ public $categories = [
  public $banks = [
       'access' => "Access Bank", 
       'citibank' => "Citibank", 
+      'diamond-access' => "Diamond-Access Bank", 
       'ecobank' => "Ecobank", 
       'fidelity' => "Fidelity Bank", 
       'fbn' => "First Bank", 
@@ -748,6 +750,7 @@ $subject = $data['subject'];
 				  $temp['sku'] = $product->sku;
 				  $temp['qty'] = $product->qty;
 				  $temp['status'] = $product->status;
+				  $temp['discounts'] = $this->getDiscounts($product->sku);
 				  $temp['pd'] = $this->getProductData($product->sku);
 				  $imgs = $this->getImages($product->sku);
 				  $temp['imggs'] = $this->getCloudinaryImages($imgs);
@@ -757,6 +760,59 @@ $subject = $data['subject'];
                 return $ret;
            }
 
+		   function getDiscounts($sku)
+           {
+           	$ret = [];
+              $discounts = Discounts::where('sku',$sku)
+			                 ->orWhere('type',"general")->get();
+ 
+              if($discounts != null)
+               {
+				  foreach($discounts as $d)
+				  {
+					$temp = [];
+				    $temp['id'] = $d->id;
+				    $temp['sku'] = $d->sku;
+				    $temp['discount_type'] = $d->discount_type;
+				    $temp['discount'] = $d->discount;
+				    $temp['type'] = $d->type;
+				    $temp['status'] = $d->status;
+				    array_push($ret,$temp);  
+				  }
+               }                         
+                                                      
+                return $ret;
+           }
+		   
+		   function getDiscountPrices($amount,$discounts)
+		   {
+			   $newAmount = 0;
+						$dsc = [];
+                     
+					 if(count($discounts) > 0)
+					 { 
+						 foreach($discounts as $d)
+						 {
+							 $temp = 0;
+							 $val = $d['discount'];
+							 
+							 switch($d['discount_type'])
+							 {
+								 case "percentage":
+								   $temp = floor(($val / 100) * $amount);
+								 break;
+								 
+								 case "flat":
+								   $temp = $val;
+								 break;
+							 }
+							 
+							 array_push($dsc,$temp);
+						 }
+					 }
+				   return $dsc;
+		   }
+		   
 		   function getProductData($sku)
            {
            	$ret = [];
@@ -1113,15 +1169,32 @@ $subject = $data['subject'];
                     {
 						if(is_null($userId)) $userId = $c['user_id'];
 						$amount = $c['product']['pd']['amount'];
+						$dsc = $this->getDiscountPrices($amount,$c['product']['discounts']);
+						$newAmount = 0;
+						if(count($dsc) > 0)
+			       {
+				     foreach($dsc as $d)
+				     {
+					   if($newAmount < 1)
+					   {
+						   $newAmount = $amount - $d;
+					   }
+					   else
+					   {
+						   $newAmount -= $d;
+					   }
+				     }
+			       }
 						$qty = $c['qty'];
                     	$ret['items'] += $qty;
-						$ret['subtotal'] += ($amount * $qty);	
+						$ret['subtotal'] += ($newAmount * $qty);
+                        $ret['discounts'] = $dsc;					
                     }
                    $u = User::where('id',$userId)->first();
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
-                                                      
+                    //dd($ret);                                  
                 return $ret;
            }
 		   

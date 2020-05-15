@@ -44,6 +44,7 @@
 					  $qty = $cart[$a]['qty'];
 					  $itemText = $qty == 1 ? "Item" : "Items";
 					  $itemAmount = $item['pd']['amount'];
+					  #$newAmount =  $totals['newAmount'];
 					  $itemDescription = $item['pd']['description'];
 					  $imggs = $item['imggs'];
 					  $ru = url('remove-from-cart').'?sku='.$sku;
@@ -81,9 +82,23 @@
               <div class="row">
                 <div id="sticky">
                   <section class="col-sm-12">
+				  <?php
+				  $dsc = 0;
+				  
+				  if( isset($totals['discounts']) && count($totals['discounts']) > 0)
+				  {
+					  foreach($totals['discounts'] as $d)
+					  {
+						$dsc += $d;  
+					  }
+					   $dsc *= $qty;
+				  }
+				  
+				  ?>
                     <h5 class="sub-title text-info text-uppercase">order summary</h5>
                     <ul class="list-group summary">
                       <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> {{$totals['items']}}</span></strong></li>
+                      <li class="list-group-item text-uppercase"><strong>discount:<span class="pull-right"> &#8358;{{number_format($dsc,2)}}</span></strong></li>
                       <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;{{number_format($totals['subtotal'],2)}}</span></strong></li>
                       <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;{{number_format($totals['delivery'],2)}}</span></strong></li>
                     </ul>

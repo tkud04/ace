@@ -60,7 +60,9 @@
 			   $pd = $product['pd'];
 			   $description = $pd['description'];
 			   $in_stock = $pd['in_stock'];
+			   
 			   $amount = $pd['amount'];
+			   
 				  $imggs = $product['imggs'];
 				?>
                 <div class="col-sm-12 product-details">
@@ -95,10 +97,35 @@
                         <h5 class="text-primary text-uppercase">Quick Overview</h5>
                         <p> <?php echo e($description); ?></p>
                       </div>
-                      <div class="product-availability in-stock">
+                      <div class="product-availability in-stock">				
                         <p>Availability: <span class="text-info"><?php echo e($in_stock); ?></span></p>
+						<?php
+					   $oldAmount = $amount; $newAmount = 0;
+			   
+			   if(count($discounts) > 0)
+			   {
+				   foreach($discounts as $d)
+				   {
+					   ?>
+					   <p><em><span class="ion-scissors" style="margin-right: 4px"></span><span class="text-primary"><?php echo $d['name']; ?></span></em></p>
+					   <?php
+					   if($newAmount < 1)
+					   {
+						   $newAmount = $oldAmount - $d['discount'];
+					   }
+					   else
+					   {
+						   $newAmount -= $d['discount'];
+					   }
+				   }
+			   }
+			       if($newAmount == 0)$newAmount = $amount;
+					  ?>                        
                       </div>
-                      <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>&#8358;<?php echo e(number_format($amount, 2)); ?></strong></span> <span class="pull-left btn btn-link"><del>&#8358;<?php echo e(number_format($amount + 1000, 2)); ?></del></span> </div>
+                      <div class="product-price clearfix">
+					    <span class="pull-left btn btn-primary"><strong>&#8358;<?php echo e(number_format($newAmount, 2)); ?></strong></span>
+					    <span class="pull-left btn btn-link"><del>&#8358;<?php echo e(number_format($oldAmount, 2)); ?></del></span>
+					  </div>
                      
                       <div class="product-quantity">
                         <h5 class="text-primary text-uppercase">select quantity</h5>

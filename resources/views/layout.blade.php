@@ -71,6 +71,8 @@
 <script src="js/wow.min.js"></script> 
 <!--Bootstrap js--> 
 <script src="js/bootstrap.min.js"></script> 
+<!--pagination js--> 
+<script src="js/pagination.js"></script>
 <!--custom js--> 
 <script src="js/custom.js"></script> 
 </head>

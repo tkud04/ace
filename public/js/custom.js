@@ -1,5 +1,12 @@
 $(document).ready(function() {
     "use strict";
+	$("#per-page").on("change", function(e) {
+       // e.preventDefault();
+       perPage = $('#per-page').val();
+	   if(perPage == "none") perPage = 3;
+	   showPage(1);
+    })
+	
     $(window).load(function() {
         $("#status").delay(350).fadeOut(),
         $("#preloader").delay(350).fadeOut("slow");
@@ -672,4 +679,98 @@ const searchToCart = (s) => {
 	 let qty = $(`#search-qty-${s}`).val();
 	   //console.log("qty: ",qty);
 	   addToCart({sku: s,qty: qty});
+}
+
+const showPage = (p) => {
+	//console.log("arr length: ",productsLength);
+	//console.log("show per page: ",perPage);
+	$('#pagination-row').hide();
+	$('#products').html("");
+	let start = 0, end = 0;
+	
+	if(productsLength < perPage){
+		end = productsLength;
+	}
+	else{
+		start = (p * perPage) - perPage;
+		end = p * perPage;
+	}
+	
+	//console.log(`start: ${start}, end: ${end}`);
+	let hh = "";
+	
+	for(let i = start; i < end; i++){
+		if(i < productsLength)
+		{
+		let p = products[i];
+		//console.log(p);
+		let imggs = JSON.parse(p.imggs);
+		let pd = JSON.parse(p.pd), description = `${pd.description}`;
+		
+		hh = `
+				    <!--start of product item container-->
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
+                          <div class="product-main">
+                            <div class="product-view">
+                              <figure class="double-img"><a href="${p.uu}"><img class="btm-img" src="${imggs[0]}" width="215" height="240"  alt=""/> <img class="top-img" src="${imggs[1]}" width="215" height="240"  alt=""/></a></figure>
+                            </div>
+                            <div class="product-btns  effect-content-inner">
+                              <p class="effect-icon"> <a href="${p.cu}" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+                              <p class="effect-icon"> <a href="${p.wu}" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
+                              <p class="effect-icon"> <a href="${p.ccu}" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
+                               <p class="effect-icon">
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'${pd.sku}',description:'${description}',amount:${pd.amount},oldAmount:'${pd.amount + 1000}',inStock:'${pd.in_stock}',imgg:'${imggs[0]}'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		  				  </p>
+                            </div>
+                          </div>
+                          <div class="product-info">
+                            <h3 class="product-name"><a href="${p.uu}">${pd.sku}</a></h3>
+                            <p class="group inner list-group-item-text">${pd.description}</p>
+                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;${pd.amount}</strong></span> <span class="old-price">&#8358;${pd.amount + 1000}</span> </div>
+                            <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
+                          </div>
+                        </div>
+                        <!--end of product item container-->
+		`;
+		$('#products').append(hh);
+		
+	  }
+	}
+	
+	//Pagination
+	$('ul.cd-pagination').html("");
+	let pages = productsLength < perPage ? 1 : Math.ceil(productsLength / perPage);
+	$('ul.cd-pagination').append(` <li class="button"><a href="javascript:void(0)" onclick="showPreviousPage();">Prev</a> </li>`);
+	for(let x = 0; x < pages; x++){
+		$('ul.cd-pagination').append(`<li><a href="javascript:void(0)" onclick="showPage(${x+1});">${x+1}</a> </li>`);
+	}
+	$('ul.cd-pagination').append(`<li class="button"><a href="javascript:void(0)" onclick="showNextPage();">Next</a></li>`);
+	
+	page = p;
+	$('#pagination-row').fadeIn();
+}
+
+const showPreviousPage = () => {
+	let sp = productsLength < perPage ? 1 : Math.ceil(productsLength / perPage), pp = page - 1;
+	//console.log(`page: ${page},sp: ${sp},pp: ${pp}`);
+	
+	if(sp > pp && pp > 0){
+		showPage(pp);
+	}
+	
+}
+
+const showNextPage = () => {
+		let sp = productsLength < perPage ? 1 : Math.ceil(productsLength / perPage), pp = page + 1;
+	//console.log(`page: ${page},sp: ${sp},pp: ${pp}`);
+	
+	if(sp >= pp){
+		showPage(pp);
+	}
+}
+
+const changePerPage = () =>{
+	       perPage = $('#per-page').val();
+		   if(perPage == "none") perPage = 3;
+
 }
