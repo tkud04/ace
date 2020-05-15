@@ -280,12 +280,12 @@
                               <figure class="double-img"><a href="{{$uu}}"><img class="btm-img" src="{{$imggs[0]}}" width="215" height="240"  alt=""/> <img class="top-img" src="{{$imggs[1]}}" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
-                              <p class="effect-icon"> <a href="{{$cu}}" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                              <p class="effect-icon"> <a href="{{$wu}}" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                              <p class="effect-icon"> <a href="{{$ccu}}" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCart({sku:'{{$sku}}',qty: 1})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToWishlist({sku:'{{$sku}}'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCompare({sku:'{{$sku}}'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
                               <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'{{$sku}}',description:`{{$description}}`,amount:'{{$amount}}',oldAmount:'{{$amount + 1000}}',inStock:'{{ucwords($in_stock)}}',imgg:'{{$imggs[0]}}'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
-		  				  </p>
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV('{{$sku}}','{{$description}}','{{$amount}}','{{$amount + 1000}}','{{ucwords($in_stock)}}','{{$imggs[0]}}')" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+							  </p>
                             </div>
                           </div>
                           <div class="product-info">

@@ -31,12 +31,22 @@
                   <ul class="list-group summary">
                     <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> {{$totals['items']}}</span></strong></li>
                     <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;{{number_format($totals['subtotal'],2)}}</span></strong></li>
-                    <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;{{number_format($totals['delivery'],2)}}</span></strong></li>
-                  </ul>
+                    @if(!is_null($user))
+					<li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;{{number_format($totals['delivery'],2)}}</span></strong></li>
+                    @endif
+				  </ul>
                 </section>
                 <section class="col-sm-12">
-                  <h5 class="sub-title text-info text-uppercase">total</h5>
-                  <div class=" summary sum js-total text-center"> <strong> &#8358;{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</strong> </div>
+				  <?php
+				   $totalText = "subtotal"; $total = $totals['subtotal'];
+				   
+				   if(!is_null($user))
+				   {
+					   $totalText = "total"; $total = $totals['subtotal'] + $totals['delivery'];
+				   }
+				  ?>
+				  <h5 class="sub-title text-info text-uppercase">{{$totalText}}</h5>
+                  <div class=" summary sum js-total text-center"> <strong> &#8358;{{number_format($total,2)}}</strong> </div>
                   <a href="{{url('cart')}}" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
 				@if(!is_null($user))

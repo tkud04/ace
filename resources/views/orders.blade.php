@@ -60,6 +60,9 @@
 							 $totals = $o['totals'];
 							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
 							 $uu = "#";
+							 $vpu = url('confirm-payment')."?oid=".$o['id'];
+							 $tru = url('track')."?o=".$o['reference'];
+							 $iu = url('receipt')."?r=".$o['reference'];
 				    ?>
 					 <tr>
 					   <td>{{$o['date']}}</td>
@@ -71,8 +74,7 @@
 							 $product = $i['product'];
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
-							 $tru = url('track')."?o=".$o['reference'];
-							 $iu = url('receipt')."?r=".$o['reference'];
+							 
 						 ?>
 						 <a href="{{$pu}}" target="_blank">{{$product['sku']}}</a> (x{{$qty}})<br>
 						 <?php
@@ -83,8 +85,11 @@
 					   <td>{{$o['payment_code']}}</td>
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
 					   <td>
-					     <a class="btn btn-primary" href="{{$tru}}">Track</span>
-					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</span>
+					     @if($o['status'] == "unpaid")
+							 <a class="btn btn-primary" href="{{$vpu}}">Verify payment</a>
+						 @endif
+					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</a>
+						 <a class="btn btn-primary" href="{{$tru}}">Track</a>					     						 
 					   </td>
 					 </tr>
 					<?php

@@ -82,3 +82,8 @@ ul.list-group-horizontal{
 li.list-group-horizontal-li{
 	 display: inline-block;
 }
+
+.wmsg{
+	font-size: 1em;
+	color: #000;
+}

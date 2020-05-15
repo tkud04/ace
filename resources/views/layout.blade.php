@@ -128,7 +128,7 @@
 		 $welcomeText = "Welcome back, ".$user->fname."!";
 	  }
 	  ?>
-        <div class="col-sm-4 welcome-msg hidden-xs">{{$welcomeText}}</div>
+        <div class="col-sm-4 welcome-msg wmsg hidden-xs">{{$welcomeText}}</div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="col-sm-8 collapse navbar-collapse navbar-right" id="line-navbar-collapse-1">
           <ul class="nav navbar-nav top-menu">
@@ -391,7 +391,7 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-8 col-sm-9">
-              <h4><i class="ion-android-phone-portrait icon text-info"></i><span class="text-uppercase text-primary">Ace Luxury Store - Let's Glam You Up</span></h4>
+              <h4><i class="ion-android-phone-portrait icon text-info"></i><span class="text-uppercase text-primary">Ace Luxury Store - Exquisite Fashion For You</span></h4>
             </div>
             <div class="col-xs-4 col-sm-3"> <a href="#" class="btn btn-default btn-block hvr-underline-from-center-default pull-right">Shop now</a> </div>
           </div>

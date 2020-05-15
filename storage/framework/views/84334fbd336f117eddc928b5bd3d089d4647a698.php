@@ -97,13 +97,11 @@
                     <ul class="list-group summary">
                       <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> <?php echo e($totals['items']); ?></span></strong></li>
                       <li class="list-group-item text-uppercase"><strong>discount:<span class="pull-right"> &#8358;<?php echo e(number_format($dsc,2)); ?></span></strong></li>
-                      <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></span></strong></li>
-                      <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right">&#8358;<?php echo e(number_format($totals['delivery'],2)); ?></span></strong></li>
-                    </ul>
+                      </ul>
                   </section>
                   <section class="col-sm-12">
-                    <h5 class="sub-title text-info text-uppercase">total price</h5>
-                    <div class=" summary sum js-total text-center"> <strong> &#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></strong> </div>
+                    <h5 class="sub-title text-info text-uppercase">subtotal</h5>
+                    <div class=" summary sum js-total text-center"> <strong> &#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></strong> </div>
                     <a href="<?php echo e(url('checkout')); ?>" class="btn btn-block btn-default hvr-underline-from-center-default">Checkout</a>
                   </section>
                 </div>

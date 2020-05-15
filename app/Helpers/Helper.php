@@ -1080,7 +1080,7 @@ $subject = $data['subject'];
 			           ->where('sku',$data['sku'])->first();
 
 			 $p = Products::where('sku',$data['sku'])->first();
-			 
+
 			 if(!is_null($p))
 			 {
 				if($data['qty'] <= $p->qty)
@@ -1152,7 +1152,7 @@ $subject = $data['subject'];
 			   {
 				  $shipping = $this->getShippingDetails($u);
                   $s = $shipping[0];				  
-				  if($s['state'] == "lagos" || $s['state'] == "ogun" || $s['state'] == "oyo") $ret = 1000; 
+				  if($s['state'] == "ekiti" || $s['state'] == "lagos" || $s['state'] == "ogun" || $s['state'] == "ondo" || $s['state'] == "osun" || $s['state'] == "oyo") $ret = 1000; 
 			   } 
 			   return $ret;
 		   }

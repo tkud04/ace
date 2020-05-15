@@ -107,7 +107,7 @@ class LoginController extends Controller {
                #else{
                   $rex = isset($req['u']) ? $req['u'] : '/';
                   if($user->verified == "vendor") $rex = "my-store";
-                  return redirect()->intended($rex);
+                  return redirect()->back();
               # }
             }
 			
