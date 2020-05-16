@@ -1102,7 +1102,7 @@ $subject = $data['subject'];
 			      {
 				     $c->update(['qty' => $data['qty']]);
 			      }
-				  dd($c);
+				  #dd($c);
 				  $ret = "ok";
 			    }
 			 }
