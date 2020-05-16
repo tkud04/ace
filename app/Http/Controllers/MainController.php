@@ -219,7 +219,7 @@ class MainController extends Controller {
 		$gid = isset($req['gid']) ? $req['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$totals = $this->helpers->getCartTotals($cart);
-		#dd($totals);
+		//dd($totals);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();

@@ -764,7 +764,8 @@ $subject = $data['subject'];
            {
            	$ret = [];
               $discounts = Discounts::where('sku',$sku)
-			                 ->orWhere('type',"general")->get();
+			                 ->orWhere('type',"general")
+							 ->where('status',"enabled")->get();
  
               if($discounts != null)
                {
@@ -1172,22 +1173,23 @@ $subject = $data['subject'];
 						$dsc = $this->getDiscountPrices($amount,$c['product']['discounts']);
 						$newAmount = 0;
 						if(count($dsc) > 0)
-			       {
-				     foreach($dsc as $d)
-				     {
-					   if($newAmount < 1)
-					   {
-						   $newAmount = $amount - $d;
-					   }
-					   else
-					   {
-						   $newAmount -= $d;
-					   }
-				     }
-			       }
+			            {
+				          foreach($dsc as $d)
+				          {
+					        if($newAmount < 1)
+					        {
+						      $newAmount = $amount - $d;
+					        }
+					        else
+					        {
+						      $newAmount -= $d;
+					        }
+				          }
+					      $amount = $newAmount;
+			            }
 						$qty = $c['qty'];
                     	$ret['items'] += $qty;
-						$ret['subtotal'] += ($newAmount * $qty);
+						$ret['subtotal'] += ($amount * $qty);
                         $ret['discounts'] = $dsc;					
                     }
                    $u = User::where('id',$userId)->first();
