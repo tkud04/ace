@@ -523,7 +523,7 @@ $subject = $data['subject'];
 
                 //check if guest mode has any cart items
                 $guestCart = Carts::where('user_id',$r)->get();
-                dd($guestCart);
+                //dd($guestCart);
                 if(count($guestCart) > 0)
 				{
 					foreach($guestCart as $gc)
@@ -1076,6 +1076,7 @@ $subject = $data['subject'];
 		   
 		   function addToCart($data)
            {
+			   dd($data);
 			 $userId = $data['user_id'];
 			 $ret = "error";
 			 
