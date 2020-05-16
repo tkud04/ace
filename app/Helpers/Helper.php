@@ -1076,7 +1076,7 @@ $subject = $data['subject'];
 		   
 		   function addToCart($data)
            {
-			   dd($data);
+			  
 			 $userId = $data['user_id'];
 			 $ret = "error";
 			 
@@ -1092,7 +1092,7 @@ $subject = $data['subject'];
 					
 			      if(is_null($c))
 			      {
-				     $ret = Carts::create(['user_id' => $userId, 
+				     $c = Carts::create(['user_id' => $userId, 
                                                       'sku' => $data['sku'], 
                                                       'qty' => $data['qty']
                                                       ]); 
@@ -1102,6 +1102,7 @@ $subject = $data['subject'];
 			      {
 				     $c->update(['qty' => $data['qty']]);
 			      }
+				  dd($c);
 				  $ret = "ok";
 			    }
 			 }
