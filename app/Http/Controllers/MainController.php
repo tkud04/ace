@@ -311,10 +311,20 @@ class MainController extends Controller {
          
          else
          {
-         	$ret = $this->helpers->checkout($user,$req,"bank");
-           //session()->flash("pay-bank-status",$ret);
-		   $uu = url('confirm-payment')."?oid=".$ret->id;
-			return redirect()->intended($uu);
+			 if($req['amount'] < 1)
+			 {
+				 $err = "error";
+				 session()->flash("no-cart-status",$err);
+				 return redirect()->back();
+			 }
+			 else
+			 {
+				 $ret = $this->helpers->checkout($user,$req,"bank");
+		         $uu = url('confirm-payment')."?oid=".$ret->id;
+			     return redirect()->intended($uu);
+			 }
+         	
+          
          }        
     }
 	

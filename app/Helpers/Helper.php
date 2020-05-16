@@ -54,6 +54,7 @@ class Helper implements HelperContract
 					 "remove-from-compare-status" => "Removed from compare list!",
 					 "select-bank-status" => "Please select your bank",
 					 "confirm-payment-status" => "Your request has been received, your order will be approved shortly.",
+					 "no-cart-status" => "Your cart is empty.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -71,6 +72,7 @@ class Helper implements HelperContract
 					 "remove-from-wishlist-status-error" => "There was a problem removing item from wishlist.",
 					 "remove-from-compare-status-error" => "There was a problem removing item from compare list.",
 					 "track-order-status-error" => "Invalid reference number, please try again.",
+					 "no-cart-status-error" => "Your cart is empty.",
                     ]
                    ];
 
@@ -1341,7 +1343,7 @@ $subject = $data['subject'];
 
            function checkout($u,$data,$type="paystack")
 		   {
-			   #dd($data);
+			  //dd($data);
 			   $ret = [];
 			   
 			   switch($type)
