@@ -38,7 +38,7 @@ class PaymentController extends Controller {
         }
 		
 		$req = $request->all();
-        #dd($req);
+        //dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
@@ -63,19 +63,27 @@ class PaymentController extends Controller {
          
          else
          {
-			 //$paystack = new Paystack();
-			 $request->reference = Paystack::genTranxRef();
-             $request->key = config('paystack.secretKey');
-			 
-			 try{
-				return Paystack::getAuthorizationUrl()->redirectNow(); 
-			 }
-			 catch(Exception $e)
+			 if($req['amount'] < 1)
 			 {
-				  $request->session()->flash("pay-card-status","error");
-			      return redirect()->intended("checkout");
+				 $err = "error";
+				 session()->flash("no-cart-status",$err);
+				 return redirect()->back();
 			 }
-            
+			 else
+			 {
+			   //$paystack = new Paystack();
+			   $request->reference = Paystack::genTranxRef();
+               $request->key = config('paystack.secretKey');
+			 
+			   try{
+				 return Paystack::getAuthorizationUrl()->redirectNow(); 
+			   }
+			   catch(Exception $e)
+			   {
+				 $request->session()->flash("pay-card-status","error");
+			     return redirect()->intended("checkout");
+			   } 
+			 }        
          }        
         
         
