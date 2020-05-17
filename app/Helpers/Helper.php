@@ -1777,7 +1777,7 @@ $subject = $data['subject'];
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
 		$ret['em'] = "kudayisitobi@gmail.com";
 		$ret['acname'] = $data['acname'];
-		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $banks[$data['bname']];
+		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
 		$ret['acnum'] = $data['acnum'];
 		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");

@@ -157,6 +157,7 @@
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
 		   @else
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+            <li><a href="{{url('orders')}}">Orders</a></li>
             <li><a href="{{url('signout')}}">Sign out</a></li>
 		   @endif
             <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
