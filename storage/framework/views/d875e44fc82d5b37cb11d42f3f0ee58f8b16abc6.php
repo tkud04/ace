@@ -55,6 +55,7 @@
                   <form role="form" method="post" action="<?php echo e(url('confirm-payment')); ?>">
 				   <?php echo csrf_field(); ?>
 
+				   <input type="hidden" name="o" value="<?php echo e($order['reference']); ?>"/>
                     <div class="row"> 
                       
                       <!-- START Order information -->

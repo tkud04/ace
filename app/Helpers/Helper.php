@@ -53,7 +53,7 @@ class Helper implements HelperContract
 					 "remove-from-wishlist-status" => "Removed from wishlist!",
 					 "remove-from-compare-status" => "Removed from compare list!",
 					 "select-bank-status" => "Please select your bank",
-					 "confirm-payment-status" => "Your request has been received, your order will be approved shortly.",
+					 "confirm-payment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
 					 "no-cart-status" => "Your cart is empty.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
@@ -237,50 +237,20 @@ public $categories = [
       'zenith' => "Zenith Bank"
  ];			
 
-  public $ip = "";			
-
-
-          /**
-           * Sends an email(blade view or text) to the recipient
-           * @param String $to
-           * @param String $subject
-           * @param String $data
-           * @param String $view
-           * @param String $image
-           * @param String $type (default = "view")
-           **/
-           function sendEmail($to,$subject,$data,$view,$type="view")
-           {
-                   if($type == "view")
-                   {
-                     Mail::send($view,$data,function($message) use($to,$subject){
-                           $message->from('ceokhalifawali@gmail.com',"Khalifa Wali");
-                           $message->to($to);
-                           $message->subject($subject);
-                          if(isset($data["has_attachments"]) && $data["has_attachments"] == "yes")
-                          {
-                          	foreach($data["attachments"] as $a) $message->attach($a);
-                          } 
-						  $message->getSwiftMessage()
-						  ->getHeaders()
-						  ->addTextHeader('x-mailgun-native-send', 'true');
-                     });
-                   }
-
-                   elseif($type == "raw")
-                   {
-                     Mail::raw($view,$data,function($message) use($to,$subject){
-                            $message->from('ceokhalifawali@gmail.com',"Khalifa Wali");
-                           $message->to($to);
-                           $message->subject($subject);
-                           if(isset($data["has_attachments"]) && $data["has_attachments"] == "yes")
-                          {
-                          	foreach($data["attachments"] as $a) $message->attach($a);
-                          } 
-                     });
-                   }
-           }          
+  public $ip = "";
+  
+  public $smtp = [
+       'ss' => "smtp.gmail.com",
+       'sp' => "587",
+       'sec' => "tls",
+       'sa' => "yes",
+       'su' => "aceluxurystoree@gmail.com",
+       'spp' => "Ace12345$",
+       'sn' => "Ace Luxury Store",
+       'se' => "aceluxurystoree@gmail.com"
+  ];
            
+		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
            function sendEmailSMTP($data,$view,$type="view")
            {
            	    // Setup a new SmtpTransport instance for new SMTP
@@ -1797,9 +1767,21 @@ $subject = $data['subject'];
 			   return $ret;
 		   }
 
-    function confirmPayment($data)
+    function confirmPayment($u,$data)
 	{
-		dd($data);
+		$o = $this->getOrder($data['o']);
+		#dd($u);
+		$ret = $this->smtp;
+		$ret['order'] = $o;
+		$ret['user'] = $u->email;
+		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
+		$ret['em'] = "kudayisitobi@gmail.com";
+		$ret['acname'] = $data['acname'];
+		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $banks[$data['bname']];
+		$ret['bname'] = $bname;
+		$ret['acnum'] = $data['acnum'];
+		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		return json_encode(['status' => "ok"]);
 	}		   
    
 }

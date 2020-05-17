@@ -56,6 +56,7 @@
                 <div class="col-sm-12" style="color: #000;">
                   <form role="form" method="post" action="{{url('confirm-payment')}}">
 				   {!! csrf_field() !!}
+				   <input type="hidden" name="o" value="{{$order['reference']}}"/>
                     <div class="row"> 
                       
                       <!-- START Order information -->
