@@ -1257,7 +1257,6 @@ class MainController extends Controller {
         	return redirect()->intended('/');
         }
         $req = $request->all();
-        //dd($req);
         
         $validator = Validator::make($req, [
                              'bname' => 'required',
@@ -1403,6 +1402,18 @@ class MainController extends Controller {
                   }       
            return $ret;                                                                                            
 	}
+	
+	
+	 /**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getZoho()
+    {
+        $ret = "97916613";
+    	return $ret;
+    }
 	
 	
 
