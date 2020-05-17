@@ -1,5 +1,11 @@
 $(document).ready(function() {
     "use strict";
+    $("a.lno-cart").on("click", function(e) {
+    	if(isMobile()){
+    	  window.location = "cart";
+       }
+    })
+    
 	$("#per-page").on("change", function(e) {
        // e.preventDefault();
        perPage = $('#per-page').val();
@@ -773,4 +779,9 @@ const changePerPage = () =>{
 	       perPage = $('#per-page').val();
 		   if(perPage == "none") perPage = 3;
 
+}
+
+const isMobile = () =>{
+	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+	return isMobile;
 }
