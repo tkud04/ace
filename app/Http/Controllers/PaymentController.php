@@ -72,6 +72,7 @@ class PaymentController extends Controller {
 			 else
 			 {
 			   //$paystack = new Paystack();
+			   #dd($request);
 			   $request->reference = Paystack::genTranxRef();
                $request->key = config('paystack.secretKey');
 			 

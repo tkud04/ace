@@ -1376,7 +1376,8 @@ $subject = $data['subject'];
            { 
               $md = $payStackResponse['metadata'];
               $amount = $payStackResponse['amount'] / 100;
-              $ref = $payStackResponse['reference'];
+              $psref = $payStackResponse['reference'];
+              $ref = $md['reference'];
               $type = $md['type'];
               $dt = [];
               
@@ -1385,6 +1386,7 @@ $subject = $data['subject'];
 				$dt['ref'] = $ref;
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($ref);
+				$dt['ps_ref'] = $psref;
 				$dt['type'] = "card";
 				$dt['status'] = "paid";
               }
@@ -1436,8 +1438,11 @@ $subject = $data['subject'];
 
            function createOrder($user, $dt)
 		   {
+			   $psref = isset($dt['ps_ref']) ? $dt['ps_ref'] : "";
+			   
 			   $ret = Orders::create(['user_id' => $user->id,
 			                          'reference' => $dt['ref'],
+			                          'ps_ref' => $psref,
 			                          'amount' => $dt['amount'],
 			                          'type' => $dt['type'],
 			                          'payment_code' => $dt['payment_code'],

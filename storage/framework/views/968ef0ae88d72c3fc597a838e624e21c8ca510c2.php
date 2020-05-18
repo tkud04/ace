@@ -138,12 +138,15 @@
 		     document.querySelector('#href').value = document.location.href;
 		   
                              	let mc = {
+									           "custom_fields": [
+												   {
+												     "display_name": "Reference #",
+												     "variable_name": "Reference #",
+												     "value": "<?php echo e($ref); ?>"
+												   }
+											   ],
                              	                'type': 'checkout',
-                                                 'notes': '',
-                                                 'address': "<?php echo e($address); ?>",
-                                                 'city': "<?php echo e($city); ?>",
-                                                 'state': "<?php echo e($state); ?>",
-                                                 'zip': "<?php echo e($zip); ?>"
+                                                 'notes': ''
                                              };
                              
            </script>
