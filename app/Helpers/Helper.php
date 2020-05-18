@@ -1375,6 +1375,7 @@ $subject = $data['subject'];
 		   function payWithPayStack($user, $payStackResponse)
            { 
               $md = $payStackResponse['metadata'];
+			  dd($md);
               $amount = $payStackResponse['amount'] / 100;
               $psref = $payStackResponse['reference'];
               $ref = $md['reference'];
