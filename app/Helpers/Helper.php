@@ -1375,10 +1375,10 @@ $subject = $data['subject'];
 		   function payWithPayStack($user, $payStackResponse)
            { 
               $md = $payStackResponse['metadata'];
-			  dd($md);
+			  #dd($md);
               $amount = $payStackResponse['amount'] / 100;
               $psref = $payStackResponse['reference'];
-              $ref = $md['reference'];
+              $ref = $md['custom_fields'][0]['value'];
               $type = $md['type'];
               $dt = [];
               

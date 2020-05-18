@@ -141,8 +141,8 @@
                              	let mc = {
 									           "custom_fields": [
 												   {
-												     "display_name": "Reference #",
-												     "variable_name": "Reference #",
+												     "display_name": "Reference No.",
+												     "variable_name": "Reference No.",
 												     "value": "{{$ref}}"
 												   }
 											   ],
