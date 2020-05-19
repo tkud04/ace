@@ -611,6 +611,28 @@
   </div>
   <!--end of quick view box--> 
   
+    <!--start of checkout box-->
+  <div class="whatsapp-box modal fade" id="whatsapp-box" tabindex="-1" role="dialog" aria-labelledby="loginboxLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="tw">&times;</span></button>
+          <h4 class="modal-title tw text-uppercase" id="loginboxLabel" >start a conversation</h4>
+		  <h6 class="tw">Click one any of numbers listed beow to chat on Whatsapp:</h6>
+        </div>
+        <div class="modal-body">
+          <ul class="list-inline row">
+            <li class="col-sm-12"> <a href="https://wa.me/2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <p class="text-center"><small>The team usually reply in a few minutes</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end of whatsapp box--> 
+  
 </div>
 <!--end of content wrap--> 
 

@@ -39,6 +39,7 @@ class Helper implements HelperContract
  public $signals = ['okays'=> ["login-status" => "Sign in successful",            
                      "signup-status" => "Account created. Enjoy your shopping!",
                      "profile-status" => "Profile updated!",
+					 "cpayment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
                      "update-status" => "Account updated!",
                      "config-status" => "Config added/updated!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
@@ -52,8 +53,7 @@ class Helper implements HelperContract
                      "add-to-compare-status" => "Added to compare list!",
 					 "remove-from-wishlist-status" => "Removed from wishlist!",
 					 "remove-from-compare-status" => "Removed from compare list!",
-					 "select-bank-status" => "Please select your bank",
-					 "confirm-payment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
+					 "select-bank-status" => "Please select your bank",					 
 					 "no-cart-status" => "Your cart is empty.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
@@ -249,6 +249,13 @@ public $categories = [
        'sn' => "Ace Luxury Store",
        'se' => "aceluxurystoree@gmail.com"
   ];
+  
+  
+  public $adminEmail = "aceluxurystore@yahoo.com";
+  public $suEmail = "kudayisitobi@gmail.com";
+  
+  
+  
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
            function sendEmailSMTP($data,$view,$type="view")
@@ -466,9 +473,10 @@ $subject = $data['subject'];
            }
            function createShippingDetails($data)
            {
+			   $zip = isset($data['zip']) ? $data['zip'] : "";
            	$ret = ShippingDetails::create(['user_id' => $data['user_id'],                                                                                                          
                                                       'company' => $data['company'], 
-                                                      'zipcode' => $data['zip'],                                                      
+                                                      'zipcode' => $zip,                                                      
                                                       'address' => $data['address'], 
                                                       'city' => $data['city'], 
                                                       'state' => $data['state'], 
@@ -1781,7 +1789,7 @@ $subject = $data['subject'];
 		$ret['order'] = $o;
 		$ret['user'] = $u->email;
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
-		$ret['em'] = "kudayisitobi@gmail.com";
+		$ret['em'] = $this->adminEmail;
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;

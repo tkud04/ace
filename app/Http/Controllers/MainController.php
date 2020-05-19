@@ -259,16 +259,18 @@ class MainController extends Controller {
 			       'date' => ""
 			    ];
 				
+				
 		   if(count($shipping) > 0) $ss = $shipping[0];
 		$c = $this->helpers->getCategories();
 		$states = $this->helpers->states;
 		$ads = $this->helpers->getAds();
 		$ref = $this->helpers->getRandomString(5);
+						$md = json_encode(['custom_fields' => ['display_name' => "Reference No.",'variable_name' => "ref",'value' => $ref],'type' => "checkout",'notes' => ""]);
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
-		return view("checkout",compact(['user','cart','totals','ss','ad','ref','states','c','signals']));								 
+		return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','c','signals']));								 
     }
 	
 	/**
@@ -1287,7 +1289,7 @@ class MainController extends Controller {
 			 }
 			 
              $ret = $this->helpers->confirmPayment($user,$req);
-	        session()->flash("confirm-payment-status","ok");
+	        session()->flash("cpayment-status","ok");
 			return redirect()->intended('orders');
          }        
     }

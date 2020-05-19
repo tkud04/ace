@@ -79,7 +79,7 @@
                         </div><br>
 						<div class="form-group">
                           <label class="control-label" for="mail">please make payment to:</label>
-                          <h4 class="form-control-plaintext" style="color: #000;">Bank: GTBank<br><br>Account name: Ace Luxury Store<br><br>Account number: 0134569244</h4>
+                          <h4 class="form-control-plaintext" style="color: #000;">Bank: Diamond-Access Bank<br><br>Account name: Ace Luxury Store<br><br>Account number: 010-976-3827</h4>
                         </div>
                       </fieldset>
                       <!-- END Order information-->

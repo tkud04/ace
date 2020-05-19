@@ -137,7 +137,7 @@ class LoginController extends Controller {
                              'address' => 'required',
                              'city' => 'required',
                              'state' => 'required',
-							 'terms' => "required|accepted"
+							 //'terms' => "required"
          ]);
          
          if($validator->fails())

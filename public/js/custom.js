@@ -1,3 +1,5 @@
+let mc = "";
+
 $(document).ready(function() {
     "use strict";
     $("a.lno-cart").on("click", function(e) {

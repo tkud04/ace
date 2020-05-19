@@ -84,6 +84,7 @@ li.list-group-horizontal-li{
 }
 
 .wmsg{
-	font-size: 1em;
+	font-size: 1.3em;
 	color: #000;
+	font-weight: bold;
 }

@@ -3,8 +3,8 @@
  $items = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/confirm-payment?o=".$order['reference'];
 ?>
-<img src="http://www.aceluxurystore.com/images/logo.png" width="100" height="100"/>
-<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order ".$order['payment_code']</h3>
+<center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
+<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order <?php echo e($order['payment_code']); ?></h3>
 Hello admin,<br> kindly confirm that payment for the below referenced order has been cleared:<br><br>
 Reference #: <b><?php echo e($order['reference']); ?></b><br>
 Customer: <b><?php echo e($user); ?></b><br>
