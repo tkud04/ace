@@ -699,7 +699,7 @@ figure.effect-layla:hover figcaption::after,figure.effect-layla:hover h3,figure.
 }
 
 #parallax {
-    background: url(../images/sliderr-9.webp)50% 0 fixed;
+    background: url(../images/sliderr-9.jpg)50% 0 fixed;
     min-height: 200px;
     text-align: center
 }
