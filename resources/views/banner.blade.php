@@ -1,6 +1,15 @@
 <!--start of banner-->
   <div id="banner">
   <?php
+  /**
+    $bbanners = [
+	  ['img' => "images/ppl/sn-1.jpg", "title" => "This is a Orifajo Title 1", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
+	  ['img' => "images/ppl/sn-2.jpg", "title" => "This is a Orifajo Title 2", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
+	  ['img' => "images/ppl/sn-3.jpg", "title" => "This is a Orifajo Title 3", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
+	  ['img' => "images/ppl/sn-4.jpg", "title" => "This is a Orifajo Title 4", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
+	  ['img' => "images/ppl/sn-5.jpg", "title" => "This is a Orifajo Title 5", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""]
+	];
+  **/
     foreach($banners as $b)
 	{
 	  $img = $b['img'];
