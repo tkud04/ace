@@ -45,7 +45,7 @@ class MainController extends Controller {
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
 		shuffle($ads);
-		#dd($banners);
+		shuffle($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 
     	return view("index-2",compact(['user','cart','c','banners','bs','na','ad','signals']));
