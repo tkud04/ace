@@ -137,8 +137,7 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-                             	 mc = <?php echo $md; ?>
-
+								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "<?php echo e($ref); ?>"}],"type":"checkout","notes":""};
                              
            </script>
                     <div class="row"> 
