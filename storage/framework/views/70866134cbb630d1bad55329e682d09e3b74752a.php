@@ -46,8 +46,15 @@
 	    ['name' => "<span>".ucwords("brooches")."</span>",'copy' => "",'url' => url('shop')."?category=brooches"],
 	    ['name' => "<span>".ucwords("rings")."</span>",'copy' => "",'url' => url('shop')."?category=rings"],
 	];
-	  $ccBackgrounds = ["images/ad-box-1.jpg","images/ad-box-2.jpg","images/ad-box-3.jpg"];
-	    shuffle($cc);
+	  $rings = ["images/sn-8.jpg"];
+	  $brooches = ["images/sn-10.jpg"];
+	  $earrings = ["images/ns-2.jpg"];
+	  
+	  shuffle($rings);
+	  shuffle($brooches);
+	  shuffle($earrings);
+		
+		$ccBackgrounds = [$earrings[0],$brooches[0],$rings[0]];
 		
 		for($i = 0; $i < 3; $i++)
 		{

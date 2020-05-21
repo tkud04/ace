@@ -1,16 +1,13 @@
 <!--start of banner-->
   <div id="banner">
   <?php
-  /**
+
     $bbanners = [
-	  ['img' => "images/ppl/sn-1.jpg", "title" => "This is a Orifajo Title 1", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
-	  ['img' => "images/ppl/sn-2.jpg", "title" => "This is a Orifajo Title 2", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
-	  ['img' => "images/ppl/sn-3.jpg", "title" => "This is a Orifajo Title 3", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
-	  ['img' => "images/ppl/sn-4.jpg", "title" => "This is a Orifajo Title 4", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
-	  ['img' => "images/ppl/sn-5.jpg", "title" => "This is a Orifajo Title 5", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""]
+	  ['img' => "images/sn-8.jpg", "title" => "This is a Orifajo Title 7", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""],
+	  ['img' => "images/ns-2.jpg", "title" => "This is a Orifajo Title 2", "subtitle" => "This is a Dabgana Orijinal Subtitle","copy" => ""]
 	];
-  **/
-    foreach($banners as $b)
+
+    foreach($bbanners as $b)
 	{
 	  $img = $b['img'];
 	  $subtitle = $b['subtitle'];
@@ -40,8 +37,8 @@
               </section> 
 	</div>
 	<div class="col-md-9 col-sm-12">
-	<img class="img-responsive hidden-xs" src="<?php echo e($img); ?>" width="1920" height="550" alt=""/>
-    <img class="img-responsive visible-xs" src="<?php echo e($img); ?>" width="1920" height="550" alt=""/>
+	<img class="img-responsive hidden-xs" src="<?php echo e($img); ?>" style="height: 600px;" width="1500" height="400" alt=""/>
+    <img class="img-responsive visible-xs" src="<?php echo e($img); ?>" style="height: 600px;" width="1500" height="400" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
