@@ -784,7 +784,8 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("orders",compact(['user','cart','c','ad','orders','signals']));			
+			$wext = isset($req['wext']) ? $req['wext'] : null;
+		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals']));			
 		}
 		else
 		{
@@ -1290,7 +1291,8 @@ class MainController extends Controller {
 			 
              $ret = $this->helpers->confirmPayment($user,$req);
 	        session()->flash("cpayment-status","ok");
-			return redirect()->intended('orders');
+			$uu = "orders?wext=".$this->helpers->getRandomString(4);
+			return redirect()->intended($uu);
          }        
     }
 	

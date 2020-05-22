@@ -13,6 +13,9 @@
     <div class="page-header">
       <div class="container text-center">
         <h2 class="text-primary text-uppercase">your orders</h2>
+		<?php if(isset($wext) && !is_null($wext)): ?>
+        <h3 class="text-info">Your request has been received, you will be notified via email shortly if your payment has been cleared.</h3>
+	    <?php endif; ?>
       </div>
     </div>
     <section class="container">

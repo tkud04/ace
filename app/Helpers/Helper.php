@@ -54,7 +54,7 @@ class Helper implements HelperContract
 					 "remove-from-wishlist-status" => "Removed from wishlist!",
 					 "remove-from-compare-status" => "Removed from compare list!",
 					 "select-bank-status" => "Please select your bank",					 
-					 "no-cart-status" => "Your cart is empty.",
+					 "no-cart-status" => "Your cart is empty."
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -1789,7 +1789,7 @@ $subject = $data['subject'];
 		$ret['order'] = $o;
 		$ret['user'] = $u->email;
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
-		$ret['em'] = $this->adminEmail;
+		$ret['em'] = $this->suEmail;
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
