@@ -14,7 +14,7 @@ Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
 <p>Click the <b>View Order</b> button below to view the order or <b>Track Order</b> button to update delivery information. Alternatively you can log in to the Admin Dashboard to view or update tracking info for this order (go to Orders and click either the View or Track buttons beside the order).</p><br>
-<p style="color:red;"><b>NOTE:</b> The order is currently marked as <b>PENDING</b>, kindly update delivery information for this order.</p><br><br>
+<p style="color:red;"><b>NOTE:</b> The tracking status for this order is currently marked as <b>PENDING</b>, kindly update delivery information for this order.</p><br><br>
 
 <a href="{{$uu}}" target="_blank" style="background: #ff9bbc; color: #fff; padding: 10px 15px; margin-right: 10px;">View order</a>
 <a href="{{$tu}}" target="_blank" style="background: #ff9bbc; color: #fff; padding: 10px 15px; margin-right: 10px;">Track order</a>
