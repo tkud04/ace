@@ -41,7 +41,7 @@
               <section> <img width="820" height="703" alt="" src="images/banner4.jpg" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
-                <a href="#">travel</a> <a href="#">blog</a> <a href="#">lifestyle</a> <a href="#">feature</a> <a href="#">mountain</a> <a href="#">design</a> <a href="#">restaurant</a> <a href="#">journey</a> <a href="#">classic</a> <a href="#">sunset</a> </section>
+                <a href="#">earrings</a> <a href="#">rings</a> <a href="#">brooches</a> <a href="#">watches</a> <a href="#">bracelets</a> <a href="#">fashion</a></section>
             </div>
             <div class="col-sm-8 col-md-9  main-sec">
               <div class="row">
@@ -126,7 +126,9 @@
                       </div>
                       <div class="product-price clearfix">
 					    <span class="pull-left btn btn-primary"><strong>&#8358;{{number_format($newAmount, 2)}}</strong></span>
+						@if($newAmount != $oldAmount)
 					    <span class="pull-left btn btn-link"><del>&#8358;{{number_format($oldAmount, 2)}}</del></span>
+					    @endif
 					  </div>
                      
                       <div class="product-quantity">
