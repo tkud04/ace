@@ -190,6 +190,16 @@
 				   array_push($imggs,$oll);
 			   }
 			    
+			   $dsc = 0;
+				  
+				  if( isset($discounts) && count($discounts) > 0)
+				  {
+					  foreach($discounts as $d)
+					  {
+						$dsc += $d['discount'];  
+					  }
+				  }
+				
 		  ?>
             <li class="col-sm-6 col-md-4">
               <div>
@@ -199,7 +209,7 @@
                   </div>
                   <div class="col-sm-6 col-md-8">
                     <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
-                    <div class="product-price"> <span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <span class="old-price"><del>&#8358;{{number_format($amount + 1000,2)}}</del></span> </div>
+                    <div class="product-price"> <span class="real-price text-info"><strong>&#8358;{{number_format($amount -$dsc,2)}}</strong></span> @if($dsc > 0)<span class="old-price"><del>&#8358;{{number_format($amount + 1000,2)}}</del></span>@endif </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>
                 </div>

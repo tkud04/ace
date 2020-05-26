@@ -149,7 +149,7 @@ class MainController extends Controller {
                  else
                  {
 					 $product = $this->helpers->getProduct($req["sku"]);
-					 //dd($product);
+					 #dd($product);
 					 $discounts = [];
 					 if(count($product['discounts']) > 0)
 					 {
@@ -184,7 +184,7 @@ class MainController extends Controller {
 							 array_push($discounts,$temp);
 						 }
 					 }
-					 //dd($discounts);
+					 #dd($discounts);
 					 $reviews = $this->helpers->getReviews($req["sku"]);
 					 $related = $this->helpers->getProducts();
 					// dd($product);

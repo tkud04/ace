@@ -619,12 +619,10 @@
 		  <h6 class="tw">Click one any of numbers listed beow to chat on Whatsapp:</h6>
         </div>
         <div class="modal-body">
-          <ul class="list-inline row">
-            <li class="col-sm-12"> <a href="https://wa.me/2348097039692" target="_blank" class="btn btn-block " ><i class="ion-social-whatsapp"></i> Customer Support</a> </li>
-          </ul>
+          <a href="javascript:void(0)" onclick="payCard(); return false;" class="btn btn-block btn-primary" ><i class="ion-card"></i> Continue to make payment</a> 
         </div>
         <div class="modal-footer">
-          <p class="text-center"><small>The team usually reply in a few minutes</small></p>
+          <p class="text-center" style="color: red; font-weight: bold; font-size: 1.1em;"><small>NOTE: Kindly note your referrence number in case of any unforeseen issues with this transaction</small></p>
         </div>
       </div>
     </div>
