@@ -1789,11 +1789,13 @@ $subject = $data['subject'];
 		$ret['order'] = $o;
 		$ret['user'] = $u->email;
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
-		$ret['em'] = $this->suEmail;
+		$ret['em'] = $this->adminEmail;
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
 		$ret['acnum'] = $data['acnum'];
+		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		$ret['em'] = $this->suEmail;
 		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		return json_encode(['status' => "ok"]);
 	}		   

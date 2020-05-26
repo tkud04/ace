@@ -128,8 +128,8 @@
                           <div class="product-info">
                             <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
-                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> </div>
-                            <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
+                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
+                          <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
                           </div>
                         </div>
                         <!--end of product item container-->
