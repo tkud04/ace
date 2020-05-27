@@ -34,12 +34,13 @@
 				 }
 				?>
                   <li class="list-group-item"><a href="{{url('shop')}}">View more</a></li>
+                  <li class="list-group-item"><br></li>
                 </ul>
               </section> 
 	</div>
-	<div class="col-md-10 col-sm-12">
-	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 600px;" width="1500" height="400" alt=""/>
-    <img class="img-responsive visible-xs" src="{{$img}}" style="height: 600px;" width="1500" height="400" alt=""/>
+	<div class="col-md-8 col-sm-12">
+	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 500px;" width="1500" height="400" alt=""/>
+    <img class="img-responsive visible-xs" src="{{$img}}" style="height: 500px;" width="1500" height="400" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
@@ -54,6 +55,7 @@
         </div>
       </div>
     </div>
+	<div class="col-md-2 col-sm-12"></div>
     </div>
 	</div>
 	<?php
