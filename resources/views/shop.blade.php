@@ -139,7 +139,7 @@
 			   wu: "{{$wu}}",
 			   ccu: "{{$ccu}}",
 			   pd: ppd,
-			   description: "{{$description}}",
+			   description: `{{$description}}`,
 			   inStock: "{{$in_stock}}",
 			   amount: "{{$amount}}",
 			   imggs: imggs,
