@@ -714,7 +714,7 @@ const showPage = (p) => {
 		//console.log(p);
 		let imggs = JSON.parse(p.imggs);
 		let pd = JSON.parse(p.pd), description = `${pd.description}`;
-		
+        description = description.replace(/(?:\r\n|\r|\n)/g, '<br>');		
 		hh = `
 				    <!--start of product item container-->
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
