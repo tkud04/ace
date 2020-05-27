@@ -205,22 +205,22 @@
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="{{$uu}}"><img class="btm-img" src="{{$imggs[0]}}" width="215" height="240"  alt=""/> <img class="top-img" src="{{$imggs[1]}}" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="{{$uu}}"><img class="btm-img" src="{{$imggs[1]}}" width="215" height="240"  alt=""/> <img class="top-img" src="{{$imggs[0]}}" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCart({sku:'{{$sku}}',qty: 1})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToWishlist({sku:'{{$sku}}'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCompare({sku:'{{$sku}}'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
-                              <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV('{{$sku}}','{{$description}}','{{$amount}}','{{$amount + 1000}}','{{ucwords($in_stock)}}','{{$imggs[0]}}')" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
-							  </p>
+		   <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCart({sku:'{{$sku}}',qty:'1'})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToWishlist({sku:'{{$sku}}'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCompare({sku:'{{$sku}}'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
+                               <p class="effect-icon">
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'{{$sku}}',description:`{{$description}}`,amount:'{{$amount}}',oldAmount:'{{$amount + 1000}}',inStock:'{{ucwords($in_stock)}}',imgg:'{{$imggs[0]}}'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		  				  </p>
                             </div>
                           </div>
                           <div class="product-info">
                             <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
                             <p class="group inner list-group-item-text">{{$description}}</p>
-                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> </div>
-                            <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
+                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <!--  <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> --></div> 
+                          <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
                           </div>
                         </div>
                         <!--end of product item container-->
