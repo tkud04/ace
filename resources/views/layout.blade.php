@@ -591,7 +591,7 @@
               <div class="product-availability in-stock">
                 <p>Availability: <span class="text-info" id="quickviewboxInStock"></span></p>
               </div>
-              <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>&#8358;<span id="quickviewboxAmount">0.00</span></strong></span> <span class="pull-left btn btn-link"><del>&#8358;<span id="quickviewboxOldAmount">0.00</span></del></span> </div>
+              <div class="product-price clearfix"> <span class="pull-left btn btn-primary"><strong>&#8358;<span id="quickviewboxAmount">0.00</span></strong></span> </div>
             </div>
           </div>
         </div>
