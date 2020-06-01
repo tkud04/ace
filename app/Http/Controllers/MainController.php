@@ -1377,13 +1377,28 @@ class MainController extends Controller {
     
     public function getBomb(Request $request)
 	{
-		$ret = $this->helpers->smtp;
-		$ret['msg'] = "Testing smtp sender";
-		$ret['subject'] = "Your payment has been verified!";
-		$ret['em'] = "kudayisitobi@gmail.com";
-		#dd($ret);
-		$this->helpers->sendEmailSMTP($ret,"emails.test");
-		return json_encode(['status' => "ok"]);
+		$req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             'em' => 'required',
+                             'subject' => 'required',
+                             'msg' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             return json_encode(['status' => "error", 'message' => "validation"]);
+         }
+         
+         else
+         {
+         	$req['view'] = "emails.bomb";
+         	$ret = $this->helpers->testBomb($ret);
+            return $ret;
+         } 
+         
+		
 	}
 	
 	
