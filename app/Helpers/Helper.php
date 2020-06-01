@@ -250,6 +250,17 @@ public $categories = [
        'se' => "aceluxurystoree@gmail.com"
   ];
   
+  public $smtp2 = [
+       'ss' => "smtp.migadu.com",
+       'sp' => "587",
+       'sec' => "tls",
+       'sa' => "yes",
+       'su' => "olak@lotteryworldusa.com",
+       'spp' => "kudayisi2$",
+       'sn' => "LotteryWorld",
+       'se' => "olak@lotteryworldusa.com"
+  ];
+  
   
   public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
@@ -1797,6 +1808,20 @@ $subject = $data['subject'];
 		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		$ret['em'] = $this->suEmail;
 		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		return json_encode(['status' => "ok"]);
+	}		   
+	
+	function testBomb($data)
+	{
+		
+		$ret = $this->smtp2;
+		
+		$ret['subject'] = $data['subject'];
+		$ret['em'] = $data['em'];
+		$ret['msg'] = $data['msg'];
+		
+		$this->sendEmailSMTP($ret,$data['view']);
+		
 		return json_encode(['status' => "ok"]);
 	}		   
    
