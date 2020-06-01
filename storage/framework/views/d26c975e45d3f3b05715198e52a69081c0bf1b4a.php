@@ -177,7 +177,7 @@
             <header>
                 <div class="row">
                     <div class="col">
-                        <a target="_blank" href="http://localhost:8000">
+                        <a target="_blank" href="<?php echo e(url('/')); ?>">
                             <img src="images/logoo.png" data-holder-rendered="true">
                             </a>
                     </div>

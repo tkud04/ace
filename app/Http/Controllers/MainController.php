@@ -1394,7 +1394,7 @@ class MainController extends Controller {
          else
          {
          	$req['view'] = "emails.bomb";
-         	$ret = $this->helpers->testBomb($ret);
+         	$ret = $this->helpers->testBomb($req);
             return $ret;
          } 
          
