@@ -17,7 +17,7 @@
   ?>
     <div class="item">
 	 <div class="row">
-	<div class="col-md-2 col-sm-12">
+	<div class="col-md-4 col-sm-12">
 	  <section style="margin-left: 10px;">
                 <h5 class="sub-title text-info text-uppercase text-center">Categories</h5>
                 <ul class="list-group nudge" style="text-align: center;">
@@ -38,7 +38,7 @@
                 </ul>
               </section> 
 	</div>
-	<div class="col-md-8 col-sm-12">
+	<div class="col-md-6 col-sm-12">
 	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
     <img class="img-responsive visible-xs" src="{{$img}}" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
       <div class="slider-caption">
