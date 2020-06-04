@@ -38,7 +38,7 @@
                 </ul>
               </section> 
 	</div>
-	<div class="col-md-6 col-sm-12">
+	<div class="col-md-6 col-sm-12" style="background: #000;">
 	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
     <img class="img-responsive visible-xs" src="{{$img}}" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
       <div class="slider-caption">
