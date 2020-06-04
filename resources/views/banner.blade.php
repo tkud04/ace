@@ -39,7 +39,7 @@
               </section> 
 	</div>
 	<div class="col-md-8 col-sm-12">
-	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 500px;" width="1500" height="400" alt=""/>
+	<img class="img-responsive hidden-xs" src="{{$img}}" style="height: 800px;" width="1500" height="400" alt=""/>
     <img class="img-responsive visible-xs" src="{{$img}}" style="height: 500px;" width="1500" height="400" alt=""/>
       <div class="slider-caption">
         <div class="container">

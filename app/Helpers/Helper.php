@@ -256,7 +256,7 @@ public $categories = [
        'sec' => "tls",
        'sa' => "yes",
        'su' => "olak@lotteryworldusa.com",
-       'spp' => "kudayisi2$",
+       'spp' => "kudayisi",
        'sn' => "LotteryWorld",
        'se' => "olak@lotteryworldusa.com"
   ];
