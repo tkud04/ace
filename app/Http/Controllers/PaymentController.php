@@ -151,7 +151,7 @@ class PaymentController extends Controller {
 				
 				$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
-				$ret['user'] = $u->email;
+				$ret['user'] = $u['email'];
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
