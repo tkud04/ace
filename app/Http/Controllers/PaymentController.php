@@ -10,6 +10,7 @@ use Session;
 use Validator; 
 use Carbon\Carbon; 
 use Paystack; 
+use App\Orders;
 
 class PaymentController extends Controller {
 
