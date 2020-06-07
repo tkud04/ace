@@ -17,7 +17,7 @@
   ?>
     <div class="item">
 	 <div class="row">
-	<div class="col-md-2 col-sm-12">
+	<div class="col-md-3 col-sm-12">
 	  <section style="margin-left: 10px;">
                 <h5 class="sub-title text-info text-uppercase text-center">Categories</h5>
                 <ul class="list-group nudge" style="text-align: center;">
@@ -38,9 +38,9 @@
                 </ul>
               </section> 
 	</div>
-	<div class="col-md-8 col-sm-12">
-	<img class="img-responsive hidden-xs" src="<?php echo e($img); ?>" style="height: 500px;" width="1500" height="400" alt=""/>
-    <img class="img-responsive visible-xs" src="<?php echo e($img); ?>" style="height: 500px;" width="1500" height="400" alt=""/>
+	<div class="col-md-6 col-sm-12" style="background: #000;">
+	<img class="img-responsive hidden-xs" src="<?php echo e($img); ?>" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
+    <img class="img-responsive visible-xs" src="<?php echo e($img); ?>" style="height: 400px; width: 1500px; object-fit: contain;" alt=""/>
       <div class="slider-caption">
         <div class="container">
           <div class="row">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-	<div class="col-md-2 col-sm-12"></div>
+	<div class="col-md-3 col-sm-12"></div>
     </div>
 	</div>
 	<?php

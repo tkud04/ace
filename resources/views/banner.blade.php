@@ -17,7 +17,7 @@
   ?>
     <div class="item">
 	 <div class="row">
-	<div class="col-md-4 col-sm-12">
+	<div class="col-md-3 col-sm-12">
 	  <section style="margin-left: 10px;">
                 <h5 class="sub-title text-info text-uppercase text-center">Categories</h5>
                 <ul class="list-group nudge" style="text-align: center;">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-	<div class="col-md-2 col-sm-12"></div>
+	<div class="col-md-3 col-sm-12"></div>
     </div>
 	</div>
 	<?php

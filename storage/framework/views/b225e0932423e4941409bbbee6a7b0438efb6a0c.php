@@ -629,7 +629,7 @@
       </div>
     </div>
   </div>
-  <!--end of whatsapp box--> 
+  <!--end of checkout box--> 
   
 </div>
 <!--end of content wrap--> 

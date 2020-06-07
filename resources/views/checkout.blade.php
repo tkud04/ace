@@ -72,7 +72,7 @@
                       <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
                         <div class="panel-body"> 
 						<img class="img img-responsive" src="images/ps.png"> <br><br>
-						  <center> <a href="javascript:void(0)" data-toggle="modal" data-target="#checkout-modal" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
+						  <center> <a href="javascript:void(0)" onclick="payCard(); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
 						</div>
                       </div>
                     </div>
