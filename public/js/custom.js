@@ -362,15 +362,15 @@ function payBank(){
 	setPaymentAction("cod");
 }
 
-function payCard(){
+function payCard(dt){
 	 	let x3 = "{{url('/')}}";
 	
 	Swal.fire({
-    title: "Order reference: 12129392",
+    title: `Order reference: ${dt.ref}`,
   imageUrl: "images/paystack.png",
   imageWidth: 400,
   imageHeight: 200,
-  imageAlt: "Pay for order 12129392 with card",
+  imageAlt: `Pay for order ${dt.ref} with card`,
   showCloseButton: true,
   html:
      "<h4 class='text-danger'><b>NOTE: </b>Make sure you note down your reference number above, as it will be required in the case of any issues regarding this order.</h4><p class='text-primary'>Click OK below to redirect to our secure payment gateway to complete this payment.</p>"
