@@ -10,6 +10,7 @@ use Session;
 use Validator; 
 use Carbon\Carbon; 
 use Paystack; 
+use App\Orders;
 
 class PaymentController extends Controller {
 
@@ -138,7 +139,7 @@ class PaymentController extends Controller {
                
                if($o != null)
                {
-				   $u = $this->getUser($o->user_id);
+				   $u = $this->helpers->getUser($o->user_id);
 				   //dd($u);
                	//We have the user, notify the customer and admin
 				$ret = $this->helpers->smtp;
@@ -146,16 +147,16 @@ class PaymentController extends Controller {
 				$ret['user'] = $u;
 				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";
 		        $ret['em'] = $u['email'];
-		        $this->sendEmailSMTP($ret,"emails.confirm-payment");
+		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
-				$ret = $this->helpers->smtp;
-				$ret['order'] = $o;
-				$ret['user'] = $u->email;
+				#$ret = $this->helpers->smtp;
+				$ret['order'] = $this->helpers->getOrder($o->reference);
+				$ret['user'] = $u['email'];
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
-		        $this->sendEmailSMTP($ret,"emails.admin-payment-alert");
+		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
 				$ret['em'] = $this->helpers->suEmail;
-		        $this->sendEmailSMTP($ret,"emails.admin-payment-alert");
+		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
                }
 			   
             $request->session()->flash("pay-card-status",$stt['status']);
