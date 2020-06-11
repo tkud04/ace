@@ -98,6 +98,9 @@ class PaymentController extends Controller {
 	 */
 	public function getPaymentCallback(Request $request)
     {
+		        $paymentDetails = Paystack::getPaymentData();
+
+        dd($paymentDetails);       
 		if(Auth::check())
 		{
 			$user = Auth::user();
@@ -107,9 +110,7 @@ class PaymentController extends Controller {
         	return redirect()->intended('login?return=dashboard');
         }
 		
-        $paymentDetails = Paystack::getPaymentData();
 
-        dd($paymentDetails);       
         $paymentData = $paymentDetails['data'];
         $successLocation = "";
         $failureLocation = "";
