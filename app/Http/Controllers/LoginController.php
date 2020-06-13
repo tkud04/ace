@@ -129,7 +129,7 @@ class LoginController extends Controller {
        #dd($req);
         
         $validator = Validator::make($req, [
-                             'pass' => 'required|min:7|confirmed',
+                             'pass' => 'required|min:7',
                              'email' => 'required|email',                            
                              'phone' => 'required|numeric',
                              'fname' => 'required',
@@ -168,7 +168,7 @@ class LoginController extends Controller {
              #$this->helpers->sendEmail($user->email,'Welcome To Disenado!',['name' => $user->fname, 'id' => $user->id],'emails.welcome','view');
              session()->flash("signup-status", "success");
 			 $rex = isset($req['u']) ? $req['u'] : '/';
-             return redirect()->intended($rex);
+             return redirect()->back();
           }
     }
 

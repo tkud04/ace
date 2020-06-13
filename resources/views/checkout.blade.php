@@ -251,13 +251,9 @@
 					@if(is_null($user))
 					<!-- Email and phone -->
                          <div class="row">
-                          <div class="col-sm-6 form-group">
+                          <div class="col-sm-12 form-group">
                             <label class="control-label" for="pass">Password</label>
                             <input type="password" id="pass" name="pass" class="form-control">
-						  </div>
-						  <div class="col-sm-6 form-group">
-                            <label class="control-label" for="pass_confirmation">Confirm password</label>
-                           <input type="password" id="pass_confirmation" name="pass_confirmation" class="form-control">
 						  </div>
                          </div>
 						 
