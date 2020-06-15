@@ -101,9 +101,20 @@
 			    $address = $ss['address']; $state = $ss['state']; 
 				$city = $ss['city']; $zip = $ss['zipcode']; $notes = "";  
 			  }
+			  
+			  //for tests
+			  $secureCheckout = "https://www.aceluxurystore.com/checkout";
+			  $unsecureCheckout = url('checkout');
+			  $securePay = "https://www.aceluxurystore.com/pay";
+			  $unsecurePay = url('pay');
+			  
+			  $isSecure = (isset($secure) && $secure);
+			  $pay = $isSecure ? $securePay : $unsecurePay;
+			  $checkout = $isSecure ? $secureCheckout : $unsecureCheckout;
+			  
 		    ?>
-				 <input type="hidden" id="bank-action" value="{{url('checkout')}}">
-                            	<input type="hidden" id="card-action" value="{{url('pay')}}">
+				 <input type="hidden" id="bank-action" value="{{$checkout}}">
+                            	<input type="hidden" id="card-action" value="{{$pay}}">
                             	
                              
 							
