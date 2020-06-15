@@ -442,14 +442,11 @@
                 <div class="col-sm-12">
                   <h5 class="text-info text-uppercase">Stay in touch</h5>
                   <ul class="list-inline social clearfix">
-                    <li class="col-sm-4 facebook"><a href="#"> <span><i class="ion-social-facebook"></i></span>
-                      <p>2598</p>
+                    <li class="col-sm-6 facebook"><a href="https://www.facebook.com/aceluxurystore"> <span><i class="ion-social-facebook"></i></span>
+                      <p>160</p>
                       </a></li>
-                    <li class="col-sm-4 twitter"><a href="#"> <span><i class=" ion-social-twitter"></i></span>
-                      <p>4576</p>
-                      </a></li>
-                    <li class="col-sm-4 googleplus"><a href="#"> <span><i class=" ion-social-instagram"></i></span>
-                      <p>1269</p>
+                    <li class="col-sm-6 googleplus"><a href="https://www.instagram.com/aceluxurystore"> <span><i class=" ion-social-instagram"></i></span>
+                      <p>1597</p>
                       </a></li>
                   </ul>
                 </div>
@@ -462,7 +459,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
-              <p class="pull-left">&copy; {{date("Y")}} Allrights reserved <a class="external" href="{{url('/')}}">Ace Luxury</a>.</p>
+              <p class="pull-left">&copy; {{date("Y")}} Allrights reserved <a class="external" href="{{url('/')}}">Ace Luxury Store</a>.</p>
             </div>
           </div>
         </div>
