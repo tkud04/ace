@@ -39,7 +39,7 @@
               <section> <img width="820" height="703" alt="" src="images/banner4.jpg" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
-                <a href="#">travel</a> <a href="#">blog</a> <a href="#">lifestyle</a> <a href="#">feature</a> <a href="#">mountain</a> <a href="#">design</a> <a href="#">restaurant</a> <a href="#">journey</a> <a href="#">classic</a> <a href="#">sunset</a> </section>
+                <a href="#">earrings</a> <a href="#">rings</a> <a href="#">brooches</a> <a href="#">watches</a> <a href="#">bracelets</a> <a href="#">fashion</a></section>
             </div>
             <div class="col-sm-8 col-md-9  main-sec">
               <div class="row">
@@ -124,7 +124,9 @@
                       </div>
                       <div class="product-price clearfix">
 					    <span class="pull-left btn btn-primary"><strong>&#8358;<?php echo e(number_format($newAmount, 2)); ?></strong></span>
+						<?php if($newAmount != $oldAmount): ?>
 					    <span class="pull-left btn btn-link"><del>&#8358;<?php echo e(number_format($oldAmount, 2)); ?></del></span>
+					    <?php endif; ?>
 					  </div>
                      
                       <div class="product-quantity">
@@ -276,22 +278,22 @@
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="<?php echo e($uu); ?>"><img class="btm-img" src="<?php echo e($imggs[0]); ?>" width="215" height="240"  alt=""/> <img class="top-img" src="<?php echo e($imggs[1]); ?>" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="<?php echo e($uu); ?>"><img class="btm-img" src="<?php echo e($imggs[1]); ?>" width="215" height="240"  alt=""/> <img class="top-img" src="<?php echo e($imggs[0]); ?>" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCart({sku:'<?php echo e($sku); ?>',qty: 1})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToWishlist({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
-                              <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCompare({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
-                              <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV('<?php echo e($sku); ?>','<?php echo e($description); ?>','<?php echo e($amount); ?>','<?php echo e($amount + 1000); ?>','<?php echo e(ucwords($in_stock)); ?>','<?php echo e($imggs[0]); ?>')" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
-							  </p>
+		   <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCart({sku:'<?php echo e($sku); ?>',qty:'1'})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToWishlist({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
+                              <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCompare({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
+                               <p class="effect-icon">
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'<?php echo e($sku); ?>',description:`<?php echo e($description); ?>`,amount:'<?php echo e($amount); ?>',oldAmount:'<?php echo e($amount + 1000); ?>',inStock:'<?php echo e(ucwords($in_stock)); ?>',imgg:'<?php echo e($imggs[0]); ?>'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		  				  </p>
                             </div>
                           </div>
                           <div class="product-info">
                             <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
-                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> </div>
-                            <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
+                            <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
+                          <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
                           </div>
                         </div>
                         <!--end of product item container-->

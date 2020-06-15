@@ -92,8 +92,10 @@
         <div class="col-sm-12">
           <div id="products" class="row">
 		  <?php
-		   foreach($na as $n)
+		   $naCount = count($na) < 12 ? count($na) : 12;
+		   for($i = 0; $i < $naCount; $i++)
 		   {
+			   $n = $na[$i];
 			   $sku = $n['sku'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
@@ -170,8 +172,11 @@
         <div class="col-sm-12">
           <ul class="row list-inline best-selling wow fadeIn" data-wow-offset="10" data-wow-duration="2s">
 		   <?php
-		   foreach($bs as $b)
+		   $bsCount = count($bs) < 12 ? count($bs) : 12;
+		   for($i = 0; $i < $bsCount; $i++)
 		   {
+			   $b = $bs[$i];
+
 			   $sku = $b['sku'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
