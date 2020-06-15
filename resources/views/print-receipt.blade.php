@@ -184,12 +184,12 @@
                     <div class="col company-details">
                         <h2 class="name">
                             <a target="_blank" href="#">
-                            Ace Luxury Stores
+                            Ace Luxury Store
                             </a>
                         </h2>
                         <div>3 Oshikomaiya Close, Demurin Road, Ketu, Lagos</div>
                         <div>(+234 809 703 9692</div>
-                        <div>info@aceluxurystores.com</div>
+                        <div>support@aceluxurystore.com</div>
                     </div>
                 </div>
             </header>
