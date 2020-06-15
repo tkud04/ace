@@ -680,6 +680,8 @@ $subject = $data['subject'];
            	$ret = [];
               $products = Products::where('id','>',"0")
 			                       ->where('status',"enabled")->get();
+								   
+				$products = $products->sortByDesc('created_at');				   
  
               if($products != null)
                {
@@ -697,7 +699,8 @@ $subject = $data['subject'];
            {
            	$ret = [];
                  $pds = ProductData::where('category',$cat)->get();
- 
+                 $pds = $pds->sortByDesc('created_at');	
+				 
               if($pds != null)
                {
 				  foreach($pds as $p)
@@ -715,7 +718,8 @@ $subject = $data['subject'];
 			   //WORK NEEDS TO BE DONE HERE
            	$ret = [];
                  $pds = ProductData::where('id','>','0')->get();
- 
+                 $pds = $pds->sortByDesc('created_at');	
+				 
               if($pds != null)
                {
 				  foreach($pds as $p)
@@ -937,7 +941,8 @@ $subject = $data['subject'];
            {
            	$ret = [];
               $pds = ProductData::where('in_stock',"new")->get();
- 
+               $pds = $pds->sortByDesc('created_at');	
+			   
               if($pds != null)
                {
 				  foreach($pds as $p)
@@ -954,7 +959,8 @@ $subject = $data['subject'];
            {
            	$ret = [];
               $pds = ProductData::where('in_stock',"new")->get();
- 
+              $pds = $pds->sortByDesc('created_at');	
+			  
               if($pds != null)
                {
 				  foreach($pds as $p)
@@ -986,7 +992,8 @@ $subject = $data['subject'];
            	$ret = [];
               $reviews = Reviews::where('sku',$sku)
 			                    ->where('status',"enabled")->get();
- 
+              $reviews = $reviews->sortByDesc('created_at');	
+			  
               if($reviews != null)
                {
 				  foreach($reviews as $r)
@@ -1507,6 +1514,8 @@ $subject = $data['subject'];
            	$ret = [];
 
 			  $orders = Orders::where('user_id',$user->id)->get();
+			  $orders = $orders->sortByDesc('created_at');
+			  
 			  #dd($uu);
               if($orders != null)
                {
@@ -1588,6 +1597,7 @@ $subject = $data['subject'];
 			   $ret = [];
 			   if($reference == "") $trackings = Trackings::where('id','>',"0")->get();
 			   else $trackings = Trackings::where('reference',$reference)->get();
+			   $trackings = $trackings->sortByDesc('created_at');
 			   
 			   if(!is_null($trackings))
 			   {
