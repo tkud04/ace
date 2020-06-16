@@ -114,7 +114,7 @@ class LoginController extends Controller {
 			else
 			{
 				session()->flash("login-status","error");
-				return redirect()->intended('login');
+				return redirect()->back();
 			}
          }        
     }
