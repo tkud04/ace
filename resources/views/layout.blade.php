@@ -111,11 +111,13 @@
 		  let ggid = getParameterByName("gid");
 		  console.log("[gid,ggid]: ",[gid,ggid]);
 		  
-		  if(!ggid){
+         /**		 
+		 if(!ggid){
 			  let uu = new URL(window.location.href);
 			  uu.searchParams.append("gid",gid);
 			   window.location =  uu;
 		  }
+		 **/
 	</script>
 	  <?php
 	  

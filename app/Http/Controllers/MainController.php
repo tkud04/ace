@@ -34,7 +34,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		//dd($bs);
@@ -65,7 +65,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		
 		$c = $this->helpers->getCategories();
@@ -122,7 +122,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
@@ -216,7 +216,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$totals = $this->helpers->getCartTotals($cart);
 		//dd($totals);
@@ -225,8 +225,7 @@ class MainController extends Controller {
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
-		//dd($totals);
-		session()->reflash();
+		#session()->reflash();
 		return view("cart",compact(['user','cart','totals','c','ad','signals']));					 
     }
 	
@@ -246,7 +245,7 @@ class MainController extends Controller {
 		    $shipping = $this->helpers->getShippingDetails($user);	
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$totals = $this->helpers->getCartTotals($cart);
 		
@@ -346,7 +345,7 @@ class MainController extends Controller {
 			$user = Auth::user();	
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
@@ -406,7 +405,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
@@ -471,7 +470,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
@@ -524,7 +523,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
@@ -550,7 +549,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
@@ -575,7 +574,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
@@ -600,7 +599,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
@@ -625,7 +624,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
@@ -661,7 +660,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 			$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
@@ -689,7 +688,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 			$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 		    $signals = $this->helpers->signals;
@@ -776,7 +775,7 @@ class MainController extends Controller {
 		{
 			$user = Auth::user();
 			$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
@@ -849,7 +848,7 @@ class MainController extends Controller {
 			
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         $req = $request->all();
         //dd($req);
@@ -947,7 +946,7 @@ class MainController extends Controller {
 		}
 		
         $req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         
         $validator = Validator::make($req, [
@@ -987,7 +986,7 @@ class MainController extends Controller {
 		}
 		
        $req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         //dd($req);
         $ret = [];
@@ -1026,7 +1025,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
@@ -1056,7 +1055,7 @@ class MainController extends Controller {
 		}
 		
        $req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -1096,7 +1095,7 @@ class MainController extends Controller {
 		}
 		
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         
         
@@ -1134,7 +1133,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 		}
 		$req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
@@ -1164,7 +1163,7 @@ class MainController extends Controller {
 		}
 		
         $req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
         
         $validator = Validator::make($req, [
                              'sku' => 'required'
@@ -1213,7 +1212,7 @@ class MainController extends Controller {
 		}
 		
        $req = $request->all();
-		$gid = isset($req['gid']) ? $req['gid'] : "";
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         
         $validator = Validator::make($req, [
