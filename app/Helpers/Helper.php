@@ -36,7 +36,7 @@ use GuzzleHttp\Exception\RequestException;
 class Helper implements HelperContract
 {
 
- public $signals = ['okays'=> ["login-status" => "Sign in successful",            
+ public $signals = ['okays'=> ["login-status" => "Welcome back!",            
                      "signup-status" => "Account created. Enjoy your shopping!",
                      "profile-status" => "Profile updated!",
 					 "cpayment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
@@ -56,7 +56,7 @@ class Helper implements HelperContract
 					 "select-bank-status" => "Please select your bank",					 
 					 "no-cart-status" => "Your cart is empty."
                      ],
-                     'errors'=> ["login-status-error" => "There was a problem signing in, please try again.",
+                     'errors'=> ["login-status-error" => "Wrong username or password, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
 					 "profile-status-error" => "There was a problem updating your profile, please try again.",
 					 "update-status-error" => "There was a problem updating the account, please try again.",
