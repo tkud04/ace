@@ -1,0 +1,9 @@
+customer not receiving email after payment
+product images should show on order emails, orders
+add images to receipt, export to pdf and print
+receipt not generating correct receipt
+
+admin
+add users tab
+reviews
+add bulk functionality for tracking order

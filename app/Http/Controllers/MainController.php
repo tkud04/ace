@@ -269,7 +269,7 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
-		$secure = true;
+		$secure = false;
 		return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));								 
     }
 	
@@ -323,6 +323,16 @@ class MainController extends Controller {
 			 else
 			 {
 				 $ret = $this->helpers->checkout($user,$req,"bank");
+				 
+				 //We have the user, notify the customer and admin
+				$rett = $this->helpers->smtp;
+				$u = $this->helpers->getUser($user->id);
+				$rett['order'] = $this->helpers->getOrder($ret->reference);
+				$rett['u'] = $u;
+				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
+		        $rett['em'] = $u['email'];
+		        $this->helpers->sendEmailSMTP($rett,"emails.new-order-bank");
+				 
 		         $uu = url('confirm-payment')."?oid=".$ret->id;
 			     return redirect()->intended($uu);
 			 }
@@ -1212,6 +1222,7 @@ class MainController extends Controller {
 		}
 		
        $req = $request->all();
+	  # dd($req);
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
         
@@ -1229,8 +1240,8 @@ class MainController extends Controller {
          else
          {
 			$order = $this->helpers->getOrder($req['oid']);
-			//dd($order);
-			if($order['status'] == "unpaid" && $order['type'] == "bank")
+			#dd($order);
+			if(isset($order['status']) && $order['status'] == "unpaid" && $order['type'] == "bank")
 			{
 				return view("confirm-payment",compact(['user','cart','c','ad','order','banks','signals']));
 			}
