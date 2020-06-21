@@ -1,4 +1,4 @@
-add images to receipt, export to pdf and print, add discount to receipt
+export to pdf and print, add discount to receipt
 receipt not generating correct receipt
 forgot password
 add update qty to cart

@@ -236,16 +236,24 @@ $ru = url('receipt')."?r=".$order['reference']."&print=1";
 					   foreach($order['items'] as $i){
 						   ++$x;
 						   $product = $i['product'];
+						   $sku = $product['sku'];
+						   $qty = $i['qty'];
 						   $pd = $product['pd'];
 						   $pu = url('product')."?sku=".$product['sku'];
+						   $img = $product['imggs'][0];
 					   ?>
                         <tr>
                             <td class="no">{{$x}}</td>
                             <td class="text-left">
-							   <h3><a target="_blank" href="{{$pu}}">{{$product['sku']}}</a></h3>
+							   <h3>
+							    <a href="{{$pu}}" target="_blank">
+						        <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="50" width="50" style="margin-bottom: 5px;"/>
+							     {{$sku}}
+						         </a>
+							   </h3>
                             </td>
-                            <td class="unit">{{$i['qty']}}</td>
-                            <td class="total">&#8358;{{number_format($pd['amount'] * $i['qty'],2)}}</td>
+                            <td class="unit">{{$qty}}</td>
+                            <td class="total">&#8358;{{number_format($pd['amount'] * $qty,2)}}</td>
                         </tr>
                        <?php
 					   }
