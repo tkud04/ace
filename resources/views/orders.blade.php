@@ -75,11 +75,17 @@
 						 foreach($items as $i)
 						 {
 							 $product = $i['product'];
+							 $sku = $product['sku'];
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
+							 $img = $product['imggs'][0];
 							 
 						 ?>
-						 <a href="{{$pu}}" target="_blank">{{$product['sku']}}</a> (x{{$qty}})<br>
+						 
+						 <a href="{{$pu}}" target="_blank">
+						   <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="50" width="50" style="margin-bottom: 5px;"/>
+							   {{$sku}}
+						 </a> (x{{$qty}})<br>
 						 <?php
 						 }
 						?>

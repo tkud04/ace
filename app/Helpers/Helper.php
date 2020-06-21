@@ -748,6 +748,7 @@ $subject = $data['subject'];
 				  $temp['discounts'] = $this->getDiscounts($product->sku);
 				  $temp['pd'] = $this->getProductData($product->sku);
 				  $imgs = $this->getImages($product->sku);
+				  #dd($imgs);
 				  $temp['imggs'] = $this->getCloudinaryImages($imgs);
 				  $ret = $temp;
                }                         

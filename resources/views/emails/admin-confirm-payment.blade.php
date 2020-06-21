@@ -1,6 +1,7 @@
 <?php
  $totals = $order['totals'];
- $items = $totals['items'];
+ $items = $order['items'];
+ $itemCount = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/confirm-payment?o=".$order['reference'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
@@ -11,7 +12,24 @@ Customer: <b>{{$user}}</b><br>
 Bank name: <b>{{$bname}}</b><br>
 Account name: <b>{{$acname}}</b><br>
 Account number: <b>{{$acnum}}</b><br>
-Items: <b>{{$items}}</b><br>
+<?php
+foreach($items as $i)
+{
+	$product = $i['product'];
+	$sku = $product['sku'];
+	$qty = $i['qty'];
+	$pu = url('product')."?sku=".$product['sku'];
+	$img = $product['imggs'][0];
+	
+?>
+
+<a href="{{$pu}}" target="_blank">
+  <img style="vertical-align: middle;border:0;line-height: 20px;" src="{{$img}}" alt="{{$sku}}" height="50" width="50" style="margin-bottom: 5px;"/>
+	  {{$sku}}
+</a> (x{{$qty}})<br>
+<?php
+}
+?>
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 

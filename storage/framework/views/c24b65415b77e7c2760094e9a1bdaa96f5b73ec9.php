@@ -73,11 +73,18 @@
 						 foreach($items as $i)
 						 {
 							 $product = $i['product'];
+							 $sku = $product['sku'];
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
+							 $img = $product['imggs'][0];
 							 
 						 ?>
-						 <a href="<?php echo e($pu); ?>" target="_blank"><?php echo e($product['sku']); ?></a> (x<?php echo e($qty); ?>)<br>
+						 
+						 <a href="<?php echo e($pu); ?>" target="_blank">
+						   <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="50" width="50" style="margin-bottom: 5px;"/>
+							   <?php echo e($sku); ?>
+
+						 </a> (x<?php echo e($qty); ?>)<br>
 						 <?php
 						 }
 						?>
