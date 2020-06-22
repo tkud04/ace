@@ -245,7 +245,7 @@ $ru = url('receipt')."?r=".$order['reference']."&print=1";
                             <td class="text-left">
 							   <h3>
 							    <a href="<?php echo e($pu); ?>" target="_blank">
-						        <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="50" width="50" style="margin-bottom: 5px;"/>
+						        <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
 							     <?php echo e($sku); ?>
 
 						         </a>

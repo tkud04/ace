@@ -1,5 +1,4 @@
 export to pdf and print, add discount to receipt
-receipt not generating correct receipt
 forgot password
 add update qty to cart
 swal alert unpaid invoices on home page load

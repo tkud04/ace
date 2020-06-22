@@ -83,7 +83,7 @@
 						 ?>
 						 
 						 <a href="{{$pu}}" target="_blank">
-						   <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="50" width="50" style="margin-bottom: 5px;"/>
+						   <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="80" width="80" style="margin-bottom: 5px;"/>
 							   {{$sku}}
 						 </a> (x{{$qty}})<br>
 						 <?php

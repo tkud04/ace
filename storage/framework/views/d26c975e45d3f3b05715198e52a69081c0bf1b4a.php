@@ -197,14 +197,14 @@
                 <div class="row contacts">
                     <div class="col invoice-to">
                         <div class="text-gray-light">RECEIPT</div>
-                        <h2 class="to">Barbie Sandy</h2>
-                        <div class="address">08023324554</div>
-                        <div class="email"><a href="mailto:barbie@yahoo.com">barbie@yahoo.com</a></div>
+                        <h2 class="to"><?php echo e($buyer['fname']." ".$buyer['lname']); ?></h2>
+                        <div class="address"><?php echo e($buyer['phone']); ?></div>
+                        <div class="email"><a href="mailto:<?php echo e($buyer['email']); ?>"><?php echo e($buyer['email']); ?></a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">UNPAID</h1>
-                        <div class="date">Receipt generated on: 10th April, 2020</div>
-                        <div class="date">Reference #: VQxhyzbBUzIvDqyEeeIlLHOu3</div>
+                        <h1 class="invoice-id"><?php echo e(strtoupper($order['status'])); ?></h1>
+                        <div class="date">Receipt generated on: <?php echo e($order['date']); ?></div>
+                        <div class="date">Reference #: <?php echo e($order['reference']); ?></div>
                     </div>
                 </div>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -217,38 +217,52 @@
                         </tr>
                     </thead>
                     <tbody>
-					                         <tr>
-                            <td class="no">1</td>
+					 <?php
+					   if(isset($order['items'])){
+						   $x = 0;
+					   foreach($order['items'] as $i){
+						   ++$x;
+						   $product = $i['product'];
+						   $sku = $product['sku'];
+						   $qty = $i['qty'];
+						   $pd = $product['pd'];
+						   $pu = url('product')."?sku=".$product['sku'];
+						   $img = $product['imggs'][0];
+					   ?>
+                        <tr>
+                            <td class="no"><?php echo e($x); ?></td>
                             <td class="text-left">
-							   <h3><a target="_blank" href="http://localhost:8000/product?sku=ACE7759LX464">ACE7759LX464</a></h3>
+							   <h3>
+							    <a href="<?php echo e($pu); ?>" target="_blank">
+						        <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
+							     <?php echo e($sku); ?>
+
+						         </a>
+							   </h3>
                             </td>
-                            <td class="unit">3</td>
-                            <td class="total">₦12,000.00</td>
+                            <td class="unit"><?php echo e($qty); ?></td>
+                            <td class="total">&#8358;<?php echo e(number_format($pd['amount'] * $qty,2)); ?></td>
                         </tr>
-                                               <tr>
-                            <td class="no">2</td>
-                            <td class="text-left">
-							   <h3><a target="_blank" href="http://localhost:8000/product?sku=ACE2078LX616">ACE2078LX616</a></h3>
-                            </td>
-                            <td class="unit">1</td>
-                            <td class="total">₦3,500.00</td>
-                        </tr>
-                                           </tbody>
+                       <?php
+					   }
+					   }
+					   ?>
+                    </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">SUBTOTAL</td>
-                            <td>₦15,500.00</td>
+                            <td>&#8358;<?php echo e(number_format($totals['subtotal'],2)); ?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">DELIVERY</td>
-                            <td>₦1,000.00</td>
+                            <td>&#8358;<?php echo e(number_format($totals['delivery'],2)); ?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">TOTAL</td>
-                            <td>₦16,500.00</td>
+                            <td>&#8358;<?php echo e(number_format($totals['subtotal'] + $totals['delivery'],2)); ?></td>
                         </tr>
                     </tfoot>
                 </table>
