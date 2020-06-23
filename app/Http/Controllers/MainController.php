@@ -11,6 +11,8 @@ use Cookie;
 use Validator; 
 use Carbon\Carbon; 
 use App\Products;
+use Codedge\Fpdf\Fpdf\Fpdf;
+
 class MainController extends Controller {
 
 	protected $helpers; //Helpers implementation
@@ -346,7 +348,7 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getReceipt(Request $request)
+	public function getReceipt(Request $request, Fpdf $fpdf)
     {
          $user = null;
 		$cart = [];
@@ -387,9 +389,27 @@ class MainController extends Controller {
 					 {
 						 $totals = $this->helpers->getOrderTotals($order['items']);
 						 # dd($totals);
-						 if(isset($req['print']) && $req['print'] == "1")
+						 if(isset($req['print']))
 						 {
-						   return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+						   switch($req['print'])
+						   {
+							   case "1":
+							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+							   break;
+							   
+							   case "2":
+							    $dt = [
+								  'name' => $buyer['fname']." ".$buyer['lname'],
+								  'email' => $buyer['email'],
+								  'phone' => $buyer['phone']
+								];
+							    $params = ['type' => 'receipt','data' => $dt];
+         	                    $this->helpers->outputPDF($params,$fpdf);
+							   break;
+							   
+							   default:
+							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+						   }
 						 }
 						 else
 						 {
@@ -1386,7 +1406,30 @@ class MainController extends Controller {
    
     
     
-    public function getBomb(Request $request)
+    public function getPDFTest(Request $request, Fpdf $fpdf)
+	{
+		$req = $request->all();
+       # dd($fpdf);
+        
+        $validator = Validator::make($req, [
+                             'x' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             return json_encode(['status' => "error", 'message' => "validation"]);
+         }
+         
+         else
+         {
+			 $params = ['type' => 'test-2','data' => []];
+         	 $this->helpers->outputPDF($params,$fpdf);
+         } 
+         
+		
+	}
+	
+	public function getBomb(Request $request)
 	{
 		$req = $request->all();
         //dd($req);

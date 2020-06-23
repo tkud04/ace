@@ -31,6 +31,7 @@ use \Cloudinary\Api\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 
 class Helper implements HelperContract
@@ -264,8 +265,6 @@ public $categories = [
   
   public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
-  
-  
   
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
@@ -1834,7 +1833,89 @@ $subject = $data['subject'];
 		$this->sendEmailSMTP($ret,$data['view']);
 		
 		return json_encode(['status' => "ok"]);
-	}		   
+	}
+	
+	function pdfHeader($ph)
+	{
+		$img = public_path()."/images/logoo.png";
+		$ph->Cell(80);
+		$ph->Image($img,80,10,50);
+		$ph->Ln(55);
+		$ph->SetFont('Arial', 'BU', 18);
+		$ph->SetX(-60);
+        $ph->Cell(0, 10, 'Ace Luxury Store',0,1);
+		$ph->SetFont('Arial', '', 15);
+		$ph->SetX(-125);
+        $ph->Cell(0, 10, '3 Oshikomaiya Close, Demurin Road, Ketu, Lagos',0,1);
+		$ph->SetX(-55);
+        $ph->Cell(0, 10, '(+234) 809 703 9692',0,1);
+		$ph->SetFont('Arial', 'IU', 15);
+		$ph->SetTextColor(0,0,120);
+		$ph->SetX($ph->GetPageWidth() - ($ph->GetStringWidth('support@aceluxurystore.com') + 5));
+        $ph->Cell(0, 10, 'support@aceluxurystore.com',0,1);
+		$ph->Ln(20);
+		$ph->Line(0,$ph->GetY() - 10,$ph->GetPageWidth(),$ph->GetY() - 10);
+	}
+	
+	function pdfFooter($ph)
+	{
+		$ph->SetY(-30);
+		$ph->SetFont('Arial','I',8);
+		$ph->SetTextColor(128);
+		$ph->Cell(0,5,'Page '.$ph->PageNo().'/{nb}',0,0,'C');
+	}
+
+    function outputPDF($data,$fpdf)
+	{	
+	   $dt = $data['data'];
+		switch($data['type'])
+		{
+			case 'test':
+			 $fpdf->AddPage();
+             $fpdf->SetFont('Arial', 'BU', 18);
+			 $fpdf->Cell(80);
+             $fpdf->Cell(20, 10, 'Creating PDF documents from helpers up',0,1,'C');
+			 $fpdf->SetFont('Arial', '', 15);
+             $fpdf->Cell(20, 10, 'Creating PDF documents from helpers');
+			break;
+			
+			case 'test-2':
+			$fpdf->AliasNbPages();
+			 $fpdf->AddPage();
+			 $this->pdfHeader($fpdf);
+			 $fpdf->SetFont('Arial', '', 15);
+			 $fpdf->SetTextColor(0);
+             $fpdf->Cell(20, 10, 'RECEIPT',0,1);
+			 $fpdf->SetFont('Arial', 'B', 18);
+             $fpdf->Cell(20, 10, 'John SNow',0,1);
+			 $fpdf->SetFont('Arial', '', 15);
+             $fpdf->Cell(20, 10, '07054329101',0,1);
+			  $fpdf->SetFont('Arial', 'IU', 15);
+			 $fpdf->SetTextColor(0,0,120);
+             $fpdf->Cell(20, 10, 'myemail@yahoo.com',0,1);
+			 $this->pdfFooter($fpdf);
+			break;
+			
+			case 'receipt':
+			$fpdf->AliasNbPages();
+			 $fpdf->AddPage();
+			 $this->pdfHeader($fpdf);
+			 $fpdf->SetFont('Arial', '', 15);
+			 $fpdf->SetTextColor(0);
+             $fpdf->Cell(20, 10, 'RECEIPT',0,1);
+			 $fpdf->SetFont('Arial', 'B', 18);
+             $fpdf->Cell(20, 10, $dt['name'],0,1);
+			 $fpdf->SetFont('Arial', '', 15);
+             $fpdf->Cell(20, 10,  $dt['phone'],0,1);
+			  $fpdf->SetFont('Arial', 'IU', 15);
+			 $fpdf->SetTextColor(0,0,120);
+             $fpdf->Cell(20, 10,  $dt['email'],0,1);
+			 $this->pdfFooter($fpdf);
+			break;
+		}
+		
+		$fpdf->Output('D');
+	}	
    
 }
 ?>

@@ -72,3 +72,4 @@ Route::post('subscribe', 'MainController@postSubscribe');
 Route::post('sync-data', 'MainController@postSyncData');
 Route::get('zohoverify/{nn}', 'MainController@getZoho');
 Route::get('bomb', 'MainController@getBomb');
+Route::get('pdf', 'MainController@getPDFTest');

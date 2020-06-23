@@ -173,13 +173,14 @@
 <?php $__env->startSection('content'); ?>
 <?php
 $ru = url('receipt')."?r=".$order['reference']."&print=1";
+$pu = url('receipt')."?r=".$order['reference']."&print=2";
 ?>
 <div id="invoice">
 
     <div class="toolbar hidden-print">
         <div class="text-right">
             <a id="printInvoicee" href="<?php echo e($ru); ?>" class="btn btn-info"><i class="fa fa-print"></i> Print</a>
-            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+            <a class="btn btn-info" href="<?php echo e($pu); ?>"><i class="fa fa-file-pdf-o"></i> Export as PDF</a>
         </div>
         <hr>
     </div>
