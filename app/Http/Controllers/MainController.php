@@ -293,7 +293,7 @@ class MainController extends Controller {
         }
         $req = $request->all();
 		$req['zip'] = "";
-        dd($req);
+        #dd($req);
         
         $validator = Validator::make($req, [
                              'email' => 'required|email',
