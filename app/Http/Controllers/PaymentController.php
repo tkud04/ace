@@ -136,22 +136,22 @@ class PaymentController extends Controller {
 			//send email to user
 			$id = $paymentData['metadata']['custom_fields'][0]['value'];
 			$o = $this->helpers->getOrder($id);
-               
+               #dd($o);
+			   
                if($o != null || count($o) > 0)
-               {
-				   $u = $this->helpers->getUser($o['user_id']);
+               {		  
 				   //dd($u);
                	//We have the user, notify the customer and admin
 				$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
-				$ret['user'] = $u['email'];
+				$ret['user'] = $user;
 				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";
-		        $ret['em'] = $u['email'];
+		        $ret['em'] = $user->email;
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
 				#$ret = $this->helpers->smtp;
-				$ret['order'] = $this->helpers->getOrder($o->reference);
-				$ret['user'] = $u['email'];
+				$ret['order'] = $o;
+				$ret['user'] =$user->email;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
 		        //$this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");

@@ -1,6 +1,7 @@
 <?php
  $totals = $order['totals'];
- $items = $totals['items'];
+ $items = $order['items'];
+ $itemCount = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
  $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
 ?>
@@ -9,7 +10,25 @@
 Hello admin,<br> please be informed that a new order has been placed via online payment. Se the details below:<br><br>
 Reference #: <b><?php echo e($order['reference']); ?></b><br>
 Customer: <b><?php echo e($user); ?></b><br>
-Items: <b><?php echo e($items); ?></b><br>
+<?php
+foreach($items as $i)
+{
+	$product = $i['product'];
+	$sku = $product['sku'];
+	$qty = $i['qty'];
+	$pu = url('product')."?sku=".$product['sku'];
+	$img = $product['imggs'][0];
+	
+?>
+
+<a href="<?php echo e($pu); ?>" target="_blank">
+  <img style="vertical-align: middle;border:0;line-height: 20px;" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
+	  <?php echo e($sku); ?>
+
+</a> (x<?php echo e($qty); ?>)<br>
+<?php
+}
+?>
 Total: <b>&#8358;<?php echo e(number_format($order['amount'],2)); ?></b><br><br>
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
