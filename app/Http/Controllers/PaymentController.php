@@ -135,17 +135,16 @@ class PaymentController extends Controller {
 			
 			//send email to user
 			$id = $paymentData['metadata']['custom_fields'][0]['value'];
-			$o = Orders::where('id',$id)
-			           ->OrWhere('reference',$id)->first();
+			$o = $this->getOrder($id);
                
-               if($o != null)
+               if($o != null || count($o) > 0)
                {
-				   $u = $this->helpers->getUser($o->user_id);
+				   $u = $this->helpers->getUser($o['user_id']);
 				   //dd($u);
                	//We have the user, notify the customer and admin
 				$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
-				$ret['user'] = $u;
+				$ret['user'] = $u['email'];
 				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";
 		        $ret['em'] = $u['email'];
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
@@ -155,7 +154,7 @@ class PaymentController extends Controller {
 				$ret['user'] = $u['email'];
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
-		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
+		        //$this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
 				$ret['em'] = $this->helpers->suEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
                }
