@@ -135,7 +135,7 @@ class PaymentController extends Controller {
 			
 			//send email to user
 			$id = $paymentData['metadata']['custom_fields'][0]['value'];
-			$o = $this->getOrder($id);
+			$o = $this->helpers->getOrder($id);
                
                if($o != null || count($o) > 0)
                {
