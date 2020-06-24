@@ -1,8 +1,6 @@
 export to pdf and print, add discount to receipt
 forgot password
 add update qty to cart
-swal alert unpaid invoices on home page load
-remove stock images
 
 admin
 add users tab

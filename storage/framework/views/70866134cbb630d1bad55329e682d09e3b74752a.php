@@ -4,6 +4,19 @@
  
  <?php echo $__env->make('banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   
+
+
+  <?php if(isset($hasUnpaidOrders) && $hasUnpaidOrders): ?>
+	<script>
+      Swal.fire({
+      title: `You have unpaid orders!`,
+	  icon: 'warning',
+      showCloseButton: true,
+      html:
+        `<h4 class="text-danger">Please make payment for your pending orders. If you have made payment, click <a href="orders">here</a> to confirm your payment`
+})
+    </script>
+  <?php endif; ?>
   <!--start of middle sec-->
   <div class="middle-se"> 
     

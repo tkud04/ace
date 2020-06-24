@@ -1915,6 +1915,14 @@ $subject = $data['subject'];
 		}
 		
 		$fpdf->Output('D');
+	}
+
+    function checkForUnpaidOrders($u)
+	{
+		$ret = Orders::where('user_id',$u->id)
+		                ->where('status','unpaid')->count();
+		#dd($ret);
+		return $ret > 0;
 	}	
    
 }

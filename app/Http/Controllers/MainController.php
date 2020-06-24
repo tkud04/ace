@@ -46,11 +46,14 @@ class MainController extends Controller {
 		//dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
+		$hasUnpaidOrders = $this->helpers->checkForUnpaidOrders($user);
+		#dd($hasUnpaidOrders);
+		
 		shuffle($ads);
 		shuffle($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 
-    	return view("index-2",compact(['user','cart','c','banners','bs','na','ad','signals']));
+    	return view("index-2",compact(['user','cart','c','banners','hasUnpaidOrders','bs','na','ad','signals']));
     }
 	
 	/**
@@ -271,7 +274,7 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
-		$secure = true;
+		$secure = false;
 		return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));								 
     }
 	
