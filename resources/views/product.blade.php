@@ -38,7 +38,7 @@
                   
                 </ul>
               </section>        
-              <section> <img width="820" height="703" alt="" src="images/banner4.jpg" class="img-responsive"> </section>
+              <section> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
                 <a href="#">earrings</a> <a href="#">rings</a> <a href="#">brooches</a> <a href="#">watches</a> <a href="#">bracelets</a> <a href="#">fashion</a></section>

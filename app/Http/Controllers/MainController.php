@@ -48,7 +48,7 @@ class MainController extends Controller {
 		$banners = $this->helpers->getBanners();
 		shuffle($ads);
 		shuffle($banners);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 
     	return view("index-2",compact(['user','cart','c','banners','bs','na','ad','signals']));
     }
@@ -75,7 +75,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$na = $this->helpers->getNewArrivals();
 		
                  if(isset($req['type']) || isset($req['category']))
@@ -131,7 +131,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		
     	
 		
@@ -226,7 +226,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		#session()->reflash();
 		return view("cart",compact(['user','cart','totals','c','ad','signals']));					 
     }
@@ -268,7 +268,7 @@ class MainController extends Controller {
 		$ref = $this->helpers->getRandomString(5);
 						$md = json_encode(['custom_fields' => ['display_name' => "Reference No.",'variable_name' => "ref",'value' => $ref],'type' => "checkout",'notes' => ""]);
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
 		$secure = false;
@@ -363,7 +363,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		
 		$req = $request->all();
 	    //dd($secure);
@@ -441,7 +441,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		//dd($user);
 		return view("contact",compact(['user','cart','c','ad','signals']));							 
     }
@@ -506,7 +506,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		
 		$req = $request->all();
 	    //dd($secure);
@@ -560,7 +560,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		#dd($ads);
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		return view("about",compact(['user','cart','c','ad','signals']));	
     }
 
@@ -584,7 +584,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		return view("privacy-policy",compact(['user','cart','c','ad','signals']));	
     }
@@ -609,7 +609,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		return view("return-policy",compact(['user','cart','c','ad','signals']));	
     }
@@ -634,7 +634,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		return view("faq",compact(['user','cart','c','ad','signals']));	
     }
@@ -659,7 +659,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		$req = $request->all();
 		
@@ -696,7 +696,7 @@ class MainController extends Controller {
 			$ads = $this->helpers->getAds();
 			$orders = $this->helpers->getOrders($user);
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
 		    return view("dashboard",compact(['user','cart','c','ad','orders','signals']));			
 		}
@@ -727,7 +727,7 @@ class MainController extends Controller {
 			$shipping = $this->helpers->getShippingDetails($user);
 			$ads = $this->helpers->getAds();
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 
 			$ss = ['company' => "",
 			       'address' => "",
@@ -812,7 +812,7 @@ class MainController extends Controller {
 			$orders = $this->helpers->getOrders($user);
 			#dd($orders);
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
 			$wext = isset($req['wext']) ? $req['wext'] : null;
 		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals']));			
@@ -1062,7 +1062,7 @@ class MainController extends Controller {
 			$wishlist = $this->helpers->getWishlist($user,$gid);
 
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
 		    return view("wishlist",compact(['user','cart','c','ad','wishlist','signals']));			
 		
@@ -1170,7 +1170,7 @@ class MainController extends Controller {
 			$compares = $this->helpers->getComparisons($user,$gid);
 
 		shuffle($ads);
-		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
 		    return view("compare",compact(['user','cart','c','ad','compares','signals']));			
 		
@@ -1228,7 +1228,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
 			shuffle($ads);
-		    $ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
+		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 			 $signals = $this->helpers->signals;
 			 $banks = $this->helpers->banks;
     	if(Auth::check())
