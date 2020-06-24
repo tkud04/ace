@@ -39,13 +39,14 @@ class PaymentController extends Controller {
         }
 		
 		$req = $request->all();
-        //dd($req);
+        dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
    
         $validator = Validator::make($req, [
                              'fname' => 'required|filled',
+							 'amount' => 'required',
                              'lname' => 'required|filled',
                              'email' => 'required|email|filled',
                              'address' => 'required|filled',
