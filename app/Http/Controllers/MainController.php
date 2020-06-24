@@ -271,7 +271,7 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
-		$secure = false;
+		$secure = true;
 		return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));								 
     }
 	
