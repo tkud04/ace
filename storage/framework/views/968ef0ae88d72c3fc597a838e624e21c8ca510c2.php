@@ -135,6 +135,7 @@
                   <form role="form" id="checkout-form" method="post">
 			                <!-- payment form -->
                             	<input type="hidden" name="email" value="<?php echo e($email); ?>"> 
+                            	<input type="hidden" name="quantity" value="<?php echo e($totals['items']); ?>"> 
                             	<input type="hidden" name="amount" value="<?php echo e(($totals['subtotal'] + $totals['delivery']) * 100); ?>"> 
                             	<input type="hidden" name="metadata" id="nd" value="" > 
                             
