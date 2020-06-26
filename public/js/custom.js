@@ -577,6 +577,14 @@ function addToCart(dt)
   window.location = cu;
 }
 
+function updateCart(dt)
+{    
+  let qty = $(`#qty-${dt.sku}`).val();
+  let upu = `update-cart?sku=${dt.sku}&qty=${qty}&gid=${gid}`;
+  console.log("upu: ",upu);
+  window.location = upu;
+}
+
 function removeFromCart(dt)
 {
   let ru = `remove-from-cart?sku=${dt.sku}&gid=${gid}`;

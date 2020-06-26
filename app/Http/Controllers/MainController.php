@@ -29,11 +29,12 @@ class MainController extends Controller {
 	 */
 	public function getIndex(Request $request)
     {
+		$hasUnpaidOrders = null;
 		$user = null;
 		if(Auth::check())
 		{
 			$user = Auth::user();
-			
+			$hasUnpaidOrders = $this->helpers->checkForUnpaidOrders($user);
 		}
 		$req = $request->all();
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
@@ -46,7 +47,7 @@ class MainController extends Controller {
 		//dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
-		$hasUnpaidOrders = $this->helpers->checkForUnpaidOrders($user);
+		
 		#dd($hasUnpaidOrders);
 		
 		shuffle($ads);
@@ -921,29 +922,30 @@ class MainController extends Controller {
          }        
     }
 	
-	
 	/**
 	 * Show the application welcome screen to the user.
 	 *
 	 * @return Response
 	 */
-    public function postUpdateCart(Request $request)
+    public function getUpdateCart(Request $request)
     {
+		$user = null;
+		$cart = [];
+		
     	if(Auth::check())
 		{
 			$user = Auth::user();
 			
 		}
-		else
-        {
-        	return redirect()->intended('/');
-        }
+		$req = $request->all();
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
         $req = $request->all();
-        //dd($req);
+        #dd($gid);
         
         $validator = Validator::make($req, [
-                             'quantity' => 'required|array|min:1',
-                             'quantity.*' => 'required|numeric'
+                             'sku' => 'required',
+                             'qty' => 'required|numeric'
          ]);
          
          if($validator->fails())
@@ -955,10 +957,19 @@ class MainController extends Controller {
          
          else
          {
-         	$quantities = $req["quantity"]; 
-             $this->helpers->updateCart($cart, $quantities);
-	        session()->flash("update-cart-status","ok");
-			return redirect()->intended('cart');
+			$req['user_id'] = is_null($user) ? $gid : $user->id;
+         	$ret = $this->helpers->updateCart($req);
+			//dd($ret);
+			session()->flash("update-cart-status",$ret);
+			
+			if($ret == "ok")
+			{
+				return redirect()->intended('cart');
+			}
+			elseif($ret == "error")
+			{
+				return redirect()->back();
+			}
          }        
     }
     

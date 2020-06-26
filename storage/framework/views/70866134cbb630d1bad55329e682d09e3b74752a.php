@@ -6,7 +6,7 @@
   
 
 
-  <?php if(isset($hasUnpaidOrders) && $hasUnpaidOrders): ?>
+  <?php if(!is_null($hasUnpaidOrders) && $hasUnpaidOrders): ?>
 	<script>
       Swal.fire({
       title: `You have unpaid orders!`,

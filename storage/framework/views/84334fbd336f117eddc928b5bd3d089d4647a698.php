@@ -54,6 +54,17 @@
                           <div class="item-body col-sm-8">
                             <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h5>
                             <p class="item-description"><?php echo e($itemDescription); ?></p>
+							
+							<div class="text-info">
+						    <div class="product-quantity">
+                        <h5 class="text-primary text-uppercase">select quantity</h5>
+                        <div class="qty-btngroup clearfix pull-left">
+                          <button type="button" class="minus">-</button>
+                          <input type="text" id="qty-<?php echo e($sku); ?>" value="<?php echo e($qty); ?>">
+                          <button type="button" class="plus">+</button>
+                        </div>
+                        <a href="javascript:void(0)" onclick="updateCart({sku:'<?php echo e($sku); ?>'})" class="btn btn-primary pull-left hvr-underline-from-center-primary">Update Cart</a> </div>
+                    </div>
                           </div>
                           <div class="item-price js-item-price col-sm-2 text-info text-center" data-price="11.99"> <strong>&#8358;<?php echo e(number_format($itemAmount * $qty, 2)); ?></strong> </div>
                         </div>

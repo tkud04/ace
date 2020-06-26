@@ -1106,25 +1106,20 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		    function updateCart($cart, $quantities)
+		    function updateCart($dt)
            {
-           	#$ret = ["subtotal" => 0, "delivery" => 0, "total" => 0];
-              
-              if($cart != null && count($cart) > 0)
-               {
-               	for($c = 0; $c < count($quantities); $c++) 
-                    {
-                    	$ccc = $cart[$c];
-                    	$cc = Carts::where('id', $ccc['id'])->first();
-                   
-                        if($cc != null)
-                        {
-                        	$cc->update(['qty' => $quantities[$c] ]);
-                        }
-                   }
-                   
-                   return "ok";
-               }                                 
+			  # dd($dt);
+           	   $userId = $dt['user_id'];
+			 $ret = "error";
+			 
+			 $c = Carts::where('user_id',$userId)
+			           ->where('sku',$dt['sku'])->first();
+
+			if($c != null)
+			{
+                $c->update(['qty' => $dt['qty']]);				
+				$ret = "ok";
+			}        
                                                       
                 return $ret;
            }	
