@@ -5,5 +5,5 @@ admin
 add bulk functionality for tracking order
 add bulk action widgets to dashboard:
 -tracking multiple orders
--update status for multiple orders paid via bank
+-confirm payment for multiple orders paid via bank
 -update stock, status for multiple products
