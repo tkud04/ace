@@ -1,9 +1,6 @@
-export to pdf and print, add discount to receipt
+export to pdf and print, add discount, delivery fee to receipt
 forgot password
 
 admin
-add bulk functionality for tracking order
 add bulk action widgets to dashboard:
--tracking multiple orders
--confirm payment for multiple orders paid via bank
 -update stock, status for multiple products
