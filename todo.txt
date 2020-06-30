@@ -1,6 +1,2 @@
 export to pdf and print, add discount, delivery fee to receipt
 forgot password
-
-admin
-add bulk action widgets to dashboard:
--update stock, status for multiple products

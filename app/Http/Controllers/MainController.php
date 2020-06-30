@@ -1470,6 +1470,22 @@ class MainController extends Controller {
 	}
 	
 	
+	 /****************
+    POST Redirects
+    ****************/
+    
+    /**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getPay()
+    {
+       return redirect()->intended('checkout');
+    }
+    
+	
+	
 	 /**
 	 * Show the application welcome screen to the user.
 	 *

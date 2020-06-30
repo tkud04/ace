@@ -66,6 +66,7 @@ Route::get('remove-from-compare', 'MainController@getRemoveFromCompare');
 Route::get('compare', 'MainController@getCompare');
 
 Route::get('payment/callback', 'PaymentController@getPaymentCallback');
+Route::get('pay', 'MainController@getPay');
 Route::post('pay', 'PaymentController@postRedirectToGateway');
 
 Route::post('subscribe', 'MainController@postSubscribe');
