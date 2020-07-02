@@ -277,7 +277,15 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		#dd($user);
 		$secure = true;
-		return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));								 
+		if(is_null($user))
+		{
+			return view("anon-checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));		
+		}
+		else
+		{
+			return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));		
+		}
+								 
     }
 	
 	/**
@@ -1482,6 +1490,29 @@ class MainController extends Controller {
          	$req['view'] = "emails.bomb";
          	$ret = $this->helpers->testBomb($req);
             return $ret;
+         } 
+         
+		
+	}
+	
+	public function getDeliveryFee(Request $request)
+	{
+		$req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             's' => 'required'
+         ]);
+		 
+         if($validator->fails())
+         {
+             return json_encode(['status' => "error", 'message' => "validation"]);
+         }
+         
+         else
+         {
+         	$ret = $this->helpers->getDeliveryFee($req['s'],"state");
+           return json_encode(['status' => "ok", 'message' => number_format($ret,2)]);
          } 
          
 		

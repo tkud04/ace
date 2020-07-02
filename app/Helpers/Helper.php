@@ -1141,15 +1141,33 @@ $subject = $data['subject'];
                 return "ok";
            }
 		   
-		   function getDeliveryFee($u=null)
+		   function getDeliveryFee($u=null,$type="user")
 		   {
 			   $ret = 2000;
-			   if(!is_null($u))
+			   $state = "";
+			   
+			   switch($type)
 			   {
-				  $shipping = $this->getShippingDetails($u);
-                  $s = $shipping[0];				  
-				  if($s['state'] == "ekiti" || $s['state'] == "lagos" || $s['state'] == "ogun" || $s['state'] == "ondo" || $s['state'] == "osun" || $s['state'] == "oyo") $ret = 1000; 
-			   } 
+				 case "user":
+				 if(!is_null($u))
+			     {
+				   $shipping = $this->getShippingDetails($u);
+                   $s = $shipping[0];				  
+                   $state = $s['state'];
+			     }
+                 break;
+
+                 case "state":
+				  $state = $u;
+                 break;				 
+			   }
+			   
+			   if($state != null && $state != "")
+			   {
+				 if($state == "ekiti" || $state == "lagos" || $state == "ogun" || $state == "ondo" || $state == "osun" || $state == "oyo") $ret = 1000;   
+			   }
+			   
+			    
 			   return $ret;
 		   }
 				

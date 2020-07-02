@@ -8,6 +8,15 @@ $(document).ready(function() {
        }
     })
     
+	$("#ca-state").on("change", function(e) {
+       // e.preventDefault();
+      let s = $('#ca-state').val();
+	   if(s == "none"){}
+	   else{
+		 getDeliveryFee(s);   
+	   }
+    })
+	
 	$("#per-page").on("change", function(e) {
        // e.preventDefault();
        perPage = $('#per-page').val();
@@ -21,6 +30,8 @@ $(document).ready(function() {
 		
 		
         $("#bname-other").hide();
+		 $('#checkout-new').hide();
+		 $('#checkout-anon').hide();
 		
 		/**
 		getCart()
@@ -615,6 +626,54 @@ function removeFromCompare(dt)
 {
   let wu = `remove-from-compare?sku=${dt.sku}&gid=${gid}`;
   window.location = wu;
+}
+
+function showCheckout(type){
+	switch(type){
+		case 'new':
+		 $('#checkout-anon').hide();
+		 $('#checkout-new').fadeIn();
+		break;
+		
+		case 'anon':
+		 $('#checkout-new').hide();
+		 $('#checkout-anon').fadeIn();
+		break;
+	}
+}
+
+function getDeliveryFee(dt){
+
+	//create request
+	const req = `gdf?s=${dt}`;
+	//console.log(req);
+	
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   //console.log(response);
+			   
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error:", message: "Network error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+	   })
+	   .then(res => {
+		   //console.log(res);
+		   
+		   if(res.status == "ok"){
+			      $('#deliv').html("&#8358;" + res.message);			  		  
+				}
+		  
+	   }).catch(error => {
+		    alert("Failed to send message: " + error);			
+	   });
 }
 
 const getCart = () => {
