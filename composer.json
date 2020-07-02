@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "barryvdh/laravel-dompdf": "^0.8.6",
         "cloudinary/cloudinary_php": "dev-master",
         "codedge/laravel-fpdf": "^1.6",
         "fideloper/proxy": "~4.0",

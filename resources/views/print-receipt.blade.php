@@ -240,7 +240,7 @@
 							   </h3>
                             </td>
                             <td class="unit">{{$qty}}</td>
-                            <td class="total">&#8358;{{number_format($pd['amount'] * $qty,2)}}</td>
+                            <td class="total">N{{number_format($pd['amount'] * $qty,2)}}</td>
                         </tr>
                        <?php
 					   }
@@ -255,7 +255,7 @@
 						<tr>
                             <td colspan="2"></td>
                             <td colspan="1">DISCOUNTS</td>
-                            <td>&#8358;{{number_format($totals['discount'],2)}}</td>
+                            <td>N{{number_format($totals['discount'],2)}}</td>
                         </tr>
 						<?php
 						}
@@ -263,17 +263,17 @@
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">SUBTOTAL</td>
-                            <td>&#8358;{{number_format($totals['subtotal'],2)}}</td>
+                            <td>N{{number_format($totals['subtotal'],2)}}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">DELIVERY</td>
-                            <td>&#8358;{{number_format($totals['delivery'],2)}}</td>
+                            <td>N{{number_format($totals['delivery'],2)}}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">TOTAL</td>
-                            <td>&#8358;{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</td>
+                            <td>N{{number_format($totals['subtotal'] + $totals['delivery'],2)}}</td>
                         </tr>
                     </tfoot>
                 </table>

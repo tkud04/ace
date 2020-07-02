@@ -11,7 +11,8 @@ use Cookie;
 use Validator; 
 use Carbon\Carbon; 
 use App\Products;
-use Codedge\Fpdf\Fpdf\Fpdf;
+//use Codedge\Fpdf\Fpdf\Fpdf;
+use PDF;
 
 class MainController extends Controller {
 
@@ -352,7 +353,7 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getReceipt(Request $request, Fpdf $fpdf)
+	public function getReceipt(Request $request)
     {
          $user = null;
 		$cart = [];
@@ -401,16 +402,31 @@ class MainController extends Controller {
 							   break;
 							   
 							   case "2":
-							    $dt = [
+							   /**
+							   $dt = [
 								  'name' => $buyer['fname']." ".$buyer['lname'],
 								  'email' => $buyer['email'],
 								  'phone' => $buyer['phone'],
 								  'status' => $order['status'],
 								  'date' => $order['date'],
 								  'reference' => $order['reference'],
+								  'items' => $order['items'],
 								];
 							    $params = ['type' => 'receipt','data' => $dt];
          	                    $this->helpers->outputPDF($params,$fpdf);
+								**/
+								$dt = [
+								  'user' => $user,
+								  'cart' => $cart,
+								  'c' => $c,
+								  'ad' => $ad,
+								  'order' => $order,
+								  'buyer' => $buyer,
+								  'signals' => $signals,
+								];
+								
+								$pdf = PDF::loadView('print-receipt', $dt);
+                                return $pdf->download('receipt.pdf');
 							   break;
 							   
 							   default:

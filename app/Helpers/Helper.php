@@ -1878,6 +1878,49 @@ $subject = $data['subject'];
 		$ph->SetTextColor(128);
 		$ph->Cell(0,5,'Page '.$ph->PageNo().'/{nb}',0,0,'C');
 	}
+	
+	function pdfTable($ph, $header, $data)
+   {
+    // Colors, line width and bold font
+    $ph->SetFillColor(141,154,165);
+    $ph->SetTextColor(255);
+    $ph->SetDrawColor(255);
+    $ph->SetLineWidth(.3);
+    $ph->SetFont('','B');
+    // Header
+    $w = array(10, 95, 20, 45);
+    for($i=0;$i<count($header);$i++)
+        $ph->Cell($w[$i],7,$header[$i],1,0,'C',true);
+    $ph->Ln();
+    // Color and font restoration
+    $ph->SetFillColor(224,235,255);
+    $ph->SetTextColor(0);
+    $ph->SetFont('');
+    // Data
+    $fill = false;
+	$x = 0;
+    foreach($data as $i)
+    {
+		++$x;
+		$product = $i['product'];
+		$sku = $product['sku'];
+		$qty = $i['qty'];
+		$pd = $product['pd'];
+		$pu = url('product')."?sku=".$product['sku'];
+		$img = $product['imggs'][0];
+		#dd($img);
+		
+        $ph->Cell($w[0],6,$x,'LR',0,'L',$fill);
+        //$ph->Image($img,$w[1],10,50,50,'png');
+        $ph->Cell($w[1],6,$sku,'LR',0,'L',$fill);
+        $ph->Cell($w[2],6,$qty,'LR',0,'R',$fill);
+        $ph->Cell($w[3],6,"N".number_format($pd['amount'] * $qty,2),'LR',0,'R',$fill);
+        $ph->Ln();
+        $fill = !$fill;
+    }
+    // Closing line
+    $ph->Cell(array_sum($w),0,'','T');
+   }
 
     function outputPDF($data,$fpdf)
 	{	
@@ -1911,6 +1954,12 @@ $subject = $data['subject'];
 			break;
 			
 			case 'receipt':
+			$rows = [
+			 ['1',"item 1 with image","qty 1","amount 1"],
+			 ['2',"item 2 with image","qty 2","amount 2"],
+			 ['3',"item 3 with image","qty 3","amount 3"],
+			 ['4',"item 4 with image","qty 4","amount 4"],
+			];
 			$fpdf->AliasNbPages();
 			 $fpdf->AddPage();
 			 $this->pdfHeader($fpdf);
@@ -1932,9 +1981,13 @@ $subject = $data['subject'];
 			 $fpdf->SetFont('Arial', '', 13);
 			 $fpdf->SetTextColor(150,150,150);
 			 $fpdf->Cell(0, 10, "Receipt generated on: ".$dt['date'],0,1);
-			 $fpdf->SetX(-57);
-			 $fpdf->Cell(0, 10, "Reference number: ".$dt['reference'],0,1);
+			 $fpdf->SetX(-50);
+			 $fpdf->Cell(0, 10, "Reference #: ".$dt['reference'],0,1);
+			 $fpdf->Ln();
+			 $fpdf->SetX(0);
+			 $this->pdfTable($fpdf,['#','Items','Qty','Total'],$dt['items']);
 			 $this->pdfFooter($fpdf);
+			 
 			break;
 		}
 		

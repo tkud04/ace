@@ -164,7 +164,8 @@ return [
 		 * Custom Service Providers...
 		 */
 		App\Providers\HelperServiceProvider::class, 
-		Unicodeveloper\Paystack\PaystackServiceProvider::class
+		Unicodeveloper\Paystack\PaystackServiceProvider::class,
+		Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -203,6 +204,7 @@ return [
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
 		'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+		'PDF' => Barryvdh\DomPDF\Facade::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,
