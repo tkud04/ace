@@ -231,6 +231,7 @@ $pu = url('receipt')."?r=".$order['reference']."&print=2";
                     <tbody>
 					 <?php
 					   if(isset($order['items'])){
+						   $totals = $order['totals'];
 						   $x = 0;
 					   foreach($order['items'] as $i){
 						   ++$x;
@@ -261,6 +262,18 @@ $pu = url('receipt')."?r=".$order['reference']."&print=2";
 					   ?>
                     </tbody>
                     <tfoot>
+					    <?php
+						if($totals['discount'] > 0)
+						{
+						?>
+						<tr>
+                            <td colspan="2"></td>
+                            <td colspan="1">DISCOUNTS</td>
+                            <td>&#8358;<?php echo e(number_format($totals['discount'],2)); ?></td>
+                        </tr>
+						<?php
+						}
+						?>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">SUBTOTAL</td>

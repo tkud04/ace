@@ -9,8 +9,7 @@
 .invoice {
     position: relative;
     background-color: #FFF;
-    min-height: 680px;
-    padding: 15px
+    padding: 15px;
 }
 
 .invoice header {
@@ -219,6 +218,7 @@
                     <tbody>
 					 <?php
 					   if(isset($order['items'])){
+						    $totals = $order['totals'];
 						   $x = 0;
 					   foreach($order['items'] as $i){
 						   ++$x;
@@ -248,6 +248,18 @@
 					   ?>
                     </tbody>
                     <tfoot>
+					    <?php
+						if($totals['discount'] > 0)
+						{
+						?>
+						<tr>
+                            <td colspan="2"></td>
+                            <td colspan="1">DISCOUNTS</td>
+                            <td>&#8358;{{number_format($totals['discount'],2)}}</td>
+                        </tr>
+						<?php
+						}
+						?>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="1">SUBTOTAL</td>
@@ -265,18 +277,8 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="thanks">Thank you!</div>
-                <div class="notices">
-                    <div>NOTICE:</div>
-                    <div class="notice">Your order will only be processed after payment is cleared.</div>
-                </div>
             </main>
-            <footer>
-                This receipt was created automatically and is valid without the signature and seal.
-            </footer>
         </div>
-        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
-        <div></div>
     </div>
 </div>
 </body>

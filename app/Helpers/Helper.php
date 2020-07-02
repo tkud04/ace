@@ -1483,21 +1483,39 @@ $subject = $data['subject'];
 			  return $ret;
 		   }
 
-           function getOrderTotals($items)
+           function getOrderTotals($items,$uid=null)
            {
-           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
+           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0,"discount" => 0];
               #dd($items);
               if($items != null && count($items) > 0)
                {           	
                	foreach($items as $i) 
                     {
 						$amount = $i['product']['pd']['amount'];
+						$dsc = $this->getDiscountPrices($amount,$i['product']['discounts']);
+						$newAmount = 0;
+						if(count($dsc) > 0)
+			            {
+				          foreach($dsc as $d)
+				          {
+					        if($newAmount < 1)
+					        {
+						      $newAmount = $amount - $d;
+					        }
+					        else
+					        {
+						      $newAmount -= $d;
+					        }
+							$ret['discount'] += $d;
+				          }
+					      $amount = $newAmount;
+			            }
 						$qty = $i['qty'];
                     	$ret['items'] += $qty;
 						$ret['subtotal'] += ($amount * $qty);	
                     }
-                   
-                   $ret['delivery'] = $this->getDeliveryFee();
+                   $u = User::where('id',$uid)->first();
+                   $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
                                                       
@@ -1535,6 +1553,7 @@ $subject = $data['subject'];
                {
 				  $temp = [];
                   $temp['id'] = $o->id;
+                  $temp['user_id'] = $o->user_id;
                   $temp['reference'] = $o->reference;
                   $temp['amount'] = $o->amount;
                   $temp['type'] = $o->type;
@@ -1542,7 +1561,7 @@ $subject = $data['subject'];
                   $temp['notes'] = $o->notes;
                   $temp['status'] = $o->status;
                   $temp['items'] = $this->getOrderItems($o->id);
-                  $temp['totals'] = $this->getOrderTotals( $temp['items']);
+                  $temp['totals'] = $this->getOrderTotals($temp['items'],$o->user_id);
                   $temp['date'] = $o->created_at->format("jS F, Y");
                   $ret = $temp; 
                }                                 

@@ -1,2 +1,2 @@
-export to pdf and print, add discount, delivery fee to receipt
+export to pdf
 forgot password

@@ -391,14 +391,13 @@ class MainController extends Controller {
 					 }
 				     else
 					 {
-						 $totals = $this->helpers->getOrderTotals($order['items']);
-						 # dd($totals);
+						 # dd($order);
 						 if(isset($req['print']))
 						 {
 						   switch($req['print'])
 						   {
 							   case "1":
-							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
 							   break;
 							   
 							   case "2":
@@ -412,12 +411,12 @@ class MainController extends Controller {
 							   break;
 							   
 							   default:
-							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
 						   }
 						 }
 						 else
 						 {
-						    return view("receipt", compact(['user','cart','c','ad','order','buyer','totals','signals'])); 
+						    return view("receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
 						 }
 						  
 					 }					 
