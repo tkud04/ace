@@ -1924,6 +1924,16 @@ $subject = $data['subject'];
 			  $fpdf->SetFont('Arial', 'IU', 15);
 			 $fpdf->SetTextColor(0,0,120);
              $fpdf->Cell(20, 10,  $dt['email'],0,1);
+			 $fpdf->SetX(-40);
+			 $fpdf->SetFont('Arial', '', 15);
+			 $fpdf->SetTextColor(0);
+             $fpdf->Cell(0, 10, 'STATUS: '.strtoupper($dt['status']),0,1);
+			 $fpdf->SetX(-83);
+			 $fpdf->SetFont('Arial', '', 13);
+			 $fpdf->SetTextColor(150,150,150);
+			 $fpdf->Cell(0, 10, "Receipt generated on: ".$dt['date'],0,1);
+			 $fpdf->SetX(-57);
+			 $fpdf->Cell(0, 10, "Reference number: ".$dt['reference'],0,1);
 			 $this->pdfFooter($fpdf);
 			break;
 		}

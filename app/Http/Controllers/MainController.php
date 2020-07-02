@@ -404,7 +404,10 @@ class MainController extends Controller {
 							    $dt = [
 								  'name' => $buyer['fname']." ".$buyer['lname'],
 								  'email' => $buyer['email'],
-								  'phone' => $buyer['phone']
+								  'phone' => $buyer['phone'],
+								  'status' => $order['status'],
+								  'date' => $order['date'],
+								  'reference' => $order['reference'],
 								];
 							    $params = ['type' => 'receipt','data' => $dt];
          	                    $this->helpers->outputPDF($params,$fpdf);
