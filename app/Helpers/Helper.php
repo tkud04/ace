@@ -1487,13 +1487,13 @@ $subject = $data['subject'];
            function addOrder($user,$data,$gid=null)
            {
 			   $cart = [];
-			   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
-
-			 if($user == null && $gid != null) $cart = $this->getCart($user,$gid);
-			 else $cart = $this->getCart($user);
-               #dd($cart);
+			   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";  
            	   $order = $this->createOrder($user, $data);
-               
+			   
+                if($user == null && $gid != null) $cart = $this->getCart($user,$gid);
+			 else $cart = $this->getCart($user);
+			 #dd($cart);
+			 
                #create order details
                foreach($cart as $c)
                {
