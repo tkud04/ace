@@ -1605,7 +1605,8 @@ $subject = $data['subject'];
 					
 					if($uid == "anon")
 					{
-						$anon = $this->getAnonOrder($oid);
+						$o = $this->getOrder($oid);
+						$anon = $this->getAnonOrder($o['reference']);
 						$ret['delivery'] = $this->getDeliveryFee($anon['state'],"state");
 					}
 					else
