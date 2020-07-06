@@ -18,6 +18,7 @@ use App\ProductImages;
 use App\Reviews;
 use App\Ads;
 use App\Banners;
+use App\AnonOrders;
 use App\Orders;
 use App\OrderItems;
 use App\Trackings;
@@ -55,7 +56,8 @@ class Helper implements HelperContract
 					 "remove-from-wishlist-status" => "Removed from wishlist!",
 					 "remove-from-compare-status" => "Removed from compare list!",
 					 "select-bank-status" => "Please select your bank",					 
-					 "no-cart-status" => "Your cart is empty."
+					 "no-cart-status" => "Your cart is empty.",
+					 "invalid-order-status" => "We couldn't find your order.",
                      ],
                      'errors'=> ["login-status-error" => "Wrong username or password, please try again.",
 					 "signup-status-error" => "There was a problem creating your account, please try again.",
@@ -74,6 +76,7 @@ class Helper implements HelperContract
 					 "remove-from-compare-status-error" => "There was a problem removing item from compare list.",
 					 "track-order-status-error" => "Invalid reference number, please try again.",
 					 "no-cart-status-error" => "Your cart is empty.",
+					 "invalid-order-status-error" => "We could not find your order.",
                     ]
                    ];
 
@@ -544,7 +547,7 @@ $subject = $data['subject'];
            {
 			  if(is_null($user))
 			  {
-				  $uu = $this->getIP();
+				  $uu = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";;
 			  }
               else
 			  {
@@ -592,7 +595,8 @@ $subject = $data['subject'];
 		   function getShippingDetails($user)
            {
            	$ret = [];
-               $sdd = ShippingDetails::where('user_id',$user->id)->get();
+			$uid = isset($user->id) ? $user->id: $user;
+               $sdd = ShippingDetails::where('user_id',$uid)->get();
  
               if($sdd != null)
                {
@@ -1396,10 +1400,31 @@ $subject = $data['subject'];
 		   }
 
            function payWithBank($user, $md)
-           {			   
+           {	
+             # dd([$user,$md]);		   
                 $dt = [];
-               	$dt['amount'] = $md['amount'] / 100;
-				$dt['ref'] = $this->getRandomString(5);
+				$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+				
+				if(is_null($user))
+				{
+		            $cart = $this->getCart($user,$gid);
+		            $totals = $this->getCartTotals($cart);
+					$delivery = $this->getDeliveryFee($md['state'],"state");
+					$dt['amount'] = $totals['subtotal'] + $delivery;
+					
+					$dt['name'] = $md['name'];
+					$dt['email'] = $md['email'];
+					$dt['phone'] = $md['phone'];
+					$dt['address'] = $md['address'];
+					$dt['city'] = $md['city'];
+					$dt['state'] = $md['state'];
+				}
+				else
+				{
+					$dt['amount'] = $md['amount'] / 100;
+				}
+				
+               	$dt['ref'] = $this->getRandomString(5);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
 				$dt['type'] = "bank";
@@ -1407,7 +1432,7 @@ $subject = $data['subject'];
               
               #create order
               #dd($dt);
-              $o = $this->addOrder($user,$dt);
+              $o = $this->addOrder($user,$dt,$gid);
                 return $o;
            }
 		   
@@ -1450,9 +1475,12 @@ $subject = $data['subject'];
 			   }
 		   }
 
-           function addOrder($user,$data)
+           function addOrder($user,$data,$gid=null)
            {
-           	$cart = $this->getCart($user);
+			   $cart = [];
+			   
+			 if($gid != null) $cart = $this->getCart($user,$gid);
+			 else $cart = $this->getCart($user);
                
            	   $order = $this->createOrder($user, $data);
                
@@ -1478,9 +1506,22 @@ $subject = $data['subject'];
 
            function createOrder($user, $dt)
 		   {
+			   #dd($dt);
 			   $psref = isset($dt['ps_ref']) ? $dt['ps_ref'] : "";
 			   
-			   $ret = Orders::create(['user_id' => $user->id,
+			   if(is_null($user))
+			   {
+				   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+				   $anon = AnonOrders::create(['email' => $dt['email'],
+				                     'reference' => $dt['ref'],
+				                     'name' => $dt['name'],
+				                     'phone' => $dt['phone'],
+				                     'address' => $dt['address'],
+				                     'city' => $dt['city'],
+				                     'state' => $dt['state'],
+				             ]);
+				   
+				   $ret = Orders::create(['user_id' => "anon",
 			                          'reference' => $dt['ref'],
 			                          'ps_ref' => $psref,
 			                          'amount' => $dt['amount'],
@@ -1488,7 +1529,22 @@ $subject = $data['subject'];
 			                          'payment_code' => $dt['payment_code'],
 			                          'notes' => $dt['notes'],
 			                          'status' => $dt['status'],
-			                 ]);
+			                 ]); 
+			   }
+			   
+			   else
+			   {
+				 $ret = Orders::create(['user_id' => $user->id,
+			                          'reference' => $dt['ref'],
+			                          'ps_ref' => $psref,
+			                          'amount' => $dt['amount'],
+			                          'type' => $dt['type'],
+			                          'payment_code' => $dt['payment_code'],
+			                          'notes' => $dt['notes'],
+			                          'status' => $dt['status'],
+			                 ]);   
+			   }
+			   
 			  return $ret;
 		   }
 
@@ -1837,17 +1893,17 @@ $subject = $data['subject'];
     function confirmPayment($u,$data)
 	{
 		$o = $this->getOrder($data['o']);
-		#dd($u);
+		#dd([$u,$data]);
 		$ret = $this->smtp;
 		$ret['order'] = $o;
-		$ret['user'] = $u->email;
+		$ret['user'] = is_null($u) ? $data['email'] : $u->email;
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
 		$ret['acnum'] = $data['acnum'];
 		$ret['em'] = $this->adminEmail;
-		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		//$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		$ret['em'] = $this->suEmail;
 		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		return json_encode(['status' => "ok"]);
@@ -2019,6 +2075,57 @@ $subject = $data['subject'];
 		#dd($ret);
 		return $ret > 0;
 	}	
+	
+	 function getAnonOrder($id)
+           {
+           	$ret = [];
+               $o = AnonOrders::where('reference',$id)
+			            ->orWhere('id',$id)->first();
+						
+               $o2 = Orders::where('reference',$id)
+			            ->orWhere('id',$id)->first();
+						
+              if($o != null || $o2 != null)
+               {
+				   if($o != null)
+				   {
+					 $temp['name'] = $o->name; 
+                       $temp['reference'] = $o->reference; 
+                       //$temp['wallet'] = $this->getWallet($u);
+                       $temp['phone'] = $o->phone; 
+                       $temp['email'] = $o->email; 
+                       $temp['address'] = $o->address; 
+                       $temp['city'] = $o->city; 
+                       $temp['state'] = $o->state; 
+                       $temp['id'] = $o->id; 
+                       $temp['date'] = $o->created_at->format("jS F, Y"); 
+                       $ret = $temp;  
+				   }
+				   else if($o2 != null)
+				   {
+					   $u = $this->getUser($o2->user_id);
+					   $sd = $this->getShippingDetails($u['id']);
+					   $shipping = $sd[0];
+					   
+					  if(count($u) > 0)
+					   {
+						 $temp['name'] = $u['fname']." ".$u['lname']; 
+                         $temp['reference'] = $o2->reference;                 
+                         $temp['phone'] = $u['phone']; 
+                         $temp['email'] = $u['email']; 
+                         $temp['address'] = $shipping['address']; 
+                         $temp['city'] = $shipping['city']; 
+                         $temp['state'] = $shipping['state']; 
+                         $temp['id'] = $o2->id; 
+                         $temp['date'] = $o2->created_at->format("jS F, Y"); 
+                         $ret = $temp;  
+					   }  
+				   }
+                   	 
+               }                          
+                                                      
+                return $ret;
+           }
    
 }
 ?>

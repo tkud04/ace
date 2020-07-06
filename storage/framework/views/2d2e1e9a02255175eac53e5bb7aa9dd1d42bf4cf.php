@@ -21,6 +21,7 @@
             <div class="col-sm-4 col-md-3 sub-data-left sub-equal">
               <div id="sticky">
                 <section class="col-sm-12">
+				<input type="hidden" id="checkout-subtotal" value="<?php echo e($totals['subtotal']); ?>">
                   <h5 class="sub-title text-info text-uppercase">order summary</h5>
                   <ul class="list-group summary">
                     <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> <?php echo e($totals['items']); ?></span></strong></li>
@@ -38,11 +39,11 @@
 				   }
 				  ?>
 				  <h5 class="sub-title text-info text-uppercase"><?php echo e($totalText); ?></h5>
-                  <div class=" summary sum js-total text-center"> <strong id="total"> &#8358;<?php echo e(number_format($total,2)); ?></strong> </div>
+                  <div class=" summary sum js-total text-center"> <strong id="checkout-total"> &#8358;<?php echo e(number_format($total,2)); ?></strong> </div>
                   <a href="<?php echo e(url('cart')); ?>" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
 				
-				<section class="col-sm-12">
+				<section class="col-sm-12" id="checkout-methods">
 				<br>
 				   <div class="accordion">
                   <div aria-multiselectable="true" role="tablist" id="accordion-one" class="panel-group">
@@ -120,19 +121,21 @@
                   </ol>
                 </div>
                 <!--end of breadcrumb--> 
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-20">
 			  <div class="alert alert-info" role="alert"><i class="ion-information-circled"></i> Returning customer? <a href="javascript:void(0)" data-toggle="modal" data-target="#login-box">Click here to login</a></div>
-			</div>
+			</div><br><br>
                 <!--start of checkout-->
                 <div class="col-sm-12">
 				 <div class="row">
-				   <div class="col-sm-6">
+				   <div class="col-sm-6">				    
 				    <center>
+					 <div class="alert alert-warning" role="alert"><i class="ion-information-circled"></i>Don't have an account? <a href="javascript:void(0)">It's easy to sign up! With an account you get to access some of the awesome features of our website.</a></div>
 				      <a class="btn btn-primary btn-lg" href="javascript:void(0)" onclick="showCheckout('new')">CREATE AN ACCOUNT</a>
 					</center>
 				   </div>
 				   <div class="col-sm-6">
 				    <center>
+					   <div class="alert alert-success" role="alert"><i class="ion-information-circled"></i>Don't want to waste time? <a href="javascript:void(0)">Great! Just give us a name, your contact details to reach you and make your payment.</a></div>
 				      <a class="btn btn-primary btn-lg" href="javascript:void(0)" onclick="showCheckout('anon')">PROCEED TO CHECKOUT</a>
 					</center>
 				   </div>
@@ -259,7 +262,7 @@
                       <div class="col-sm-6">
                         <div class="checkbox small">
 						<?php
-						$checked = is_null($user) ? "" : " checked";
+						$checked = " checked";
 						?>
                           <input type="checkbox" id="terms" value="on" name="terms"<?php echo e($checked); ?>>
                           <label for="terms">Do you agree to the <a href="<?php echo e(url('returns')); ?>">terms?</a></label>
@@ -273,9 +276,13 @@
 					<?php if(is_null($user)): ?>
 					<!-- Email and phone -->
                          <div class="row">
-                          <div class="col-sm-12 form-group">
+                          <div class="col-sm-6 form-group">
                             <label class="control-label" for="pass">Password</label>
                             <input type="password" id="pass" name="pass" class="form-control">
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="pass2">Confirm password</label>
+                            <input type="password" id="pass2" name="pass_confirmation" class="form-control">
 						  </div>
                          </div>
 						 
@@ -317,39 +324,41 @@
                       <!-- START Presonal information -->
                       <fieldset class="col-md-12">
                         <legend>Billing Details</legend>
-                        
-                        <!-- Name -->
+						 <!-- Name  -->
                          <div class="row">
                           <div class="col-sm-12 form-group">
-                            <label class="control-label" for="fname">Name</label>
+                           <label class="control-label" for="ca-name">Name</label>
                             <input type="text" id="ca-name" name="name" class="form-control" <?php echo e($rd); ?>>
 						  </div>
                          </div>
 						 
-						 <!-- Email and phone -->
+						 <!-- Name and phone -->
                          <div class="row">
                           <div class="col-sm-6 form-group">
-                            <label class="control-label" for="email">Email address</label>
+                           <label class="control-label" for="ca-email">Email address</label>
                             <input type="text" id="ca-email" name="email" class="form-control" <?php echo e($rd); ?>>
 						  </div>
 						  <div class="col-sm-6 form-group">
-                            <label class="control-label" for="lname">Phone number</label>
+                            <label class="control-label" for="ca-phone">Phone number</label>
                             <input type="text" id="ca-phone" name="phone" class="form-control" <?php echo e($rd); ?>>
 						  </div>
                          </div>
                         
+						
                         <!-- Address -->
-                        <div class="form-group">
+                        <div class="row">
+						<div class="col-sm-6 form-group">
                           <label class="control-label" for="address">Shipping address</label>
                           <input type="text" id="ca-address" name="address" class="form-control" <?php echo e($rd); ?>>
                         </div>
-                        
-                        <!-- Country and state -->
-                        <div class="row">
-                          <div class="col-sm-6 form-group">
+						<div class="col-sm-6 form-group">
                             <label class="control-label" for="city">City</label>
                             <input type="text" id="ca-city" name="city" class="form-control" <?php echo e($rd); ?>>
                           </div>
+						</div>
+                        
+                        <!-- Country and state -->
+                        <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
                             <select class="selectpicker" id="ca-state" name="state" value="<?php echo e($state); ?>" style="display: none;">
@@ -374,17 +383,14 @@
                             ?>							
                             </select>
                           </div>
-                        </div>
-                        
-                        <!-- City and Zip code -->
-                        <div class="row">
-						  <div class="col-sm-12 form-group">
+						  <div class="col-sm-6 form-group">
                             <label class="control-label" for="country">Country</label>
                             <select class="selectpicker" id="ca-country" style="display: none;">
-                              <option>Nigeria</option>
+                              <option selected="selected">Nigeria</option>
                             </select>
                           </div>
                         </div>
+                        
                       </fieldset>
                       <!-- END Personal information-->                      
                    
@@ -414,12 +420,7 @@
                         
                       </div>
                     </div>
-					
-					<div class="row" style="margin-bottom: 20px;">
-					  <div class="col-sm-12">
-					    <input type="submit" class="btn btn-primary" value="Submit">
-					  </div>
-					</div>
+
                  </form>
 				</div>
                 <!--end of checkout--> 

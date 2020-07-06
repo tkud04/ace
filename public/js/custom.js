@@ -32,6 +32,7 @@ $(document).ready(function() {
         $("#bname-other").hide();
 		 $('#checkout-new').hide();
 		 $('#checkout-anon').hide();
+		 $('#checkout-methods').hide();
 		
 		/**
 		getCart()
@@ -411,7 +412,7 @@ function setPaymentAction(type){
 		paymentURL = $("#card-action").val();  
    }
    
-   //alert(paymentURL);
+   console.log(paymentURL);
    $('#checkout-form').attr('action',paymentURL);
    $('#checkout-form').submit();
 }
@@ -645,8 +646,9 @@ function showCheckout(type){
 function getDeliveryFee(dt){
 
 	//create request
-	const req = `gdf?s=${dt}`;
-	//console.log(req);
+	let subtotal = $('#checkout-subtotal').val();
+	const req = `gdf?s=${dt}&st=${subtotal}`;
+	console.log(req);
 	
 	
 	//fetch request
@@ -665,10 +667,12 @@ function getDeliveryFee(dt){
 		    alert("Failed to send message: " + error);			
 	   })
 	   .then(res => {
-		   //console.log(res);
+		   console.log(res);
 		   
 		   if(res.status == "ok"){
-			      $('#deliv').html("&#8358;" + res.message);			  		  
+			      $('#deliv').html("&#8358;" + res.message);
+				  if(parseInt(res.total) > 0) $('#checkout-total').html("&#8358;" + res.total);
+                  $('#checkout-methods').fadeIn();				  
 				}
 		  
 	   }).catch(error => {

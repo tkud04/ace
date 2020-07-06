@@ -276,7 +276,7 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		#dd($user);
-		$secure = true;
+		$secure = (isset($req['ss']) && $req['ss'] == "1") ? false : true;
 		if(is_null($user))
 		{
 			return view("anon-checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));		
@@ -295,20 +295,21 @@ class MainController extends Controller {
 	 */
     public function postCheckout(Request $request)
     {
+		$user = null;
+		$rules = [
+                             'email' => 'required|email',
+                             'name' => 'required',
+                             'phone' => 'required|numeric',
+                             'address' => 'required',
+                             'state' => 'required',
+                             'city' => 'required',
+                             'terms' => 'accepted'
+         ];
+		 
     	if(Auth::check())
 		{
 			$user = Auth::user();
-			
-		}
-		else
-        {
-        	return redirect()->intended('/');
-        }
-        $req = $request->all();
-		$req['zip'] = "";
-        #dd($req);
-        
-        $validator = Validator::make($req, [
+			$rules = [
                              'email' => 'required|email',
                              'amount' => 'required|numeric',
                              'fname' => 'required',
@@ -318,7 +319,13 @@ class MainController extends Controller {
                              'state' => 'required',
                              'city' => 'required',
                              'terms' => 'accepted'
-         ]);
+         ];
+		}
+        $req = $request->all();
+		$req['zip'] = "";
+        #dd($req);
+        
+        $validator = Validator::make($req, $rules);
          
          if($validator->fails())
          {
@@ -329,6 +336,7 @@ class MainController extends Controller {
          
          else
          {
+			 #dd($req);
 			 if($req['amount'] < 1)
 			 {
 				 $err = "error";
@@ -338,15 +346,25 @@ class MainController extends Controller {
 			 else
 			 {
 				 $ret = $this->helpers->checkout($user,$req,"bank");
-				 
+				 #dd($ret);
 				 //We have the user, notify the customer and admin
 				$rett = $this->helpers->smtp;
-				$u = $this->helpers->getUser($user->id);
+				if(is_null($user))
+				{
+					$u = $this->helpers->getAnonOrder($ret->reference);
+					$view = "emails.anon-new-order-bank";
+				}
+				else
+				{
+					$u = $this->helpers->getUser($user->id);
+					$view = "emails.new-order-bank";
+				}
+				
 				$rett['order'] = $this->helpers->getOrder($ret->reference);
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
 		        $rett['em'] = $u['email'];
-		        $this->helpers->sendEmailSMTP($rett,"emails.new-order-bank");
+		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
 		         $uu = url('confirm-payment')."?oid=".$ret->id;
 			     return redirect()->intended($uu);
@@ -392,7 +410,7 @@ class MainController extends Controller {
                  else
                  {
 					 $order = $this->helpers->getOrder($req['r']);
-					 $buyer = $this->helpers->getBuyer($req['r']);
+					
 					
 					 if(is_null($order) || $order == [])
 					 {
@@ -400,13 +418,16 @@ class MainController extends Controller {
 					 }
 				     else
 					 {
-						 # dd($order);
+						   $buyer = is_null($user) ? [] : $this->helpers->getBuyer($req['r']);
+						   $anon = is_null($user) ? $this->helpers->getAnonOrder($req['r']) : [];
+						   #dd($anon);
+						  
 						 if(isset($req['print']))
 						 {
 						   switch($req['print'])
 						   {
 							   case "1":
-							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
 							   break;
 							   
 							   case "2":
@@ -430,20 +451,22 @@ class MainController extends Controller {
 								  'ad' => $ad,
 								  'order' => $order,
 								  'buyer' => $buyer,
+								  'anon' => $anon,
 								  'signals' => $signals,
 								];
 								
+								$fname = $order['status'] == "paid" ? "receipt.pdf" : "invoice.pdf";
 								$pdf = PDF::loadView('print-receipt', $dt);
-                                return $pdf->download('receipt.pdf');
+                                return $pdf->download($fname);
 							   break;
 							   
 							   default:
-							      return view("print-receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
 						   }
 						 }
 						 else
 						 {
-						    return view("receipt", compact(['user','cart','c','ad','order','buyer','signals'])); 
+						    return view("receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
 						 }
 						  
 					 }					 
@@ -831,27 +854,82 @@ class MainController extends Controller {
 	 */
 	public function getOrders(Request $request)
     {
+		$user = null;
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		
 		if(Auth::check())
 		{
 			$user = Auth::user();
+		}
+		
 			$req = $request->all();
-		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 			$ads = $this->helpers->getAds();
-			$orders = $this->helpers->getOrders($user);
+			$orders = is_null($user) ? [] : $this->helpers->getOrders($user);
 			#dd($orders);
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
 			$wext = isset($req['wext']) ? $req['wext'] : null;
 		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals']));			
-		}
-		else
+		
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function getAnonOrder(Request $request)
+    {
+		$user = null;
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+			$c = $this->helpers->getCategories();
+			$ads = $this->helpers->getAds();
+			shuffle($ads);
+		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
+		    $signals = $this->helpers->signals;
+			
+    	if(Auth::check())
 		{
-			return redirect()->intended('/');
+			$user = Auth::user();
 		}
 		
+        $req = $request->all();
+        #dd($req);
+        
+        $validator = Validator::make($req, [
+                             'ref' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+         	$anon = $this->helpers->getAnonOrder($req['ref']);
+			$orders = [];
+			
+			if(count($anon) > 0)
+			{
+				$orders[0] = $this->helpers->getOrder($anon['reference']);
+				return view("orders",compact(['user','cart','c','ad','anon','orders','signals']));		
+			}
+			else
+			{
+				session()->flash("invalid-order-status","error");
+				return redirect()->intended('orders');
+			}
+	       
+			
+         }        
     }
 	
 	/**
@@ -1276,10 +1354,7 @@ class MainController extends Controller {
 			$user = Auth::user();
 			
 		}
-		else
-		{
-			return redirect()->intended('/');
-		}
+		
 		
        $req = $request->all();
 	  # dd($req);
@@ -1301,9 +1376,11 @@ class MainController extends Controller {
          {
 			$order = $this->helpers->getOrder($req['oid']);
 			#dd($order);
+			
 			if(isset($order['status']) && $order['status'] == "unpaid" && $order['type'] == "bank")
 			{
-				return view("confirm-payment",compact(['user','cart','c','ad','order','banks','signals']));
+				$anon = is_null($user) ? $this->helpers->getAnonOrder($order['reference']) : [];
+				return view("confirm-payment",compact(['user','cart','c','ad','anon','order','banks','signals']));
 			}
 			else
 			{
@@ -1322,15 +1399,14 @@ class MainController extends Controller {
 	 */
     public function postConfirmPayment(Request $request)
     {
+		$user = null;
+		
     	if(Auth::check())
 		{
 			$user = Auth::user();
 			
 		}
-		else
-        {
-        	return redirect()->intended('/');
-        }
+
         $req = $request->all();
         
         $validator = Validator::make($req, [
@@ -1511,8 +1587,14 @@ class MainController extends Controller {
          
          else
          {
-         	$ret = $this->helpers->getDeliveryFee($req['s'],"state");
-           return json_encode(['status' => "ok", 'message' => number_format($ret,2)]);
+			 $total = 0;
+             $ret = $this->helpers->getDeliveryFee($req['s'],"state");
+			
+			if(isset($req['st']) && is_numeric($req['st']))
+			{
+				$total = number_format($ret + $req['st'],2);
+			}
+           return json_encode(['status' => "ok", 'message' => number_format($ret,2),'total' => $total]);
          } 
          
 		

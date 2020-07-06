@@ -155,11 +155,11 @@
                 <li class="lnt-cart-actions text-center"> <a class="btn btn-default btn-lg hvr-underline-from-center-default" href="{{url('cart')}}">View cart</a> <a class="btn btn-primary hvr-underline-from-center-primary" href="{{url('checkout')}}">Checkout</a> </li>
               </ul>
             </li>
+			 <li><a href="{{url('orders')}}">Orders</a></li>
            @if(is_null($user))
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
 		   @else
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
-            <li><a href="{{url('orders')}}">Orders</a></li>
             <li><a href="{{url('signout')}}">Sign out</a></li>
 		   @endif
             <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>

@@ -29,25 +29,24 @@ class PaymentController extends Controller {
 	 */
     public function postRedirectToGateway(Request $request)
     {
+		$user = null;
+		
     	if(Auth::check())
 		{
 			$user = Auth::user();
 		}
-		else
-        {
-        	return redirect()->intended('/');
-        }
+		
 		
 		$req = $request->all();
        # dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
-   
+		$name = isset($req['name']) ? $req['name'] : $req['fname']." ".$req['lname'];
+        #dd($name);
+		
         $validator = Validator::make($req, [
-                             'fname' => 'required|filled',
 							 'amount' => 'required',
-                             'lname' => 'required|filled',
                              'email' => 'required|email|filled',
                              'address' => 'required|filled',
                              'city' => 'required|filled',
@@ -99,18 +98,17 @@ class PaymentController extends Controller {
 	 */
 	public function getPaymentCallback(Request $request)
     {
+		$user = null;
+		
 		if(Auth::check())
 		{
 			$user = Auth::user();
 		}
-		else
-        {
-        	return redirect()->intended('login?return=dashboard');
-        }
+		
 		
         $paymentDetails = Paystack::getPaymentData();
 
-        #dd($paymentDetails);       
+        dd($paymentDetails);       
         $paymentData = $paymentDetails['data'];
         $successLocation = "";
         $failureLocation = "";
@@ -154,7 +152,7 @@ class PaymentController extends Controller {
 				$ret['user'] =$user->email;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
-		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
+		       // $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
 				$ret['em'] = $this->helpers->suEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
                }

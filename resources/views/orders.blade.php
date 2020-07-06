@@ -37,6 +37,7 @@
                 <li class="active">your orders</li>
               </ol>
             </div>
+			@if(count($orders) > 0)
             <!--start of columns-->
             <div class="col-sm-12">
               <div class="row extra-btm-padding">
@@ -111,7 +112,32 @@
               </div>
             
             </div>
-            <!--start of columns--> 
+            <!--end of columns--> 
+			@else
+				<div class="col-sm-12">
+			      <form role="form" action="{{url('anon-order')}}" method="get">
+					
+					  <fieldset class="col-md-12">
+                        <legend>sign in to view your orders OR enter your reference number below</legend>
+                        
+                        <!-- Name -->
+                         <div class="row">
+                          <div class="col-sm-12 form-group">
+                            <label class="control-label" for="ref">Reference #</label>
+                            <input type="text" id="ref" name="ref" placeholder="Enter your reference number" class="form-control">
+						  </div>
+						 
+                         </div>
+					 </fieldset>
+					 
+					 <div class="row" style="margin-bottom: 20px;">
+					  <div class="col-sm-12">
+					    <input type="submit" class="btn btn-primary" value="Submit">
+					  </div>
+					</div>
+				  </form>
+			    </div>
+			@endif
           </div>
         </div>
       </div>

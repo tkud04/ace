@@ -1,6 +1,9 @@
 <html>
 <head>
-<title>Receipt</title>
+<?php
+$tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
+?>
+<title><?php echo e($tt); ?></title>
 <style type="text/css">
   #invoice{
     padding: 30px;
@@ -169,6 +172,20 @@
 </style>
 </head>
 <body>
+<?php
+if($user == null && count($anon) > 0)
+{
+	$name = $anon['name'];
+	$phone = $anon['phone'];
+	$email = $anon['email'];
+}
+else
+{
+	$name = $buyer['fname']." ".$buyer['lname'];
+	$phone = $buyer['phone'];
+	$email = $buyer['email'];
+}
+?>
 <div id="invoice">
 
     <div class="invoice overflow-auto">
@@ -195,14 +212,14 @@
             <main>
                 <div class="row contacts">
                     <div class="col invoice-to">
-                        <div class="text-gray-light">RECEIPT</div>
-                        <h2 class="to"><?php echo e($buyer['fname']." ".$buyer['lname']); ?></h2>
-                        <div class="address"><?php echo e($buyer['phone']); ?></div>
-                        <div class="email"><a href="mailto:<?php echo e($buyer['email']); ?>"><?php echo e($buyer['email']); ?></a></div>
+                        <div class="text-gray-light"><?php echo e(strtoupper($tt)); ?></div>
+                        <h2 class="to"><?php echo e($name); ?></h2>
+                        <div class="address"><?php echo e($phone); ?></div>
+                        <div class="email"><a href="mailto:<?php echo e($email); ?>"><?php echo e($email); ?></a></div>
                     </div>
                     <div class="col invoice-details">
                         <h1 class="invoice-id"><?php echo e(strtoupper($order['status'])); ?></h1>
-                        <div class="date">Receipt generated on: <?php echo e($order['date']); ?></div>
+                        <div class="date"><?php echo e(ucwords($tt)); ?> generated on: <?php echo e($order['date']); ?></div>
                         <div class="date">Reference #: <?php echo e($order['reference']); ?></div>
                     </div>
                 </div>

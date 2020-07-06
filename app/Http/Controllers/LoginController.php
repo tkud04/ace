@@ -129,7 +129,7 @@ class LoginController extends Controller {
        #dd($req);
         
         $validator = Validator::make($req, [
-                             'pass' => 'required|min:7',
+                             'pass' => 'required|min:7|confirmed',
                              'email' => 'required|email',                            
                              'phone' => 'required|numeric',
                              'fname' => 'required',

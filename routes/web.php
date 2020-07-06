@@ -30,6 +30,8 @@ Route::get('privacy-policy', 'MainController@getPrivacyPolicy');
 Route::get('returns', 'MainController@getReturnPolicy');
 
 Route::get('orders', 'MainController@getOrders');
+Route::get('anon-order', 'MainController@getAnonOrder');
+Route::post('anon-order', 'MainController@postAnonOrder');
 Route::get('receipt', 'MainController@getReceipt');
 Route::get('track', 'MainController@getTrack');
 Route::get('confirm-payment', 'MainController@getConfirmPayment');

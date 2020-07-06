@@ -88,3 +88,28 @@ li.list-group-horizontal-li{
 	color: #000;
 	font-weight: bold;
 }
+
+.mb-1{
+	margin-bottom: 1px;
+}
+.mb-2{
+	margin-bottom: 2px;
+}
+.mb-5{
+	margin-bottom: 5px;
+}
+.mb-10{
+	margin-bottom: 10px;
+}
+.mb-20{
+	margin-bottom: 20px;
+}
+.mb-30{
+	margin-bottom: 30px;
+}
+.mb-50{
+	margin-bottom: 50px;
+}
+.mb-100{
+	margin-bottom: 100px;
+}

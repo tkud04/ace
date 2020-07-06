@@ -23,7 +23,7 @@
                 <section>
                   <h5 class="sub-title text-info text-uppercase">confirm your payment</h5>
                   <p class="text-danger"><b>NOTE: </b>Make sure you include your payment code as reference when making payment. </p>
-                  <p class="text-danger"><b>NOTE: </b>Your order would only be processed AFTER your payments have been cleared from our end. </p>
+                  <p class="text-danger"><b>NOTE: </b>Your order would only be processed AFTER your payment has been cleared from our end. </p>
                   <br>
 				  <dl>
                     <dt>Steps to take</dt>
@@ -83,6 +83,10 @@
                         </div>
                       </fieldset>
                       <!-- END Order information-->
+					  <?php
+					  $email = is_null($user) ? $anon['email'] : $user['email'];
+					  $phone = is_null($user) ? $anon['phone'] : $user['phone'];
+					  ?>
 					  <!-- START Bank information -->
                       <fieldset class="col-md-6">
                         <legend>Bank information</legend>
@@ -112,11 +116,11 @@
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="mail">email address <span class="req">*</span></label>
-                          <input type="text" id="mail" name="email" class="form-control" value="<?php echo e($user['email']); ?>" readonly>
+                          <input type="text" id="mail" name="email" class="form-control" value="<?php echo e($email); ?>" readonly>
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="phone">phone number <span class="req">*</span></label>
-                          <input type="text" id="phone" name="phone" class="form-control" value="<?php echo e($user['phone']); ?>" readonly>
+                          <input type="text" id="phone" name="phone" class="form-control" value="<?php echo e($phone); ?>" readonly>
                         </div>
                       </fieldset>
                       <!-- END Personal information--> 

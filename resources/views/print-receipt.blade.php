@@ -1,6 +1,9 @@
 <html>
 <head>
-<title>Receipt</title>
+<?php
+$tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
+?>
+<title>{{$tt}}</title>
 <style type="text/css">
   #invoice{
     padding: 30px;
@@ -169,6 +172,20 @@
 </style>
 </head>
 <body>
+<?php
+if($user == null && count($anon) > 0)
+{
+	$name = $anon['name'];
+	$phone = $anon['phone'];
+	$email = $anon['email'];
+}
+else
+{
+	$name = $buyer['fname']." ".$buyer['lname'];
+	$phone = $buyer['phone'];
+	$email = $buyer['email'];
+}
+?>
 <div id="invoice">
 
     <div class="invoice overflow-auto">
@@ -195,14 +212,14 @@
             <main>
                 <div class="row contacts">
                     <div class="col invoice-to">
-                        <div class="text-gray-light">RECEIPT</div>
-                        <h2 class="to">{{$buyer['fname']." ".$buyer['lname']}}</h2>
-                        <div class="address">{{$buyer['phone']}}</div>
-                        <div class="email"><a href="mailto:{{$buyer['email']}}">{{$buyer['email']}}</a></div>
+                        <div class="text-gray-light">{{strtoupper($tt)}}</div>
+                        <h2 class="to">{{$name}}</h2>
+                        <div class="address">{{$phone}}</div>
+                        <div class="email"><a href="mailto:{{$email}}">{{$email}}</a></div>
                     </div>
                     <div class="col invoice-details">
                         <h1 class="invoice-id">{{strtoupper($order['status'])}}</h1>
-                        <div class="date">Receipt generated on: {{$order['date']}}</div>
+                        <div class="date">{{ucwords($tt)}} generated on: {{$order['date']}}</div>
                         <div class="date">Reference #: {{$order['reference']}}</div>
                     </div>
                 </div>
