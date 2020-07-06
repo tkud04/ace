@@ -1178,7 +1178,6 @@ $subject = $data['subject'];
           function getCartTotals($cart)
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
-              // dd($cart);
 			  $userId = null;
 			  
               if($cart != null && count($cart) > 0)
@@ -1213,7 +1212,7 @@ $subject = $data['subject'];
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
-                    //dd($ret);                                  
+                   # dd($ret);                                  
                 return $ret;
            }
 		   
@@ -1442,7 +1441,7 @@ $subject = $data['subject'];
 			  #dd($md);
               $amount = $payStackResponse['amount'] / 100;
               $psref = $payStackResponse['reference'];
-              $ref = $md['custom_fields'][0]['value'];
+              $ref = $md['ref'];
               $type = $md['type'];
               $dt = [];
               
@@ -1454,6 +1453,16 @@ $subject = $data['subject'];
 				$dt['ps_ref'] = $psref;
 				$dt['type'] = "card";
 				$dt['status'] = "paid";
+				
+				if(is_null($user))
+				{
+					$dt['name'] = $md['name'];
+					$dt['email'] = $md['email'];
+					$dt['phone'] = $md['phone'];
+					$dt['address'] = $md['address'];
+					$dt['city'] = $md['city'];
+					$dt['state'] = $md['state'];
+				}
               }
               
               #create order
@@ -1478,10 +1487,11 @@ $subject = $data['subject'];
            function addOrder($user,$data,$gid=null)
            {
 			   $cart = [];
-			   
-			 if($gid != null) $cart = $this->getCart($user,$gid);
+			   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+
+			 if($user == null && $gid != null) $cart = $this->getCart($user,$gid);
 			 else $cart = $this->getCart($user);
-               
+               #dd($cart);
            	   $order = $this->createOrder($user, $data);
                
                #create order details
@@ -1561,10 +1571,14 @@ $subject = $data['subject'];
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0,"discount" => 0];
               #dd($items);
+			  $oid = "";
+			  
               if($items != null && count($items) > 0)
-               {           	
+               {      
+                 $oid = $items[0]['order_id'];		   
                	foreach($items as $i) 
                     {
+						
 						$amount = $i['product']['pd']['amount'];
 						$dsc = $this->getDiscountPrices($amount,$i['product']['discounts']);
 						$newAmount = 0;
@@ -1588,8 +1602,19 @@ $subject = $data['subject'];
                     	$ret['items'] += $qty;
 						$ret['subtotal'] += ($amount * $qty);	
                     }
-                   $u = User::where('id',$uid)->first();
-                   $ret['delivery'] = $this->getDeliveryFee($u);
+					
+					if($uid == "anon")
+					{
+						$anon = $this->getAnonOrder($oid);
+						$ret['delivery'] = $this->getDeliveryFee($anon['state'],"state");
+					}
+					else
+					{
+						$u = User::where('id',$uid)->first();
+						  $ret['delivery'] = $this->getDeliveryFee($u);
+					}
+                   
+                 
                   
                }                                 
                                                       
@@ -1671,6 +1696,7 @@ $subject = $data['subject'];
                     {
 						$temp = [];
                     	$temp['id'] = $i->id; 
+                    	$temp['order_id'] = $i->order_id; 
                         $temp['product'] = $this->getProduct($i->sku); 
                         $temp['qty'] = $i->qty; 
                         array_push($ret, $temp); 

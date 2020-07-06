@@ -387,18 +387,28 @@ function payCard(dt){
   html:
      "<h4 class='text-danger'><b>NOTE: </b>Make sure you note down your reference number above, as it will be required in the case of any issues regarding this order.</h4><p class='text-primary'>Click OK below to redirect to our secure payment gateway to complete this payment.</p>"
 }).then((result) => {
-  console.log(result);
   if (result.value) {
-    payWithCard();
+	  let a = false;
+	  if(dt.anon) a = dt.anon;
+	  
+    payWithCard(a);
   }
 });
 
 }
 
-function payWithCard(){
+function payWithCard(anon=false){
 	 mc['notes'] = $('#notes').val();
-	$('#nd').val(JSON.stringify(mc));
-	console.log($('#nd').val());
+	 if(anon){
+		 mc['name'] = $('#ca-name').val();
+		 mc['email'] = $('#ca-email').val();
+		 mc['phone'] = $('#ca-phone').val();
+		 mc['address'] = $('#ca-address').val();
+		 mc['city'] = $('#ca-city').val();
+		 mc['state'] = $('#ca-state').val();
+	 }
+	 $('#nd').val(JSON.stringify(mc)); 
+	//console.log($('#nd').val());
 	setPaymentAction("card");
 }
 
@@ -412,7 +422,7 @@ function setPaymentAction(type){
 		paymentURL = $("#card-action").val();  
    }
    
-   console.log(paymentURL);
+   //console.log(paymentURL);
    $('#checkout-form').attr('action',paymentURL);
    $('#checkout-form').submit();
 }
@@ -670,8 +680,11 @@ function getDeliveryFee(dt){
 		   console.log(res);
 		   
 		   if(res.status == "ok"){
-			      $('#deliv').html("&#8358;" + res.message);
-				  if(parseInt(res.total) > 0) $('#checkout-total').html("&#8358;" + res.total);
+			      $('#deliv').html("&#8358;" + res.message[1]);
+				  if(parseInt(res.total) > 0){
+					$('#checkout-total').html("&#8358;" + res.total[1]);  
+					$('#ca-amount').val(res.total[0] * 100);  //for paystack
+				  } 
                   $('#checkout-methods').fadeIn();				  
 				}
 		  

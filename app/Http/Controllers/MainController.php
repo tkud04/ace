@@ -410,7 +410,7 @@ class MainController extends Controller {
                  else
                  {
 					 $order = $this->helpers->getOrder($req['r']);
-					
+					#dd($order);
 					
 					 if(is_null($order) || $order == [])
 					 {
@@ -1592,9 +1592,10 @@ class MainController extends Controller {
 			
 			if(isset($req['st']) && is_numeric($req['st']))
 			{
-				$total = number_format($ret + $req['st'],2);
+				$tt = $ret + $req['st'];
+				$total = number_format($tt,2);
 			}
-           return json_encode(['status' => "ok", 'message' => number_format($ret,2),'total' => $total]);
+           return json_encode(['status' => "ok", 'message' => [$ret,number_format($ret,2)],'total' => [$tt,$total]]);
          } 
          
 		

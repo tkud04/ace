@@ -67,7 +67,7 @@
                       <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
                         <div class="panel-body"> 
 						<img class="img img-responsive" src="images/ps.png"> <br><br>
-						  <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}'}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
+						  <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
 						</div>
                       </div>
                     </div>
@@ -164,7 +164,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "{{$ref}}"}],"type":"checkout","notes":""};
+								 mc = {"ref":"{{$ref}}",
+								       "type":"checkout",
+								       "email":"{{$email}}",
+								       "phone":"{{$phone}}",
+								       "address":"{{$address}}",
+								       "city":"{{$city}}",
+								       "state":"{{$state}}",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 
@@ -303,7 +311,7 @@
 				  
                   <form role="form" id="checkout-form" method="post">
 			                <!-- payment form -->
-                            	<input type="hidden" name="email" id="ca-email"> {{-- required --}}
+                            	<input type="hidden" name="email"> {{-- required --}}
                             	<input type="hidden" name="quantity" value="{{$totals['items']}}"> {{-- required --}}
                             	<input type="hidden" name="amount" id="ca-amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
                             	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
@@ -316,7 +324,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "{{$ref}}"}],"type":"checkout","notes":""};
+								 mc = {"ref":"{{$ref}}",
+								       "type":"checkout",
+								       "email":"{{$email}}",
+								       "phone":"{{$phone}}",
+								       "address":"{{$address}}",
+								       "city":"{{$city}}",
+								       "state":"{{$state}}",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 

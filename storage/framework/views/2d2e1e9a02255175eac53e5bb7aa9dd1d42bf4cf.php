@@ -65,7 +65,7 @@
                       <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
                         <div class="panel-body"> 
 						<img class="img img-responsive" src="images/ps.png"> <br><br>
-						  <center> <a href="javascript:void(0)" onclick="payCard({ref: '<?php echo e($ref); ?>'}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
+						  <center> <a href="javascript:void(0)" onclick="payCard({ref: '<?php echo e($ref); ?>',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
 						</div>
                       </div>
                     </div>
@@ -163,7 +163,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "<?php echo e($ref); ?>"}],"type":"checkout","notes":""};
+								 mc = {"ref":"<?php echo e($ref); ?>",
+								       "type":"checkout",
+								       "email":"<?php echo e($email); ?>",
+								       "phone":"<?php echo e($phone); ?>",
+								       "address":"<?php echo e($address); ?>",
+								       "city":"<?php echo e($city); ?>",
+								       "state":"<?php echo e($state); ?>",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 
@@ -302,7 +310,7 @@
 				  
                   <form role="form" id="checkout-form" method="post">
 			                <!-- payment form -->
-                            	<input type="hidden" name="email" id="ca-email"> 
+                            	<input type="hidden" name="email"> 
                             	<input type="hidden" name="quantity" value="<?php echo e($totals['items']); ?>"> 
                             	<input type="hidden" name="amount" id="ca-amount" value="<?php echo e(($totals['subtotal'] + $totals['delivery']) * 100); ?>"> 
                             	<input type="hidden" name="metadata" id="nd" value="" > 
@@ -316,7 +324,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "<?php echo e($ref); ?>"}],"type":"checkout","notes":""};
+								 mc = {"ref":"<?php echo e($ref); ?>",
+								       "type":"checkout",
+								       "email":"<?php echo e($email); ?>",
+								       "phone":"<?php echo e($phone); ?>",
+								       "address":"<?php echo e($address); ?>",
+								       "city":"<?php echo e($city); ?>",
+								       "state":"<?php echo e($state); ?>",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 

@@ -38,7 +38,7 @@ class PaymentController extends Controller {
 		
 		
 		$req = $request->all();
-       # dd($req);
+       #dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
@@ -108,12 +108,15 @@ class PaymentController extends Controller {
 		
         $paymentDetails = Paystack::getPaymentData();
 
-        dd($paymentDetails);       
+        #dd($paymentDetails);       
+        
         $paymentData = $paymentDetails['data'];
-        $successLocation = "";
+        $md = $paymentData['metadata'];
+		#dd($md);       
+		$successLocation = "";
         $failureLocation = "";
         
-        switch($paymentData['metadata']['type'])
+        switch($md['type'])
         {
         	case 'checkout':
               $successLocation = "orders";
@@ -128,28 +131,42 @@ class PaymentController extends Controller {
         //status, reference, metadata(order-id,items,amount,ssa), type
         if($paymentData['status'] == 'success')
         {
+			$id = $md['ref'];
+			 //get the user 
+				   if($user == null)
+				   {
+					   
+					   $name = $md['name'];
+					   $email = $md['email'];
+				   }
+				   else
+				   {
+					   $name = $user->fname;
+					   $email = $user->email;
+				   }
+				   
 			#dd($paymentData);
         	$stt = $this->helpers->checkout($user,$paymentData);
 			
 			//send email to user
-			$id = $paymentData['metadata']['custom_fields'][0]['value'];
+			
 			$o = $this->helpers->getOrder($id);
                #dd($o);
 			   
                if($o != null || count($o) > 0)
                {		  
-				   //dd($u);
+				  
                	//We have the user, notify the customer and admin
 				$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
-				$ret['user'] = $user;
+				$ret['name'] = $name;
 				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";
-		        $ret['em'] = $user->email;
+		        $ret['em'] = $email;
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
 				#$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
-				$ret['user'] =$user->email;
+				$ret['user'] =$email;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['em'] = $this->helpers->adminEmail;
 		       // $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
