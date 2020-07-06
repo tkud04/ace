@@ -1605,9 +1605,7 @@ $subject = $data['subject'];
 					
 					if($uid == "anon")
 					{
-						$o = $this->getOrder($oid);
-						$anon = $this->getAnonOrder($o['reference']);
-						$ret['delivery'] = $this->getDeliveryFee($anon['state'],"state");
+						
 					}
 					else
 					{
@@ -1662,6 +1660,12 @@ $subject = $data['subject'];
                   $temp['status'] = $o->status;
                   $temp['items'] = $this->getOrderItems($o->id);
                   $temp['totals'] = $this->getOrderTotals($temp['items'],$o->user_id);
+				  if($o->user_id == "anon")
+				  {
+						$anon = $this->getAnonOrder($o->reference,false);
+						$temp['totals']['delivery'] = $this->getDeliveryFee($anon['state'],"state");  
+				  }
+				  
                   $temp['date'] = $o->created_at->format("jS F, Y");
                   $ret = $temp; 
                }                                 
@@ -2103,10 +2107,12 @@ $subject = $data['subject'];
 		return $ret > 0;
 	}	
 	
-	 function getAnonOrder($id)
+	 function getAnonOrder($id,$all=true)
            {
            	$ret = [];
-               $o = AnonOrders::where('reference',$id)
+			if($all)
+			{
+				$o = AnonOrders::where('reference',$id)
 			            ->orWhere('id',$id)->first();
 						
                $o2 = Orders::where('reference',$id)
@@ -2149,7 +2155,30 @@ $subject = $data['subject'];
 					   }  
 				   }
                    	 
-               }                          
+               }
+			}
+			
+			else
+			{
+				$o = AnonOrders::where('reference',$id)
+			            ->orWhere('id',$id)->first();
+						
+				if($o != null)
+				   {
+					 $temp['name'] = $o->name; 
+                       $temp['reference'] = $o->reference; 
+                       //$temp['wallet'] = $this->getWallet($u);
+                       $temp['phone'] = $o->phone; 
+                       $temp['email'] = $o->email; 
+                       $temp['address'] = $o->address; 
+                       $temp['city'] = $o->city; 
+                       $temp['state'] = $o->state; 
+                       $temp['id'] = $o->id; 
+                       $temp['date'] = $o->created_at->format("jS F, Y"); 
+                       $ret = $temp;  
+				   }
+			}
+                                         
                                                       
                 return $ret;
            }
