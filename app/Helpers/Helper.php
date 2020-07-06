@@ -2110,7 +2110,7 @@ $subject = $data['subject'];
 						
                $o2 = Orders::where('reference',$id)
 			            ->orWhere('id',$id)->first();
-						dd([$o,$o2)]);
+						dd([$o,$o2]);
               if($o != null || $o2 != null)
                {
 				   if($o != null)
