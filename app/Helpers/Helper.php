@@ -1570,7 +1570,7 @@ $subject = $data['subject'];
            function getOrderTotals($items,$uid=null)
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0,"discount" => 0];
-              dd($items);
+             # dd($items);
 			  $oid = "";
 			  
               if($items != null && count($items) > 0)
