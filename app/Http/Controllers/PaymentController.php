@@ -112,7 +112,7 @@ class PaymentController extends Controller {
         
         $paymentData = $paymentDetails['data'];
         $md = $paymentData['metadata'];
-		#dd($md);       
+		dd($md);       
 		$successLocation = "";
         $failureLocation = "";
         
@@ -131,6 +131,7 @@ class PaymentController extends Controller {
         //status, reference, metadata(order-id,items,amount,ssa), type
         if($paymentData['status'] == 'success')
         {
+			
 			$id = $md['ref'];
 			 //get the user 
 				   if($user == null)

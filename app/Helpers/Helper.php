@@ -1933,11 +1933,23 @@ $subject = $data['subject'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
 		$ret['acnum'] = $data['acnum'];
-		$ret['em'] = $this->adminEmail;
-		//$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
-		$ret['em'] = $this->suEmail;
-		$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
-		return json_encode(['status' => "ok"]);
+		
+		try
+		{
+			$ret['em'] = $this->adminEmail;
+		    //$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		    $ret['em'] = $this->suEmail;
+		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+			$s = ['status' => "ok"];
+		}
+		
+		catch(Throwable $e)
+		{
+			dd($e);
+			$s = ['status' => "error",'message' => "network error"];
+		}
+		
+		return json_encode($s);
 	}		   
 	
 	function testBomb($data)
