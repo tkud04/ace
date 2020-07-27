@@ -112,7 +112,7 @@ class PaymentController extends Controller {
         
         $paymentData = $paymentDetails['data'];
         $md = $paymentData['metadata'];
-		dd($md);       
+		#dd($md);       
 		$successLocation = "";
         $failureLocation = "";
         
@@ -139,11 +139,18 @@ class PaymentController extends Controller {
 					   
 					   $name = $md['name'];
 					   $email = $md['email'];
+					   $shipping = [
+					     'address' => $md['address'],
+					     'city' => $md['city'],
+					     'state' => $md['state'],
+					   ];
 				   }
 				   else
 				   {
 					   $name = $user->fname;
 					   $email = $user->email;
+					   $sd = $this->getShippingDetails($u['id']);
+					   $shipping = $sd[0];
 				   }
 				   
 			#dd($paymentData);
@@ -169,8 +176,9 @@ class PaymentController extends Controller {
 				$ret['order'] = $o;
 				$ret['user'] =$email;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
+		        $ret['shipping'] = $shipping;
 		        $ret['em'] = $this->helpers->adminEmail;
-		       // $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
+		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
 				$ret['em'] = $this->helpers->suEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
                }

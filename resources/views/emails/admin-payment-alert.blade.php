@@ -29,6 +29,11 @@ foreach($items as $i)
 }
 ?>
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
+
+<h6>Shipping Details</h6>
+<p>Address: {{$shipping['address']}}</p>
+<p>City: {{$shipping['city']}}</p>
+<p>State: {{$shipping['state']}}</p><br><br>
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
 <p>Click the <b>View Order</b> button below to view the order or <b>Track Order</b> button to update delivery information. Alternatively you can log in to the Admin Dashboard to view or update tracking info for this order (go to Orders and click either the View or Track buttons beside the order).</p><br>
