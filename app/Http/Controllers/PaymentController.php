@@ -38,7 +38,7 @@ class PaymentController extends Controller {
 		
 		
 		$req = $request->all();
-       dd($req);
+      # dd($req);
         $type = json_decode($req['metadata']);
         //dd($type);
         
