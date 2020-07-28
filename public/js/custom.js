@@ -408,8 +408,8 @@ function payWithCard(anon=false){
 		 mc['state'] = $('#ca-state').val();
 	 }
 	 $('#nd').val(JSON.stringify(mc)); 
-	//console.log($('#nd').val());
-	setPaymentAction("card");
+	console.log(mc);
+	//setPaymentAction("card");
 }
 
 function setPaymentAction(type){
