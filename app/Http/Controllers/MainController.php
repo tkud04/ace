@@ -1411,7 +1411,7 @@ class MainController extends Controller {
         
         $validator = Validator::make($req, [
                              'o' => 'required',
-                             'bname' => 'required',
+                             'bname' => 'required|not_in:none',
                              'acname' => 'required',
                              'acnum' => 'required',
                              'email' => 'required|email',

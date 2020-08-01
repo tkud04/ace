@@ -137,7 +137,7 @@
                   <form role="form" id="checkout-form" method="post">
 			                <!-- payment form -->
                             	<input type="hidden" name="email" value="{{$email}}"> {{-- required --}}
-                            	<input type="hidden" name="quantity" value="{{$totals['items']}}"> {{-- required --}}
+                            	<input type="hidden" name="quantity" value="1"> {{-- required --}}
                             	<input type="hidden" name="amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
                             	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             

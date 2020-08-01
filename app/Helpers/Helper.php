@@ -1937,7 +1937,7 @@ $subject = $data['subject'];
 		try
 		{
 			$ret['em'] = $this->adminEmail;
-		    //$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		    $ret['em'] = $this->suEmail;
 		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 			$s = ['status' => "ok"];
@@ -1945,7 +1945,7 @@ $subject = $data['subject'];
 		
 		catch(Throwable $e)
 		{
-			dd($e);
+			#dd($e);
 			$s = ['status' => "error",'message' => "network error"];
 		}
 		

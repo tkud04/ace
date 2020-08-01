@@ -9,6 +9,9 @@ foreach($errors->all() as $error){
    elseif($error == "The selected sz is invalid." || $error == "The sz field is required."){
 		$nl .= "You must select a size to continue";
    }
+   elseif($error == "The selected bname is invalid." || $error == "The bname field is required."){
+		$nl .= "Select a bank to continue";
+   }
    else{
 		$nl .= $error;
    }
