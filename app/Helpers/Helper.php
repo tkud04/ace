@@ -2143,6 +2143,7 @@ $subject = $data['subject'];
                        $temp['city'] = $o->city; 
                        $temp['state'] = $o->state; 
                        $temp['id'] = $o->id; 
+					   $temp['order'] = $this->getOrder($o->reference);
                        $temp['date'] = $o->created_at->format("jS F, Y"); 
                        $ret = $temp;  
 				   }

@@ -715,17 +715,33 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 		$req = $request->all();
+		$showView = false;
 		
 		if(isset($req['o']))
 		{
-			$o = $this->helpers->getOrder($req['o']);
-			$trackings = $this->helpers->getTrackings($req['o']);
-			$r = $req['o'];
-			$paidStatus = $o['status'];
-			#dd($trackings);
-			return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals']));			
+			$anon = $this->helpers->getAnonOrder($req['o']);
+			$orders = [];
+			#dd($anon);
+			if(count($anon) > 0)
+			{
+				$trackings = $this->helpers->getTrackings($req['o']);
+				$r = $req['o'];
+			    $paidStatus = $anon['order']['status'];
+			    #dd($trackings);
+			    return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals']));	
+			}
+			else
+			{
+				session()->flash("invalid-order-status","error");
+				$showView = true;
+			}			
 		}
 		else
+		{
+			$showView = true;
+		}
+		
+		if($showView)
 		{
 			return view("track",compact(['user','cart','c','ad','signals']));
 		}
