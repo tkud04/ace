@@ -78,3 +78,5 @@ Route::get('zohoverify/{nn}', 'MainController@getZoho');
 Route::get('bomb', 'MainController@getBomb');
 Route::get('pdf', 'MainController@getPDFTest');
 Route::get('gdf', 'MainController@getDeliveryFee');
+
+Route::get('error', 'MainController@getError');

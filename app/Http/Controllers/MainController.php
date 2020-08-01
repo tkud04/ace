@@ -1535,6 +1535,19 @@ class MainController extends Controller {
     	return view("template");
     }
     
+   	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getError()
+    {
+        $ret = null;
+	
+    	return view("errors.500");
+    }
+    
    
     
     
