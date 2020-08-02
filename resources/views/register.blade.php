@@ -26,13 +26,12 @@
                   <h5 class="sub-title text-info text-uppercase">why register?</h5>
                   <p>With an account you can enjoy lots of benefits </p>
                   <dl>
-                    <dt>Saving Time</dt>
-                    <dd>A description list is perfect for defining terms.</dd>
+                    <dt>N500 signup bonus</dt>
+                    <dd>Get up to N500 bonus on your first order with a new account</dd>
                     <dt>Save Your Shipping Address</dt>
-                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                    <dt>Home Delivery</dt>
-                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                    <dd>Save time when placing orders</dd>
+                    <dt>Win Amazing Discounts</dt>
+                    <dd>Stand a chance to win great discounts</dd>
                   </dl>
                 </section>
               </div>
