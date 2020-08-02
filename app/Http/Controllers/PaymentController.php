@@ -147,7 +147,7 @@ class PaymentController extends Controller {
 				   }
 				   else
 				   {
-					   $name = $user->fname;
+					   $name = $user->fname." ".$user->lname;
 					   $email = $user->email;
 					   $sd = $this->getShippingDetails($u['id']);
 					   $shipping = $sd[0];
