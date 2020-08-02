@@ -135,7 +135,7 @@
                   <form role="form" id="checkout-form" method="post">
 			                <!-- payment form -->
                             	<input type="hidden" name="email" value="<?php echo e($email); ?>"> 
-                            	<input type="hidden" name="quantity" value="<?php echo e($totals['items']); ?>"> 
+                            	<input type="hidden" name="quantity" value="1"> 
                             	<input type="hidden" name="amount" value="<?php echo e(($totals['subtotal'] + $totals['delivery']) * 100); ?>"> 
                             	<input type="hidden" name="metadata" id="nd" value="" > 
                             
@@ -149,7 +149,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "<?php echo e($ref); ?>"}],"type":"checkout","notes":""};
+								 mc = {"ref":"<?php echo e($ref); ?>",
+								       "type":"checkout",
+								       "email":"<?php echo e($email); ?>",
+								       "phone":"<?php echo e($phone); ?>",
+								       "address":"<?php echo e($address); ?>",
+								       "city":"<?php echo e($city); ?>",
+								       "state":"<?php echo e($state); ?>",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 
