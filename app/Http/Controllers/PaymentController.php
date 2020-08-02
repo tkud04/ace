@@ -131,7 +131,7 @@ class PaymentController extends Controller {
         //status, reference, metadata(order-id,items,amount,ssa), type
         if($paymentData['status'] == 'success')
         {
-			dd($md);
+			#dd($md);
 			$id = $md['ref'];
 			 //get the user 
 				   if($user == null)
