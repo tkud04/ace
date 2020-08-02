@@ -150,23 +150,30 @@ class LoginController extends Controller {
          
          else
          {
+			 $isNew = !$this->helpers->isDuplicateUser(['email' => $req['email'], 'phone' => $req['phone']]);
+			 
             $req['role'] = "user";    
             $req['status'] = "enabled";           
             $req['verified'] = "yes";           
             
-                       #dd($req);            
+            # dd($isNew);            
 
             $user =  $this->helpers->createUser($req); 
 			Auth::login($user);
 			$req['user_id'] = $user->id;
 			$req['company'] = "";
             $shippingDetails =  $this->helpers->createShippingDetails($req); 
+			
+			if($isNew)
+			{
+				$this->helpers->giveDiscount($user,['type' => "flat", 'amount' => "500"]);
+			}
            // $wallet =  $this->helpers->createWallet($req); 
            
                                                     
              //after creating the user, send back to the registration view with a success message
              #$this->helpers->sendEmail($user->email,'Welcome To Disenado!',['name' => $user->fname, 'id' => $user->id],'emails.welcome','view');
-             session()->flash("signup-status", "success");
+             session()->flash("signup-status", "ok");
 			 $rex = isset($req['u']) ? $req['u'] : '/';
              return redirect()->back();
           }

@@ -39,7 +39,7 @@ class Helper implements HelperContract
 {
 
  public $signals = ['okays'=> ["login-status" => "Welcome back!",            
-                     "signup-status" => "Account created. Enjoy your shopping!",
+                     "signup-status" => "Welcome to your new account. As a welcome gift you get a discount <b>N500</b> off your first order. Enjoy your shopping!",
                      "profile-status" => "Profile updated!",
 					 "cpayment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
                      "update-status" => "Account updated!",
@@ -758,13 +758,37 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+		   function createDiscount($data)
+           {
+			   $type = isset($data['type']) ? $data['type'] : "user";
+			   
+           	$ret = Discounts::create(['sku' => $data['id'],                                                                                                          
+                                                      'discount_type' => $data['discount_type'], 
+                                                      'discount' => $data['discount'], 
+                                                      'type' => $type, 
+                                                      'status' => $data['status'], 
+                                                      ]);
+                                                      
+                return $ret;
+           }
 
-		   function getDiscounts($sku)
+		   function getDiscounts($id,$type="product")
            {
            	$ret = [];
-              $discounts = Discounts::where('sku',$sku)
+			 if($type == "product")
+			 {
+				$discounts = Discounts::where('sku',$id)
 			                 ->orWhere('type',"general")
+							 ->where('status',"enabled")->get(); 
+			 }
+			 elseif($type == "user")
+			 {
+				 $discounts = Discounts::where('sku',$id)
+			                 ->where('type',"user")
 							 ->where('status',"enabled")->get();
+			 }
+              
  
               if($discounts != null)
                {
@@ -1186,7 +1210,9 @@ $subject = $data['subject'];
                     {
 						if(is_null($userId)) $userId = $c['user_id'];
 						$amount = $c['product']['pd']['amount'];
-						$dsc = $this->getDiscountPrices($amount,$c['product']['discounts']);
+						$discounts = $c['product']['discounts'];
+						#dd($discounts);
+						$dsc = $this->getDiscountPrices($amount,$discounts);
 						$newAmount = 0;
 						if(count($dsc) > 0)
 			            {
@@ -1208,11 +1234,23 @@ $subject = $data['subject'];
 						$ret['subtotal'] += ($amount * $qty);
                         $ret['discounts'] = $dsc;					
                     }
+					
+					$userDiscounts = $this->getDiscounts($userId,"user");
+					#dd($userDiscounts);
+					$ua = 0; $una = 0;
+					
+					$dsc = $this->getDiscountPrices($ret['subtotal'],$userDiscounts);
+					#dd($dsc);
+					if(count($dsc) > 0)
+				          {
+					        $ret['subtotal'] -= $dsc[0];
+				          }
+					
                    $u = User::where('id',$userId)->first();
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
-                   # dd($ret);                                  
+                    #dd($ret);                                  
                 return $ret;
            }
 		   
@@ -2195,6 +2233,28 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		
+	function isDuplicateUser($data)
+	{
+		$ret = false;
+		
+		$dup = User::where('email',$data['email'])
+		           ->orWhere('phone',$data['phone'])->get();
+        
+       if(count($dup) > 0) $ret = true;		
+		return $ret;
+	}
+	
+	function giveDiscount($user,$dt)
+	{
+	    $ret = $this->createDiscount([
+	       'id' => $user->id,                                                                                                          
+           'discount_type' => $dt['type'], 
+           'discount' => $dt['amount'], 
+           'status' => "enabled",	   
+		]);
+		return $ret;
+	}
    
 }
 ?>
