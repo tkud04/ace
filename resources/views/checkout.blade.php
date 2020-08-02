@@ -150,7 +150,15 @@
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
-								 mc = {"custom_fields": [{"display_name":"Reference No.","variable_name":"ref","value": "{{$ref}}"}],"type":"checkout","notes":""};
+								 mc = {"ref":"{{$ref}}",
+								       "type":"checkout",
+								       "email":"{{$email}}",
+								       "phone":"{{$phone}}",
+								       "address":"{{$address}}",
+								       "city":"{{$city}}",
+								       "state":"{{$state}}",
+									   "notes":""
+									  };
                              
            </script>
                     <div class="row"> 
