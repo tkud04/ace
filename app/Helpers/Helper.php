@@ -2129,7 +2129,7 @@ $subject = $data['subject'];
 						
                $o2 = Orders::where('reference',$id)
 			            ->orWhere('id',$id)->first();
-						dd([$o,$o2]);
+						#dd([$o,$o2]);
               if($o != null || $o2 != null)
                {
 				   if($o != null)
@@ -2143,7 +2143,7 @@ $subject = $data['subject'];
                        $temp['city'] = $o->city; 
                        $temp['state'] = $o->state; 
                        $temp['id'] = $o->id; 
-                       dd($o2);
+                       #dd($o2);
                        if($o2 != null) $temp['order'] = $this->getOrder($id);
                        $temp['date'] = $o->created_at->format("jS F, Y"); 
                        $ret = $temp;  
@@ -2164,6 +2164,7 @@ $subject = $data['subject'];
                          $temp['city'] = $shipping['city']; 
                          $temp['state'] = $shipping['state']; 
                          $temp['id'] = $o2->id; 
+                         $temp['order'] = $this->getOrder($id);
                          $temp['date'] = $o2->created_at->format("jS F, Y"); 
                          $ret = $temp;  
 					   }  
