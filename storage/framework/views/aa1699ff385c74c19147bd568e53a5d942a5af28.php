@@ -7,9 +7,10 @@
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">New order <?php echo e($order['payment_code']); ?> paid via card!</h3>
-Hello admin,<br> please be informed that a new order has been placed via online payment. Se the details below:<br><br>
+Hello admin,<br> please be informed that a new order has been placed via online payment. See the details below:<br><br>
 Reference #: <b><?php echo e($order['reference']); ?></b><br>
-Customer: <b><?php echo e($user); ?></b><br>
+Customer: <b><?php echo e($name); ?> (<?php echo e($user); ?>)</b><br>
+Notes: <b><?php echo e($order['notes']); ?></b><br>
 <?php
 foreach($items as $i)
 {
