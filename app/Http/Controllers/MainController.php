@@ -936,7 +936,7 @@ class MainController extends Controller {
 			if(count($anon) > 0)
 			{
 				$orders[0] = $this->helpers->getOrder($anon['reference']);
-				dd($orders[0]);
+				#dd($orders[0]);
 				return view("orders",compact(['user','cart','c','ad','anon','orders','signals']));		
 			}
 			else
