@@ -1528,14 +1528,18 @@ $subject = $data['subject'];
 		   
 		   function clearNewUserDiscount($u)
 		   {
-			   $d = Discounts::where('sku',$u->id)
+			  # dd($user);
+			  if(!is_null($u))
+			  {
+			     $d = Discounts::where('sku',$u->id)
 			                 ->where('type',"user")
 							 ->where('discount',$this->newUserDiscount)->first();
 			   
-			   if(!is_null($d))
-			   {
+			     if(!is_null($d))
+			     {
 				   $d->delete();
-			   }
+			     }
+			  }
 		   }
 
            function addOrder($user,$data,$gid=null)
