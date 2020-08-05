@@ -39,7 +39,7 @@ class Helper implements HelperContract
 {
 
  public $signals = ['okays'=> ["login-status" => "Welcome back!",            
-                     "signup-status" => "Account created. Enjoy your shopping!",
+                     "signup-status" => "Welcome to your new account. As a welcome gift you get a discount N500 off your first order. Enjoy your shopping!",
                      "profile-status" => "Profile updated!",
 					 "cpayment-status" => "Your request has been received, you will be notified via email shortly if your payment has been cleared.",
                      "update-status" => "Account updated!",
@@ -268,6 +268,8 @@ public $categories = [
   
   public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
+  
+  public $newUserDiscount = "500";
   
            
 		   #{'msg':msg,'em':em,'subject':subject,'link':link,'sn':senderName,'se':senderEmail,'ss':SMTPServer,'sp':SMTPPort,'su':SMTPUser,'spp':SMTPPass,'sa':SMTPAuth};
@@ -759,13 +761,35 @@ $subject = $data['subject'];
                 return $ret;
            }
 
-		   function getDiscounts($sku)
+		   function createDiscount($data)
+           {
+			   $type = isset($data['type']) ? $data['type'] : "user";
+
+           	$ret = Discounts::create(['sku' => $data['id'],                                                                                                          
+                                                      'discount_type' => $data['discount_type'], 
+                                                      'discount' => $data['discount'], 
+                                                      'type' => $type, 
+                                                      'status' => $data['status'], 
+                                                      ]);
+			return $ret;
+           }
+
+		   function getDiscounts($id,$type="product")
            {
            	$ret = [];
-              $discounts = Discounts::where('sku',$sku)
+             if($type == "product")
+			 {
+				$discounts = Discounts::where('sku',$id)
 			                 ->orWhere('type',"general")
+							 ->where('status',"enabled")->get(); 
+			 }
+			 elseif($type == "user")
+			 {
+				 $discounts = Discounts::where('sku',$id)
+			                 ->where('type',"user")
 							 ->where('status',"enabled")->get();
- 
+             }
+			 
               if($discounts != null)
                {
 				  foreach($discounts as $d)
@@ -1186,7 +1210,10 @@ $subject = $data['subject'];
                     {
 						if(is_null($userId)) $userId = $c['user_id'];
 						$amount = $c['product']['pd']['amount'];
-						$dsc = $this->getDiscountPrices($amount,$c['product']['discounts']);
+						$discounts = $c['product']['discounts'];
+						#dd($discounts);
+						$dsc = $this->getDiscountPrices($amount,$discounts);
+						
 						$newAmount = 0;
 						if(count($dsc) > 0)
 			            {
@@ -1208,11 +1235,23 @@ $subject = $data['subject'];
 						$ret['subtotal'] += ($amount * $qty);
                         $ret['discounts'] = $dsc;					
                     }
+					
+					$userDiscounts = $this->getDiscounts($userId,"user");
+					#dd($userDiscounts);
+					$ua = 0; $una = 0;
+
+					$dsc = $this->getDiscountPrices($ret['subtotal'],$userDiscounts);
+					#dd($dsc);
+					if(count($dsc) > 0)
+				          {
+					        $ret['subtotal'] -= $dsc[0];
+				          }
+					
                    $u = User::where('id',$userId)->first();
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
-                   # dd($ret);                                  
+                   #dd($ret);                                  
                 return $ret;
            }
 		   
@@ -1483,6 +1522,18 @@ $subject = $data['subject'];
 				   $p->update(['qty' => $qty]);
 			   }
 		   }
+		   
+		   function clearNewUserDiscount($u)
+		   {
+			   $d = Discounts::where('sku',$u->id)
+			                 ->where('type',"user")
+							 ->where('discount',$this->newUserDiscount)->first();
+			   
+			   if(!is_null($d))
+			   {
+				   $d->delete();
+			   }
+		   }
 
            function addOrder($user,$data,$gid=null)
            {
@@ -1511,6 +1562,9 @@ $subject = $data['subject'];
 			   
 			   //clear cart
 			   $this->clearCart($user);
+			   
+			   //if new user, clear discount
+			   $this->clearNewUserDiscount($user);
 			   return $order;
            }
 
@@ -1937,7 +1991,7 @@ $subject = $data['subject'];
 		try
 		{
 			$ret['em'] = $this->adminEmail;
-		    //$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		    $ret['em'] = $this->suEmail;
 		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 			$s = ['status' => "ok"];
@@ -1945,8 +1999,8 @@ $subject = $data['subject'];
 		
 		catch(Throwable $e)
 		{
-			dd($e);
-			$s = ['status' => "error",'message' => "network error"];
+			#dd($e);
+			$s = ['status' => "error",'message' => "server error"];
 		}
 		
 		return json_encode($s);
@@ -2197,6 +2251,28 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+    function isDuplicateUser($data)
+	{
+		$ret = false;
+
+		$dup = User::where('email',$data['email'])
+		           ->orWhere('phone',$data['phone'])->get();
+
+       if(count($dup) > 0) $ret = true;		
+		return $ret;
+	}
+
+	function giveDiscount($user,$dt)
+	{
+	    $ret = $this->createDiscount([
+	       'id' => $user->id,                                                                                                          
+           'discount_type' => $dt['type'], 
+           'discount' => $dt['amount'], 
+           'status' => "enabled",	   
+		]);
+		return $ret;
+	}
    
 }
 ?>

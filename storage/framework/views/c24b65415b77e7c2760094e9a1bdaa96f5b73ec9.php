@@ -8,6 +8,9 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+<?php
+$legendText = count($orders) > 0 ? "enter your reference number below" : "sign in to view your orders OR enter your reference number below";
+?>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
@@ -35,7 +38,31 @@
                 <li class="active">your orders</li>
               </ol>
             </div>
+			<div class="col-sm-12">
+			      <form role="form" action="<?php echo e(url('anon-order')); ?>" method="get">
+					
+					  <fieldset class="col-md-12">
+                        <legend><?php echo e($legendText); ?></legend>
+                        
+                        <!-- Name -->
+                         <div class="row">
+                          <div class="col-sm-12 form-group">
+                            <label class="control-label" for="ref">Reference #</label>
+                            <input type="text" id="ref" name="ref" placeholder="Enter your reference number" class="form-control">
+						  </div>
+						 
+                         </div>
+					 </fieldset>
+					 
+					 <div class="row" style="margin-bottom: 20px;">
+					  <div class="col-sm-12">
+					    <input type="submit" class="btn btn-primary" value="Submit">
+					  </div>
+					</div>
+				  </form>
+			    </div>
 			<?php if(count($orders) > 0): ?>
+				<br>
             <!--start of columns-->
             <div class="col-sm-12">
               <div class="row extra-btm-padding">
@@ -112,31 +139,8 @@
             
             </div>
             <!--end of columns--> 
-			<?php else: ?>
-				<div class="col-sm-12">
-			      <form role="form" action="<?php echo e(url('anon-order')); ?>" method="get">
-					
-					  <fieldset class="col-md-12">
-                        <legend>sign in to view your orders OR enter your reference number below</legend>
-                        
-                        <!-- Name -->
-                         <div class="row">
-                          <div class="col-sm-12 form-group">
-                            <label class="control-label" for="ref">Reference #</label>
-                            <input type="text" id="ref" name="ref" placeholder="Enter your reference number" class="form-control">
-						  </div>
-						 
-                         </div>
-					 </fieldset>
-					 
-					 <div class="row" style="margin-bottom: 20px;">
-					  <div class="col-sm-12">
-					    <input type="submit" class="btn btn-primary" value="Submit">
-					  </div>
-					</div>
-				  </form>
-			    </div>
 			<?php endif; ?>
+			
           </div>
         </div>
       </div>

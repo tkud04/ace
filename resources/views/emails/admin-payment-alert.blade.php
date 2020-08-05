@@ -10,6 +10,7 @@
 Hello admin,<br> please be informed that a new order has been placed via online payment. See the details below:<br><br>
 Reference #: <b>{{$order['reference']}}</b><br>
 Customer: <b>{{$name}} ({{$user}})</b><br>
+Notes: <b>{{$order['notes']}}</b><br>
 <?php
 foreach($items as $i)
 {
