@@ -1142,8 +1142,9 @@ $subject = $data['subject'];
 			 
 			 $c = Carts::where('user_id',$userId)
 			           ->where('sku',$dt['sku'])->first();
-
-			if($c != null)
+             $p = Products::where('sku',$data['sku'])->first();
+			 
+			if($c != null && $p != null && $p->qty > $dt['qty'])
 			{
                 $c->update(['qty' => $dt['qty']]);				
 				$ret = "ok";
