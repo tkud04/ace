@@ -1146,7 +1146,7 @@ $subject = $data['subject'];
 			           ->where('sku',$dt['sku'])->first();
              $p = Products::where('sku',$dt['sku'])->first();
 			 
-			if($c != null && $p != null && $p->qty > $dt['qty'])
+			if($c != null && $p != null && $p->qty >= $dt['qty'])
 			{
                 $c->update(['qty' => $dt['qty']]);				
 				$ret = "ok";
