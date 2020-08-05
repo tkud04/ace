@@ -223,7 +223,7 @@
               <div>
                 <div class="row">
                   <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="{{$imggs[1]}}" width="200" height="230" alt=""/></figure>
+                    <figure><img class="img-responsive" src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
                     <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
