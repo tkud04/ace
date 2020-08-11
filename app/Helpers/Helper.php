@@ -686,7 +686,7 @@ $subject = $data['subject'];
            {
            	$ret = [];
               $products = Products::where('id','>',"0")
-                                   where('id','>',"0")
+                                   ->where('id','>',"0")
 			                       ->where('status',"enabled")->get();
 								   
 				$products = $products->sortByDesc('created_at');				   
