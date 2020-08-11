@@ -686,6 +686,7 @@ $subject = $data['subject'];
            {
            	$ret = [];
               $products = Products::where('id','>',"0")
+                                   where('id','>',"0")
 			                       ->where('status',"enabled")->get();
 								   
 				$products = $products->sortByDesc('created_at');				   
@@ -694,8 +695,8 @@ $subject = $data['subject'];
                {
 				  foreach($products as $p)
 				  {
-					  $pp = $this->getProduct($p->id);
-					  array_push($ret,$pp);
+					     $pp = $this->getProduct($p->id);
+					     array_push($ret,$pp); 
 				  }
                }                         
                                                       
@@ -713,7 +714,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  if($pp['status'] == "enabled") array_push($ret,$pp);
+					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -732,7 +733,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  if($pp['status'] == "enabled") array_push($ret,$pp);
+					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -978,7 +979,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  if($pp['status'] == "enabled") array_push($ret,$pp);
+					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }
                }                         
                                   
@@ -996,7 +997,7 @@ $subject = $data['subject'];
 				  foreach($pds as $p)
 				  {
 					  $pp = $this->getProduct($p->sku);
-					  if($pp['status'] == "enabled") array_push($ret,$pp);
+					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }
                }                         
                                   
