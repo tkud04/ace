@@ -9,7 +9,6 @@
 Hello {{$name}},<br> your payment for order <b>{{$order['reference']}}</b> has been cleared and your order is being processed. <br><br>
 
 Reference #: <b>{{$order['reference']}}</b><br>
-Customer: <b>{{$name}} ({{$user}})</b><br>
 Notes: <b>{{$order['notes']}}</b><br><br>
 <?php
 foreach($items as $i)
