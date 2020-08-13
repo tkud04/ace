@@ -139,7 +139,7 @@ class PaymentController extends Controller {
 					   
 					   $name = $md['name'];
 					   $email = $md['email'];
-					   $email = $md['phone'];
+					   $phone = $md['phone'];
 					   $shipping = [
 					     'address' => $md['address'],
 					     'city' => $md['city'],
