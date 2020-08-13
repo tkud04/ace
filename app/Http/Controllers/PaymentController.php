@@ -139,6 +139,7 @@ class PaymentController extends Controller {
 					   
 					   $name = $md['name'];
 					   $email = $md['email'];
+					   $email = $md['phone'];
 					   $shipping = [
 					     'address' => $md['address'],
 					     'city' => $md['city'],
@@ -149,6 +150,7 @@ class PaymentController extends Controller {
 				   {
 					   $name = $user->fname." ".$user->lname;
 					   $email = $user->email;
+					   $phone = $user->phone;
 					   $sd = $this->helpers->getShippingDetails($user->id);
 					   $shipping = $sd[0];
 				   }
@@ -176,6 +178,7 @@ class PaymentController extends Controller {
 				#$ret = $this->helpers->smtp;
 				$ret['order'] = $o;
 				$ret['user'] =$email;
+				$ret['phone'] =$phone;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
 		        $ret['shipping'] = $shipping;
 		        $ret['em'] = $this->helpers->adminEmail;
