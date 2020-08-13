@@ -2317,12 +2317,32 @@ $subject = $data['subject'];
 		   
 		    function getCurrentSender()
 		   {
-			   $s = Senders::where('current',"yes")->first();;
+			   $ret = [];
+			   $s = Senders::where('current',"yes")->first();
 			   
 			   if($s != null)
 			   {
 				   $ret = $this->getSender($s['id']);
 			   }
+			   
+			   return $ret;
+		   }
+		   function getCurrentBank()
+		   {
+			   $ret = [];
+			   $s = Settings::where('name',"bank")->first();
+			   
+			   if($s != null)
+			   {
+				   $val = explode(',',$s->value);
+				   $ret = [
+				     'bname' => $ret[0],
+					 'acname' => $ret[1],
+					 'acnum' => $ret[2]
+				   ];
+			   }
+			   
+			   return $ret;
 		   }
    
 }
