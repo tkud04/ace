@@ -165,7 +165,8 @@ class PaymentController extends Controller {
                {		  
 				  
                	//We have the user, notify the customer and admin
-				$ret = $this->helpers->smtp;
+				//$ret = $this->helpers->smtp;
+				$ret = $this->helpers->getCurrentSender();
 				$ret['order'] = $o;
 				$ret['name'] = $name;
 				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";

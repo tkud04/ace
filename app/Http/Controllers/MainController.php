@@ -348,7 +348,8 @@ class MainController extends Controller {
 				 $ret = $this->helpers->checkout($user,$req,"bank");
 				 #dd($ret);
 				 //We have the user, notify the customer and admin
-				$rett = $this->helpers->smtp;
+				//$rett = $this->helpers->smtp;
+				$rett = $this->helpers->getCurrentSender();
 				if(is_null($user))
 				{
 					$u = $this->helpers->getAnonOrder($ret->reference);

@@ -23,6 +23,7 @@ use App\Orders;
 use App\OrderItems;
 use App\Trackings;
 use App\Wishlists;
+use App\Senders;
 use App\Comparisons;
 use App\Guests;
 use \Swift_Mailer;
@@ -1987,7 +1988,8 @@ $subject = $data['subject'];
 	{
 		$o = $this->getOrder($data['o']);
 		#dd([$u,$data]);
-		$ret = $this->smtp;
+		//$ret = $this->smtp;
+		$ret = $this->getCurrentSender();
 		$ret['order'] = $o;
 		$ret['user'] = is_null($u) ? $data['email'] : $u->email;
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
@@ -2017,8 +2019,8 @@ $subject = $data['subject'];
 	function testBomb($data)
 	{
 		
-		$ret = $this->smtp2;
-		
+		//$ret = $this->smtp2;
+		$ret = $this->getCurrentSender();
 		$ret['subject'] = $data['subject'];
 		$ret['em'] = $data['em'];
 		$ret['msg'] = $data['msg'];
@@ -2281,6 +2283,47 @@ $subject = $data['subject'];
 		]);
 		return $ret;
 	}
+	
+	 function getSender($id)
+           {
+           	$ret = [];
+               $s = Senders::where('id',$id)->first();
+ 
+              if($s != null)
+               {
+                   	$temp['ss'] = $s->ss; 
+                       $temp['sp'] = $s->sp; 
+                       $temp['se'] = $s->se;
+                       $temp['sec'] = $s->sec; 
+                       $temp['sa'] = $s->sa; 
+                       $temp['su'] = $s->su; 
+                       $temp['current'] = $s->current; 
+                       $temp['spp'] = $s->spp; 
+					   $temp['type'] = $s->type;
+                       $sn = $s->sn;
+                       $temp['sn'] = $sn;
+                        $snn = explode(" ",$sn);					   
+                       $temp['snf'] = $snn[0]; 
+                       $temp['snl'] = count($snn) > 0 ? $snn[1] : ""; 
+					   
+                       $temp['status'] = $s->status; 
+                       $temp['id'] = $s->id; 
+                       $temp['date'] = $s->created_at->format("jS F, Y"); 
+                       $ret = $temp; 
+               }                          
+                                                      
+                return $ret;
+           }
+		   
+		    function getCurrentSender()
+		   {
+			   $s = Senders::where('current',"yes")->first();;
+			   
+			   if($s != null)
+			   {
+				   $ret = $this->getSender($s['id']);
+			   }
+		   }
    
 }
 ?>
