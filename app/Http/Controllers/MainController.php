@@ -1367,6 +1367,7 @@ class MainController extends Controller {
 		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 			 $signals = $this->helpers->signals;
 			 $banks = $this->helpers->banks;
+			 $bank = $this->helpers->getCurrentBank();
     	if(Auth::check())
 		{
 			$user = Auth::user();
@@ -1398,7 +1399,7 @@ class MainController extends Controller {
 			if(isset($order['status']) && $order['status'] == "unpaid" && $order['type'] == "bank")
 			{
 				$anon = is_null($user) ? $this->helpers->getAnonOrder($order['reference']) : [];
-				return view("confirm-payment",compact(['user','cart','c','ad','anon','order','banks','signals']));
+				return view("confirm-payment",compact(['user','cart','c','ad','anon','order','banks','bank','signals']));
 			}
 			else
 			{

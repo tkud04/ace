@@ -24,6 +24,7 @@ use App\OrderItems;
 use App\Trackings;
 use App\Wishlists;
 use App\Senders;
+use App\Settings;
 use App\Comparisons;
 use App\Guests;
 use \Swift_Mailer;
@@ -2336,9 +2337,9 @@ $subject = $data['subject'];
 			   {
 				   $val = explode(',',$s->value);
 				   $ret = [
-				     'bname' => $ret[0],
-					 'acname' => $ret[1],
-					 'acnum' => $ret[2]
+				     'bname' => $val[0],
+					 'acname' => $val[1],
+					 'acnum' => $val[2]
 				   ];
 			   }
 			   
