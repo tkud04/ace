@@ -50,7 +50,7 @@
                       </li>
 					  <li class="col-md-12">
                         <label class="control-label" for="comment-email">Your phone number <span class="req">*</span></label>
-                        <input type="email" class="form-control" name="email" value="{{$phone}}" id="comment-email" required="">
+                        <input type="number" class="form-control" name="phone" value="{{$phone}}" id="comment-phone" required="">
                       </li>
                           <li class="col-md-12">
                         <label class="control-label" for="comment-body">Your message <span class="req">*</span></label>

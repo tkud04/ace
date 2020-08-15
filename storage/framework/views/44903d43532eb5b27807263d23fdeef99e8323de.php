@@ -49,7 +49,7 @@
                       </li>
 					  <li class="col-md-12">
                         <label class="control-label" for="comment-email">Your phone number <span class="req">*</span></label>
-                        <input type="email" class="form-control" name="email" value="<?php echo e($phone); ?>" id="comment-email" required="">
+                        <input type="number" class="form-control" name="phone" value="<?php echo e($phone); ?>" id="comment-phone" required="">
                       </li>
                           <li class="col-md-12">
                         <label class="control-label" for="comment-body">Your message <span class="req">*</span></label>
@@ -72,7 +72,7 @@
                     <span class="small"> <span class="text-info text-capitalize"> <strong>Phone number</strong> :</span><br>
                         <a href="tel:2348097039692">+234 809 703 9692</a><br>
                         <span class="text-info text-capitalize"> <strong>Email us</strong> :</span><br>
-                        <a href="#">support@aceluxurystores.com</a></span></p>
+                        <a href="#">support@aceluxurystore.com</a></span></p>
                     </section>
                 
               </div>

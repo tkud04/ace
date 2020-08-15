@@ -534,7 +534,7 @@ class MainController extends Controller {
          {
          	$this->helpers->contact($req);
 	        session()->flash("contact-status","ok");
-			return redirect()->intended('profile');
+			return redirect()->intended('shop');
          }        
     }
 	

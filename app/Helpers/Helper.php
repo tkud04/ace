@@ -1372,7 +1372,27 @@ $subject = $data['subject'];
 
            function contact($data)
 		   {
-			   dd($data);
+			   #dd($data);
+			   $ret = $this->getCurrentSender();
+		       $ret['data'] = $data;
+    		   $ret['subject'] = "New message from ".$data['name'];	
+		       
+			   try
+		       {
+			    $ret['em'] = $this->adminEmail;
+		         $this->sendEmailSMTP($ret,"emails.contact");
+		         $ret['em'] = $this->suEmail;
+		         $this->sendEmailSMTP($ret,"emails.contact");
+			     $s = ['status' => "ok"];
+		       }
+		
+		       catch(Throwable $e)
+		       {
+			     #dd($e);
+			     $s = ['status' => "error",'message' => "server error"];
+		       }
+		
+		       return json_encode($s);
 		   }	
 
              function getBanners()

@@ -25,21 +25,21 @@
           </ol>
         </div>
         <div class="col-sm-12">
-		  <p><b>Ace Luxury Stores</b> is committed to ensuring that your privacy is protected. This privacy policy explains how we use the information we collect about you, how you can instruct us if you prefer to limit the use of that information and the procedures that we have in place to safeguard your privacy.</p><br>
+		  <p><b>Ace Luxury Store</b> is committed to ensuring that your privacy is protected. This privacy policy explains how we use the information we collect about you, how you can instruct us if you prefer to limit the use of that information and the procedures that we have in place to safeguard your privacy.</p><br>
           <h4 class="sub-title text-primary text-uppercase">The Information We Collect And How We Use It</h4>
          <p>When you register for our service (or as required) we may need to know your name, postal address, e-mail address, telephone number, credit card number and expiry date (or as required).</p><br>
 
-<p>Ace Luxury Stores gathers this information to allow us to process your registration, and process any orders you may make. The relevant information is then used by us, our agents and sub-contractors to communicate with you on any matter relating to the execution of your order and the provision of the service in general.</p><br>
+<p>Ace Luxury Store gathers this information to allow us to process your registration, and process any orders you may make. The relevant information is then used by us, our agents and sub-contractors to communicate with you on any matter relating to the execution of your order and the provision of the service in general.</p><br>
 
-<p>Ace Luxury Stores may also use aggregate information and statistics for the purposes of monitoring website usage in order to help us develop the website and our services and may provide such aggregate information to third parties. These statistics will not include information that can be used to identify any individual.</p><br>
+<p>Ace Luxury Store may also use aggregate information and statistics for the purposes of monitoring website usage in order to help us develop the website and our services and may provide such aggregate information to third parties. These statistics will not include information that can be used to identify any individual.</p><br>
 
 <p>From time to time we may provide your information to our customer services agencies for research and analysis purposes so that we can monitor and improve the serviceswe provide. We or our agents and sub-contractors may contact you by post, email, or telephone to ask you for your feedback and comments on our services.</p><br>
 
-<p>Ace Luxury Stores may also wish to provide you with information about special features of our website or any other service or products we think may be of interest to you. If you would rather not receive this information, please send a blank e-mail message to support@aceluxurystores.com.</p><br>
+<p>Ace Luxury Store may also wish to provide you with information about special features of our website or any other service or products we think may be of interest to you. If you would rather not receive this information, please send a blank e-mail message to support@aceluxurystores.com.</p><br>
 
-<p>Ace Luxury Stores may also wish to provide you with related information from third parties we think may be of interest to you. If you would rather not receive this information, please send a blank e-mail message to support@aceluxurystores.com</p><br>
+<p>Ace Luxury Store may also wish to provide you with related information from third parties we think may be of interest to you. If you would rather not receive this information, please send a blank e-mail message to support@aceluxurystores.com</p><br>
 
-<p>Ace Luxury Stores may also provide your information to carefully selected third parties whose products or services we believe may be of interest to you. If you do not wish us to disclose your information in this way, please send an email to support@aceluxurystores.com.</p><br>
+<p>Ace Luxury Store may also provide your information to carefully selected third parties whose products or services we believe may be of interest to you. If you do not wish us to disclose your information in this way, please send an email to support@aceluxurystores.com.</p><br>
           <h4 class="sub-title text-primary text-uppercase">Sale of Business</h4>
           <p>If this business is sold or integrated with another business your details may be disclosed to our advisers and any prospective purchasers and their advisers and will be passed on to the new owners of the business </p>
           <br>
