@@ -26,11 +26,10 @@
     <section class="container">
       <div class="row">
         <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="images/wide-ad-img.gif" width="1920" height="275" alt=""/>
-          <img class="img-responsive visible-xs" src="images/wide-ad-img-small.png" width="1920" height="275" alt=""/>
+          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="{{$ad}}" width="1920" height="275" alt=""/>
+          <img class="img-responsive visible-xs" src="{{$ad}}" width="1920" height="275" alt=""/>
             <figcaption>
-              <h2>Enjoy our <span>free shipping</span> for any order</h2>
-              <a href="#">View more</a> </figcaption>
+              <a href="javascript:void(0)">View more</a> </figcaption>
           </figure>
         </div>
       </div>
