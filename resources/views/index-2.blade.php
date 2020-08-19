@@ -21,13 +21,15 @@
   @endif
   <!--start of middle sec-->
   <div class="middle-se"> 
-    
+    <?php
+	//inner ad former dimension: 1920 x 725
+	?>
     <!--start of wide ad-->
     <section class="container">
       <div class="row">
         <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="{{$ad}}" width="1920" height="275" alt=""/>
-          <img class="img-responsive visible-xs" src="{{$ad}}" width="1920" height="275" alt=""/>
+          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="{{$ad}}" width="1170" height="100" alt=""/>
+          <img class="img-responsive visible-xs" src="{{$ad}}" width="1170" height="100" alt=""/>
             <figcaption>
               <a href="javascript:void(0)">View more</a> </figcaption>
           </figure>
