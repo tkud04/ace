@@ -28,8 +28,8 @@
     <section class="container">
       <div class="row">
         <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="{{$ad}}" width="1170" height="100" alt=""/>
-          <img class="img-responsive visible-xs" src="{{$ad}}" width="1170" height="100" alt=""/>
+          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="{{$ad}}" alt=""/>
+          <img class="img-responsive visible-xs" src="{{$ad}}" alt=""/>
             <figcaption>
               <a href="javascript:void(0)">View more</a> </figcaption>
           </figure>
