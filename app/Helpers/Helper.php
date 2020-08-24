@@ -258,6 +258,9 @@ public $categories = [
        'sn' => "Ace Luxury Store",
        'se' => "aceluxurystoree@gmail.com"
   ];
+  //ace yahoo
+  //pass: Eca12345$
+  
   
   public $smtp2 = [
        'ss' => "smtp.migadu.com",

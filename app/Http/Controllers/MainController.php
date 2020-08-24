@@ -56,7 +56,7 @@ class MainController extends Controller {
 		shuffle($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 
-    	return view("index-2",compact(['user','cart','c','banners','hasUnpaidOrders','bs','na','ad','plugins','signals']));
+    	return view("index-2",compact(['user','cart','c','banners','hasUnpaidOrders','bs','na','ad','signals','plugins']));
     }
 	
 	/**
@@ -79,6 +79,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
@@ -93,7 +94,7 @@ class MainController extends Controller {
 					   // dd($products);
 					   $samba = $this->helpers->getFriendlyName($type);
 					   
-                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals','plugins']));
                        
                      }
                 
@@ -104,7 +105,7 @@ class MainController extends Controller {
 					   $products = $this->helpers->getProductsByCategory($category);
 					 // dd($products);
 					 $samba = $this->helpers->getFriendlyName($category);
-                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));			 
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals','plugins']));			 
                     }
 				 }
                  else
@@ -112,7 +113,7 @@ class MainController extends Controller {
 					   $products = $this->helpers->getProducts();
 					 // dd($products);
 					 $samba = "Shop";
-                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals']));
+                       return view("shop",compact(['user','cart','products','c','na','ad','samba','signals','plugins']));
 				 }				 
     }
 	
@@ -135,6 +136,7 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$cc = $this->helpers->categories_2;
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
@@ -203,7 +205,7 @@ class MainController extends Controller {
 					}
 					else
 					{
-						return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','discounts','signals']));
+						return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','discounts','signals','plugins']));
 					}
                     			 
                  }			 
@@ -231,10 +233,11 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		#session()->reflash();
-		return view("cart",compact(['user','cart','totals','c','ad','signals']));					 
+		return view("cart",compact(['user','cart','totals','c','ad','signals','plugins']));					 
     }
 	
 	/**
@@ -276,15 +279,16 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		#dd($user);
 		$secure = (isset($req['ss']) && $req['ss'] == "1") ? false : true;
 		if(is_null($user))
 		{
-			return view("anon-checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));		
+			return view("anon-checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals','plugins']));		
 		}
 		else
 		{
-			return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals']));		
+			return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals','plugins']));		
 		}
 								 
     }
@@ -394,6 +398,7 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
@@ -429,7 +434,7 @@ class MainController extends Controller {
 						   switch($req['print'])
 						   {
 							   case "1":
-							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals','plugins'])); 
 							   break;
 							   
 							   case "2":
@@ -454,7 +459,7 @@ class MainController extends Controller {
 								  'order' => $order,
 								  'buyer' => $buyer,
 								  'anon' => $anon,
-								  'signals' => $signals,
+								  'signals','plugins' => $signals,
 								];
 								
 								$fname = $order['status'] == "paid" ? "receipt.pdf" : "invoice.pdf";
@@ -463,12 +468,12 @@ class MainController extends Controller {
 							   break;
 							   
 							   default:
-							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
+							      return view("print-receipt", compact(['user','cart','c','ad','order','anon','buyer','signals','plugins'])); 
 						   }
 						 }
 						 else
 						 {
-						    return view("receipt", compact(['user','cart','c','ad','order','anon','buyer','signals'])); 
+						    return view("receipt", compact(['user','cart','c','ad','order','anon','buyer','signals','plugins'])); 
 						 }
 						  
 					 }					 
@@ -494,11 +499,12 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		//dd($user);
-		return view("contact",compact(['user','cart','c','ad','signals']));							 
+		return view("contact",compact(['user','cart','c','ad','signals','plugins']));							 
     }
 	
 	/**
@@ -559,6 +565,7 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$ads = $this->helpers->getAds();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
@@ -582,11 +589,11 @@ class MainController extends Controller {
 					 
 					 if(count($results) < 1)
 					 {
-						return view("search-not-found",compact(['user','cart','c','ad','signals'])); 
+						return view("search-not-found",compact(['user','cart','c','ad','signals','plugins'])); 
 					 }
 				     else
 					 {
-						 return view("search-found", compact(['results','user','cart','c','ad','signals'])); 
+						 return view("search-found", compact(['results','user','cart','c','ad','signals','plugins'])); 
 					 }
                     					 
                  }	 
@@ -613,10 +620,11 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		#dd($ads);
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
-		return view("about",compact(['user','cart','c','ad','signals']));	
+		return view("about",compact(['user','cart','c','ad','signals','plugins']));	
     }
 
 	/**
@@ -638,10 +646,11 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("privacy-policy",compact(['user','cart','c','ad','signals']));	
+		return view("privacy-policy",compact(['user','cart','c','ad','signals','plugins']));	
     }
 	
 	/**
@@ -663,10 +672,11 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("return-policy",compact(['user','cart','c','ad','signals']));	
+		return view("return-policy",compact(['user','cart','c','ad','signals','plugins']));	
     }
 	
 	/**
@@ -688,10 +698,11 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		$c = $this->helpers->getCategories();
 		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
-		return view("faq",compact(['user','cart','c','ad','signals']));	
+		return view("faq",compact(['user','cart','c','ad','signals','plugins']));	
     }
     
 	/**
@@ -716,6 +727,7 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$req = $request->all();
 		$showView = false;
 		
@@ -730,7 +742,7 @@ class MainController extends Controller {
 				$r = $req['o'];
 			    $paidStatus = $anon['order']['status'];
 			    #dd($trackings);
-			    return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals']));	
+			    return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals','plugins']));	
 			}
 			else
 			{
@@ -745,7 +757,7 @@ class MainController extends Controller {
 		
 		if($showView)
 		{
-			return view("track",compact(['user','cart','c','ad','signals']));
+			return view("track",compact(['user','cart','c','ad','signals','plugins']));
 		}
 			
     }
@@ -769,7 +781,8 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("dashboard",compact(['user','cart','c','ad','orders','signals']));			
+			$plugins = $this->helpers->getPlugins();
+		    return view("dashboard",compact(['user','cart','c','ad','orders','signals','plugins']));			
 		}
 		else
 		{
@@ -793,6 +806,7 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 			$c = $this->helpers->getCategories();
 		    $signals = $this->helpers->signals;
+			$plugins = $this->helpers->getPlugins();
 		    $states = $this->helpers->states;
 			$account = $this->helpers->getUser($user->email);
 			$shipping = $this->helpers->getShippingDetails($user);
@@ -810,7 +824,7 @@ class MainController extends Controller {
 			    ];
 				
 		   if(count($shipping) > 0) $ss = $shipping[0];
-		    return view("profile",compact(['user','cart','c','signals','account','ad','ss','states']));			
+		    return view("profile",compact(['user','cart','c','signals','plugins','account','ad','ss','states']));			
 		}
 		else
 		{
@@ -890,8 +904,9 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
+			$plugins = $this->helpers->getPlugins();
 			$wext = isset($req['wext']) ? $req['wext'] : null;
-		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals']));			
+		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals','plugins']));			
 		
     }
 	
@@ -910,6 +925,7 @@ class MainController extends Controller {
 			shuffle($ads);
 		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
+			$plugins = $this->helpers->getPlugins();
 			
     	if(Auth::check())
 		{
@@ -939,7 +955,7 @@ class MainController extends Controller {
 			{
 				$orders[0] = $this->helpers->getOrder($anon['reference']);
 				#dd($orders[0]);
-				return view("orders",compact(['user','cart','c','ad','anon','orders','signals']));		
+				return view("orders",compact(['user','cart','c','ad','anon','orders','signals','plugins']));		
 			}
 			else
 			{
@@ -1201,7 +1217,8 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("wishlist",compact(['user','cart','c','ad','wishlist','signals']));			
+			$plugins = $this->helpers->getPlugins();
+		    return view("wishlist",compact(['user','cart','c','ad','wishlist','signals','plugins']));			
 		
     }
 	
@@ -1309,7 +1326,8 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		    $signals = $this->helpers->signals;
-		    return view("compare",compact(['user','cart','c','ad','compares','signals']));			
+			$plugins = $this->helpers->getPlugins();
+		    return view("compare",compact(['user','cart','c','ad','compares','signals','plugins']));			
 		
     }
 	
@@ -1367,6 +1385,7 @@ class MainController extends Controller {
 			shuffle($ads);
 		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 			 $signals = $this->helpers->signals;
+			 $plugins = $this->helpers->getPlugins();
 			 $banks = $this->helpers->banks;
 			 $bank = $this->helpers->getCurrentBank();
     	if(Auth::check())
@@ -1400,7 +1419,7 @@ class MainController extends Controller {
 			if(isset($order['status']) && $order['status'] == "unpaid" && $order['type'] == "bank")
 			{
 				$anon = is_null($user) ? $this->helpers->getAnonOrder($order['reference']) : [];
-				return view("confirm-payment",compact(['user','cart','c','ad','anon','order','banks','bank','signals']));
+				return view("confirm-payment",compact(['user','cart','c','ad','anon','order','banks','bank','signals','plugins']));
 			}
 			else
 			{

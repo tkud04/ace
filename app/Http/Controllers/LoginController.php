@@ -39,8 +39,9 @@ class LoginController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad.jpg" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$states = $this->helpers->states;
-		return view("register",compact(['user','cart','c','ad','signals','states']));
+		return view("register",compact(['user','cart','c','ad','signals','plugins','states']));
     }
 	/**
 	 * Show the application welcome screen to the user.
@@ -65,7 +66,8 @@ class LoginController extends Controller {
 		$cart = $this->helpers->getCart($user,$request);
 		$c = $this->helpers->categories;
 		$signals = $this->helpers->signals;
-		return view("login",compact(['user','cart','c','signals']));	
+		$plugins = $this->helpers->getPlugins();
+		return view("login",compact(['user','cart','c','signals','plugins']));	
     }
 
   
@@ -183,7 +185,8 @@ class LoginController extends Controller {
 	public function getForgotUsername()
     {
 		$layoutAd = $this->helpers->getAds();
-         return view('forgot_username',compact(['layoutAd',]));
+		$plugins = $this->helpers->getPlugins();
+         return view('forgot_username',compact(['layoutAd','plugins']));
     }
     
     /**
@@ -234,8 +237,9 @@ class LoginController extends Controller {
 			return redirect()->intended('/');
 		}
 		$signals = $this->helpers->signals;
+		$plugins = $this->helpers->getPlugins();
 		$layoutAd = $this->helpers->getAds();
-         return view('forgot-password', compact(['layoutAd','user','signals']));
+         return view('forgot-password', compact(['layoutAd','user','signals','plugins']));
     }
     
     /**
@@ -300,6 +304,7 @@ class LoginController extends Controller {
        $user = null;
        $req = $request->all();
        $return = isset($req['return']) ? $req['return'] : '/';
+	   $plugins = $this->helpers->getPlugins();
 		
 		if(Auth::check())
 		{
@@ -319,7 +324,7 @@ class LoginController extends Controller {
                 }
                 $v = ($user->role == "user") ? 'reset' : 'admin.reset';
 				$layoutAd = $this->helpers->getAds();
-            	return view($v,compact(['layoutAd','user','return']));
+            	return view($v,compact(['layoutAd','user','return','plugins']));
             }
             
             else

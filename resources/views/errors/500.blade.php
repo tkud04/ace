@@ -2,6 +2,7 @@
 $user = null;
 $c = [];
 $cart = [];
+$plugins = [];
 ?>
 @extends('layout')
 

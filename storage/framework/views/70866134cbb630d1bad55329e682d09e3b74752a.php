@@ -26,8 +26,8 @@
     <section class="container">
       <div class="row">
         <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/>
-          <img class="img-responsive visible-xs" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/>
+          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="<?php echo e($ad); ?>" alt=""/>
+          <img class="img-responsive visible-xs" src="<?php echo e($ad); ?>" alt=""/>
             <figcaption>
               <a href="javascript:void(0)">View more</a> </figcaption>
           </figure>
@@ -111,13 +111,13 @@
 		   {
 			   $n = $na[$i];
 			   $sku = $n['sku'];
+			   $name = $n['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $n['pd'];
 			   $description = $pd['description'];
-			   $name = $n['name'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
@@ -138,12 +138,12 @@
                               <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToWishlist({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
                               <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCompare({sku:'<?php echo e($sku); ?>'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
                                <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'<?php echo e($sku); ?>',description:`<?php echo e($description); ?>`,amount:'<?php echo e($amount); ?>',oldAmount:'<?php echo e($amount + 1000); ?>',inStock:'<?php echo e(ucwords($in_stock)); ?>',imgg:'<?php echo e($imggs[0]); ?>'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'<?php echo e($sku); ?>',name:'<?php echo e($name); ?>',description:`<?php echo e($description); ?>`,amount:'<?php echo e($amount); ?>',oldAmount:'<?php echo e($amount + 1000); ?>',inStock:'<?php echo e(ucwords($in_stock)); ?>',imgg:'<?php echo e($imggs[0]); ?>'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
 		  				  </p>
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?> - <?php echo e($name); ?></a></h3>
+                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
@@ -193,12 +193,12 @@
 			   $b = $bs[$i];
 
 			   $sku = $b['sku'];
+			   $name = $b['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $b['pd'];
-			   $name = $b['name'];
 			   $description = $pd['description'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
@@ -227,7 +227,7 @@
                     <figure><img class="img-responsive" src="<?php echo e($imggs[0]); ?>" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?> - <?php echo e($name); ?></a></h3>
+                    <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>
                     <div class="product-price"> <span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount -$dsc,2)); ?></strong></span> <?php if($dsc > 0): ?><span class="old-price"><del>&#8358;<?php echo e(number_format($amount + 1000,2)); ?></del></span><?php endif; ?> </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>
