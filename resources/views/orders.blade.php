@@ -104,6 +104,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						 {
 							 $product = $i['product'];
 							 $sku = $product['sku'];
+							 $name = $product['name'];
 							 $qty = $i['qty'];
 							 $pu = url('product')."?sku=".$product['sku'];
 							 $img = $product['imggs'][0];
@@ -112,7 +113,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						 
 						 <a href="{{$pu}}" target="_blank">
 						   <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="80" width="80" style="margin-bottom: 5px;"/>
-							   {{$sku}}
+							   {{$name}}
 						 </a> (x{{$qty}})<br>
 						 <?php
 						 }

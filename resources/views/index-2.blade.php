@@ -119,6 +119,7 @@
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $n['pd'];
 			   $description = $pd['description'];
+			   $name = $n['name'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
@@ -144,7 +145,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                            <h3 class="product-name"><a href="{{$uu}}">{{$sku}} - {{$name}}</a></h3>
                             <p class="group inner list-group-item-text">{{$description}}</p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <!--  <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
@@ -199,6 +200,7 @@
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $b['pd'];
+			   $name = $b['name'];
 			   $description = $pd['description'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
@@ -227,7 +229,7 @@
                     <figure><img class="img-responsive" src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                    <h3 class="product-name"><a href="{{$uu}}">{{$sku}} - {{$name}}</a></h3>
                     <div class="product-price"> <span class="real-price text-info"><strong>&#8358;{{number_format($amount -$dsc,2)}}</strong></span> @if($dsc > 0)<span class="old-price"><del>&#8358;{{number_format($amount + 1000,2)}}</del></span>@endif </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>

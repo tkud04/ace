@@ -40,6 +40,7 @@
 				    {
 					  $item = $cart[$a]['product'];
 					  $sku = $item['sku'];
+					  $name = $item['name'];
 					  $uu = url('product')."?sku=".$sku;
 					  $qty = $cart[$a]['qty'];
 					  $itemText = $qty == 1 ? "Item" : "Items";
@@ -54,7 +55,7 @@
                         <div class="row">
                           <div class="item-image col-sm-2"> <img class="img-responsive" src="{{$imggs[0]}}" width="126" height="144" alt=""> </div>
                           <div class="item-body col-sm-8">
-                            <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$uu}}">{{$sku}}</a></h5>
+                            <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$uu}}">{{$name}}</a></h5>
                             <p class="item-description">{{$itemDescription}}</p>
 							
 							<div class="text-info">

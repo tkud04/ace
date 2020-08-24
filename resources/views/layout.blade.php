@@ -77,6 +77,13 @@
 <script src="js/custom.js"></script> 
 </head>
 <body>
+
+<!-- DO NOT EDIT!! start of plugins -->
+@foreach($plugins as $p)
+  {!! $p['value'] !!}
+@endforeach
+<!-- DO NOT EDIT!! end of plugins -->
+
 <!--start of loader-->
 <div id="preloader">
   <div id="status"></div>

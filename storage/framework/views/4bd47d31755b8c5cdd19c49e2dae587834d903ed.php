@@ -1,11 +1,11 @@
-<?php $__env->startSection('title',$product['sku']); ?>
+<?php $__env->startSection('title',$product['name']); ?>
 
 <?php $__env->startSection('content'); ?>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
       <div class="container text-center">
-        <h2 class="text-primary text-uppercase"><?php echo e($product['sku']); ?></h2>
+        <h2 class="text-primary text-uppercase"><?php echo e($product['name']); ?></h2>
         <p>View more information about this product.</p>
       </div>
     </div>
@@ -39,7 +39,7 @@
               <section> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
-                <a href="#">earrings</a> <a href="#">rings</a> <a href="#">brooches</a> <a href="#">watches</a> <a href="#">bracelets</a> <a href="#">fashion</a></section>
+                <a href="javascript:void(0)">earrings</a> <a href="javascript:void(0)">rings</a> <a href="javascript:void(0)">brooches</a> <a href="javascript:void(0)">watches</a> <a href="javascript:void(0)">bracelets</a> <a href="javascript:void(0)">fashion</a></section>
             </div>
             <div class="col-sm-8 col-md-9  main-sec">
               <div class="row">
@@ -47,12 +47,13 @@
                   <ol class="breadcrumb  dashed-border">
                     <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
                     <li><a href="<?php echo e(url('shop')); ?>">Shop</a></li>
-                    <li class="active"><?php echo e($product['sku']); ?></li>
+                    <li class="active"><?php echo e($product['name']); ?></li>
                   </ol>
                 </div>
                 <!--start of product details-->
                 <?php
 				   $sku = $product['sku'];
+				   $name = $product['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku;
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -91,7 +92,7 @@
 					 <input type="hidden" id="sku" value="<?php echo e($product['sku']); ?>">
 					 <input type="hidden" id="cu" value="<?php echo e($cu); ?>">
                       <div class="product-name">
-                        <h5 class="text-primary text-uppercase"><?php echo e($sku); ?></h5>
+                        <h5 class="text-primary text-uppercase"><?php echo e($sku); ?> - <?php echo e($name); ?></h5>
                       </div>
                       <div class="product-description">
                         <h5 class="text-primary text-uppercase">Quick Overview</h5>
@@ -259,6 +260,7 @@
 			   if($n['sku'] != $product['sku'])
 			   {
 			   $sku = $n['sku'];
+			   $name = $n['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -290,7 +292,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
+                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>

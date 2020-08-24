@@ -25,6 +25,7 @@ use App\Trackings;
 use App\Wishlists;
 use App\Senders;
 use App\Settings;
+use App\Plugins;
 use App\Comparisons;
 use App\Guests;
 use \Swift_Mailer;
@@ -752,6 +753,7 @@ $subject = $data['subject'];
                {
 				  $temp = [];
 				  $temp['id'] = $product->id;
+				  $temp['name'] = $product->name;
 				  $temp['sku'] = $product->sku;
 				  $temp['qty'] = $product->qty;
 				  $temp['status'] = $product->status;
@@ -2365,6 +2367,43 @@ $subject = $data['subject'];
 			   
 			   return $ret;
 		   }
+		   
+		    function getPlugins()
+   {
+	   $ret = [];
+	   
+	   $plugins = Plugins::where('id','>',"0")->get();
+	   
+	   if(!is_null($plugins))
+	   {
+		   foreach($plugins as $p)
+		   {
+		     $temp = $this->getPlugin($p->id);
+		     array_push($ret,$temp);
+	       }
+	   }
+	   
+	   return $ret;
+   }
+   
+   function getPlugin($id)
+           {
+           	$ret = [];
+               $p = Plugins::where('id',$id)->first();
+ 
+              if($p != null)
+               {
+                   	$temp['name'] = $p->name; 
+                       $temp['value'] = $p->value; 	   
+                       $temp['status'] = $p->status; 
+                       $temp['id'] = $p->id; 
+                       $temp['date'] = $p->created_at->format("jS F, Y"); 
+                       $temp['updated'] = $p->updated_at->format("jS F, Y"); 
+                       $ret = $temp; 
+               }                          
+                                                      
+                return $ret;
+           }
    
 }
 ?>

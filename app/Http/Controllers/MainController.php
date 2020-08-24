@@ -48,6 +48,7 @@ class MainController extends Controller {
 		//dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
+		$plugins = $this->helpers->getPlugins();
 		
 		#dd($hasUnpaidOrders);
 		
@@ -55,7 +56,7 @@ class MainController extends Controller {
 		shuffle($banners);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 
-    	return view("index-2",compact(['user','cart','c','banners','hasUnpaidOrders','bs','na','ad','signals']));
+    	return view("index-2",compact(['user','cart','c','banners','hasUnpaidOrders','bs','na','ad','plugins','signals']));
     }
 	
 	/**

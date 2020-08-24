@@ -109,6 +109,7 @@
 		   foreach($products as $n)
 		   {
 			   $sku = $n['sku'];
+			   $name = $n['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -131,7 +132,8 @@
 		  imggs = "<?php echo e(json_encode($imggs,JSON_HEX_APOS|JSON_HEX_QUOT)); ?>";
 		  imggs = imggs.replace(/&quot;/g, '\"');
 		   temp = {
-			   sku: "<?php echo e($n['sku']); ?>",
+			   sku: "<?php echo e($sku); ?>",
+			   name: "<?php echo e($name); ?>",
 			   uu: "<?php echo e($uu); ?>",
 			   cu: "<?php echo e($cu); ?>",
 			   wu: "<?php echo e($wu); ?>",
@@ -184,6 +186,7 @@
 		   foreach($na as $n)
 		   {
 			   $sku = $n['sku'];
+			   $name = $n['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -215,7 +218,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
+                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>

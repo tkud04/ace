@@ -77,6 +77,14 @@
 <script src="js/custom.js"></script> 
 </head>
 <body>
+
+<!-- DO NOT EDIT!! start of plugins -->
+<?php $__currentLoopData = $plugins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  <?php echo $p['value']; ?>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<!-- DO NOT EDIT!! end of plugins -->
+
 <!--start of loader-->
 <div id="preloader">
   <div id="status"></div>

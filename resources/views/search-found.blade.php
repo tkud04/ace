@@ -49,7 +49,7 @@
                     <div class="row">
                       <div class="item-image col-sm-2"> <img class="img-responsive" src="{{$imggs[0]}}" width="126" height="144" alt=""> </div>
                       <div class="item-body col-sm-8">
-                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$pu}}">{{$p['sku']}}</a></h5>
+                        <h5 class="item-title text-primary text-uppercase text-primary text-uppercase"><a href="{{$pu}}">{{$p['name']}}</a></h5>
                         <p class="item-description">{!! $pd['description'] !!} </p>
                       </div>
                       <div class="item-price js-item-price col-sm-2 text-info text-center"> <strong>&#8358;{{number_format($pd['amount'],2)}}</strong> </div>

@@ -19,16 +19,17 @@
   <?php endif; ?>
   <!--start of middle sec-->
   <div class="middle-se"> 
-    
+    <?php
+	//inner ad former dimension: 1920 x 725
+	?>
     <!--start of wide ad-->
     <section class="container">
       <div class="row">
         <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="images/wide-ad-img.gif" width="1920" height="275" alt=""/>
-          <img class="img-responsive visible-xs" src="images/wide-ad-img-small.png" width="1920" height="275" alt=""/>
+          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/>
+          <img class="img-responsive visible-xs" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/>
             <figcaption>
-              <h2>Enjoy our <span>free shipping</span> for any order</h2>
-              <a href="#">View more</a> </figcaption>
+              <a href="javascript:void(0)">View more</a> </figcaption>
           </figure>
         </div>
       </div>
@@ -116,6 +117,7 @@
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $n['pd'];
 			   $description = $pd['description'];
+			   $name = $n['name'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
 			   $imggs = $n['imggs'];
@@ -141,7 +143,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
+                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?> - <?php echo e($name); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
@@ -196,6 +198,7 @@
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
 			   $ccu = url('add-to-compare')."?sku=".$sku;
 			   $pd = $b['pd'];
+			   $name = $b['name'];
 			   $description = $pd['description'];
 			   $in_stock = $pd['in_stock'];
 			   $amount = $pd['amount'];
@@ -224,7 +227,7 @@
                     <figure><img class="img-responsive" src="<?php echo e($imggs[0]); ?>" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?></a></h3>
+                    <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($sku); ?> - <?php echo e($name); ?></a></h3>
                     <div class="product-price"> <span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount -$dsc,2)); ?></strong></span> <?php if($dsc > 0): ?><span class="old-price"><del>&#8358;<?php echo e(number_format($amount + 1000,2)); ?></del></span><?php endif; ?> </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>
