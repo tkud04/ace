@@ -113,6 +113,7 @@
 		   {
 			   $n = $na[$i];
 			   $sku = $n['sku'];
+			   $name = $n['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -139,12 +140,12 @@
                               <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToWishlist({sku:'{{$sku}}'})" class="hint-top" data-hint="Wishlist"><span class="fav ion-ios-star"></span></a></p>
                               <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCompare({sku:'{{$sku}}'})" class="hint-top" data-hint="Compare"> <span class="compare ion-android-funnel"></span> </a></p>
                                <p class="effect-icon">
-		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'{{$sku}}',description:`{{$description}}`,amount:'{{$amount}}',oldAmount:'{{$amount + 1000}}',inStock:'{{ucwords($in_stock)}}',imgg:'{{$imggs[0]}}'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
+		   <a data-toggle="modal" data-target="#quick-view-box" onclick="populateQV({sku:'{{$sku}}',name:'{{$name}}',description:`{{$description}}`,amount:'{{$amount}}',oldAmount:'{{$amount + 1000}}',inStock:'{{ucwords($in_stock)}}',imgg:'{{$imggs[0]}}'})" class="hint-top" data-hint="Quick View"><span class="ion-ios-eye view"></span> </a>
 		  				  </p>
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                            <h3 class="product-name"><a href="{{$uu}}">{{$name}}</a></h3>
                             <p class="group inner list-group-item-text">{{$description}}</p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <!--  <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
@@ -194,6 +195,7 @@
 			   $b = $bs[$i];
 
 			   $sku = $b['sku'];
+			   $name = $b['name'];
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -227,7 +229,7 @@
                     <figure><img class="img-responsive" src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
-                    <h3 class="product-name"><a href="{{$uu}}">{{$sku}}</a></h3>
+                    <h3 class="product-name"><a href="{{$uu}}">{{$name}}</a></h3>
                     <div class="product-price"> <span class="real-price text-info"><strong>&#8358;{{number_format($amount -$dsc,2)}}</strong></span> @if($dsc > 0)<span class="old-price"><del>&#8358;{{number_format($amount + 1000,2)}}</del></span>@endif </div>
                     <div class="product-evaluate text-info"><span><i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star"></i> <i class="ion-android-star-half"></i></span></div>
                   </div>
