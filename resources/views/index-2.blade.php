@@ -36,7 +36,7 @@
       </div>
     </section>
     <!--end of wide ad--> 
-	<br><br>
+	
 	    <!--start of ad-boxes-->
 		
     <section class="container">
