@@ -26,21 +26,17 @@
 	?>
     <!--start of wide ad-->
     <section class="container">
-      <div class="row">
+      <div class="row" style="margin-top: 20px;">
         <div class="col-sm-12">
           <div class="inner-ad">
          <figure><img class="img-responsive hidden-xs" src="{{$ad}}" width="1170" height="100" alt=""/></figure>
           <img class="img-responsive visible-xs" src="{{$ad}}" alt=""/>
-		  <figure>
-            <figcaption>
-              <a href="javascript:void(0)">View more</a> </figcaption>
-			  <figure>
         </div>
         </div>
       </div>
     </section>
     <!--end of wide ad--> 
-	<br><br>
+	
 	    <!--start of ad-boxes-->
 		
     <section class="container">
