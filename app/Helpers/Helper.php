@@ -1587,7 +1587,7 @@ $subject = $data['subject'];
                    $dt['sku'] = $c['product']['sku'];
 				   $dt['qty'] = $c['qty'];
 				   $dt['order_id'] = $order->id;
-				   $this->updateStock($dt['sku'],$dt['qty']);
+				   if($dt['status'] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
                    $oi = $this->createOrderItems($dt);                    
                }
 
