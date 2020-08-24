@@ -25,20 +25,24 @@
     <!--start of wide ad-->
     <section class="container">
       <div class="row">
-        <div class="col-sm-12 wide-ad">
-          <figure class="effect-layla"> <img class="img-responsive hidden-xs" src="<?php echo e($ad); ?>" alt=""/>
+        <div class="col-sm-12">
+          <div class="inner-ad">
+         <figure><img class="img-responsive hidden-xs" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""/></figure>
           <img class="img-responsive visible-xs" src="<?php echo e($ad); ?>" alt=""/>
+		  <figure>
             <figcaption>
               <a href="javascript:void(0)">View more</a> </figcaption>
-          </figure>
+			  <figure>
+        </div>
         </div>
       </div>
     </section>
     <!--end of wide ad--> 
 	<br><br>
 	    <!--start of ad-boxes-->
+		
     <section class="container">
-      <div class="row">
+      <div class="row" style="margin-top: 20px;">
 	  <?php
 	  $cc = [];
 	  foreach($c as $ccc)
