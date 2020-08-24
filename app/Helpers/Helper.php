@@ -2378,8 +2378,11 @@ $subject = $data['subject'];
 	   {
 		   foreach($plugins as $p)
 		   {
-		     $temp = $this->getPlugin($p->id);
-		     array_push($ret,$temp);
+			 if($p->status == "enabled")
+			 {
+				$temp = $this->getPlugin($p->id);
+		        array_push($ret,$temp); 
+			 }
 	       }
 	   }
 	   
