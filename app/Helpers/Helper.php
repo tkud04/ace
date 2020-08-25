@@ -1572,7 +1572,7 @@ $subject = $data['subject'];
 
            function addOrder($user,$data,$gid=null)
            {
-           	dd($data);
+           	#dd($data);
 			   $cart = [];
 			   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";  
            	   $order = $this->createOrder($user, $data);
@@ -1588,7 +1588,7 @@ $subject = $data['subject'];
                    $dt['sku'] = $c['product']['sku'];
 				   $dt['qty'] = $c['qty'];
 				   $dt['order_id'] = $order->id;
-				   if($data['status'] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
+				   if($data["status"] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
                    $oi = $this->createOrderItems($dt);                    
                }
 
