@@ -1572,6 +1572,7 @@ $subject = $data['subject'];
 
            function addOrder($user,$data,$gid=null)
            {
+           	dd($data);
 			   $cart = [];
 			   $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";  
            	   $order = $this->createOrder($user, $data);
