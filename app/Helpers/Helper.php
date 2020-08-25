@@ -1587,7 +1587,7 @@ $subject = $data['subject'];
                    $dt['sku'] = $c['product']['sku'];
 				   $dt['qty'] = $c['qty'];
 				   $dt['order_id'] = $order->id;
-				   if($dt['status'] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
+				   if($data['status'] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
                    $oi = $this->createOrderItems($dt);                    
                }
 
@@ -2027,7 +2027,7 @@ $subject = $data['subject'];
 		try
 		{
 			$ret['em'] = $this->adminEmail;
-		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
+		    //$this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 		    $ret['em'] = $this->suEmail;
 		    $this->sendEmailSMTP($ret,"emails.admin-confirm-payment");
 			$s = ['status' => "ok"];
