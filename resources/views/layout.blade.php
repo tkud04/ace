@@ -655,7 +655,7 @@
 <!--navigation js--> 
 <script src="js/jquery.highlight.js"></script> 
 <script src="js/jquery.touchSwipe.min.js"></script> 
-<script src="js/line.js"></script> 
+<!--<script src="js/line.js"></script>--> 
 <!--scrollbar js--> 
 <script src="js/nicescroll.js"></script> 
 <script src="js/jquery.nicescroll.plus.js"></script> 
