@@ -274,7 +274,8 @@ public $categories = [
   ];
   
   
-  public $adminEmail = "aceluxurystore@yahoo.com";
+  public $adminEmail = "aquarius4tkud@yahoo.com";
+  //public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
   
   public $newUserDiscount = "500";
@@ -1668,7 +1669,8 @@ $subject = $data['subject'];
                  $oid = $items[0]['order_id'];		   
                	foreach($items as $i) 
                     {
-						
+						if(count($i['product']) > 0)
+                        {
 						$amount = $i['product']['pd']['amount'];
 						$dsc = $this->getDiscountPrices($amount,$i['product']['discounts']);
 						$newAmount = 0;
@@ -1691,7 +1693,8 @@ $subject = $data['subject'];
 						$qty = $i['qty'];
                     	$ret['items'] += $qty;
 						$ret['subtotal'] += ($amount * $qty);	
-                    }
+                       }
+				  }
 					
 					if($uid == "anon")
 					{
@@ -1796,7 +1799,7 @@ $subject = $data['subject'];
                         $temp['qty'] = $i->qty; 
                         array_push($ret, $temp); 
                     }
-               }                                 
+               }			   
               			  
                 return $ret;
            }

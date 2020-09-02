@@ -100,17 +100,18 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						<?php
 						 foreach($items as $i)
 						 {
-							 $product = $i['product'];
-							 $sku = $product['sku'];
-							 $qty = $i['qty'];
-							 $pu = url('product')."?sku=".$product['sku'];
-							 $img = $product['imggs'][0];
+							   $product = $i['product'];
+							   $sku = $product['sku'];
+							   $name = $product['name'];
+							   $pu = url('product')."?sku=".$product['sku'];
+							   $img = $product['imggs'][0];
 							 
+							 $qty = $i['qty'];
 						 ?>
 						 
 						 <a href="<?php echo e($pu); ?>" target="_blank">
 						   <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
-							   <?php echo e($sku); ?>
+							   <?php echo e($name); ?>
 
 						 </a> (x<?php echo e($qty); ?>)<br>
 						 <?php

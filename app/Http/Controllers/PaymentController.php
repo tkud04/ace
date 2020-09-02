@@ -112,7 +112,7 @@ class PaymentController extends Controller {
         
         $paymentData = $paymentDetails['data'];
         $md = $paymentData['metadata'];
-		#dd($md);       
+		dd($md);       
 		$successLocation = "";
         $failureLocation = "";
         
