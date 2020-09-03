@@ -188,7 +188,18 @@ class PaymentController extends Controller {
                }
 			   
             $request->session()->flash("pay-card-status",$stt['status']);
-			return redirect()->intended($successLocation);
+			//return redirect()->intended($successLocation);
+			
+			$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
+		$signals = $this->helpers->signals;
+			
+			return view("card-payment-success",compact(['user','cart','c','ad','signals','plugins']));
         }
         else
         {
