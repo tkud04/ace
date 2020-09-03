@@ -199,7 +199,7 @@ class PaymentController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 			
-			return view("card-payment-success",compact(['user','cart','c','ad','signals','plugins']));
+			return view("cps",compact(['user','cart','c','ad','signals','plugins']));
         }
         else
         {
