@@ -274,8 +274,8 @@ public $categories = [
   ];
   
   
- // public $adminEmail = "aquarius4tkud@yahoo.com";
-  public $adminEmail = "aceluxurystore@yahoo.com";
+  public $adminEmail = "aquarius4tkud@yahoo.com";
+ // public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
   
   public $newUserDiscount = "500";
@@ -495,6 +495,25 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+		   	function getSetting($id)
+	{
+		$temp = [];
+		$s = Settings::where('id',$id)
+		             ->orWhere('name',$id)->first();
+ 
+              if($s != null)
+               {
+				      $temp['name'] = $s->name; 
+                       $temp['value'] = $s->value;                  
+                       $temp['id'] = $s->id; 
+                       $temp['date'] = $s->created_at->format("jS F, Y"); 
+                       $temp['updated'] = $s->updated_at->format("jS F, Y"); 
+                   
+               }      
+       return $temp;            	   
+   }
+   
            function createShippingDetails($data)
            {
 			   $zip = isset($data['zip']) ? $data['zip'] : "";
@@ -1562,7 +1581,7 @@ $subject = $data['subject'];
 			  {
 			     $d = Discounts::where('sku',$u->id)
 			                 ->where('type',"user")
-							 ->where('discount',$this->newUserDiscount)->first();
+							 ->where('discount',$this->getSetting('nud'))->first();
 			   
 			     if(!is_null($d))
 			     {

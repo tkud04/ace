@@ -168,7 +168,8 @@ class LoginController extends Controller {
 			
 			if($isNew)
 			{
-				$this->helpers->giveDiscount($user,['type' => "flat", 'amount' => "500"]);
+				$newDiscount = $this->helpers->getSetting('nud');
+				$this->helpers->giveDiscount($user,['type' => "flat", 'amount' => $newDiscount]);
 			}
            // $wallet =  $this->helpers->createWallet($req); 
            
