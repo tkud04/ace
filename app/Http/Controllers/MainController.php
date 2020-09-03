@@ -372,7 +372,7 @@ class MainController extends Controller {
 		        $rett['em'] = $u['email'];
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
-		         $uu = url('confirm-payment')."?oid=".$ret->id;
+		         $uu = url('confirm-payment')."?oid=".$ret->reference;
 			     return redirect()->intended($uu);
 			 }
          	

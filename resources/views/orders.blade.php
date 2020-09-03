@@ -91,7 +91,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							 $totals = $o['totals'];
 							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
 							 $uu = "#";
-							 $vpu = url('confirm-payment')."?oid=".$o['id'];
+							 $vpu = url('confirm-payment')."?oid=".$o['reference'];
 							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
 				    ?>
