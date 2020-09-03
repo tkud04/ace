@@ -45,9 +45,12 @@
 
 
 @section('scripts')
+<?php
+$uu = url('orders');
+?>
 <script>
 setTimeout(() => {
-	window.location = "orders";
+	window.location = "{{$uu}}";
 },5000);
 </script>
 @stop
