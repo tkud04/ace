@@ -4,6 +4,7 @@
 
 @section('content')
 <?php
+$uu = url('confirm-payment')."?oid=".$o['reference'];
 $amount = 0;
 if(isset($o)) $amount = $o['amount'];
 ?>
@@ -11,20 +12,17 @@ if(isset($o)) $amount = $o['amount'];
 
 <b>Your payment was successful!</b><br>
 
-<p>Fetching your orders.. <a href="{{url('orders')}}">Click here</a> if you are not redirected within 10 seconds.</p>
+<p>Fetching your orders.. <a href="{{$uu}}">Click here</a> if you are not redirected within 10 seconds.</p>
 
 @stop
 
 
 @section('scripts')
-<?php
-$uu = url('orders');
-?>
 <script>
 fbq('track', 'Purchase', {currency: "NGN", value: "{{$amount}}"});
 
 setTimeout(() => {
 	window.location = "{{$uu}}";
-},10000);
+},15000);
 </script>
 @stop

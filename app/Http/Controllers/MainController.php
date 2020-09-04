@@ -367,13 +367,24 @@ class MainController extends Controller {
 				}
 				
 				$rett['order'] = $this->helpers->getOrder($ret->reference);
+				$o = $rett['order'];
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
 		        $rett['em'] = $u['email'];
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
-		         $uu = url('confirm-payment')."?oid=".$ret->reference;
-			     return redirect()->intended($uu);
+		        // $uu = url('confirm-payment')."?oid=".$ret->reference;
+			     //return redirect()->intended($uu);
+				 $gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+		$c = $this->helpers->getCategories();
+		$ads = $this->helpers->getAds();
+		$plugins = $this->helpers->getPlugins();
+		shuffle($ads);
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
+		$signals = $this->helpers->signals;
+			
+			return view("bps",compact(['user','cart','c','o','ad','signals','plugins']));
 			 }
          	
           
