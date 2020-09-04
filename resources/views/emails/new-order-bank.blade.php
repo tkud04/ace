@@ -1,3 +1,10 @@
+<?php
+ $totals = $order['totals'];
+ $items = $order['items'];
+ $itemCount = $totals['items'];
+ $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
+ $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
+?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order {{$order['payment_code']}}</h3>
 
