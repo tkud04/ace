@@ -369,7 +369,7 @@ class MainController extends Controller {
 				
 				$rett['order'] = $this->helpers->getOrder($ret->reference);
 				$o = $rett['order'];
-				dd([$rett['order'],$o]);
+				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
 		        $rett['em'] = $u['email'];
