@@ -596,6 +596,9 @@ function addToCart(dt)
 	}
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
+  
+  fbq('track', 'AddToCart');
+  
   window.location = cu;
 }
 

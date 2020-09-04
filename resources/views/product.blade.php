@@ -319,3 +319,9 @@
   <!--end of middle sec--> 
     
 @stop
+
+@section('scripts')
+<script>
+fbq('track', 'ViewContent', {currency: "NGN", value: "{{$amount}}"});
+</script>
+@stop
