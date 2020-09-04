@@ -80,3 +80,4 @@ Route::get('pdf', 'MainController@getPDFTest');
 Route::get('gdf', 'MainController@getDeliveryFee');
 
 Route::get('error', 'MainController@getError');
+Route::get('cps', 'MainController@getCpsTest');

@@ -9,27 +9,27 @@
 <!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!-- Ionicons font -->
-<link href="css/ionicons.min.css" rel="stylesheet">
+<link href="<?php echo e(asset('css/ionicons.min.css')); ?>" rel="stylesheet">
 <!-- Bootstrap styles-->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
 <!--custom styles-->
-<link href="css/custom.css" rel="stylesheet" />
-<link href="css/custom-pink.css" rel="stylesheet"/>
-<link href="css/custom-turquoise.css" rel="stylesheet" />
-<link href="css/custom-purple.css" rel="stylesheet" />
-<link href="css/custom-orange.css" rel="stylesheet" />
-<link href="css/custom-blue.css" rel="stylesheet" />
-<link href="css/custom-green.css" rel="stylesheet" />
-<link href="css/custom-red.css" rel="stylesheet" />
-<link href="css/custom-gold.css" rel="stylesheet" id="style">
+<link href="<?php echo e(asset('css/custom.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-pink.css')); ?>" rel="stylesheet"/>
+<link href="<?php echo e(asset('css/custom-turquoise.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-purple.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-orange.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-blue.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-green.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-red.css')); ?>" rel="stylesheet" />
+<link href="<?php echo e(asset('css/custom-gold.css')); ?>" rel="stylesheet" id="style">
 <!--tooltiop-->
-<link href="css/hint.css" rel="stylesheet">
+<link href="<?php echo e(asset('css/hint.css')); ?>" rel="stylesheet">
 <!-- animation -->
-<link href="css/animate.css" rel="stylesheet" />
+<link href="<?php echo e(asset('css/animate.css')); ?>" rel="stylesheet" />
 <!--select-->
-<link href="css/bootstrap-select.min.css" rel="stylesheet">
+<link href="<?php echo e(asset('css/bootstrap-select.min.css')); ?>" rel="stylesheet">
 <!--color picker-->
-<link href="css/jquery.simplecolorpicker.css" rel="stylesheet">
+<link href="<?php echo e(asset('css/jquery.simplecolorpicker.css')); ?>" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -38,7 +38,7 @@
     <![endif]-->
 <!-- favicon -->
 
-<link rel="icon" type="image/png" href="images/favicon.png" sizes="16x16">
+<link rel="icon" type="image/png" href="<?php echo e(asset('images/favicon.png')); ?>" sizes="16x16">
 
 <style type="text/css">
 .overlay-effect {
@@ -63,18 +63,18 @@
 </style>
 <?php echo $__env->yieldContent('styles'); ?>
 <!--jQuery--> 
-<script src="js/jquery.min.js"></script> 
+<script src="<?php echo e(asset('js/jquery.min.js')); ?>"></script> 
 <!--SweetAlert--> 
-<link href="lib/sweet-alert/sweetalert2.css" rel="stylesheet">
-<script src="lib/sweet-alert/sweetalert2.js"></script>
+<link href="<?php echo e(asset('lib/sweet-alert/sweetalert2.css')); ?>" rel="stylesheet">
+<script src="<?php echo e(asset('lib/sweet-alert/sweetalert2.js')); ?>"></script>
 <!--wow animation--> 
-<script src="js/wow.min.js"></script> 
+<script src="<?php echo e(asset('js/wow.min.js')); ?>"></script> 
 <!--Bootstrap js--> 
-<script src="js/bootstrap.min.js"></script> 
+<script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script> 
 <!--pagination js--> 
-<script src="js/pagination.js"></script>
+<script src="<?php echo e(asset('js/pagination.js')); ?>"></script>
 <!--custom js--> 
-<script src="js/custom.js"></script> 
+<script src="<?php echo e(asset('js/custom.js')); ?>"></script> 
 </head>
 <body>
 
@@ -300,9 +300,9 @@
                           <li data-target="#carousel-category-home" data-slide-to="2" class=""></li>
                         </ol>
                         <div class="carousel-inner" role="listbox">
-                          <div class="item active"><img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/></div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
-                          <div class="item"> <img src="images/nav-img-1.jpg" width="296" height="400" alt="Slide image"/> </div>
+                          <div class="item active"><img src="<?php echo e(asset('images/nav-img-1.jpg')); ?>" width="296" height="400" alt="Slide image"/></div>
+                          <div class="item"> <img src="<?php echo e(asset('images/nav-img-1.jpg')); ?>" width="296" height="400" alt="Slide image"/> </div>
+                          <div class="item"> <img src="<?php echo e(asset('images/nav-img-1.jpg')); ?>" width="296" height="400" alt="Slide image"/> </div>
                         </div>
                       </div>
                     </div>
@@ -586,7 +586,7 @@
         </div>
         <div class="modal-body product-details">
           <div class="row">
-            <div class="col-sm-7"> <img id="quickviewboxImg" class="img-responsive" src="images/p-details-z-1.jpg" width="700" height="700"  alt=""/> </div>
+            <div class="col-sm-7"> <img id="quickviewboxImg" class="img-responsive" src="<?php echo e(asset('images/p-details-z-1.jpg')); ?>" width="700" height="700"  alt=""/> </div>
             <div class="col-sm-5 sub-info">
               <div class="product-review">
                 <p><span class="text-info"><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i><i class="ion-android-star-outline"></i></span> <span class="pull-right"><small>8 Reviews</small></span> </p>
@@ -650,38 +650,38 @@
 <?php echo $__env->yieldContent('scripts'); ?>
 
 <!--style switcher--> 
-<script src="js/style-switcher.js"></script> 
+<script src="<?php echo e(asset('js/style-switcher.js')); ?>"></script> 
 <!--switches--> 
-<script src="js/switches.js"></script> 
+<script src="<?php echo e(asset('js/switches.js')); ?>"></script> 
 <!--slick carousel--> 
-<script src="js/slick.js"></script> 
+<script src="<?php echo e(asset('js/slick.js')); ?>"></script> 
 <!--navigation js--> 
-<script src="js/jquery.highlight.js"></script> 
-<script src="js/jquery.touchSwipe.min.js"></script> 
+<script src="<?php echo e(asset('js/jquery.highlight.js')); ?>"></script> 
+<script src="<?php echo e(asset('js/jquery.touchSwipe.min.js')); ?>"></script> 
 <!--<script src="js/line.js"></script>--> 
 <!--scrollbar js--> 
-<script src="js/nicescroll.js"></script> 
-<script src="js/jquery.nicescroll.plus.js"></script> 
+<script src="<?php echo e(asset('js/nicescroll.js')); ?>"></script> 
+<script src="<?php echo e(asset('js/jquery.nicescroll.plus.js')); ?>"></script> 
 <!--countdown counter--> 
-<script src="js/countdown.js"></script> 
+<script src="<?php echo e(asset('js/countdown.js')); ?>"></script> 
 <!--color picker--> 
-<script src="js/jquery.simplecolorpicker.js"></script> 
+<script src="<?php echo e(asset('js/jquery.simplecolorpicker.js')); ?>"></script> 
 <!--image zoom--> 
-<script src="js/jquery.zoom.js"></script> 
+<script src="<?php echo e(asset('js/jquery.zoom.js')); ?>"></script> 
 <!--go to top--> 
-<script src='js/to-top.js'></script> 
+<script src="<?php echo e(asset('js/to-top.js')); ?>"></script> 
 <!--product items counter--> 
-<script src="js/jquery.charactercounter.js"></script> 
+<script src="<?php echo e(asset('js/jquery.charactercounter.js')); ?>"></script> 
 <!--select--> 
-<script src="js/bootstrap-select.min.js"></script> 
+<script src="<?php echo e(asset('js/bootstrap-select.min.js')); ?>"></script> 
 <!--price range slider--> 
-<script src="js/bootstrap-slider.js"></script> 
+<script src="<?php echo e(asset('js/bootstrap-slider.js')); ?>"></script> 
 <!--animated particles--> 
-<script src='js/jquery.particleground.js'></script> 
+<script src="<?php echo e(asset('js/jquery.particleground.js')); ?>"></script> 
 <!--masonry--> 
-<script src="js/salvattore.js"></script> 
+<script src="<?php echo e(asset('js/salvattore.js')); ?>"></script> 
 <!--tab collapse--> 
-<script src="js/bootstrap-tabcollapse.js"></script> 
+<script src="<?php echo e(asset('js/bootstrap-tabcollapse.js')); ?>"></script> 
 
 
 <!--end of js-->
