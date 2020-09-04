@@ -1,3 +1,34 @@
+ <?php
+				   $sku = $product['sku'];
+				   $name = $product['name'];
+			   $uu = url('product')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku;
+			   $wu = url('add-to-wishlist')."?sku=".$sku;
+			   $ccu = url('add-to-compare')."?sku=".$sku;
+			   $pd = $product['pd'];
+			   $description = $pd['description'];
+			   $category = $pd['category'];
+			   $in_stock = $pd['in_stock'];
+			   
+			   $amount = $pd['amount'];
+			   
+				  $imggs = $product['imggs'];
+				?>
+
+<?php $__env->startSection('metas'); ?>
+<meta property="og:title" content="<?php echo e($name); ?>">
+<meta property="og:description" content="<?php echo e($description); ?>">
+<meta property="og:url" content="<?php echo e($uu); ?>">
+<meta property="og:image" content="<?php echo e($imggs[0]); ?>">
+<meta property="product:brand" content="Ace Luxury Store">
+<meta property="product:availability" content="<?php echo e($in_stock); ?>">
+<meta property="product:condition" content="<?php echo e($in_stock); ?>">
+<meta property="product:price:amount" content="<?php echo e($amount); ?>">
+<meta property="product:price:currency" content="NGN">
+<meta property="product:retailer_item_id" content="<?php echo e($sku); ?>">
+<meta property="product:item_group_id" content="<?php echo e($category); ?>">
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('title',$product['name']); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -51,21 +82,7 @@
                   </ol>
                 </div>
                 <!--start of product details-->
-                <?php
-				   $sku = $product['sku'];
-				   $name = $product['name'];
-			   $uu = url('product')."?sku=".$sku;
-			   $cu = url('add-to-cart')."?sku=".$sku;
-			   $wu = url('add-to-wishlist')."?sku=".$sku;
-			   $ccu = url('add-to-compare')."?sku=".$sku;
-			   $pd = $product['pd'];
-			   $description = $pd['description'];
-			   $in_stock = $pd['in_stock'];
-			   
-			   $amount = $pd['amount'];
-			   
-				  $imggs = $product['imggs'];
-				?>
+               
                 <div class="col-sm-12 product-details">
                   <div class="row">
                     <div class="col-sm-6">
@@ -317,5 +334,11 @@
   </div>
   <!--end of middle sec--> 
     
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script>
+fbq('track', 'ViewContent', {currency: "NGN", value: "<?php echo e($amount); ?>"});
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/product.blade.php ENDPATH**/ ?>

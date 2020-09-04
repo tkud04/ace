@@ -1,5 +1,36 @@
 @extends('layout')
 
+ <?php
+				   $sku = $product['sku'];
+				   $name = $product['name'];
+			   $uu = url('product')."?sku=".$sku;
+			   $cu = url('add-to-cart')."?sku=".$sku;
+			   $wu = url('add-to-wishlist')."?sku=".$sku;
+			   $ccu = url('add-to-compare')."?sku=".$sku;
+			   $pd = $product['pd'];
+			   $description = $pd['description'];
+			   $category = $pd['category'];
+			   $in_stock = $pd['in_stock'];
+			   
+			   $amount = $pd['amount'];
+			   
+				  $imggs = $product['imggs'];
+				?>
+
+@section('metas')
+<meta property="og:title" content="{{$name}}">
+<meta property="og:description" content="{{$description}}">
+<meta property="og:url" content="{{$uu}}">
+<meta property="og:image" content="{{$imggs[0]}}">
+<meta property="product:brand" content="Ace Luxury Store">
+<meta property="product:availability" content="{{$in_stock}}">
+<meta property="product:condition" content="{{$in_stock}}">
+<meta property="product:price:amount" content="{{$amount}}">
+<meta property="product:price:currency" content="NGN">
+<meta property="product:retailer_item_id" content="{{$sku}}">
+<meta property="product:item_group_id" content="{{$category}}">
+@stop
+
 @section('title',$product['name'])
 
 @section('content')
@@ -53,21 +84,7 @@
                   </ol>
                 </div>
                 <!--start of product details-->
-                <?php
-				   $sku = $product['sku'];
-				   $name = $product['name'];
-			   $uu = url('product')."?sku=".$sku;
-			   $cu = url('add-to-cart')."?sku=".$sku;
-			   $wu = url('add-to-wishlist')."?sku=".$sku;
-			   $ccu = url('add-to-compare')."?sku=".$sku;
-			   $pd = $product['pd'];
-			   $description = $pd['description'];
-			   $in_stock = $pd['in_stock'];
-			   
-			   $amount = $pd['amount'];
-			   
-				  $imggs = $product['imggs'];
-				?>
+               
                 <div class="col-sm-12 product-details">
                   <div class="row">
                     <div class="col-sm-6">
