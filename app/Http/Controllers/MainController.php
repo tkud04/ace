@@ -367,7 +367,7 @@ class MainController extends Controller {
 				}
 				
 				$rett['order'] = $this->helpers->getOrder($ret->reference);
-				$o = $rett['order'];
+				#$o = $rett['order'];
 				dd([$ret['order'],$o]);
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
@@ -384,6 +384,9 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
+		
+		$o = $this->helpers->getOrder($ret->reference);
+				dd([$ret['order'],$o]);
 			
 			return view("bps",compact(['user','cart','c','o','ad','signals','plugins']));
 			 }
