@@ -35,7 +35,7 @@
 <meta property="og:image" content="{{$imggs[0]}}">
 <meta property="product:brand" content="Ace Luxury Store">
 <meta property="product:availability" content="{{$iss[$in_stock]}}">
-<meta property="product:condition" content="{{$iss[$in_stock]}}">
+<meta property="product:condition" content="new">
 <meta property="product:price:amount" content="{{$amount}}">
 <meta property="product:price:currency" content="NGN">
 <meta property="product:retailer_item_id" content="{{$sku}}">
