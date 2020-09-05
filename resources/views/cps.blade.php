@@ -17,6 +17,7 @@ foreach($items as $i)
 	$img = $product['imggs'][0];
 ?>
 <script>
+let cidcontents = [];
 cidcontents.push({
       id: "{{$sku}}",
       quantity: "{{$qty}}"
@@ -44,7 +45,7 @@ fbq('track', 'Purchase', {
 	currency: "NGN",
 	contents: cidcontents,
     content_type: 'product',
-	value: "{{$amount}}",
+	value: "{{$amount}}"
 	});
 
 

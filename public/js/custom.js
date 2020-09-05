@@ -873,7 +873,7 @@ const showPage = (p) => {
 	
 	page = p;
 	$('#pagination-row').fadeIn();
-	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN", content_type: 'product',);
+	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN", content_type: 'product');
 }
 
 const showPreviousPage = () => {

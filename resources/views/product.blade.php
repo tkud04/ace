@@ -351,6 +351,6 @@
 
 @section('scripts')
 <script>
-fbq('track', 'ViewContent', {content_ids: ["{{$sku}}"], currency: "NGN", value: "{{$amount}}"});
+fbq('track', 'ViewContent', {content_ids: ["{{$sku}}"], currency: "NGN", value: "{{$amount}}", content_type: "product"});
 </script>
 @stop
