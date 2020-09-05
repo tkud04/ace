@@ -597,7 +597,7 @@ function addToCart(dt)
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   
-  fbq('track', 'AddToCart');
+  fbq('track', 'AddToCart', {content_ids: [dt.sku], currency: "NGN");
   
   window.location = cu;
 }
@@ -813,13 +813,14 @@ const showPage = (p) => {
 	}
 	
 	//console.log(`start: ${start}, end: ${end}`);
-	let hh = "";
-	
+	let hh = "", cids = [];
+
 	for(let i = start; i < end; i++){
 		if(i < productsLength)
 		{
 		let p = products[i];
 		//console.log(p);
+		cids.push(p.sku);
 		let imggs = JSON.parse(p.imggs);
 		let ppd = p.pd.replace(/(?:\r\n|\r|\n)/g, '<br>'), pd = JSON.parse(ppd);
 		let description = `${pd.description}`;
@@ -865,6 +866,7 @@ const showPage = (p) => {
 	
 	page = p;
 	$('#pagination-row').fadeIn();
+	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN");
 }
 
 const showPreviousPage = () => {
