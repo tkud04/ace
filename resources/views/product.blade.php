@@ -11,10 +11,12 @@
 			   $description = $pd['description'];
 			   $category = $pd['category'];
 			   $in_stock = $pd['in_stock'];
-			   
+			   $iss = ['in_stock' => "in stock",'out_of_stock' => "out of stock",'new' => "available for order"];
 			   $amount = $pd['amount'];
 			   
 				  $imggs = $product['imggs'];
+				
+				$googleCategory = ['bracelets' => "198",'bracelets' => "198"'bracelets' => "198"];
 				?>
 
 @section('metas')
@@ -23,8 +25,8 @@
 <meta property="og:url" content="{{$uu}}">
 <meta property="og:image" content="{{$imggs[0]}}">
 <meta property="product:brand" content="Ace Luxury Store">
-<meta property="product:availability" content="{{$in_stock}}">
-<meta property="product:condition" content="{{$in_stock}}">
+<meta property="product:availability" content="{{$iss[$in_stock]}}">
+<meta property="product:condition" content="{{$iss[$in_stock]}}">
 <meta property="product:price:amount" content="{{$amount}}">
 <meta property="product:price:currency" content="NGN">
 <meta property="product:retailer_item_id" content="{{$sku}}">
@@ -339,6 +341,6 @@
 
 @section('scripts')
 <script>
-fbq('track', 'ViewContent', {currency: "NGN", value: "{{$amount}}"});
+fbq('track', 'ViewContent', {content_ids: ["{{$sku}}"], currency: "NGN", value: "{{$amount}}"});
 </script>
 @stop
