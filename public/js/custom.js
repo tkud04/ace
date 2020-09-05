@@ -597,7 +597,14 @@ function addToCart(dt)
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   
-  fbq('track', 'AddToCart', {content_ids: [dt.sku], currency: "NGN", content_type: 'product');
+  fbq('track', 'AddToCart', {
+	currency: "NGN",
+	contents: [{
+      id: dt.sku,
+      quantity: dt.qty
+    }],
+    content_type: 'product'
+	});
   
   window.location = cu;
 }
