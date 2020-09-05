@@ -597,7 +597,7 @@ function addToCart(dt)
   let cu = `add-to-cart?sku=${dt.sku}&from_wishlist=${dt.fromWishlist}&qty=${dt.qty}&gid=${gid}`;
   console.log("cu: ",cu);
   
-  fbq('track', 'AddToCart', {content_ids: [dt.sku], currency: "NGN");
+  fbq('track', 'AddToCart', {content_ids: [dt.sku], currency: "NGN", content_type: 'product');
   
   window.location = cu;
 }
@@ -866,7 +866,7 @@ const showPage = (p) => {
 	
 	page = p;
 	$('#pagination-row').fadeIn();
-	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN");
+	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN", content_type: 'product',);
 }
 
 const showPreviousPage = () => {

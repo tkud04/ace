@@ -16,7 +16,16 @@
 			   
 				  $imggs = $product['imggs'];
 				
-				$googleCategory = ['bracelets' => "198",'bracelets' => "198"'bracelets' => "198"];
+				$googleProductCategories = [
+				              'bracelets' => "191",
+							  'brooches' => "197",
+							  'earrings' => "194",
+							  'necklaces' => "196",
+							  'rings' => "200",
+							  'anklets' => "189",
+							  'scarfs' => "177",
+							  'Hair Accessories' => "171"
+							  ];
 				?>
 
 @section('metas')
@@ -31,6 +40,7 @@
 <meta property="product:price:currency" content="NGN">
 <meta property="product:retailer_item_id" content="{{$sku}}">
 <meta property="product:item_group_id" content="{{$category}}">
+<meta property="product:category" content="{{$googleProductCategories[$category]}}">
 @stop
 
 @section('title',$product['name'])

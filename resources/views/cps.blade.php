@@ -6,7 +6,26 @@
 <?php
 $amount = 0;
 if(isset($o)) $amount = $o['amount'];
+$items = $o['items'];
+
+foreach($items as $i)
+{
+	$product = $i['product'];
+	$sku = $product['sku'];
+	$name = $product['name'];
+	$qty = $i['qty'];
+	$img = $product['imggs'][0];
 ?>
+<script>
+cidcontents.push({
+      id: "{{$sku}}",
+      quantity: "{{$qty}}"
+    });
+</script>
+<?php
+}
+?>
+
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Transaction successful</h3>
 
 <b>Your payment was successful!</b><br>
@@ -21,7 +40,13 @@ if(isset($o)) $amount = $o['amount'];
 $uu = url('orders');
 ?>
 <script>
-fbq('track', 'Purchase', {currency: "NGN", value: "{{$amount}}"});
+fbq('track', 'Purchase', {
+	currency: "NGN",
+	contents: cidcontents,
+    content_type: 'product',
+	value: "{{$amount}}",
+	});
+
 
 setTimeout(() => {
 	window.location = "{{$uu}}";
