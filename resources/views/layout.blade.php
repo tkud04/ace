@@ -75,7 +75,7 @@
 <!--pagination js--> 
 <script src="{{asset('js/pagination.js')}}"></script>
 <!--custom js--> 
-<script src="{{asset('js/custom.js')}}"></script> 
+<script src="{{asset('js/custom.js').'?ver='.rand(99,9999)}}"></script> 
 </head>
 <body>
 
