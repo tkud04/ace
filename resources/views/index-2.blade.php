@@ -133,7 +133,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="{{$uu}}"><img class="btm-img" src="{{$imggs[1]}}" width="215" height="240"  alt=""/> <img class="top-img" src="{{$imggs[0]}}" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="{{$uu}}"><img class="btm-img lazyload" src="{{$imggs[1]}}" data-src="{{$imggs[1]}}" width="215" height="240"  alt=""/> <img class="top-img lazyload" src="{{$imggs[0]}}" data-src="{{$imggs[0]}}" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
 		   <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCart({sku:'{{$sku}}',qty:'1'})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
@@ -226,7 +226,7 @@
               <div>
                 <div class="row">
                   <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
+                    <figure><img class="img-responsive lazyload" src="{{$imggs[0]}}" data-src="{{$imggs[0]}}" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
                     <h3 class="product-name"><a href="{{$uu}}">{{$name}}</a></h3>

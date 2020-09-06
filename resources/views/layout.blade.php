@@ -76,6 +76,9 @@
 <script src="{{asset('js/pagination.js')}}"></script>
 <!--custom js--> 
 <script src="{{asset('js/custom.js').'?ver='.rand(99,9999)}}"></script> 
+<!--lazysizes--> 
+<script src="{{asset('lib/lazysizes/lazysizes.min.js')}}"></script> 
+<script src="" async=""></script>
 </head>
 <body>
 
