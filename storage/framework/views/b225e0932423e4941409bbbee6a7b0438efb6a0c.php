@@ -63,6 +63,14 @@
 
 </style>
 <?php echo $__env->yieldContent('styles'); ?>
+
+<!-- DO NOT EDIT!! start of plugins -->
+<?php $__currentLoopData = $plugins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  <?php echo $p['value']; ?>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<!-- DO NOT EDIT!! end of plugins -->
+
 <!--jQuery--> 
 <script src="<?php echo e(asset('js/jquery.min.js')); ?>"></script> 
 <!--SweetAlert--> 
@@ -75,16 +83,10 @@
 <!--pagination js--> 
 <script src="<?php echo e(asset('js/pagination.js')); ?>"></script>
 <!--custom js--> 
-<script src="<?php echo e(asset('js/custom.js')); ?>"></script> 
+<script src="<?php echo e(asset('js/custom.js').'?ver='.rand(99,9999)); ?>"></script> 
+
 </head>
 <body>
-
-<!-- DO NOT EDIT!! start of plugins -->
-<?php $__currentLoopData = $plugins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-  <?php echo $p['value']; ?>
-
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<!-- DO NOT EDIT!! end of plugins -->
 
 <!--start of loader-->
 <div id="preloader">

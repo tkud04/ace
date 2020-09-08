@@ -112,6 +112,7 @@
 		   {
 			   $sku = $n['sku'];
 			   $name = $n['name'];
+			   $displayName = $name == "" ? $sku : $name;
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -135,7 +136,7 @@
 		  imggs = imggs.replace(/&quot;/g, '\"');
 		   temp = {
 			   sku: "{{$sku}}",
-			   name: "{{$name}}",
+			   name: "{{$displayName}}",
 			   uu: "{{$uu}}",
 			   cu: "{{$cu}}",
 			   wu: "{{$wu}}",
@@ -189,6 +190,7 @@
 		   {
 			   $sku = $n['sku'];
 			   $name = $n['name'];
+			   $displayName = $name == "" ? $sku : $name;
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -220,7 +222,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="{{$uu}}">{{$name}}</a></h3>
+                            <h3 class="product-name"><a href="{{$uu}}">{{$displayName}}</a></h3>
                             <p class="group inner list-group-item-text">{{$description}}</p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;{{number_format($amount,2)}}</strong></span> <!--  <span class="old-price">&#8358;{{number_format($amount + 1000,2)}}</span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>

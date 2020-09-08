@@ -112,6 +112,7 @@
 			   $n = $na[$i];
 			   $sku = $n['sku'];
 			   $name = $n['name'];
+			   $displayName = $name == "" ? $sku : $name;
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
 			   $wu = url('add-to-wishlist')."?sku=".$sku;
@@ -131,7 +132,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="<?php echo e($uu); ?>"><img class="btm-img" src="<?php echo e($imggs[1]); ?>" width="215" height="240"  alt=""/> <img class="top-img" src="<?php echo e($imggs[0]); ?>" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="<?php echo e($uu); ?>"><img class="btm-img " src="<?php echo e($imggs[1]); ?>" data-src="<?php echo e($imggs[1]); ?>" width="215" height="240"  alt=""/> <img class="top-img " src="<?php echo e($imggs[0]); ?>" data-src="<?php echo e($imggs[0]); ?>" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
 		   <p class="effect-icon"> <a href="javascript:void(0)" onclick="addToCart({sku:'<?php echo e($sku); ?>',qty:'1'})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
@@ -143,7 +144,7 @@
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>
+                            <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($displayName); ?></a></h3>
                             <p class="group inner list-group-item-text"><?php echo e($description); ?></p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;<?php echo e(number_format($amount,2)); ?></strong></span> <!--  <span class="old-price">&#8358;<?php echo e(number_format($amount + 1000,2)); ?></span> --></div> 
                           <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
@@ -224,7 +225,7 @@
               <div>
                 <div class="row">
                   <div class="col-sm-6 col-md-4">
-                    <figure><img class="img-responsive" src="<?php echo e($imggs[0]); ?>" width="200" height="230" alt=""/></figure>
+                    <figure><img class="img-responsive " src="<?php echo e($imggs[0]); ?>" data-src="<?php echo e($imggs[0]); ?>" width="200" height="230" alt=""/></figure>
                   </div>
                   <div class="col-sm-6 col-md-8">
                     <h3 class="product-name"><a href="<?php echo e($uu); ?>"><?php echo e($name); ?></a></h3>

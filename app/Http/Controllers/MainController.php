@@ -45,7 +45,7 @@ class MainController extends Controller {
 		$signals = $this->helpers->signals;
 		$na = $this->helpers->getNewArrivals();
 		$bs = $this->helpers->getBestSellers();
-		//dd($na);
+		#dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
 		$plugins = $this->helpers->getPlugins();
