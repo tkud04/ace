@@ -136,7 +136,7 @@
 		  imggs = imggs.replace(/&quot;/g, '\"');
 		   temp = {
 			   sku: "{{$sku}}",
-			   name: "{{$displayName}}",
+			   name: "{{$name}}",
 			   uu: "{{$uu}}",
 			   cu: "{{$cu}}",
 			   wu: "{{$wu}}",

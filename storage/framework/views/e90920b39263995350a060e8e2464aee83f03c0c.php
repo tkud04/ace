@@ -134,7 +134,7 @@
 		  imggs = imggs.replace(/&quot;/g, '\"');
 		   temp = {
 			   sku: "<?php echo e($sku); ?>",
-			   name: "<?php echo e($displayName); ?>",
+			   name: "<?php echo e($name); ?>",
 			   uu: "<?php echo e($uu); ?>",
 			   cu: "<?php echo e($cu); ?>",
 			   wu: "<?php echo e($wu); ?>",
