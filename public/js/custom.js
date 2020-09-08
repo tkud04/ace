@@ -842,7 +842,7 @@ const showPage = (p) => {
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="${p.uu}" title="${nnn}"><img class="btm-img" src="${imggs[0]}" width="215" height="240"  alt=""/> <img class="top-img" src="${imggs[1]}" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="${p.uu}" title="${p.name}"><img class="btm-img" src="${imggs[0]}" width="215" height="240"  alt=""/> <img class="top-img" src="${imggs[1]}" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
                               <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCart({sku:'${pd.sku}',qty: 1})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
@@ -854,7 +854,7 @@ const showPage = (p) => {
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="${p.uu}" title="${nnn}">${nn}</a></h3>
+                            <h3 class="product-name"><a href="${p.uu}" title="${p.name}">${nn}</a></h3>
                             <p class="group inner list-group-item-text">${pd.description}</p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;${pd.amount}</strong></span></div>
                             <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
