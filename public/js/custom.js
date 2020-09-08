@@ -842,7 +842,7 @@ const showPage = (p) => {
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product-item-container effect-wrap effect-animate">
                           <div class="product-main">
                             <div class="product-view">
-                              <figure class="double-img"><a href="${p.uu}"><img class="btm-img" src="${imggs[0]}" width="215" height="240"  alt=""/> <img class="top-img" src="${imggs[1]}" width="215" height="240"  alt=""/></a></figure>
+                              <figure class="double-img"><a href="${p.uu}" title="${nnn}"><img class="btm-img" src="${imggs[0]}" width="215" height="240"  alt=""/> <img class="top-img" src="${imggs[1]}" width="215" height="240"  alt=""/></a></figure>
                             </div>
                             <div class="product-btns  effect-content-inner">
                               <p class="effect-icon"> <a href="javascript:void(0)"  onclick="addToCart({sku:'${pd.sku}',qty: 1})" class="hint-top" data-hint="Add To Cart"><span class="cart ion-bag"></span></a></p>
