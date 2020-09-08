@@ -854,7 +854,7 @@ const showPage = (p) => {
                             </div>
                           </div>
                           <div class="product-info">
-                            <h3 class="product-name"><a href="${p.uu}">${nn}</a></h3>
+                            <h3 class="product-name"><a href="${p.uu}" title="${nnn}">${nn}</a></h3>
                             <p class="group inner list-group-item-text">${pd.description}</p>
                             <div class="product-price"><span class="real-price text-info"><strong>&#8358;${pd.amount}</strong></span></div>
                             <div class="product-evaluate text-info"> <i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star"></i><i class="ion-android-star-half"></i> </div>
