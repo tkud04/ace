@@ -828,7 +828,11 @@ const showPage = (p) => {
 		let p = products[i];
 		//console.log(p);
 		cids.push(p.sku);
-		let nn = p.name == "" ? p.sku : p.name;
+		let nnn = p.name;
+		if(p.name.length > 12){
+			nnn = `${p.name.substr(0,12)}..`;
+		}
+		let nn = p.name == "" ? p.sku : nnn;
 		let imggs = JSON.parse(p.imggs);
 		let ppd = p.pd.replace(/(?:\r\n|\r|\n)/g, '<br>'), pd = JSON.parse(ppd);
 		let description = `${pd.description}`;
