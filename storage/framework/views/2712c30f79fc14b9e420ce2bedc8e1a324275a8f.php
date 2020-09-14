@@ -2,7 +2,8 @@
  $totals = $order['totals'];
  $items = $order['items'];
  $itemCount = $totals['items'];
- $uu = "http://www.aceluxurystore.com/confirm-payment?oid=".$order['id'];
+ $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
+ $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order <?php echo e($order['payment_code']); ?></h3>
@@ -14,6 +15,7 @@ foreach($items as $i)
 {
 	$product = $i['product'];
 	$sku = $product['sku'];
+	$name = $product['name'];
 	$qty = $i['qty'];
 	$pu = url('product')."?sku=".$product['sku'];
 	$img = $product['imggs'][0];
@@ -22,7 +24,7 @@ foreach($items as $i)
 
 <a href="<?php echo e($pu); ?>" target="_blank">
   <img style="vertical-align: middle;border:0;line-height: 20px;" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
-	  <?php echo e($sku); ?>
+	  <?php echo e($name); ?>
 
 </a> (x<?php echo e($qty); ?>)<br>
 <?php

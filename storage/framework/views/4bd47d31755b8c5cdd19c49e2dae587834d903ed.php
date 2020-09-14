@@ -9,10 +9,21 @@
 			   $description = $pd['description'];
 			   $category = $pd['category'];
 			   $in_stock = $pd['in_stock'];
-			   
+			   $iss = ['in_stock' => "in stock",'out_of_stock' => "out of stock",'new' => "available for order"];
 			   $amount = $pd['amount'];
 			   
 				  $imggs = $product['imggs'];
+				
+				$googleProductCategories = [
+				              'bracelets' => "191",
+							  'brooches' => "197",
+							  'earrings' => "194",
+							  'necklaces' => "196",
+							  'rings' => "200",
+							  'anklets' => "189",
+							  'scarfs' => "177",
+							  'Hair Accessories' => "171"
+							  ];
 				?>
 
 <?php $__env->startSection('metas'); ?>
@@ -21,12 +32,13 @@
 <meta property="og:url" content="<?php echo e($uu); ?>">
 <meta property="og:image" content="<?php echo e($imggs[0]); ?>">
 <meta property="product:brand" content="Ace Luxury Store">
-<meta property="product:availability" content="<?php echo e($in_stock); ?>">
-<meta property="product:condition" content="<?php echo e($in_stock); ?>">
+<meta property="product:availability" content="<?php echo e($iss[$in_stock]); ?>">
+<meta property="product:condition" content="new">
 <meta property="product:price:amount" content="<?php echo e($amount); ?>">
 <meta property="product:price:currency" content="NGN">
 <meta property="product:retailer_item_id" content="<?php echo e($sku); ?>">
 <meta property="product:item_group_id" content="<?php echo e($category); ?>">
+<meta property="product:category" content="<?php echo e($googleProductCategories[$category]); ?>">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('title',$product['name']); ?>
@@ -338,7 +350,7 @@
 
 <?php $__env->startSection('scripts'); ?>
 <script>
-fbq('track', 'ViewContent', {currency: "NGN", value: "<?php echo e($amount); ?>"});
+fbq('track', 'ViewContent', {content_ids: ["<?php echo e($sku); ?>"], currency: "NGN", value: "<?php echo e($amount); ?>", content_type: "product"});
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/product.blade.php ENDPATH**/ ?>
