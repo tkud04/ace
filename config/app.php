@@ -166,7 +166,7 @@ return [
 		App\Providers\HelperServiceProvider::class, 
 		Unicodeveloper\Paystack\PaystackServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
-
+        App\Providers\AgentServiceProvider::class, 
     ],
 
     /*
@@ -182,7 +182,8 @@ return [
 
     'aliases' => [
 
-        'App' => Illuminate\Support\Facades\App::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+		'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,

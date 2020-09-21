@@ -54,13 +54,16 @@
     </div>
     <section class="container">
       <div class="row">
+	   <?php if($agent->isDesktop()): ?>
         <div class="col-sm-12">
           <div class="inner-ad">
             <figure><img class="img-responsive" src="<?php echo e($ad); ?>" width="1170" height="100" alt=""></figure>
           </div>
         </div>
+	   <?php endif; ?>
         <div class="col-sm-12 equal-height-container">
           <div class="row">
+		    <?php if($agent->isDesktop()): ?>
             <div class="col-sm-4 col-md-3  sub-data-left sub-equal">
               <section>
                 <h5 class="sub-title text-info text-uppercase">Categories</h5>
@@ -84,6 +87,7 @@
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
                 <a href="javascript:void(0)">earrings</a> <a href="javascript:void(0)">rings</a> <a href="javascript:void(0)">brooches</a> <a href="javascript:void(0)">watches</a> <a href="javascript:void(0)">bracelets</a> <a href="javascript:void(0)">fashion</a></section>
             </div>
+			<?php endif; ?>
             <div class="col-sm-8 col-md-9  main-sec">
               <div class="row">
                 <div class="col-sm-12">
@@ -339,6 +343,31 @@
                 
               </div>
             </div>
+			<?php if($agent->isMobile()): ?>
+            <div class="col-sm-4 col-md-3  sub-data-left sub-equal">
+              <section>
+                <h5 class="sub-title text-info text-uppercase">Categories</h5>
+                <ul class="list-group nudge">
+				<?php
+				  $i = 0;
+				 foreach($cc as $key => $value)
+				 {
+					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
+					 $uu = url('shop')."?category=".$key;
+				?>
+                  <li class="list-group-item"><a href="<?php echo e($uu); ?>"<?php echo e($style); ?>><?php echo e($value); ?></a></li>
+				<?php
+				 }
+				?>
+                  
+                </ul>
+              </section>        
+              <section> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </section>
+              <section class="col-sm-12 tags">
+                <h5 class="sub-title text-info text-uppercase">popular tags</h5>
+                <a href="javascript:void(0)">earrings</a> <a href="javascript:void(0)">rings</a> <a href="javascript:void(0)">brooches</a> <a href="javascript:void(0)">watches</a> <a href="javascript:void(0)">bracelets</a> <a href="javascript:void(0)">fashion</a></section>
+            </div>
+			<?php endif; ?>
           </div>
         </div>
       </div>

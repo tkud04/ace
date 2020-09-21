@@ -362,7 +362,7 @@
   <!-- end of navigation --> 
   
    <!--------- Cookie consent-------------->
-        	@include('cookie-consent')
+        	<?php //@include('cookie-consent') ?>
         
         <!--------- Session notifications-------------->
         	<?php
