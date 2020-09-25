@@ -94,6 +94,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							 $vpu = url('confirm-payment')."?oid=".$o['reference'];
 							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
+
 				    ?>
 					 <tr>
 					   <td>{{$o['date']}}</td>
