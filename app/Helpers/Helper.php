@@ -708,15 +708,25 @@ $subject = $data['subject'];
 					
            }		   
 		   
-		     function getProducts()
+		     function getProducts($c="all")
            {
-           	$ret = [];
-              $products = Products::where('id','>',"0")
-                                   ->where('qty','>',"0")
+			   $ret = [];
+			$rr = [];
+              /**
+			  $products = Products::where('qty','>',"0")
 			                       ->where('status',"enabled")->get();
-								   
+             **/				
+				#dd($rr);			   
+				
+				$products = Products::cursor()->filter(function ($p) {
+                                                            return ($p->qty > 0 && $p->status == "enabled");
+                                                          });
+				
+				
 				$products = $products->sortByDesc('created_at');				   
- 
+              
+			  
+			  
               if($products != null)
                {
 				  foreach($products as $p)
@@ -783,7 +793,6 @@ $subject = $data['subject'];
 				  $temp['discounts'] = $this->getDiscounts($product->sku);
 				  $temp['pd'] = $this->getProductData($product->sku);
 				  $imgs = $this->getImages($product->sku);
-				  #dd($imgs);
 				  $temp['imggs'] = $this->getCloudinaryImages($imgs);
 				  $ret = $temp;
                }                         
@@ -917,10 +926,10 @@ $subject = $data['subject'];
 		   function getImage($pi)
            {
        	         $temp = [];
-				 $temp['id'] = $pi->id;
-				 $temp['sku'] = $pi->sku;
-			     $temp['cover'] = $pi->cover;
-				 $temp['url'] = $pi->url;
+				 $temp['id'] = $pi['id'];
+				 $temp['sku'] = $pi['sku'];
+			     $temp['cover'] = $pi['cover'];
+				 $temp['url'] = $pi['url'];
 				 
                 return $temp;
            }
@@ -928,14 +937,16 @@ $subject = $data['subject'];
 		   function getImages($sku)
 		   {
 			   $ret = [];
-			   $records = $this->getProductImages($sku);
-			   
-			   $coverImage = ProductImages::where('sku',$sku)
-			                              ->where('cover',"yes")->first();
+			   $records = collect($this->getProductImages($sku));
+			   $s = $sku;
+			   $coverImage = $records->first(function ($value, $key) use($s) {
+                                               return ($value['sku'] == $s) && ($value['cover'] == "yes");
+                                            });
 										  
-               $otherImages = ProductImages::where('sku',$sku)
-			                              ->where('cover',"!=","yes")->get();
+               $otherImages = $records->where('sku',$sku)
+			                          ->where('cover',"!=","yes");
 			  
+			  #dd([$coverImage,$otherImages]);
                if($coverImage != null)
 			   {
 				   $temp = $this->getImage($coverImage);
@@ -1000,11 +1011,12 @@ $subject = $data['subject'];
            	$ret = [];
               $pds = ProductData::where('in_stock',"new")->get();
                $pds = $pds->sortByDesc('created_at');	
-			   
+			   #dd($pds);
               if($pds != null)
                {
 				  foreach($pds as $p)
 				  {
+					  #dd($p);
 					  $pp = $this->getProduct($p->sku);
 					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }
@@ -1016,13 +1028,15 @@ $subject = $data['subject'];
 		   function getBestSellers()
            {
            	$ret = [];
-              $pds = ProductData::where('in_stock',"new")->get();
-              $pds = $pds->sortByDesc('created_at');	
-			  
+              $pdss = ProductData::where('in_stock',"new")->get();
+              $pdss = $pdss->sortByDesc('created_at');	
+			  $pds = $pdss->chunk(12);
+			  #dd($pds);
               if($pds != null)
                {
-				  foreach($pds as $p)
+				  foreach($pds[0] as $p)
 				  {
+					  #dd($p);
 					  $pp = $this->getProduct($p->sku);
 					  if($pp['status'] == "enabled" && $pp['qty'] > 0) array_push($ret,$pp);
 				  }

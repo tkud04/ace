@@ -37,14 +37,19 @@ class MainController extends Controller {
 			$user = Auth::user();
 			$hasUnpaidOrders = $this->helpers->checkForUnpaidOrders($user);
 		}
+		
 		$req = $request->all();
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
+		
 		$c = $this->helpers->getCategories();
-		//dd($bs);
+		
 		$signals = $this->helpers->signals;
-		$na = $this->helpers->getNewArrivals();
+		#$na = $this->helpers->getProducts();
+		$na = [];
+		#dd($na);
 		$bs = $this->helpers->getBestSellers();
+		#$bs = [];
 		#dd($na);
 		$ads = $this->helpers->getAds("wide-ad");
 		$banners = $this->helpers->getBanners();
