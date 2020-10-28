@@ -1011,7 +1011,7 @@ $subject = $data['subject'];
            	$ret = [];
               $pdss = ProductData::where('in_stock',"new")->get();
               $pdss = $pdss->sortByDesc('created_at');	
-			  $pds = $pdss->chunk(12);
+			  $pds = $pdss->chunk(24);
 			   #dd($pds);
               if($pds != null)
                {
@@ -1031,7 +1031,7 @@ $subject = $data['subject'];
            	$ret = [];
               $pdss = ProductData::where('in_stock',"new")->get();
               $pdss = $pdss->sortByDesc('created_at');	
-			  $pds = $pdss->chunk(12);
+			  $pds = $pdss->chunk(24);
 			  #dd($pds);
               if($pds != null)
                {
