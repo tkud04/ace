@@ -45,8 +45,8 @@ class MainController extends Controller {
 		$c = $this->helpers->getCategories();
 		
 		$signals = $this->helpers->signals;
-		#$na = $this->helpers->getProducts();
-		$na = [];
+		$na = $this->helpers->getNewArrivals();
+		#$na = [];
 		#dd($na);
 		$bs = $this->helpers->getBestSellers();
 		#$bs = [];
