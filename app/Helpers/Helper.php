@@ -1009,12 +1009,13 @@ $subject = $data['subject'];
 		   function getNewArrivals()
            {
            	$ret = [];
-              $pds = ProductData::where('in_stock',"new")->get();
-               $pds = $pds->sortByDesc('created_at');	
+              $pdss = ProductData::where('in_stock',"new")->get();
+              $pdss = $pdss->sortByDesc('created_at');	
+			  $pds = $pdss->chunk(12);
 			   #dd($pds);
               if($pds != null)
                {
-				  foreach($pds as $p)
+				  foreach($pds[0] as $p)
 				  {
 					  #dd($p);
 					  $pp = $this->getProduct($p->sku);
