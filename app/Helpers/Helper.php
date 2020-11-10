@@ -26,6 +26,7 @@ use App\Wishlists;
 use App\Senders;
 use App\Settings;
 use App\Plugins;
+use App\Couriers;
 use App\Comparisons;
 use App\Guests;
 use \Swift_Mailer;
