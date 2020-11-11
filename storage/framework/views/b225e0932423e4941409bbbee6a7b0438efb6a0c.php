@@ -85,8 +85,6 @@
 <!--custom js--> 
 <script src="<?php echo e(asset('js/custom.js').'?ver='.rand(99,9999)); ?>"></script> 
 
-<?php echo $__env->yieldContent('scripts'); ?>
-
 </head>
 <body>
 
@@ -651,6 +649,8 @@
 <!--end of go to top--> 
 
 <!--start of js--> 
+
+<?php echo $__env->yieldContent('scripts'); ?>
 
 <!--style switcher--> 
 <script src="<?php echo e(asset('js/style-switcher.js')); ?>"></script> 

@@ -33,7 +33,7 @@ $(document).ready(function() {
         $("#bname-other").hide();
 		 $('#checkout-new').hide();
 		 $('#checkout-anon').hide();
-		 $('#checkout-methods').hide();
+		 $('#payment-method-acd').hide();
 		
 		/**
 		getCart()
@@ -676,11 +676,15 @@ function showCheckout(type){
 		case 'new':
 		 $('#checkout-anon').hide();
 		 $('#checkout-new').fadeIn();
+		  $('#payment-type-acd').hide();
+		  $('#payment-method-acd').hide();
 		break;
 		
 		case 'anon':
 		 $('#checkout-new').hide();
 		 $('#checkout-anon').fadeIn();
+		 $('#payment-method-acd').hide();
+		 $('#payment-type-acd').fadeIn();
 		break;
 	}
 }
@@ -717,7 +721,7 @@ function getDeliveryFee(dt){
 					$('#checkout-total').html("&#8358;" + res.total[1]);  
 					$('#ca-amount').val(res.total[0] * 100);  //for paystack
 				  } 
-                  $('#checkout-methods').fadeIn();				  
+                  $('#payment-method-acd').fadeIn();				  
 				}
 		  
 	   }).catch(error => {
