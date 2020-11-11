@@ -84,6 +84,8 @@
 <!--custom js--> 
 <script src="{{asset('js/custom.js').'?ver='.rand(99,9999)}}"></script> 
 
+@yield('scripts')
+
 </head>
 <body>
 
@@ -646,8 +648,6 @@
 <!--end of go to top--> 
 
 <!--start of js--> 
-
-@yield('scripts')
 
 <!--style switcher--> 
 <script src="{{asset('js/style-switcher.js')}}"></script> 

@@ -2449,6 +2449,46 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }
+		   
+  function getCouriers($cvg)
+   {
+	   $ret = [];
+	   
+	   $couriers = Couriers::where('coverage',$cvg)->get();
+	   
+	   if(!is_null($couriers))
+	   {
+		   foreach($couriers as $c)
+		   {
+		     $temp = $this->getCourier($c->id);
+		     array_push($ret,$temp);
+	       }
+	   }
+	   
+	   return $ret;
+   }
+   
+   function getCourier($id)
+           {
+           	$ret = [];
+               $c = Couriers::where('id',$id)->first();
+ 
+              if($c != null)
+               {
+                   	$temp['id'] = $c->id;  
+                       $temp['status'] = $c->status; 
+                       $temp['nickname'] = $c->nickname; 
+                       $temp['name'] = $c->name; 
+                       $temp['price'] = $c->price; 
+                       $temp['type'] = $c->type; 
+                       $temp['coverage'] = $c->coverage; 
+                       $temp['date'] = $c->created_at->format("jS F, Y"); 
+                       $temp['updated'] = $c->updated_at->format("jS F, Y"); 
+                       $ret = $temp; 
+               }                          
+                                                      
+                return $ret;
+           }
    
 }
 ?>

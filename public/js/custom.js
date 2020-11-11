@@ -2,6 +2,7 @@ let mc = "";
 
 $(document).ready(function() {
     "use strict";
+	$('#payment-method-acd').hide();
     $("a.lno-cart").on("click", function(e) {
     	if(isMobile()){
     	  window.location = "cart";
@@ -369,6 +370,24 @@ function populateQV(dt){
 }
 
 
+function payNow(){
+	console.log("pay now");
+	paymentType = "prepaid";
+	$('#payment-type-acd').hide();
+	$('#payment-method-acd').fadeIn();
+	//setPaymentAction("cod");
+}
+
+function paymentMethodsBack(){
+	$('#payment-method-acd').hide();
+	$('#payment-type-acd').fadeIn();
+}
+
+function payOnDelivery(){
+	paymentType = "pod";
+    setPaymentAction("pod");
+}
+
 function payBank(){
 	console.log("pay to bank account");
 	setPaymentAction("cod");
@@ -420,6 +439,9 @@ function setPaymentAction(type){
    }
    else if(type == "card"){
 		paymentURL = $("#card-action").val();  
+   }
+   else if(type == "pod"){
+		paymentURL = $("#pod-action").val();  
    }
    
    //console.log(paymentURL);

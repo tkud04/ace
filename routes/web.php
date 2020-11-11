@@ -21,6 +21,8 @@ Route::get('cart', 'MainController@getCart');
 
 Route::get('checkout', 'MainController@getCheckout');
 Route::post('checkout', 'MainController@postCheckout');
+Route::get('pod', 'MainController@getPOD');
+Route::post('pod', 'MainController@postPOD');
 Route::get('contact', 'MainController@getContact');
 Route::post('contact', 'MainController@postContact');
 Route::get('search', 'MainController@getSearch');

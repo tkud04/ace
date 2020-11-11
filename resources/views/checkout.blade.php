@@ -2,7 +2,11 @@
 
 @section('title',"Checkout")
 
+
 @section('content')
+<script>
+let paymentType = "";
+</script>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">
@@ -50,7 +54,36 @@
                   <a href="{{url('cart')}}" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
 				@if(!is_null($user))
-				<section class="col-sm-12">
+				<section class="col-sm-12" id="payment-type-acd">
+				<br>
+				   <div class="accordion">
+                  <div aria-multiselectable="true" role="tablist" id="accordion-two" class="panel-group">
+                    <div class="panel panel-default">
+                      <div id="headingThree" role="tab" class="panel-heading">
+                        <h4 class="panel-title"> <a aria-controls="collapseThree" aria-expanded="true" href="#collapseThree" data-parent="#accordion-two" data-toggle="collapse" class=""><span class="badge">1</span> Pay now </a> </h4>
+                      </div>
+                      <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse in" id="collapseThree" aria-expanded="true" style="">
+                        <div class="panel-body"> 
+						   Make your payment instantly via our payment channels<br><br>
+						  <center> <button onclick="payNow(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay now</button></center>
+						</div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div id="headingFour" role="tab" class="panel-heading">
+                        <h4 class="panel-title"> <a aria-controls="collapseFour" aria-expanded="false" href="#collapseFour" data-parent="#accordion-two" data-toggle="collapse" class="collapsed"><span class="badge">2</span> Pay on delivery</a> </h4>
+                      </div>
+                      <div aria-labelledby="headingFour" role="tabpanel" class="panel-collapse collapse" id="collapseFour" aria-expanded="false" style="height: 92px;">
+                        <div class="panel-body"> 
+						 Make your payment on delivery to your doorstep<br><br>
+						  <center> <a href="javascript:void(0)" onclick="payOnDelivery(); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
+						</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+				</section>
+				<section class="col-sm-12" id="payment-method-acd">
 				<br>
 				   <div class="accordion">
                   <div aria-multiselectable="true" role="tablist" id="accordion-one" class="panel-group">
@@ -78,6 +111,7 @@
                     </div>
                   </div>
                 </div>
+				<a href="javascript:void(0)" onclick="paymentMethodsBack(); return false;" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> back</a>
 				</section>
 				@endif
               </div>
@@ -112,9 +146,12 @@
 			  $pay = $isSecure ? $securePay : $unsecurePay;
 			  $checkout = $isSecure ? $secureCheckout : $unsecureCheckout;
 			  
+			  $pod = url('pod');
 		    ?>
 				 <input type="hidden" id="bank-action" value="{{$checkout}}">
                             	<input type="hidden" id="card-action" value="{{$pay}}">
+                            	<input type="hidden" id="pod-action" value="{{$pod}}">
+                            	<input type="hidden" name="reff" value="{{$ref}}">
                             	
                              
 							
