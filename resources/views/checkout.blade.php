@@ -4,9 +4,6 @@
 
 
 @section('content')
-<script>
-let paymentType = "";
-</script>
    <!--start of middle sec-->
 <div class="middle-sec wow fadeIn animated animated" data-wow-offset="10" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s;">
     <div class="page-header">

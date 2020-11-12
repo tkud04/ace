@@ -1752,6 +1752,43 @@ class MainController extends Controller {
 		
 	}
 	
+	public function getCouriers(Request $request)
+	{
+		$req = $request->all();
+        //dd($req);
+        
+        $validator = Validator::make($req, [
+                             's' => 'required'
+         ]);
+		 
+         if($validator->fails())
+         {
+             return json_encode(['status' => "error", 'message' => "validation"]);
+         }
+         
+         else
+         {
+			 $total = 0;
+			 
+             $ret = $this->helpers->getCouriers($req['s']);
+			 $dt = [];
+			 
+			 foreach($ret as $r)
+			 {
+				if(isset($req['st']) && is_numeric($req['st']))
+				{
+					$r['total'] = number_format($r['price'] + $req['st']);
+					array_push($dt,$r);
+				} 
+			 }
+			 #dd($dt);
+			 
+           return json_encode(['status' => "ok", 'message' => $dt]);
+         } 
+         
+		
+	}
+	
 	public function getDeliveryFee(Request $request)
 	{
 		$req = $request->all();

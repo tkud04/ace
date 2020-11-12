@@ -2450,9 +2450,27 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-  function getCouriers($cvg)
+  function getCouriers($s)
    {
 	   $ret = [];
+	   $cvg = "";
+	   
+	   switch($s)
+	   {
+		   case "lagos":
+		     $cvg = "lagos";
+		   break;
+		   
+		   case "ekiti":
+		   case "ogun":
+		   case "oyo":
+		   case "osun":
+		   case "ondo":
+		     $cvg = "sw";
+		   break;
+		   default:
+		     $cvg = "others";
+	   }
 	   
 	   $couriers = Couriers::where('coverage',$cvg)->get();
 	   

@@ -379,31 +379,10 @@
            </script>
                     <div class="row"> 
                       
-                      <!-- START Presonal information -->
-                      <fieldset class="col-md-12">
-                        <legend>Billing Details</legend>
-						 <!-- Name  -->
-                         <div class="row">
-                          <div class="col-sm-12 form-group">
-                           <label class="control-label" for="ca-name">Name</label>
-                            <input type="text" id="ca-name" name="name" class="form-control" {{$rd}}>
-						  </div>
-                         </div>
-						 
-						 <!-- Name and phone -->
-                         <div class="row">
-                          <div class="col-sm-6 form-group">
-                           <label class="control-label" for="ca-email">Email address</label>
-                            <input type="text" id="ca-email" name="email" class="form-control" {{$rd}}>
-						  </div>
-						  <div class="col-sm-6 form-group">
-                            <label class="control-label" for="ca-phone">Phone number</label>
-                            <input type="text" id="ca-phone" name="phone" class="form-control" {{$rd}}>
-						  </div>
-                         </div>
-                        
-						
-                        <!-- Address -->
+                      <!-- START Shipping information -->
+                      <fieldset class="col-md-12" style="margin-bottom: 15px;">
+					    <legend>Shipping Details</legend>
+						 <!-- Address -->
                         <div class="row">
 						<div class="col-sm-6 form-group">
                           <label class="control-label" for="address">Shipping address</label>
@@ -414,8 +393,7 @@
                             <input type="text" id="ca-city" name="city" class="form-control" {{$rd}}>
                           </div>
 						</div>
-                        
-                        <!-- Country and state -->
+						 <!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-6 form-group">
                             <label class="control-label" for="state">State</label>
@@ -448,6 +426,49 @@
                             </select>
                           </div>
                         </div>
+						<!-- Country and state -->
+                        <div class="row">
+                          <div class="col-sm-12 form-group">
+                            <label class="control-label" for="courier">Couriers available</label>
+                            <div class="table-responsive form-control" id="ca-courier">
+							  <table class="table ace-table">
+							    <thead>
+								  <tr>
+								    <th>Courier</th>
+								    <th>Payment type</th>
+								    <th>Price</th>
+								  </tr>
+								</thead>
+							    <tbody></tbody>
+							  </table>					
+                            </div>
+                          </div>
+						 </div>
+					  </fieldset>
+					  <!-- START Shipping information -->
+					  
+					  <!-- START Presonal information -->
+                      <fieldset class="col-md-12">
+                        <legend>Billing Details</legend>
+						 <!-- Name  -->
+                         <div class="row">
+                          <div class="col-sm-12 form-group">
+                           <label class="control-label" for="ca-name">Name</label>
+                            <input type="text" id="ca-name" name="name" class="form-control" {{$rd}}>
+						  </div>
+                         </div>
+						 
+						 <!-- Name and phone -->
+                         <div class="row">
+                          <div class="col-sm-6 form-group">
+                           <label class="control-label" for="ca-email">Email address</label>
+                            <input type="text" id="ca-email" name="email" class="form-control" {{$rd}}>
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="ca-phone">Phone number</label>
+                            <input type="text" id="ca-phone" name="phone" class="form-control" {{$rd}}>
+						  </div>
+                         </div>
                         
                       </fieldset>
                       <!-- END Personal information-->                      

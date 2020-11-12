@@ -1,4 +1,4 @@
-let mc = "";
+let mc = "", paymentType = "pod";
 
 $(document).ready(function() {
     "use strict";
@@ -11,10 +11,11 @@ $(document).ready(function() {
     
 	$("#ca-state").on("change", function(e) {
        // e.preventDefault();
+	   console.log(paymentType);
       let s = $('#ca-state').val();
 	   if(s == "none"){}
 	   else{
-		 getDeliveryFee(s);   
+	    getCouriers(s);   
 	   }
     })
 	
@@ -687,6 +688,67 @@ function showCheckout(type){
 		 $('#payment-type-acd').fadeIn();
 		break;
 	}
+}
+
+function getCouriers(dt){
+
+	//create request
+	let subtotal = $('#checkout-subtotal').val();
+	const req = `gc?s=${dt}&st=${subtotal}`;
+	console.log(req);
+	
+	
+	//fetch request
+	fetch(req)
+	   .then(response => {
+		   if(response.status === 200){
+			   //console.log(response);
+			   
+			   return response.json();
+		   }
+		   else{
+			   return {status: "error:", message: "Network error"};
+		   }
+	   })
+	   .catch(error => {
+		    alert("Failed to send message: " + error);			
+	   })
+	   .then(res => {
+		   console.log(res);
+		   
+		   if(res.status == "ok"){
+			   let data = res.message;
+			   
+			   if(data.length < 1){
+				   Swal.fire({
+			     icon: 'error',
+                 title: "No couriers available in your area.."
+               })
+			   }
+			   else{
+				  $('#deliv').html("&#8358;" + res.message[1]);
+				  if(parseInt(res.total) > 0){
+					$('#checkout-total').html("&#8358;" + res.total[1]);  
+					$('#ca-amount').val(res.total[0] * 100);  //for paystack
+				  } 
+                  $('#payment-method-acd').fadeIn(); 
+			   }
+			      				  
+				}
+			else{
+				Swal.fire({
+			     icon: 'error',
+                 title: "An error occured: " + res.message
+               })
+			}
+		 
+		  
+	   }).catch(error => {
+             Swal.fire({
+			 icon: 'error',
+             title: "Failed to send message: " + error
+           })			
+	   });
 }
 
 function getDeliveryFee(dt){

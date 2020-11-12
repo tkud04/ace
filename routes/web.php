@@ -80,6 +80,7 @@ Route::get('zohoverify/{nn}', 'MainController@getZoho');
 Route::get('bomb', 'MainController@getBomb');
 Route::get('pdf', 'MainController@getPDFTest');
 Route::get('gdf', 'MainController@getDeliveryFee');
+Route::get('gc', 'MainController@getCouriers');
 
 Route::get('error', 'MainController@getError');
 Route::get('cps', 'MainController@getCpsTest');
