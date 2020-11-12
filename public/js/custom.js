@@ -371,15 +371,25 @@ function populateQV(dt){
 }
 
 
+function setPaymentType(t){
+	paymentType = t;
+	$('#ca-state').val("none");
+	$('#ca-state').selectpicker({
+        style: "btn-select",
+        size: 6
+    });
+}
+
 function payNow(){
 	console.log("pay now");
-	paymentType = "prepaid";
+	setPaymentType("prepaid");
 	$('#payment-type-acd').hide();
 	$('#payment-method-acd').fadeIn();
 	//setPaymentAction("cod");
 }
 
 function paymentMethodsBack(){
+	setPaymentType("pod");
 	$('#payment-method-acd').hide();
 	$('#payment-type-acd').fadeIn();
 }
@@ -677,15 +687,11 @@ function showCheckout(type){
 		case 'new':
 		 $('#checkout-anon').hide();
 		 $('#checkout-new').fadeIn();
-		  $('#payment-type-acd').hide();
-		  $('#payment-method-acd').hide();
 		break;
 		
 		case 'anon':
 		 $('#checkout-new').hide();
 		 $('#checkout-anon').fadeIn();
-		 $('#payment-method-acd').hide();
-		 $('#payment-type-acd').fadeIn();
 		break;
 	}
 }
@@ -718,7 +724,8 @@ function getCouriers(dt){
 		   
 		   if(res.status == "ok"){
 			   let data = res.message;
-			   
+			    let hh = ``;
+				
 			   if(data.length < 1){
 				   Swal.fire({
 			     icon: 'error',
@@ -726,14 +733,37 @@ function getCouriers(dt){
                })
 			   }
 			   else{
+				  
+				   for(let r = 0; r < data.length; r++){
+					   let cc = data[r];
+					   let cvg = "";
+					   let ss = "";
+					   if(paymentType == cc.type) ss = `<span class="label label-success">SELECTED</span>`;
+					   if(cc.coverage == "lagos") cvg = "Lagos state";
+					   else if(cc.coverage == "sw") cvg = "Southwest states";
+					   else ttype = "Other states";
+					   
+					   hh += `
+					    <tr>
+						  <td>${cc.name}</td>
+						  <td>${cc.type}</td>
+						  <td>${cvg}</td>
+						  <td>&#8358;${cc.price}</td>
+						  <td>${ss}</td>
+						</tr>
+					   `;
+				   }
+				   
+				   /**
 				  $('#deliv').html("&#8358;" + res.message[1]);
 				  if(parseInt(res.total) > 0){
 					$('#checkout-total').html("&#8358;" + res.total[1]);  
 					$('#ca-amount').val(res.total[0] * 100);  //for paystack
 				  } 
                   $('#payment-method-acd').fadeIn(); 
+				  **/
 			   }
-			      				  
+			      	$('#courier-table > tbody').html(hh);			  
 				}
 			else{
 				Swal.fire({
@@ -997,4 +1027,23 @@ const changePerPage = () =>{
 const isMobile = () =>{
 	let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 	return isMobile;
+}
+
+const fi_back = n => {
+	let pp = n - 1;
+	
+	if(pp > 0){
+		$(`#fieldset-${n}`).hide();
+		$(`#fieldset-${pp}`).fadeIn();
+	}
+	
+}
+
+const fi_next = n => {
+			let pp = n + 1;
+	
+	if(pp < 4){
+		$(`#fieldset-${n}`).hide();
+		$(`#fieldset-${pp}`).fadeIn();
+	}
 }

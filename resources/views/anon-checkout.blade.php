@@ -8,6 +8,8 @@
 	console.log("anon");
 	let anon = true;
 	$('#payment-type-acd').hide();
+	$('#fieldset-2').hide();
+	$('#fieldset-3').hide();
 
 </script>
 @stop
@@ -55,68 +57,6 @@
                   <div class=" summary sum js-total text-center"> <strong id="checkout-total"> &#8358;{{number_format($total,2)}}</strong> </div>
                   <a href="{{url('cart')}}" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> return to cart</a>
                 </section>
-				
-				<section class="col-sm-12" id="payment-type-acd">
-				<br>
-				   <div class="accordion">
-                  <div aria-multiselectable="true" role="tablist" id="accordion-two" class="panel-group">
-                    <div class="panel panel-default">
-                      <div id="headingThree" role="tab" class="panel-heading">
-                        <h4 class="panel-title"> <a aria-controls="collapseThree" aria-expanded="true" href="#collapseThree" data-parent="#accordion-two" data-toggle="collapse" class=""><span class="badge">1</span> Pay now </a> </h4>
-                      </div>
-                      <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse in" id="collapseThree" aria-expanded="true" style="">
-                        <div class="panel-body"> 
-						   Make your payment instantly via our payment channels<br><br>
-						  <center> <button onclick="payNow(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay now</button></center>
-						</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div id="headingFour" role="tab" class="panel-heading">
-                        <h4 class="panel-title"> <a aria-controls="collapseFour" aria-expanded="false" href="#collapseFour" data-parent="#accordion-two" data-toggle="collapse" class="collapsed"><span class="badge">2</span> Pay on delivery</a> </h4>
-                      </div>
-                      <div aria-labelledby="headingFour" role="tabpanel" class="panel-collapse collapse" id="collapseFour" aria-expanded="false" style="height: 92px;">
-                        <div class="panel-body"> 
-						 Make your payment on delivery to your doorstep<br><br>
-						  <center> <a href="javascript:void(0)" onclick="payOnDelivery(); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
-						</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-				</section>
-				<section class="col-sm-12" id="payment-method-acd">
-				<br>
-				   <div class="accordion">
-                  <div aria-multiselectable="true" role="tablist" id="accordion-one" class="panel-group">
-                    <div class="panel panel-default">
-                      <div id="headingOne" role="tab" class="panel-heading">
-                        <h4 class="panel-title"> <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion-one" data-toggle="collapse" class=""><span class="badge">1</span> Direct bank transfer </a> </h4>
-                      </div>
-                      <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse in" id="collapseOne" aria-expanded="true" style="">
-                        <div class="panel-body"> 
-						   Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account. <br><br>
-						  <center> <button onclick="payBank(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
-						</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div id="headingTwo" role="tab" class="panel-heading">
-                        <h4 class="panel-title"> <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion-one" data-toggle="collapse" class="collapsed"><span class="badge">2</span> Pay online</a> </h4>
-                      </div>
-                      <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 92px;">
-                        <div class="panel-body"> 
-						<img class="img img-responsive" src="images/ps.png"> <br><br>
-						  <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
-						</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-				<a href="javascript:void(0)" onclick="paymentMethodsBack(); return false;" class="btn btn-block btn-default hvr-underline-from-center-default"><i class="rm-icon ion-arrow-return-left"></i> back</a>
-				</section>
-				
-				
               </div>
 			  <br>
 			 
@@ -171,7 +111,7 @@
                 <!--start of checkout-->
                 <div class="col-sm-12">
 				 <div class="row">
-				   <div class="col-sm-6">				    
+				   <div class="col-sm-6" style="margin-bottom: 10px;">				    
 				    <center>
 					 <div class="alert alert-warning" role="alert"><i class="ion-information-circled"></i>Don't have an account? <a href="javascript:void(0)">It's easy to sign up! With an account you get to access some of the awesome features of our website.</a></div>
 				      <a class="btn btn-primary btn-lg" href="javascript:void(0)" onclick="showCheckout('new')">CREATE AN ACCOUNT</a>
@@ -380,7 +320,38 @@
                     <div class="row"> 
                       
                       <!-- START Shipping information -->
-                      <fieldset class="col-md-12" style="margin-bottom: 15px;">
+                      <fieldset class="col-md-12" style="margin-bottom: 15px;" id="fieldset-1">
+					    <legend>Billing Details</legend>
+						 <!-- Name  -->
+                         <div class="row">
+                          <div class="col-sm-12 form-group">
+                           <label class="control-label" for="ca-name">Name</label>
+                            <input type="text" id="ca-name" name="name" class="form-control" {{$rd}}>
+						  </div>
+                         </div>
+						 
+						 <!-- Name and phone -->
+                         <div class="row">
+                          <div class="col-sm-6 form-group">
+                           <label class="control-label" for="ca-email">Email address</label>
+                            <input type="text" id="ca-email" name="email" class="form-control" {{$rd}}>
+						  </div>
+						  <div class="col-sm-6 form-group">
+                            <label class="control-label" for="ca-phone">Phone number</label>
+                            <input type="text" id="ca-phone" name="phone" class="form-control" {{$rd}}>
+						  </div>
+                         </div>
+						
+						 <div class="row" style="margin-bottom: 20px;">
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-primary" onclick="fi_next(1); return false;">Next</a>
+					       </div>
+					     </div>
+					  </fieldset>
+					  <!-- START Shipping information -->
+					  
+					  <!-- START Presonal information -->
+                      <fieldset class="col-md-12" id="fieldset-2">
 					    <legend>Shipping Details</legend>
 						 <!-- Address -->
                         <div class="row">
@@ -426,17 +397,33 @@
                             </select>
                           </div>
                         </div>
+						
+						 <div class="row" style="margin-bottom: 20px;">
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(2); return false;">Back</a>
+					        <a href="javascript:void(0)" class="btn btn-primary" onclick="fi_next(2); return false;">Next</a>
+					       </div>
+					     </div>
+                        
+                      </fieldset>
+                      <!-- END Personal information-->
+					  
+					  <!-- START Courier info and checkout -->
+                      <fieldset class="col-md-12" id="fieldset-3">
+                        <legend>Checkout</legend>
 						<!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-12 form-group">
                             <label class="control-label" for="courier">Couriers available</label>
-                            <div class="table-responsive form-control" id="ca-courier">
-							  <table class="table ace-table">
+                            <div id="ca-courier">
+							  <table class="table ace-table" id="courier-table">
 							    <thead>
 								  <tr>
 								    <th>Courier</th>
 								    <th>Payment type</th>
+								    <th>Coverage</th>
 								    <th>Price</th>
+								    <th></th>
 								  </tr>
 								</thead>
 							    <tbody></tbody>
@@ -444,31 +431,13 @@
                             </div>
                           </div>
 						 </div>
-					  </fieldset>
-					  <!-- START Shipping information -->
-					  
-					  <!-- START Presonal information -->
-                      <fieldset class="col-md-12">
-                        <legend>Billing Details</legend>
-						 <!-- Name  -->
-                         <div class="row">
-                          <div class="col-sm-12 form-group">
-                           <label class="control-label" for="ca-name">Name</label>
-                            <input type="text" id="ca-name" name="name" class="form-control" {{$rd}}>
-						  </div>
-                         </div>
 						 
-						 <!-- Name and phone -->
-                         <div class="row">
-                          <div class="col-sm-6 form-group">
-                           <label class="control-label" for="ca-email">Email address</label>
-                            <input type="text" id="ca-email" name="email" class="form-control" {{$rd}}>
-						  </div>
-						  <div class="col-sm-6 form-group">
-                            <label class="control-label" for="ca-phone">Phone number</label>
-                            <input type="text" id="ca-phone" name="phone" class="form-control" {{$rd}}>
-						  </div>
-                         </div>
+						 <div class="row" style="margin-bottom: 20px;">
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(3); return false;">Back</a>
+					        <a href="javascript:void(0)" class="btn btn-primary" >Submit</a>
+					       </div>
+					     </div>
                         
                       </fieldset>
                       <!-- END Personal information-->                      

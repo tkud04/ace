@@ -407,7 +407,7 @@
             <div class="col-xs-8 col-sm-9">
               <h4><i class="ion-android-phone-portrait icon text-info"></i><span class="text-uppercase text-primary">Ace Luxury Store - Exquisite Fashion For You</span></h4>
             </div>
-            <div class="col-xs-4 col-sm-3"> <a href="#" class="btn btn-default btn-block hvr-underline-from-center-default pull-right">Shop now</a> </div>
+            <div class="col-xs-4 col-sm-3"> <a href="javascript:void(0)" class="btn btn-default btn-block hvr-underline-from-center-default pull-right">Shop now</a> </div>
           </div>
         </div>
       </div>
