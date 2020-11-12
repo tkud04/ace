@@ -1777,7 +1777,7 @@ class MainController extends Controller {
 			 {
 				if(isset($req['st']) && is_numeric($req['st']))
 				{
-					$r['total'] = number_format($r['price'] + $req['st']);
+					$r['total'] = number_format($r['price'] + $req['st'],2);
 					array_push($dt,$r);
 				} 
 			 }

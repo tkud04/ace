@@ -416,7 +416,7 @@
 						<!-- Country and state -->
                         <div class="row">
                           <div class="col-sm-12 form-group">
-                            <label class="control-label" for="courier">Couriers available</label>
+                            <label class="control-label" for="courier">Select payment/delivery method</label>
                             <div id="ca-courier">
 							  <table class="table ace-table" id="courier-table">
 							    <thead>
@@ -425,7 +425,7 @@
 								    <th>Payment type</th>
 								    <th>Coverage</th>
 								    <th>Price</th>
-								    <th></th>
+								    <th>Action</th>
 								  </tr>
 								</thead>
 							    <tbody></tbody>

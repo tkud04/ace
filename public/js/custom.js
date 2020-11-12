@@ -1,4 +1,4 @@
-let mc = "", paymentType = "pod";
+let mc = "", paymentType = "pod", courier = "", couriers = [];
 
 $(document).ready(function() {
     "use strict";
@@ -696,6 +696,24 @@ function showCheckout(type){
 	}
 }
 
+function setCourier(id){
+	prevCourier = courier;
+	let ccc = couriers.find(i => i.id == id);
+    if(ccc){
+	   $(`#ca-action-${ccc.id}`).html(`<span class="label label-success">SELECTED</span>`);
+	   if(prevCourier != "") $(`#ca-action-${prevCourier.id}`).html(`<a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="setCourier(${prevCourier.id})">Select</a>`);
+	   
+	   $('#deliv').html("&#8358;" + ccc.price);
+	   
+	   if(parseInt(ccc.total) > 0){
+	     $('#checkout-total').html("&#8358;" + ccc.total);  
+	     $('#ca-amount').val(ccc.total * 100);  //for paystack
+	   }
+
+       courier = ccc;	   
+	}
+}
+
 function getCouriers(dt){
 
 	//create request
@@ -735,33 +753,29 @@ function getCouriers(dt){
 			   else{
 				  
 				   for(let r = 0; r < data.length; r++){
-					   let cc = data[r];
-					   let cvg = "";
-					   let ss = "";
-					   if(paymentType == cc.type) ss = `<span class="label label-success">SELECTED</span>`;
+					   let cc = data[r], cvg = "", ttype = "";
+					   let ss = `<a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="setCourier(${cc.id})">Select</a>`;
+					   
+					   if(courier == cc.id) ss = `<span class="label label-success">SELECTED</span>`;
 					   if(cc.coverage == "lagos") cvg = "Lagos state";
 					   else if(cc.coverage == "sw") cvg = "Southwest states";
 					   else ttype = "Other states";
 					   
+					   if(cc.type == "prepaid") ttype = "Pay now";
+					   if(cc.type == "pod") ttype = "Pay on delivery";
+					   
 					   hh += `
 					    <tr>
 						  <td>${cc.name}</td>
-						  <td>${cc.type}</td>
+						  <td>${ttype}</td>
 						  <td>${cvg}</td>
 						  <td>&#8358;${cc.price}</td>
-						  <td>${ss}</td>
+						  <td id="ca-action-${cc.id}">${ss}</td>
 						</tr>
 					   `;
+					   
+					   couriers.push({id: cc.id,price: cc.price, total: cc.total});
 				   }
-				   
-				   /**
-				  $('#deliv').html("&#8358;" + res.message[1]);
-				  if(parseInt(res.total) > 0){
-					$('#checkout-total').html("&#8358;" + res.total[1]);  
-					$('#ca-amount').val(res.total[0] * 100);  //for paystack
-				  } 
-                  $('#payment-method-acd').fadeIn(); 
-				  **/
 			   }
 			      	$('#courier-table > tbody').html(hh);			  
 				}
