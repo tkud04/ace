@@ -460,6 +460,32 @@ function setPaymentAction(type){
    $('#checkout-form').submit();
 }
 
+function fi_preview(){
+	if(courier.type){
+	  if(courier.type == "prepaid"){
+		  $('#ca-preview-pod').hide();
+		  $('#ca-preview-prepaid').fadeIn();
+	  }	
+	  else if(courier.type == "pod"){
+		  $('#ca-preview-prepaid').hide();
+		  $('#ca-preview-pod').fadeIn();
+	  }	
+	
+	  fi_next(3);
+	}
+	else{
+		Swal.fire({
+			     icon: 'error',
+                 title: "Select a payment/delivery method."
+               })
+	}
+	
+}
+
+function fi_submit(){
+	
+}
+
 function bomb(dt,url){
 
 	//create request
@@ -709,6 +735,15 @@ function setCourier(id){
 	     $('#checkout-total').html("&#8358;" + ccc.total);  
 	     $('#ca-amount').val(ccc.total * 100);  //for paystack
 	   }
+	   
+	   if(ccc.type == "pod"){
+		   $('#ca-preview-prepaid').hide();
+		   $('#ca-preview-pod').fadeIn();
+	   }
+	   else if(ccc.type == "prepaid"){
+		   $('#ca-preview-pod').hide();
+		   $('#ca-preview-prepaid').fadeIn();
+	   }
 
        courier = ccc;	   
 	}
@@ -774,10 +809,12 @@ function getCouriers(dt){
 						</tr>
 					   `;
 					   
-					   couriers.push({id: cc.id,price: cc.price, total: cc.total});
+					   couriers.push({id: cc.id,price: cc.price, total: cc.total, type: cc.type});
 				   }
 			   }
-			      	$('#courier-table > tbody').html(hh);			  
+			      	$('#courier-table > tbody').html(hh);
+                    $('#ca-preview-prepaid').hide();
+	                $('#ca-preview-pod').hide();					
 				}
 			else{
 				Swal.fire({
@@ -1056,7 +1093,7 @@ const fi_back = n => {
 const fi_next = n => {
 			let pp = n + 1;
 	
-	if(pp < 4){
+	if(pp < 5){
 		$(`#fieldset-${n}`).hide();
 		$(`#fieldset-${pp}`).fadeIn();
 	}

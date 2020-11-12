@@ -10,6 +10,9 @@
 	$('#payment-type-acd').hide();
 	$('#fieldset-2').hide();
 	$('#fieldset-3').hide();
+	$('#fieldset-4').hide();
+	$('#ca-preview-prepaid').hide();
+	$('#ca-preview-pod').hide();
 
 </script>
 @stop
@@ -408,7 +411,7 @@
                       </fieldset>
                       <!-- END Personal information-->
 					  
-					  <!-- START Courier info and checkout -->
+					  <!-- START Courier info-->
                       <fieldset class="col-md-12" id="fieldset-3">
                         <legend>Checkout</legend>
 						<!-- Country and state -->
@@ -435,12 +438,44 @@
 						 <div class="row" style="margin-bottom: 20px;">
 					       <div class="col-sm-12">
 					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(3); return false;">Back</a>
-					        <a href="javascript:void(0)" class="btn btn-primary" >Submit</a>
+					        <a href="javascript:void(0)" class="btn btn-primary" onclick="fi_preview(); return false;"> Next</a>
 					       </div>
 					     </div>
                         
                       </fieldset>
-                      <!-- END Personal information-->                      
+                      <!-- END Courier info-->  
+					  
+					  <!-- START preview and checkout-->
+                      <fieldset class="col-md-12" id="fieldset-4">
+                        <legend>Preview</legend>
+						<!-- Pay Now -->					 
+						 <div class="row" id="ca-preview-prepaid" style="margin-bottom: 20px;">
+						   <div class="col-sm-6 form-group">
+                             Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account. <br><br>
+						     <center> <button onclick="payBank(); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
+                           </div>
+						   <div class="col-sm-6 form-group">
+                              <img class="img img-responsive" src="images/ps.png"> <br><br>
+						      <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
+                           </div>
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(4); return false;">Back</a>
+					       </div>
+					     </div>
+						 
+						 <!-- Pay on Delivery -->					 
+						 <div class="row" id="ca-preview-pod" style="margin-bottom: 20px;">
+						   <div class="col-sm-12 form-group">
+                             Make your payment on delivery to your doorstep. Please use your Order ID as the payment reference. <br><br>
+						      <center> <a href="javascript:void(0)" onclick="payOnDelivery({ref: '{{$ref}}',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
+                           </div>
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(4); return false;">Back</a>
+					       </div>
+					     </div>
+                        
+                      </fieldset>
+                      <!-- END preview and checkout-->                      
                    
                     </div>
                     
