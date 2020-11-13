@@ -76,6 +76,8 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
                                     <th>Reference #</th>
                                     <th>Items</th>
                                     <th>Amount</th>
+                                    <th>Type</th>
+                                    <th>Courier</th>
                                     <th>Payment code</th>
                                     <th>Status</th>                                                                       
                                     <th>Actions</th>                                                                       
@@ -94,6 +96,11 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							 $vpu = url('confirm-payment')."?oid=".$o['reference'];
 							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
+							 $type = $o['type']; $c = $o['courier'];
+							 $ttype = "";
+							 
+							 if($type == "card" || $type == "bank") $ttype = "Prepaid (".$type.")";
+							 else if($type == "pod") $ttype = "Pay on Delivery";
 
 				    ?>
 					 <tr>
@@ -121,6 +128,8 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						?>
 					   </td>
 					   <td>&#8358;{{number_format($o['amount'],2)}}</td>		  
+					   <td>{{$ttype}}</td>		  
+					   <td><b>{{$c['name']}}</b> | {{number_format($c['price'],2)}}</td>		  
 					   <td>{{$o['payment_code']}}</td>
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
 					   <td>

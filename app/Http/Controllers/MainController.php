@@ -444,7 +444,7 @@ class MainController extends Controller {
 		}
         $req = $request->all();
 		$req['zip'] = "";
-        dd($req);
+        #dd($req);
         
         $validator = Validator::make($req, $rules);
          
@@ -466,7 +466,7 @@ class MainController extends Controller {
 			 }
 			 else
 			 {
-				 $ret = $this->helpers->checkout($user,$req,"bank");
+				 $ret = $this->helpers->checkout($user,$req,"pod");
 				 $o = [];
 				 #dd($ret);
 				 //We have the user, notify the customer and admin
@@ -475,19 +475,19 @@ class MainController extends Controller {
 				if(is_null($user))
 				{
 					$u = $this->helpers->getAnonOrder($ret->reference);
-					$view = "emails.anon-new-order-bank";
+					$view = "emails.anon-new-order-pod";
 				}
 				else
 				{
 					$u = $this->helpers->getUser($user->id);
-					$view = "emails.new-order-bank";
+					$view = "emails.new-order-pod";
 				}
 				
 				$rett['order'] = $this->helpers->getOrder($ret->reference);
 				$o = $rett['order'];
 				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
-				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
+				$rett['subject'] = "Your order is on its way! Ref: ".$ret->reference;
 		        $rett['em'] = $u['email'];
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
@@ -502,7 +502,7 @@ class MainController extends Controller {
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		$signals = $this->helpers->signals;
 			
-			return view("bps",compact(['user','cart','c','o','ad','signals','plugins']));
+			return view("podpps",compact(['user','cart','c','o','ad','signals','plugins']));
 			 }
          	
           
@@ -1778,6 +1778,7 @@ class MainController extends Controller {
 				if(isset($req['st']) && is_numeric($req['st']))
 				{
 					$r['total'] = number_format($r['price'] + $req['st'],2);
+					$r['rtotal'] = $r['price'] + $req['st'];
 					array_push($dt,$r);
 				} 
 			 }

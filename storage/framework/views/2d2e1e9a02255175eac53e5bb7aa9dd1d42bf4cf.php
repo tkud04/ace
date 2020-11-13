@@ -87,14 +87,19 @@
 			  $unsecureCheckout = url('checkout');
 			  $securePay = "https://www.aceluxurystore.com/pay";
 			  $unsecurePay = url('pay');
+			  $securePOD = "https://www.aceluxurystore.com/pod";
+			  $unsecurePOD = url('pod');
 			  
 			  $isSecure = (isset($secure) && $secure);
 			  $pay = $isSecure ? $securePay : $unsecurePay;
 			  $checkout = $isSecure ? $secureCheckout : $unsecureCheckout;
+			  $pod = $isSecure ? $securePOD : $unsecurePOD;
 			  
 		    ?>
 				 <input type="hidden" id="bank-action" value="<?php echo e($checkout); ?>">
                             	<input type="hidden" id="card-action" value="<?php echo e($pay); ?>">
+                            	<input type="hidden" id="pod-action" value="<?php echo e($pod); ?>">
+
                             	
                              
 							
@@ -308,6 +313,7 @@
 			    <?php echo csrf_field(); ?>
 
 				<input type="hidden" id="href" name="u" value="">
+				                            	<input type="hidden" name="courier" id="ca-courierr" value="">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   

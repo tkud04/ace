@@ -1474,6 +1474,9 @@ $subject = $data['subject'];
 				  case "paystack":
                  	$ret = $this->payWithPayStack($u, $data);
                   break;
+				  case "pod":
+                 	$ret = $this->payOnDelivery($u, $data);
+                  break;
 			   }
 			   
 			   return $ret;
@@ -1577,6 +1580,39 @@ $subject = $data['subject'];
                 return ['status' => "ok",'dt' => $dt];
            }
 		   
+		   function payOnDelivery($user, $md)
+           {	
+             # dd([$user,$md]);		   
+                $dt = [];
+				$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+				
+				if(is_null($user))
+				{
+		            $cart = $this->getCart($user,$gid);
+		            $totals = $this->getCartTotals($cart);
+					
+					$dt['name'] = $md['name'];
+					$dt['email'] = $md['email'];
+					$dt['phone'] = $md['phone'];
+					$dt['address'] = $md['address'];
+					$dt['city'] = $md['city'];
+					$dt['state'] = $md['state'];
+				}
+				
+				$dt['amount'] = $md['amount'] / 100;
+				$dt['courier_id'] = $md['courier'];
+               	$dt['ref'] = $this->getRandomString(5);
+				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
+				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
+				$dt['type'] = "pod";
+				$dt['status'] = "unpaid";
+              
+              #create order
+              #dd($dt);
+              $o = $this->addOrder($user,$dt,$gid);
+                return $o;
+           }
+		   
 		   function updateStock($s,$q)
 		   {
 			   $p = Products::where('sku',$s)->first();
@@ -1661,6 +1697,7 @@ $subject = $data['subject'];
 			                          'reference' => $dt['ref'],
 			                          'ps_ref' => $psref,
 			                          'amount' => $dt['amount'],
+			                          'courier_id' => $dt['courier_id'],
 			                          'type' => $dt['type'],
 			                          'payment_code' => $dt['payment_code'],
 			                          'notes' => $dt['notes'],
@@ -1674,6 +1711,7 @@ $subject = $data['subject'];
 			                          'reference' => $dt['ref'],
 			                          'ps_ref' => $psref,
 			                          'amount' => $dt['amount'],
+			                          'courier_id' => $dt['courier_id'],
 			                          'type' => $dt['type'],
 			                          'payment_code' => $dt['payment_code'],
 			                          'notes' => $dt['notes'],
@@ -1701,7 +1739,9 @@ $subject = $data['subject'];
 			  
               if($items != null && count($items) > 0)
                {      
-                 $oid = $items[0]['order_id'];		   
+                 $oid = $items[0]['order_id'];
+                 $o = Orders::where('id',$oid)->first();	
+				 
                	foreach($items as $i) 
                     {
 						if(count($i['product']) > 0)
@@ -1738,7 +1778,8 @@ $subject = $data['subject'];
 					else
 					{
 						$u = User::where('id',$uid)->first();
-						  $ret['delivery'] = $this->getDeliveryFee($u);
+						$c = $this->getCourier($o->courier_id);
+						  $ret['delivery'] = $c['price'];
 					}
                    
                  
@@ -1783,6 +1824,9 @@ $subject = $data['subject'];
                   $temp['reference'] = $o->reference;
                   $temp['amount'] = $o->amount;
                   $temp['type'] = $o->type;
+                  $temp['courier_id'] = $o->courier_id;
+				  $c = $this->getCourier($o->courier_id);
+                  $temp['courier'] = $c;
                   $temp['payment_code'] = $o->payment_code;
                   $temp['notes'] = $o->notes;
                   $temp['status'] = $o->status;
@@ -1791,7 +1835,8 @@ $subject = $data['subject'];
 				  if($o->user_id == "anon")
 				  {
 						$anon = $this->getAnonOrder($o->reference,false);
-						$temp['totals']['delivery'] = $this->getDeliveryFee($anon['state'],"state");  
+						
+						$temp['totals']['delivery'] = $c['price'];  
 				  }
 				  
                   $temp['date'] = $o->created_at->format("jS F, Y");

@@ -452,6 +452,7 @@ function setPaymentAction(type){
 		paymentURL = $("#card-action").val();  
    }
    else if(type == "pod"){
+	   $('#ca-courierr').val(courier.id);
 		paymentURL = $("#pod-action").val();  
    }
    
@@ -731,9 +732,10 @@ function setCourier(id){
 	   
 	   $('#deliv').html("&#8358;" + ccc.price);
 	   
-	   if(parseInt(ccc.total) > 0){
-	     $('#checkout-total').html("&#8358;" + ccc.total);  
-	     $('#ca-amount').val(ccc.total * 100);  //for paystack
+	   if(parseInt(ccc.rtotal) > 0){
+	     $('#checkout-total').html("&#8358;" + ccc.total);
+         let camt = parseInt(ccc.rtotal) * 100;		 
+	     $('#ca-amount').val(camt);  //for paystack
 	   }
 	   
 	   if(ccc.type == "pod"){
@@ -809,7 +811,7 @@ function getCouriers(dt){
 						</tr>
 					   `;
 					   
-					   couriers.push({id: cc.id,price: cc.price, total: cc.total, type: cc.type});
+					   couriers.push({id: cc.id,price: cc.price, total: cc.total, rtotal: cc.rtotal, type: cc.type});
 				   }
 			   }
 			      	$('#courier-table > tbody').html(hh);
