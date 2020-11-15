@@ -796,7 +796,7 @@ function getCouriers(dt){
 					   if(courier == cc.id) ss = `<span class="label label-success">SELECTED</span>`;
 					   if(cc.coverage == "lagos") cvg = "Lagos state";
 					   else if(cc.coverage == "sw") cvg = "Southwest states";
-					   else ttype = "Other states";
+					   else cvg = "Other states";
 					   
 					   if(cc.type == "prepaid") ttype = "Pay now";
 					   if(cc.type == "pod") ttype = "Pay on delivery";
