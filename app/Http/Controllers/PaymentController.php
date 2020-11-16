@@ -48,6 +48,7 @@ class PaymentController extends Controller {
         $validator = Validator::make($req, [
 							 'amount' => 'required',
                              'email' => 'required|email|filled',
+							 'courier' => 'required',
                              'address' => 'required|filled',
                              'city' => 'required|filled',
                              'state' => 'required|not_in:none',

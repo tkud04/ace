@@ -30,6 +30,12 @@ foreach($items as $i)
 }
 ?>
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
+
+<h6>Shipping Details</h6>
+<p>Address: {{$shipping['address']}}</p>
+<p>City: {{$shipping['city']}}</p>
+<p>State: {{$shipping['state']}}</p><br><br>
+
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 <p style="color:red;"><b>NOTE:</b> We only accept <b>CASH</b> on delivery.</p><br>
 <p>Please inspect your order upon arrival to your destination. Once satisfied kindly make your payment to the dispatcher. </p><br>

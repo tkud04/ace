@@ -25,13 +25,15 @@ cidcontents.push({
 </script>
 <?php
 }
+$vu = url('anon-order')."?ref=".$o['reference'];
+
 ?>
 
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Transaction successful</h3>
 
 <b>Your payment was successful!</b><br>
 
-<p>Fetching your orders.. <a href="{{url('orders')}}">Click here</a> if you are not redirected within 10 seconds.</p>
+<p>Redirecting.. <a href="{{$vu}}">Click here</a> if you are not redirected within 10 seconds.</p>
 
 @stop
 
@@ -50,7 +52,7 @@ fbq('track', 'Purchase', {
 
 
 setTimeout(() => {
-	window.location = "{{$uu}}";
+	window.location = "{{$vu}}";
 },10000);
 </script>
 @stop

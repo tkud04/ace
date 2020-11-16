@@ -78,7 +78,6 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
                                     <th>Amount</th>
                                     <th>Type</th>
                                     <th>Courier</th>
-                                    <th>Payment code</th>
                                     <th>Status</th>                                                                       
                                     <th>Actions</th>                                                                       
                                 </tr>
@@ -140,7 +139,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					   <td><b>{{$cr['name']}}</b> (&#8358;{{number_format($cr['price'],2)}})</td>		  
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
 					   <td>
-					     @if($ttype == "Prepaid" && $o['status'] == "unpaid")
+					     @if(($type == "card" || $type == "bank") && $o['status'] == "unpaid")
 							 <a class="btn btn-primary" href="{{$vpu}}">Verify payment</a>
 						 @endif
 					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</a>

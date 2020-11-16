@@ -78,7 +78,6 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
                                     <th>Amount</th>
                                     <th>Type</th>
                                     <th>Courier</th>
-                                    <th>Payment code</th>
                                     <th>Status</th>                                                                       
                                     <th>Actions</th>                                                                       
                                 </tr>
@@ -141,7 +140,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					   <td><b><?php echo e($cr['name']); ?></b> (&#8358;<?php echo e(number_format($cr['price'],2)); ?>)</td>		  
 					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
 					   <td>
-					     <?php if($ttype == "Prepaid" && $o['status'] == "unpaid"): ?>
+					     <?php if(($type == "card" || $type == "bank") && $o['status'] == "unpaid"): ?>
 							 <a class="btn btn-primary" href="<?php echo e($vpu); ?>">Verify payment</a>
 						 <?php endif; ?>
 					     <a class="btn btn-info" href="<?php echo e($iu); ?>" target="_blank">Receipt</a>

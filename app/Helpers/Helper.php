@@ -1532,6 +1532,7 @@ $subject = $data['subject'];
 					$dt['amount'] = $md['amount'] / 100;
 				}
 				
+               	$dt['courier_id'] = $md['courier'];
                	$dt['ref'] = $this->getRandomString(5);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
@@ -1558,6 +1559,7 @@ $subject = $data['subject'];
                	$dt['amount'] = $amount;
 				$dt['ref'] = $ref;
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
+				$dt['courier_id'] = $md['courier'];
 				$dt['payment_code'] = $this->getPaymentCode($ref);
 				$dt['ps_ref'] = $psref;
 				$dt['type'] = "card";
@@ -2517,7 +2519,8 @@ $subject = $data['subject'];
 		     $cvg = "others";
 	   }
 	   
-	   $couriers = Couriers::where('coverage',$cvg)->get();
+	   $couriers = Couriers::where('coverage',$cvg)
+	                       ->orWhere('coverage',$s)->get();
 	   
 	   if(!is_null($couriers))
 	   {

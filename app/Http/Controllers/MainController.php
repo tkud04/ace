@@ -313,6 +313,7 @@ class MainController extends Controller {
                              'phone' => 'required|numeric',
                              'address' => 'required',
                              'state' => 'required',
+							 'courier' => 'required',
                              'city' => 'required',
                              'terms' => 'accepted'
          ];
@@ -328,6 +329,7 @@ class MainController extends Controller {
                              'phone' => 'required|numeric',
                              'address' => 'required',
                              'state' => 'required',
+                             'courier' => 'required',
                              'city' => 'required',
                              'terms' => 'accepted'
          ];
@@ -365,11 +367,18 @@ class MainController extends Controller {
 				if(is_null($user))
 				{
 					$u = $this->helpers->getAnonOrder($ret->reference);
+					$shipping = [
+					     'address' => $req['address'],
+					     'city' => $req['city'],
+					     'state' => $req['state'],
+					   ];
 					$view = "emails.anon-new-order-bank";
 				}
 				else
 				{
 					$u = $this->helpers->getUser($user->id);
+					 $sd = $this->helpers->getShippingDetails($user->id);
+					 $shipping = $sd[0];
 					$view = "emails.new-order-bank";
 				}
 				
@@ -379,6 +388,7 @@ class MainController extends Controller {
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
 		        $rett['em'] = $u['email'];
+				$ret['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;
@@ -421,6 +431,7 @@ class MainController extends Controller {
                              'email' => 'required|email',
                              'name' => 'required',
                              'phone' => 'required|numeric',
+							 'courier' => 'required',
                              'address' => 'required',
                              'state' => 'required',
                              'city' => 'required',
@@ -436,6 +447,7 @@ class MainController extends Controller {
                              'fname' => 'required',
                              'lname' => 'required',
                              'phone' => 'required|numeric',
+							 'courier' => 'required',
                              'address' => 'required',
                              'state' => 'required',
                              'city' => 'required',
@@ -475,11 +487,19 @@ class MainController extends Controller {
 				if(is_null($user))
 				{
 					$u = $this->helpers->getAnonOrder($ret->reference);
+					$shipping = [
+					     'address' => $req['address'],
+					     'city' => $req['city'],
+					     'state' => $req['state'],
+					   ];
 					$view = "emails.anon-new-order-pod";
 				}
 				else
 				{
 					$u = $this->helpers->getUser($user->id);
+					 $sd = $this->helpers->getShippingDetails($user->id);
+					 $shipping = $sd[0];
+					$view = "emails.new-order-bank";
 					$view = "emails.new-order-pod";
 				}
 				
@@ -487,8 +507,9 @@ class MainController extends Controller {
 				$o = $rett['order'];
 				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
-				$rett['subject'] = "Your order is on its way! Ref: ".$ret->reference;
+				$rett['subject'] = "Your order has been placed! Ref: ".$ret->reference;
 		        $rett['em'] = $u['email'];
+				$ret['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;

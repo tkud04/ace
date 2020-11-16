@@ -436,6 +436,7 @@ function payWithCard(anon=false){
 		 mc['address'] = $('#ca-address').val();
 		 mc['city'] = $('#ca-city').val();
 		 mc['state'] = $('#ca-state').val();
+		 mc['courier'] = courier.id;
 	 }
 	 $('#nd').val(JSON.stringify(mc)); 
 	//console.log(mc);
@@ -444,15 +445,15 @@ function payWithCard(anon=false){
 
 function setPaymentAction(type){
 	let paymentURL = "";
-	
+	$('#ca-courierr').val(courier.id);
 	if(type == "cod"){
+		
 		paymentURL = $("#bank-action").val();  
    }
    else if(type == "card"){
 		paymentURL = $("#card-action").val();  
    }
    else if(type == "pod"){
-	   $('#ca-courierr').val(courier.id);
 		paymentURL = $("#pod-action").val();  
    }
    

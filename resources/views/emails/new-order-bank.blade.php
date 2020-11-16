@@ -30,11 +30,15 @@ foreach($items as $i)
 }
 ?>
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
-<h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
-<p style="color:red;"><b>NOTE:</b> We only accept <b>CASH</b> on delivery.</p><br>
-<p>Please inspect your order upon arrival to your destination. Once satisfied kindly make your payment to the dispatcher. </p><br>
-<p style="color:red;"><b>NOTE:</b> This order is currently marked as <b>PENDING</b>. We will only process orders whose payment have been cleared in our accounts and confirmed.<br><br>Orders are delivered within 48 hours in Lagos.<br><br>Orders outside Lagos are delivered between 3 – 7 days.</p><br><br>
 
-<a href="{{$tu}}" target="_blank" style="background: #ff9bbc; color: #fff; padding: 10px 15px; margin-right: 10px;">Track your order</a>
+<h6>Shipping Details</h6>
+<p>Address: {{$shipping['address']}}</p>
+<p>City: {{$shipping['city']}}</p>
+<p>State: {{$shipping['state']}}</p><br><br>
+
+<h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
+<p>Click the button below to confirm your payment for this order. Alternatively you can log in to your Dashboard to confirm payment for this order (go to Orders and click the Verify Payment button beside the order).</p><br>
+<p style="color:red;"><b>NOTE:</b> This order is currently marked as <b>PENDING</b>. We will only process orders whose payment have been cleared in our accounts and confirmed.<br><br>Orders are delivered within 48 hours in Lagos.<br><br>Orders outside Lagos are delivered between 3 – 7 days.</p><br><br>
+<a href="{{$uu}}" target="_blank" style="background: #ff9bbc; color: #fff; padding: 10px 15px; margin-right: 10px;">Confirm Payment</a>
 <br><br>
 
