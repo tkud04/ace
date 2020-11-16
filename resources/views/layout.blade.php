@@ -256,20 +256,34 @@
                 <ul class="lnt-category list-unstyled">
 				<?php
 				 $i = 0;
+				 if(is_array($c) && count($c) > 0)
+				 {
 				 foreach($c as $cc)
 				 {
 					 $ccu = url('shop')."?category=".$cc['category'];
+					 #$ccu = "javascript:void(0)";
+					 $catt = ucwords($cc['category']);
+					 #$catt = "Category";
 					 $cl = ($i == 0) ? ' class="active"' : '';
 					 ++$i;
 					 $spp = "";
+					 
 					 if($cc['special'] == "hot" || $cc['special'] == "special" || $cc['special'] == "trending")
 					 {
 						 if($cc['special'] == "hot") $spp = '<span class="label label-danger">Hot</span></a>';
 						 if($cc['special'] == "special") $spp = '<span class="label label-info">Popular</span></a>';
 						 if($cc['special'] == "trending") $spp = '<span class="label label-primary">Trending</span></a>';
 					 }
+					 
 				?>
-                  <li{{$cl}}><a href="{{$ccu}}">{{ucwords($cc['category'])}} {!!$spp!!}</a></li>
+                  <li{{$cl}}><a href="{{$ccu}}">{{$catt}} {!!$spp!!}</a></li>
+				<?php
+				 }
+				 }
+				 else 
+				 {
+				?>
+				<li>Categories</li>
 				<?php
 				 }
 				?>
@@ -430,8 +444,11 @@
 			  <?php
 			  foreach($c as $cc){
 				   $ccu = url('shop')."?category=".$cc['category'];
+					 #$ccu = "javascript:void(0)";
+					 $catt = ucwords($cc['category']);
+					 #$catt = "Category";
 			  ?>
-                <li><a href="{{$ccu}}">{{ucwords($cc['category'])}}</a> </li>
+                <li><a href="{{$ccu}}">{{$catt}}</a> </li>
 			  <?php
 			  }
 			  ?>

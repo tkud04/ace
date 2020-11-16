@@ -2,6 +2,7 @@
 <head>
 <?php
 $tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
+$stss = $order['type'] == "pod" ? "pay on delivery" : $order['status'];
 ?>
 <title>{{$tt}}</title>
 <style type="text/css">
@@ -218,7 +219,7 @@ else
                         <div class="email"><a href="mailto:{{$email}}">{{$email}}</a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id">{{strtoupper($order['status'])}}</h1>
+                        <h1 class="invoice-id">{{strtoupper($stss)}}</h1>
                         <div class="date">{{ucwords($tt)}} generated on: {{$order['date']}}</div>
                         <div class="date">Reference #: {{$order['reference']}}</div>
                     </div>

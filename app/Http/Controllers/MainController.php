@@ -869,7 +869,7 @@ class MainController extends Controller {
 			{
 				$trackings = $this->helpers->getTrackings($req['o']);
 				$r = $req['o'];
-			    $paidStatus = $anon['order']['status'];
+			    $paidStatus = $anon['order']['type'] == "pod" ? "pod" : $anon['order']['status'];
 			    #dd($trackings);
 			    return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals','plugins']));	
 			}
@@ -1083,7 +1083,7 @@ class MainController extends Controller {
 			if(count($anon) > 0)
 			{
 				$orders[0] = $this->helpers->getOrder($anon['reference']);
-				#dd($orders[0]);
+				#dd($c);
 				return view("orders",compact(['user','cart','c','ad','anon','orders','signals','plugins']));		
 			}
 			else

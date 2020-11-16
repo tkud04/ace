@@ -96,11 +96,19 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							 $vpu = url('confirm-payment')."?oid=".$o['reference'];
 							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
-							 $type = $o['type']; $c = $o['courier'];
+							 $type = $o['type']; $cr = $o['courier'];
 							 $ttype = "";
 							 
-							 if($type == "card" || $type == "bank") $ttype = "Prepaid (".$type.")";
-							 else if($type == "pod") $ttype = "Pay on Delivery";
+							 if($type == "card" || $type == "bank")
+							 {
+								$ttype = "Prepaid (".$type.")";
+                                $ttClass = "primary";								
+							 } 
+							 else if($type == "pod")
+							 {
+								 $ttype = "Pay on Delivery";
+								 $ttClass = "success";
+							 } 
 
 				    ?>
 					 <tr>
@@ -128,12 +136,11 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						?>
 					   </td>
 					   <td>&#8358;{{number_format($o['amount'],2)}}</td>		  
-					   <td>{{$ttype}}</td>		  
-					   <td><b>{{$c['name']}}</b> | {{number_format($c['price'],2)}}</td>		  
-					   <td>{{$o['payment_code']}}</td>
+					   <td><span class="label label-{{$ttClass}}">{{strtoupper($ttype)}}</span></td>		  
+					   <td><b>{{$cr['name']}}</b> (&#8358;{{number_format($cr['price'],2)}})</td>		  
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
 					   <td>
-					     @if($o['status'] == "unpaid")
+					     @if($ttype == "Prepaid" && $o['status'] == "unpaid")
 							 <a class="btn btn-primary" href="{{$vpu}}">Verify payment</a>
 						 @endif
 					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</a>

@@ -1,3 +1,4 @@
+
 <?php
 $tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
 ?>
@@ -190,6 +191,8 @@ else
 	$phone = $buyer['phone'];
 	$email = $buyer['email'];
 }
+
+$stss = $order['type'] == "pod" ? "pay on delivery" : $order['status'];
 ?>
 <div id="invoice">
 
@@ -230,7 +233,7 @@ else
                         <div class="email"><a href="mailto:<?php echo e($email); ?>"><?php echo e($email); ?></a></div>
                     </div>
                     <div class="col invoice-details">
-                        <h1 class="invoice-id"><?php echo e(strtoupper($order['status'])); ?></h1>
+                        <h1 class="invoice-id"><?php echo e(strtoupper($stss)); ?></h1>
                         <div class="date"><?php echo e(ucwords($tt)); ?> generated on: <?php echo e($order['date']); ?></div>
                         <div class="date">Reference #: <?php echo e($order['reference']); ?></div>
                     </div>
@@ -253,6 +256,7 @@ else
 						   ++$x;
 						   $product = $i['product'];
 						   $sku = $product['sku'];
+						   $name = $product['name'];
 						   $qty = $i['qty'];
 						   $pd = $product['pd'];
 						   $pu = url('product')."?sku=".$product['sku'];
@@ -264,7 +268,7 @@ else
 							   <h3>
 							    <a href="<?php echo e($pu); ?>" target="_blank">
 						        <img class="img img-fluid" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
-							     <?php echo e($sku); ?>
+							     <?php echo e($name); ?>
 
 						         </a>
 							   </h3>
