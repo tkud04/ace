@@ -222,20 +222,11 @@
                             <select class="selectpicker" id="ca-state" name="state" value="<?php echo e($state); ?>" style="display: none;">
 							<option value="none">Select state</option>
 							<?php
-							 if(is_null($user))
-							 {
 							 foreach($states as $key => $value)
 							 {
 								 $sss = $key == $state ? "selected='selected'" : "";
 						    ?>
                               <option value="<?php echo e($key); ?>"<?php echo e($sss); ?>><?php echo e(ucwords($value)); ?></option>
-							<?php
-							 }
-							 }
-							 else
-							 {
-							?>
-							   <option value="<?php echo e($state); ?>" selected><?php echo e($states[$state]); ?></option>
 							<?php
 							 }
                             ?>							
@@ -315,7 +306,7 @@
 						 <div class="row" id="ca-preview-pod" style="margin-bottom: 20px;">
 						   <div class="col-sm-12 form-group">
                              Make your payment on delivery to your doorstep. Please use your Order ID as the payment reference. <br><br>
-						      <center> <a href="javascript:void(0)" onclick="payOnDelivery({ref: '<?php echo e($ref); ?>',anon: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
+						      <center> <a href="javascript:void(0)" onclick="payOnDelivery({ref: '<?php echo e($ref); ?>'}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
                            </div>
 					       <div class="col-sm-12">
 					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(4); return false;">Back</a>

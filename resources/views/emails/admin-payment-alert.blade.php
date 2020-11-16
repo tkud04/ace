@@ -4,6 +4,7 @@
  $itemCount = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
  $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
+ $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">New order {{$order['payment_code']}} paid via card!</h3>
@@ -34,9 +35,11 @@ foreach($items as $i)
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
 
 <h6>Shipping Details</h6>
+<p><b>{{$cr['name']}}</b> (&#8358;{{number_format($cr['price'],2)}})</p>
 <p>Address: {{$shipping['address']}}</p>
 <p>City: {{$shipping['city']}}</p>
 <p>State: {{$shipping['state']}}</p><br><br>
+
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
 <p>Click the <b>View Order</b> button below to view the order or <b>Track Order</b> button to update delivery information. Alternatively you can log in to the Admin Dashboard to view or update tracking info for this order (go to Orders and click either the View or Track buttons beside the order).</p><br>

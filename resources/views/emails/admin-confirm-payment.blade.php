@@ -3,6 +3,7 @@
  $items = $order['items'];
  $itemCount = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/confirm-payment?o=".$order['reference'];
+ $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order {{$order['payment_code']}}</h3>
@@ -32,6 +33,14 @@ foreach($items as $i)
 }
 ?>
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
+
+<h6>Shipping Details</h6>
+<p><b>{{$cr['name']}}</b> (&#8358;{{number_format($cr['price'],2)}})</p>
+<p>Address: {{$shipping['address']}}</p>
+<p>City: {{$shipping['city']}}</p>
+<p>State: {{$shipping['state']}}</p><br><br>
+
+
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
 <p>If the payment has been cleared, please click the button below to confirm the order. Alternatively you can log in to the Admin Dashboard to confirm the order (go to Orders and click the Confirm button beside the order).</p><br>

@@ -684,8 +684,10 @@ $subject = $data['subject'];
            function updateShippingDetails($user, $data)
            {		
 				$company = isset($data['company']) ? $data['company'] : "";
+				$z = isset($data['zip']) ? $data['zip'] : "";
+				$xf = isset($data['xf']) ? $data['xf'] : $user->id;
 
-				$ss = ShippingDetails::where('user_id', $data['xf'])->first();
+				$ss = ShippingDetails::where('user_id', $xf)->first();
 				
 				if(is_null($ss))
 				{
@@ -694,7 +696,7 @@ $subject = $data['subject'];
                                                       'address' => $data['address'],
                                                      'city' => $data['city'],
                                                 'state' => $data['state'],
-                                              'zipcode' => $data['zip'] 
+                                              'zipcode' => $z 
                                                       ]);	
 				}
 				else
@@ -703,7 +705,7 @@ $subject = $data['subject'];
                                                       'address' => $data['address'],
                                                      'city' => $data['city'],
                                                 'state' => $data['state'],
-                                              'zipcode' => $data['zip'] 
+                                              'zipcode' => $z 
                                                       ]);	
 				}
 					
@@ -1530,6 +1532,7 @@ $subject = $data['subject'];
 				else
 				{
 					$dt['amount'] = $md['amount'] / 100;
+					$this->updateShippingDetails($user,$md);
 				}
 				
                	$dt['courier_id'] = $md['courier'];
@@ -1574,6 +1577,10 @@ $subject = $data['subject'];
 					$dt['city'] = $md['city'];
 					$dt['state'] = $md['state'];
 				}
+				else
+				{
+					$this->updateShippingDetails($user,$md);
+				}
               }
               
               #create order
@@ -1599,6 +1606,10 @@ $subject = $data['subject'];
 					$dt['address'] = $md['address'];
 					$dt['city'] = $md['city'];
 					$dt['state'] = $md['state'];
+				}
+				else
+				{
+					$this->updateShippingDetails($user,$md);
 				}
 				
 				$dt['amount'] = $md['amount'] / 100;
@@ -2103,12 +2114,28 @@ $subject = $data['subject'];
 		//$ret = $this->smtp;
 		$ret = $this->getCurrentSender();
 		$ret['order'] = $o;
-		$ret['user'] = is_null($u) ? $data['email'] : $u->email;
+		
+		if(is_null($u))
+		{
+			$ret['user'] = $data['email'];
+			$shipping = [
+					     'address' => $md['address'],
+					     'city' => $md['city'],
+					     'state' => $md['state'],
+					   ];
+		}
+		else
+		{
+			$ret['user'] = $u->email;
+			 $sd = $this->getShippingDetails($u->id);
+					   $shipping = $sd[0];
+		}
 		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;
 		$ret['acnum'] = $data['acnum'];
+		$ret['shipping'] = $shipping;
 		
 		try
 		{
@@ -2289,8 +2316,11 @@ $subject = $data['subject'];
 
     function checkForUnpaidOrders($u)
 	{
-		$ret = Orders::where('user_id',$u->id)
-		                ->where('status','unpaid')->count();
+		$ret = Orders::where([
+		                       'user_id' => $u->id,
+							   'status' => "unpaid",
+							   'type' => "bank"
+		                     ])->count();
 		#dd($ret);
 		return $ret > 0;
 	}	

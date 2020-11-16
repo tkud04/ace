@@ -492,11 +492,13 @@ class MainController extends Controller {
 					     'city' => $req['city'],
 					     'state' => $req['state'],
 					   ];
+					   $name = $req['name'];
 					$view = "emails.anon-new-order-pod";
 				}
 				else
 				{
 					$u = $this->helpers->getUser($user->id);
+					$name = $user->fname." ".$user->lname;
 					 $sd = $this->helpers->getShippingDetails($user->id);
 					 $shipping = $sd[0];
 					$view = "emails.new-order-pod";
@@ -507,9 +509,21 @@ class MainController extends Controller {
 				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
 				$rett['subject'] = "Your order has been placed! Ref: ".$ret->reference;
+				$rett['name'] = $name;
 		        $rett['em'] = $u['email'];
 				$rett['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
+				
+				#$ret = $this->helpers->smtp;
+				$rett['order'] = $o;
+				$rett['user'] =$u['email'];
+				$rett['phone'] =$u['phone'];
+		        $rett['subject'] = "URGENT: Customer placed a POD for order #".$o['reference'];
+		        $rett['shipping'] = $shipping;
+		        $rett['em'] = $this->helpers->adminEmail;
+		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
+				$ret['em'] = $this->helpers->suEmail;
+		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;
 			     //return redirect()->intended($uu);

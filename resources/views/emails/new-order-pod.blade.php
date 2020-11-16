@@ -4,6 +4,7 @@
  $itemCount = $totals['items'];
  $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
  $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
+  $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Your order #{{$order['reference']}} is on its way</h3>
@@ -32,6 +33,7 @@ foreach($items as $i)
 Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
 
 <h6>Shipping Details</h6>
+<p><b>{{$cr['name']}}</b> (&#8358;{{number_format($cr['price'],2)}})</p>
 <p>Address: {{$shipping['address']}}</p>
 <p>City: {{$shipping['city']}}</p>
 <p>State: {{$shipping['state']}}</p><br><br>

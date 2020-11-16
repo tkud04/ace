@@ -221,20 +221,11 @@
                             <select class="selectpicker" id="ca-state" name="state" value="{{$state}}" style="display: none;">
 							<option value="none">Select state</option>
 							<?php
-							 if(is_null($user))
-							 {
 							 foreach($states as $key => $value)
 							 {
 								 $sss = $key == $state ? "selected='selected'" : "";
 						    ?>
                               <option value="{{$key}}"{{$sss}}>{{ucwords($value)}}</option>
-							<?php
-							 }
-							 }
-							 else
-							 {
-							?>
-							   <option value="{{$state}}" selected>{{$states[$state]}}</option>
 							<?php
 							 }
                             ?>							
