@@ -499,7 +499,6 @@ class MainController extends Controller {
 					$u = $this->helpers->getUser($user->id);
 					 $sd = $this->helpers->getShippingDetails($user->id);
 					 $shipping = $sd[0];
-					$view = "emails.new-order-bank";
 					$view = "emails.new-order-pod";
 				}
 				
@@ -509,7 +508,7 @@ class MainController extends Controller {
 				$rett['u'] = $u;
 				$rett['subject'] = "Your order has been placed! Ref: ".$ret->reference;
 		        $rett['em'] = $u['email'];
-				$ret['shipping'] = $shipping;
+				$rett['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;
