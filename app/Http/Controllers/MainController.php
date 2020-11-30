@@ -508,7 +508,7 @@ class MainController extends Controller {
 				$o = $rett['order'];
 				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
-				$rett['subject'] = "Your order has been placed! Ref: ".$ret->reference;
+				$rett['subject'] = "Your order has been placed via POD. Reference#: ".$ret->reference;
 				$rett['name'] = $name;
 		        $rett['em'] = $u['email'];
 				$rett['shipping'] = $shipping;
@@ -518,7 +518,7 @@ class MainController extends Controller {
 				$rett['order'] = $o;
 				$rett['user'] =$u['email'];
 				$rett['phone'] =$u['phone'];
-		        $rett['subject'] = "URGENT: Customer placed a POD for order #".$o['reference'];
+		        $rett['subject'] = "URGENT: Customer placed an order via POD. Reference #".$o['reference'];
 		        $rett['shipping'] = $shipping;
 		        $rett['em'] = $this->helpers->adminEmail;
 		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
