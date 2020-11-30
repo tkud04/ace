@@ -172,7 +172,7 @@ class PaymentController extends Controller {
 				$ret = $this->helpers->getCurrentSender();
 				$ret['order'] = $o;
 				$ret['name'] = $name;
-				$ret['subject'] = "Your order ".$o['payment_code']." has been placed via card";
+				$ret['subject'] = "Your order has been placed via card. Reference #: ".$o['reference']." ;
 		        $ret['em'] = $email;
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
@@ -180,7 +180,7 @@ class PaymentController extends Controller {
 				$ret['order'] = $o;
 				$ret['user'] =$email;
 				$ret['phone'] =$phone;
-		        $ret['subject'] = "URGENT: Received payment for order ".$o['payment_code'];
+		        $ret['subject'] = "URGENT: Received payment for order ".$o['reference']." via card";
 		        $ret['shipping'] = $shipping;
 		        $ret['em'] = $this->helpers->adminEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
