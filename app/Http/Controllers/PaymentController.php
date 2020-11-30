@@ -172,7 +172,7 @@ class PaymentController extends Controller {
 				$ret = $this->helpers->getCurrentSender();
 				$ret['order'] = $o;
 				$ret['name'] = $name;
-				$ret['subject'] = "Your payment for order ".$o['payment_code']." has been confirmed!";
+				$ret['subject'] = "Your order ".$o['payment_code']." has been placed via card";
 		        $ret['em'] = $email;
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
