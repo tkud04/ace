@@ -388,7 +388,7 @@ class MainController extends Controller {
 				$rett['u'] = $u;
 				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
 		        $rett['em'] = $u['email'];
-				$ret['shipping'] = $shipping;
+				$rett['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;

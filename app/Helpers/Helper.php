@@ -2130,7 +2130,7 @@ $subject = $data['subject'];
 			 $sd = $this->getShippingDetails($u->id);
 					   $shipping = $sd[0];
 		}
-		$ret['subject'] = "URGENT: Confirm payment for order ".$o['payment_code'];
+		$ret['subject'] = "URGENT: Confirm payment for order ".$o['reference'];
 		$ret['acname'] = $data['acname'];
 		$bname =  $data['bname'] == "other" ? $data['bname-other'] : $this->banks[$data['bname']];
 		$ret['bname'] = $bname;

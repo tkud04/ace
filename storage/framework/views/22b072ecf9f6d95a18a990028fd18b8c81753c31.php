@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title',"Order Placed"); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -28,12 +30,13 @@ cidcontents.push({
 </script>
 <?php
 }
+$vu = url('anon-order')."?ref=".$o['reference'];
 ?>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Order Placed Successfully</h3>
 
-<b>You've placed your order!</b><br>
+<b>Your order has been placed.</b><br>
 
-<p>Confirming your order.. <a href="<?php echo e($uu); ?>">Click here</a> if you are not redirected within 10 seconds.</p>
+<p>Redirecting.. <a href="<?php echo e($vu); ?>">Click here</a> if you are not redirected within 10 seconds.</p>
 
 <?php $__env->stopSection(); ?>
 
@@ -48,7 +51,7 @@ fbq('track', 'Purchase', {
 	});
 
 setTimeout(() => {
-	window.location = "<?php echo e($uu); ?>";
+	window.location = "<?php echo e($vu); ?>";
 },15000);
 </script>
 <?php $__env->stopSection(); ?>

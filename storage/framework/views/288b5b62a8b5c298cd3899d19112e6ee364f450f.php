@@ -1,6 +1,7 @@
 
 <?php
 $tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
+$stss = $order['type'] == "pod" ? "pay on delivery" : $order['status'];
 ?>
 <?php $__env->startSection('title',$tt); ?>
 
@@ -191,8 +192,6 @@ else
 	$phone = $buyer['phone'];
 	$email = $buyer['email'];
 }
-
-$stss = $order['type'] == "pod" ? "pay on delivery" : $order['status'];
 ?>
 <div id="invoice">
 
