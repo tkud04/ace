@@ -5,8 +5,10 @@
   $uu = "http://www.aceluxurystore.com/track?o=".$order['reference'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
-<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Payment confirmed!</h3>
-Hello {{$name}},<br> your payment for order <b>{{$order['reference']}}</b> has been cleared and your order is being processed. <br><br>
+
+<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Your order reference # is #{{$order['reference']}}</h3>
+
+Hello {{$name}},<br> You just placed an order via card. See the details below:<br><br>
 
 Reference #: <b>{{$order['reference']}}</b><br>
 Notes: <b>{{$order['notes']}}</b><br><br>
