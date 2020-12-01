@@ -825,6 +825,7 @@ function getCouriers(dt){
 						  <td>${cc.name}</td>
 						  <td>${ttype}</td>
 						  <td>${cvg}</td>
+						  <td>3 to 5 days</td>
 						  <td>&#8358;${cc.price}</td>
 						  <td id="ca-action-${cc.id}">${ss}</td>
 						</tr>

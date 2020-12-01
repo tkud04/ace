@@ -434,6 +434,7 @@
 								    <th>Courier</th>
 								    <th>Payment type</th>
 								    <th>Coverage</th>
+								    <th>Delivery time</th>
 								    <th>Price</th>
 								    <th>Action</th>
 								  </tr>
