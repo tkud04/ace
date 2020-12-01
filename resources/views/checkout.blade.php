@@ -11,6 +11,7 @@
 	$('#fieldset-2').hide();
 	$('#fieldset-3').hide();
 	$('#fieldset-4').hide();
+	$('#fieldset-5').hide();
 	$('#ca-preview-prepaid').hide();
 	$('#ca-preview-pod').hide();
 	
@@ -130,7 +131,7 @@
 			                <!-- payment form -->
                             	<input type="hidden" name="email" value="{{$email}}"> {{-- required --}}
                             	<input type="hidden" name="quantity" value="1"> {{-- required --}}
-                            	<input type="hidden" name="amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
+                            	<input type="hidden" name="amount" id="ca-amount" value="{{($totals['subtotal'] + $totals['delivery']) * 100}}"> {{-- required in kobo --}}
                             	<input type="hidden" name="metadata" id="nd" value="" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             
                                 <input type="hidden" id="meta-comment" value="">  
@@ -305,7 +306,7 @@
 						 <div class="row" id="ca-preview-pod" style="margin-bottom: 20px;">
 						   <div class="col-sm-12 form-group">
                              Make your payment on delivery to your doorstep. Please use your Order ID as the payment reference. <br><br>
-						      <center> <a href="javascript:void(0)" onclick="payOnDelivery({ref: '{{$ref}}'}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
+						      <center> <a href="javascript:void(0)" onclick="fi_pod(); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay on delivery</a></center>
                            </div>
 					       <div class="col-sm-12">
 					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(4); return false;">Back</a>
@@ -313,7 +314,29 @@
 					     </div>
                         
                       </fieldset>
-                      <!-- END preview and checkout-->                      
+                      <!-- END preview and checkout--> 
+
+                       <!-- START pod checkout -->
+                      <fieldset class="col-md-12" id="fieldset-5">
+                        <legend>Pay on delivery</legend>
+						<!-- Pay Now -->					 
+						 <div class="row" style="margin-bottom: 20px;">
+						   <div class=" summary sum js-total text-center">All Payment on Delivery orders attract a down payment of 50% of the total amount at checkout.</div>
+						   <h5>50% of total amount: &#8358;<span id="pod-amount"></span></h5>
+						   
+						 </div>
+						 <div class="row" style="margin-bottom: 20px;">
+						   <div class="col-sm-12 form-group">
+                              <img class="img img-responsive" src="images/ps.png"> <br><br>
+						      <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}',anon: true,pod: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
+                           </div>
+					       <div class="col-sm-12">
+					        <a href="javascript:void(0)" class="btn btn-default" onclick="fi_back(5); return false;">Back</a>
+					       </div>
+					     </div>
+						
+                      </fieldset>
+                      <!-- END pod checkout-->    					  
                    
                     </div>
                     

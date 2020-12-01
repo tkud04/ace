@@ -2,7 +2,7 @@
 <head>
 <?php
 $tt = $order['status'] == "unpaid" ? "Invoice" : "Receipt";
-$stss = $order['type'] == "pod" ? "pay on delivery" : $order['status'];
+$stss = $order['type'] == "pod" ? "pay balance on delivery" : $order['status'];
 ?>
 <title>{{$tt}}</title>
 <style type="text/css">

@@ -113,7 +113,7 @@ class PaymentController extends Controller {
         
         $paymentData = $paymentDetails['data'];
         $md = $paymentData['metadata'];
-		#dd($md);       
+		#dd($paymentData);       
 		$successLocation = "";
         $failureLocation = "";
         
@@ -149,6 +149,7 @@ class PaymentController extends Controller {
 				   }
 				   else
 				   {
+					   $u = $this->helpers->getUser($user->id);
 					   $name = $user->fname." ".$user->lname;
 					   $email = $user->email;
 					   $phone = $user->phone;
@@ -157,11 +158,53 @@ class PaymentController extends Controller {
 				   }
 				   
 			#dd($paymentData);
-        	$stt = $this->helpers->checkout($user,$paymentData);
+			if(isset($md['pod']) && $md['pod'] == "yes")
+			{
+				$md['amount'] = $paymentData['amount'] * 2;
+				$ret = $this->helpers->checkout($user,$md,"pod");
+				$payStatus = $ret['status'];
+				$rett = $this->helpers->getCurrentSender();
+				
+				if(is_null($user))
+				{
+					$u = $this->helpers->getAnonOrder($id);
+					$view = "emails.anon-new-order-pod";
+				}
+				else
+				{
+					$view = "emails.new-order-pod";
+				}
+				
+				$o = $this->helpers->getOrder($id);
+				#dd([$o,$ret]);
+				$rett['u'] = $u;
+				$rett['order'] = $o;
+				$rett['subject'] = "Your order has been placed via POD. Reference#: ".$ret->reference;
+				$rett['name'] = $name;
+		        $rett['em'] = $email;
+				$rett['shipping'] = $shipping;
+				#dd($rett);
+		        $this->helpers->sendEmailSMTP($rett,$view);
+				
+				#$ret = $this->helpers->smtp;
+				
+				$rett['user'] = $email;
+				$rett['phone'] = $phone;
+		        $rett['subject'] = "URGENT: Customer placed an order via POD. Reference #".$o['reference'];
+		        $rett['shipping'] = $shipping;
+		        $rett['em'] = $this->helpers->adminEmail;
+		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
+				$rett['em'] = $this->helpers->suEmail;
+		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
+			} 
 			
-			//send email to user
 			
-			$o = $this->helpers->getOrder($id);
+			else
+			{
+				$stt = $this->helpers->checkout($user,$paymentData);
+				$payStatus = $stt['status'];
+				//send email to user
+			   $o = $this->helpers->getOrder($id);
                #dd($o);
 			   
                if($o != null || count($o) > 0)
@@ -170,14 +213,14 @@ class PaymentController extends Controller {
                	//We have the user, notify the customer and admin
 				//$ret = $this->helpers->smtp;
 				$ret = $this->helpers->getCurrentSender();
-				$ret['order'] = $o;
 				$ret['name'] = $name;
+				$ret['order'] = $o;
 				$ret['subject'] = "Your order has been placed via card. Reference #: ".$o['reference'];
 		        $ret['em'] = $email;
 		        $this->helpers->sendEmailSMTP($ret,"emails.confirm-payment");
 				
 				#$ret = $this->helpers->smtp;
-				$ret['order'] = $o;
+				
 				$ret['user'] =$email;
 				$ret['phone'] =$phone;
 		        $ret['subject'] = "URGENT: Received payment for order ".$o['reference']." via card";
@@ -187,8 +230,11 @@ class PaymentController extends Controller {
 				$ret['em'] = $this->helpers->suEmail;
 		        $this->helpers->sendEmailSMTP($ret,"emails.admin-payment-alert");
                }
+			} 
+			
+			
 			   
-            $request->session()->flash("pay-card-status",$stt['status']);
+            $request->session()->flash("pay-card-status",$payStatus);
 			//return redirect()->intended($successLocation);
 			
 			$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";

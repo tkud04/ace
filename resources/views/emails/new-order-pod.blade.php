@@ -9,7 +9,7 @@
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Your order reference # is #{{$order['reference']}}</h3>
 
-Hello {{$u['name']}},<br> You just placed an order via POD (Payment on delivery). See the details below:<br><br>
+Hello {{$u['fname']}},<br> You just placed an order via POD (Payment on delivery). See the details below:<br><br>
 Reference #: <b>{{$order['reference']}}</b><br>
 <?php
 foreach($items as $i)

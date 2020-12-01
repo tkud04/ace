@@ -1591,7 +1591,7 @@ $subject = $data['subject'];
 		   
 		   function payOnDelivery($user, $md)
            {	
-             # dd([$user,$md]);		   
+              #dd([$user,$md]);		   
                 $dt = [];
 				$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 				
@@ -1599,7 +1599,7 @@ $subject = $data['subject'];
 				{
 		            $cart = $this->getCart($user,$gid);
 		            $totals = $this->getCartTotals($cart);
-					
+					#dd($totals);
 					$dt['name'] = $md['name'];
 					$dt['email'] = $md['email'];
 					$dt['phone'] = $md['phone'];
@@ -1614,11 +1614,11 @@ $subject = $data['subject'];
 				
 				$dt['amount'] = $md['amount'] / 100;
 				$dt['courier_id'] = $md['courier'];
-               	$dt['ref'] = $this->getRandomString(5);
+               	$dt['ref'] = $md['ref'];
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
 				$dt['type'] = "pod";
-				$dt['status'] = "unpaid";
+				$dt['status'] = "pod";
               
               #create order
               #dd($dt);

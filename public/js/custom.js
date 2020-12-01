@@ -399,7 +399,7 @@ function payOnDelivery(){
     setPaymentAction("pod");
 }
 
-function payBank(){
+function payBank(dt){
 	console.log("pay to bank account");
 	setPaymentAction("cod");
 }
@@ -418,18 +418,16 @@ function payCard(dt){
      "<h4 class='text-danger'><b>NOTE: </b>Make sure you note down your reference number above, as it will be required in the case of any issues regarding this order.</h4><p class='text-primary'>Click OK below to redirect to our secure payment gateway to complete this payment.</p>"
 }).then((result) => {
   if (result.value) {
-	  let a = false;
-	  if(dt.anon) a = dt.anon;
 	  
-    payWithCard(a);
+    payWithCard(dt);
   }
 });
 
 }
 
-function payWithCard(anon=false){
+function payWithCard(dt){
 	 mc['notes'] = $('#notes').val();
-	 if(anon){
+	 if(dt.anon){
 		 mc['name'] = $('#ca-name').val();
 		 mc['email'] = $('#ca-email').val();
 		 mc['phone'] = $('#ca-phone').val();
@@ -438,8 +436,13 @@ function payWithCard(anon=false){
 		 mc['state'] = $('#ca-state').val();
 		 mc['courier'] = courier.id;
 	 }
+	 if(dt.pod){
+		 let hp = $('#ca-amount').val();
+		 $('#ca-amount').val(parseInt(hp) / 2);
+		 mc['pod'] = "yes";
+	 }
 	 $('#nd').val(JSON.stringify(mc)); 
-	//console.log(mc);
+	console.log(mc);
 	setPaymentAction("card");
 }
 
@@ -482,6 +485,21 @@ function fi_preview(){
                })
 	}
 	
+}
+
+function fi_pod(){
+	let amt = $('#ca-amount').val();
+	
+	if(parseInt(amt) > 0){
+	  $('#pod-amount').html(amt/200);
+	  fi_next(4);
+	}
+	else{
+		Swal.fire({
+			     icon: 'error',
+                 title: "Please add a product to your cart"
+               })
+	}
 }
 
 function fi_submit(){
@@ -1096,7 +1114,7 @@ const fi_back = n => {
 const fi_next = n => {
 			let pp = n + 1;
 	
-	if(pp < 5){
+	if(pp < 6){
 		$(`#fieldset-${n}`).hide();
 		$(`#fieldset-${pp}`).fadeIn();
 	}
