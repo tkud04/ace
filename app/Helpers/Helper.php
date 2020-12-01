@@ -2118,6 +2118,8 @@ $subject = $data['subject'];
 		if(is_null($u))
 		{
 			$ret['user'] = $data['email'];
+			$md = $this->getAnonOrder($data['o']);
+			#dd($md);
 			$shipping = [
 					     'address' => $md['address'],
 					     'city' => $md['city'],

@@ -2,8 +2,7 @@
  $totals = $order['totals'];
  $items = $order['items'];
  $itemCount = $totals['items'];
- $uu = "http://admin.aceluxurystore.com/edit-order?r=".$order['reference'];
- $tu = "http://admin.aceluxurystore.com/track?o=".$order['reference'];
+ $tu = "http://www.aceluxurystore.com/track?o=".$order['reference'];
   $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>

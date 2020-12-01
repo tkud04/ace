@@ -386,7 +386,7 @@ class MainController extends Controller {
 				$o = $rett['order'];
 				#dd([$rett['order'],$o]);
 				$rett['u'] = $u;
-				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->payment_code;
+				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->reference;
 		        $rett['em'] = $u['email'];
 				$rett['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
@@ -1117,8 +1117,10 @@ class MainController extends Controller {
 			if(count($anon) > 0)
 			{
 				$orders[0] = $this->helpers->getOrder($anon['reference']);
+				$banks = $this->helpers->banks;
+			    $bank = $this->helpers->getCurrentBank();
 				#dd($c);
-				return view("orders",compact(['user','cart','c','ad','anon','orders','signals','plugins']));		
+				return view("orders",compact(['user','cart','c','ad','anon','banks','bank','orders','signals','plugins']));		
 			}
 			else
 			{
