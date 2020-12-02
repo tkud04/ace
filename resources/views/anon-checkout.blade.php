@@ -511,16 +511,7 @@
                     
                     <!-- Agree checkbox and Continue button -->
                     <div class="row">
-					  @if(!is_null($user))
-                      <div class="col-sm-12">
-                        <fieldset>
-                          <legend>order notes</legend>
-                          <textarea class="form-control" rows="5" cols="40" name="notes" id="ca-notes" required=""></textarea>
-                          <hr>
-                        </fieldset>
-                      </div>
-					  @endif
-                      <div class="col-sm-6">
+					  <div class="col-sm-2">
                         <div class="checkbox small">
 						<?php
 						$checked = " checked";
@@ -529,9 +520,14 @@
                           <label for="terms">Do you agree to the <a href="{{url('returns')}}">terms?</a></label>
                         </div>
                       </div>
-                      <div class="col-sm-6 text-right">
-                        
+					  <div class="col-sm-10">
+                        <fieldset>
+                          <legend>order notes</legend>
+                          <textarea class="form-control" rows="5" cols="40" name="notes" id="ca-notes" required=""></textarea>
+                          <hr>
+                        </fieldset>
                       </div>
+					  
                     </div>
 
                  </form>
