@@ -1614,7 +1614,7 @@ $subject = $data['subject'];
 				
 				$dt['amount'] = $md['amount'] / 100;
 				$dt['courier_id'] = $md['courier'];
-               	$dt['ref'] = $md['ref'];
+               	$dt['ref'] = isset($md['ref']) ? $md['ref'] : $this->getRandomString(5);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_code'] = $this->getPaymentCode($dt['ref']);
 				$dt['type'] = "pod";
