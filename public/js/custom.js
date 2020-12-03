@@ -401,6 +401,10 @@ function payOnDelivery(){
 
 function payBank(dt){
 	console.log("pay to bank account");
+	if (dt.pod) {
+	  
+    $('#ca-pod').val("yes");
+  }
 	setPaymentAction("cod");
 }
 
