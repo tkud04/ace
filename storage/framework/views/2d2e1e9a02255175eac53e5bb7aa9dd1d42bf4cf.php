@@ -315,6 +315,7 @@
 
 				<input type="hidden" id="href" name="u" value="">
 				                            	<input type="hidden" name="courier" id="ca-courierr" value="">
+					<input type="hidden" name="pod-bank" id="ca-pod" value="no">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
@@ -497,7 +498,11 @@
 						   
 						 </div>
 						 <div class="row" style="margin-bottom: 20px;">
-						   <div class="col-sm-12 form-group">
+						   <div class="col-sm-6 form-group">
+                             Make your payment directly into our bank account. Please use your order reference # as the payment reference. <br><br>
+						     <center> <button onclick="payBank({pod:true}); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
+                           </div>
+						   <div class="col-sm-6 form-group">
                               <img class="img img-responsive" src="images/ps.png"> <br><br>
 						      <center> <a href="javascript:void(0)" onclick="payCard({ref: '<?php echo e($ref); ?>',anon: true,pod: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
                            </div>
@@ -513,16 +518,7 @@
                     
                     <!-- Agree checkbox and Continue button -->
                     <div class="row">
-					  <?php if(!is_null($user)): ?>
-                      <div class="col-sm-12">
-                        <fieldset>
-                          <legend>order notes</legend>
-                          <textarea class="form-control" rows="5" cols="40" name="notes" id="ca-notes" required=""></textarea>
-                          <hr>
-                        </fieldset>
-                      </div>
-					  <?php endif; ?>
-                      <div class="col-sm-6">
+					  <div class="col-sm-2">
                         <div class="checkbox small">
 						<?php
 						$checked = " checked";
@@ -531,9 +527,14 @@
                           <label for="terms">Do you agree to the <a href="<?php echo e(url('returns')); ?>">terms?</a></label>
                         </div>
                       </div>
-                      <div class="col-sm-6 text-right">
-                        
+					  <div class="col-sm-10">
+                        <fieldset>
+                          <legend>order notes</legend>
+                          <textarea class="form-control" rows="5" cols="40" name="notes" id="ca-notes" required=""></textarea>
+                          <hr>
+                        </fieldset>
                       </div>
+					  
                     </div>
 
                  </form>

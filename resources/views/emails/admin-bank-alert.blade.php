@@ -6,13 +6,11 @@
  $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
-<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order {{$order['reference']}}</h3>
-Hello admin,<br> kindly confirm that payment for the below referenced order has been cleared:<br><br>
+<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Bank payment request for order {{$order['reference']}}, paid via {{$order['type']}}</h3>
+Hello admin,<br> please be informed that a new bank payment request has been received. See the details below:<br><br>
 Reference #: <b>{{$order['reference']}}</b><br>
-Customer: <b>{{$user}}</b><br>
-Bank name: <b>{{$bname}}</b><br>
-Account name: <b>{{$acname}}</b><br>
-Account number: <b>{{$acnum}}</b><br>
+Customer: <b>{{$name}}</b><br>
+Customer contact: <b>{{$phone}} | {{$user}}</b><br>
 <?php
 foreach($items as $i)
 {
@@ -43,7 +41,7 @@ Total: <b>&#8358;{{number_format($order['amount'],2)}}</b><br><br>
 
 <h5 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Next steps</h5>
 
-<p>If the payment has been cleared, please click the button below to confirm the order. Alternatively you can log in to the Admin Dashboard to confirm the order (go to Orders and click the Confirm button beside the order).</p><br>
+<p>If the payment has been cleared, please click the button below to confirm the order. Alternatively you can follow up the customer.</p><br>
 <p style="color:red;"><b>NOTE:</b> If the payment has not been cleared, do not confirm the order.</p><br><br>
 
 <a href="{{$uu}}" target="_blank" style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm this order</a><br><br>
