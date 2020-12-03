@@ -336,7 +336,7 @@ class MainController extends Controller {
 		}
         $req = $request->all();
 		$req['zip'] = "";
-        dd($req);
+       # dd($req);
         
         $validator = Validator::make($req, $rules);
          
@@ -358,7 +358,48 @@ class MainController extends Controller {
 			 }
 			 else
 			 {
-				 $ret = $this->helpers->checkout($user,$req,"bank");
+				if(isset($req['pod-bank']) && $req['pod-bank'] == "yes")
+			    {
+				$ret = $this->helpers->checkout($user,$req,"pod");
+				 $o = [];
+				 #dd($ret);
+				 //We have the user, notify the customer and admin
+				//$rett = $this->helpers->smtp;
+				$rett = $this->helpers->getCurrentSender();
+				if(is_null($user))
+				{
+					$u = $this->helpers->getAnonOrder($ret->reference);
+					$shipping = [
+					     'address' => $req['address'],
+					     'city' => $req['city'],
+					     'state' => $req['state'],
+					   ];
+					$name = $req['name'];
+					$view = "emails.anon-new-order-pod";
+				}
+				else
+				{
+					$u = $this->helpers->getUser($user->id);
+					 $sd = $this->helpers->getShippingDetails($user->id);
+					 $shipping = $sd[0];
+					$name = $user->fname." ".$user->lname;
+					$view = "emails.new-order-pod";
+				}
+				
+				$rett['order'] = $this->helpers->getOrder($ret->reference);
+				$o = $rett['order'];
+				#dd([$rett['order'],$o]);
+				$rett['u'] = $u;
+				$rett['subject'] = "URGENT: Confirm your payment for order ".$ret->reference;
+		        $rett['em'] = $u['email'];
+				$rett['name'] = $name;
+				$rett['shipping'] = $shipping;
+		        $this->helpers->sendEmailSMTP($rett,$view);
+				}
+				
+				else
+				{
+					$ret = $this->helpers->checkout($user,$req,"bank");
 				 $o = [];
 				 #dd($ret);
 				 //We have the user, notify the customer and admin
@@ -390,6 +431,9 @@ class MainController extends Controller {
 		        $rett['em'] = $u['email'];
 				$rett['shipping'] = $shipping;
 		        $this->helpers->sendEmailSMTP($rett,$view);
+				}
+				
+				 
 				 
 		        // $uu = url('confirm-payment')."?oid=".$ret->reference;
 			     //return redirect()->intended($uu);
