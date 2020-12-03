@@ -403,7 +403,7 @@ class MainController extends Controller {
 				  $rett['phone'] = $u['phone'];
 				  $rett['em'] = $this->helpers->adminEmail;
 				  $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
-				  $rett['em'] = $this->helpers->adminEmail;
+				  $rett['em'] = $this->helpers->suEmail;
 				  $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
 				}
 				
