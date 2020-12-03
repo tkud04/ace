@@ -495,7 +495,11 @@
 						   
 						 </div>
 						 <div class="row" style="margin-bottom: 20px;">
-						   <div class="col-sm-12 form-group">
+						   <div class="col-sm-6 form-group">
+                             Make your payment directly into our bank account. Please use your order reference # as the payment reference. Your order will not be shipped until the initial deposit has cleared in our account. <br><br>
+						     <center> <button onclick="payBank({pod:true}); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
+                           </div>
+						   <div class="col-sm-6 form-group">
                               <img class="img img-responsive" src="images/ps.png"> <br><br>
 						      <center> <a href="javascript:void(0)" onclick="payCard({ref: '{{$ref}}',anon: true,pod: true}); return false;" class="btn btn-primary hvr-underline-from-center-primary ">pay with card</a></center>
                            </div>
