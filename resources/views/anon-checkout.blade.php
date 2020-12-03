@@ -313,6 +313,7 @@
 			    {!! csrf_field() !!}
 				<input type="hidden" id="href" name="u" value="">
 				                            	<input type="hidden" name="courier" id="ca-courierr" value="">
+					<input type="hidden" name="pod-bank" id="ca-pod" value="no">
 		   <script>
 		     document.querySelector('#href').value = document.location.href;
 		   
@@ -496,6 +497,7 @@
 						 </div>
 						 <div class="row" style="margin-bottom: 20px;">
 						   <div class="col-sm-6 form-group">
+							
                              Make your payment directly into our bank account. Please use your order reference # as the payment reference. Your order will not be shipped until the initial deposit has cleared in our account. <br><br>
 						     <center> <button onclick="payBank({pod:true}); return false;" class="btn btn-primary hvr-underline-from-center-primary " type="button">pay to bank</button></center>
                            </div>
