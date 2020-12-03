@@ -360,6 +360,7 @@ class MainController extends Controller {
 			 {
 				if(isset($req['pod-bank']) && $req['pod-bank'] == "yes")
 			    {
+				  $req['payment_type'] = "bank";
 				  $ret = $this->helpers->checkout($user,$req,"pod");
 				  $o = [];
 				  #dd($ret);
@@ -394,7 +395,7 @@ class MainController extends Controller {
 		          $rett['em'] = $u['email'];
 				  $rett['name'] = $name;
 				  $rett['shipping'] = $shipping;
-				  $rett['ptype'] = "bank";
+				  $rett['payment_type'] = "bank";
 		          $this->helpers->sendEmailSMTP($rett,$view);
 				  
 				  $rett['subject'] = "URGENT: Part payment received for order ".$o['reference']." via POD";
