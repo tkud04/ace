@@ -192,7 +192,7 @@ class PaymentController extends Controller {
 				
 				$rett['user'] = $email;
 				$rett['phone'] = $phone;
-		        $rett['subject'] = "URGENT: Customer placed an order via POD. Reference #".$o['reference'];
+		        $rett['subject'] = "URGENT:Received part payment for order ".$o['reference']." via POD";
 		        $rett['shipping'] = $shipping;
 		        $rett['em'] = $this->helpers->adminEmail;
 		        $this->helpers->sendEmailSMTP($rett,"emails.admin-payment-alert");
