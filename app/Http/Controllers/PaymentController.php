@@ -158,10 +158,11 @@ class PaymentController extends Controller {
 				   }
 				   
 			#dd($paymentData);
+			#dd($md);
 			if(isset($md['pod']) && $md['pod'] == "yes")
 			{
 				$md['amount'] = $paymentData['amount'] * 2;
-				$md['payment_type'] = "bank";
+				$md['payment_type'] = "card";
 				$ret = $this->helpers->checkout($user,$md,"pod");
 				$payStatus = $ret['status'];
 				$rett = $this->helpers->getCurrentSender();
