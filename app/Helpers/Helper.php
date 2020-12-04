@@ -275,8 +275,8 @@ public $categories = [
   ];
   
   
-  public $adminEmail = "aquarius4tkud@yahoo.com";
-  //public $adminEmail = "aceluxurystore@yahoo.com";
+  //public $adminEmail = "aquarius4tkud@yahoo.com";
+  public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
   
   public $newUserDiscount = "500";

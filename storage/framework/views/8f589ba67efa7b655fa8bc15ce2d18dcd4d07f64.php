@@ -3,6 +3,9 @@
 <?php $__env->startSection('title',"Transaction Successful"); ?>
 
 <?php $__env->startSection('content'); ?>
+<script>
+let cidcontents = [];
+</script>
 <?php
 $amount = 0;
 if(isset($o)) $amount = $o['amount'];

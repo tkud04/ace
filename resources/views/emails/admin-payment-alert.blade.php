@@ -7,8 +7,8 @@
  $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
-<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">New order {{$order['payment_code']}} paid via card!</h3>
-Hello admin,<br> please be informed that a new order has been placed via online payment. See the details below:<br><br>
+<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Card payment received for order {{$order['reference']}}, paid via {{$order['type']}}</h3>
+Hello admin,<br> please be informed that a card payment has been received via online payment. See the details below:<br><br>
 Reference #: <b>{{$order['reference']}}</b><br>
 Customer: <b>{{$name}}</b><br>
 Customer contact: <b>{{$phone}} | {{$user}}</b><br>
