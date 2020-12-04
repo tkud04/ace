@@ -1133,7 +1133,9 @@ class MainController extends Controller {
 		    $signals = $this->helpers->signals;
 			$plugins = $this->helpers->getPlugins();
 			$wext = isset($req['wext']) ? $req['wext'] : null;
-		    return view("orders",compact(['user','cart','c','ad','wext','orders','signals','plugins']));			
+			$banks = $this->helpers->banks;
+			    $bank = $this->helpers->getCurrentBank();
+		    return view("orders",compact(['user','cart','c','ad','wext','banks','bank','orders','signals','plugins']));			
 		
     }
 	
