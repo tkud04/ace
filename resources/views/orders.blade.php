@@ -143,7 +143,12 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						 <a class="btn btn-primary" href="{{$tru}}">Track</a>					     						 
 					   </td>
 					 </tr>
-					 @if(($type == "card" || $type == "bank") && $o['status'] == "unpaid")
+					<?php
+					 $v1 = ($type == "card" || $type == "bank") && $o['status'] == "unpaid";
+					 $v2 = ($type == "pod" && $o['payment_type'] == "bank" && $o['status'] == "pod");
+					 if($v1 || $v2)
+					  {
+				    ?>
 					 <tr>
 					   <td colspan="8">
 					     <div class="row">
@@ -264,8 +269,9 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
       </div>
 					   </td>
 					 </tr>
-					 @endif
+					 
 					<?php
+					       }
 						 }  
 					  }
                     ?>						  
