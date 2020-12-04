@@ -144,7 +144,12 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						 <a class="btn btn-primary" href="<?php echo e($tru); ?>">Track</a>					     						 
 					   </td>
 					 </tr>
-					 <?php if(($type == "card" || $type == "bank") && $o['status'] == "unpaid"): ?>
+					<?php
+					 $v1 = ($type == "card" || $type == "bank") && $o['status'] == "unpaid";
+					 $v2 = ($type == "pod" && $o['payment_type'] == "bank" && $o['status'] == "pod");
+					 if($v1 || $v2)
+					  {
+				    ?>
 					 <tr>
 					   <td colspan="8">
 					     <div class="row">
@@ -266,8 +271,9 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
       </div>
 					   </td>
 					 </tr>
-					 <?php endif; ?>
+					 
 					<?php
+					       }
 						 }  
 					  }
                     ?>						  
@@ -301,4 +307,5 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
     <script src="lib/datatables/js/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="lib/datatables/js/datatables-init.js"></script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/orders.blade.php ENDPATH**/ ?>

@@ -336,7 +336,7 @@ class MainController extends Controller {
 		}
         $req = $request->all();
 		$req['zip'] = "";
-       # dd($req);
+       #dd($req);
         
         $validator = Validator::make($req, $rules);
          
@@ -398,7 +398,7 @@ class MainController extends Controller {
 				  $rett['payment_type'] = "bank";
 		          $this->helpers->sendEmailSMTP($rett,$view);
 				  
-				  $rett['subject'] = "URGENT: Part payment received for order ".$o['reference']." via POD";
+				  $rett['subject'] = "URGENT: Bank payment request (part payment) for order ".$o['reference']." via POD";
 				  $rett['user'] = $u['email'];
 				  $rett['phone'] = $u['phone'];
 				  $rett['em'] = $this->helpers->adminEmail;
@@ -424,6 +424,7 @@ class MainController extends Controller {
 					     'city' => $req['city'],
 					     'state' => $req['state'],
 					   ];
+					   $name = $req['name'];
 					   $view = "emails.anon-new-order-bank";
 				    }
 				    else
@@ -431,6 +432,7 @@ class MainController extends Controller {
 					   $u = $this->helpers->getUser($user->id);
 					   $sd = $this->helpers->getShippingDetails($user->id);
 					   $shipping = $sd[0];
+					   $name = $user->fname." ".$user->lname;
 					   $view = "emails.new-order-bank";
 				    }
 				
@@ -440,16 +442,17 @@ class MainController extends Controller {
 				    $rett['u'] = $u;
 				    $rett['subject'] = "URGENT: Confirm your payment for order ".$ret->reference;
 		            $rett['em'] = $u['email'];
+					$rett['name'] = $name;
 				    $rett['shipping'] = $shipping;
-					$rett['ptype'] = "bank";
+					$rett['payment_type'] = "bank";
 		            $this->helpers->sendEmailSMTP($rett,$view);
 					
-					$rett['subject'] = "URGENT: Payment received for order ".$o['reference']." via Bank";
+					$rett['subject'] = "URGENT: Bank payment request for order ".$o['reference'];
 				    $rett['user'] = $u['email'];
 				    $rett['phone'] = $u['phone'];
 				    $rett['em'] = $this->helpers->adminEmail;
 				    $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
-				    $rett['em'] = $this->helpers->adminEmail;
+				    $rett['em'] = $this->helpers->suEmail;
 				    $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
 				}
 				

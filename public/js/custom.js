@@ -401,10 +401,18 @@ function payOnDelivery(){
 
 function payBank(dt){
 	console.log("pay to bank account");
-	if (dt.pod) {
-	  
-    $('#ca-pod').val("yes");
-  }
+	try
+	{
+		if (dt.pod != null) {
+	      $('#ca-pod').val("yes");
+        }
+	}
+	catch(e)
+	{
+		//console.log("exception caught: ",e)
+		 $('#ca-pod').val("no");
+	}
+	
 	setPaymentAction("cod");
 }
 

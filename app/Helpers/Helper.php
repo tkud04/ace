@@ -275,8 +275,8 @@ public $categories = [
   ];
   
   
-  //public $adminEmail = "aquarius4tkud@yahoo.com";
-  public $adminEmail = "aceluxurystore@yahoo.com";
+  public $adminEmail = "aquarius4tkud@yahoo.com";
+  //public $adminEmail = "aceluxurystore@yahoo.com";
   public $suEmail = "kudayisitobi@gmail.com";
   
   public $newUserDiscount = "500";
@@ -1519,8 +1519,6 @@ $subject = $data['subject'];
 				{
 		            $cart = $this->getCart($user,$gid);
 		            $totals = $this->getCartTotals($cart);
-					$delivery = $this->getDeliveryFee($md['state'],"state");
-					$dt['amount'] = $totals['subtotal'] + $delivery;
 					
 					$dt['name'] = $md['name'];
 					$dt['email'] = $md['email'];
@@ -1531,11 +1529,11 @@ $subject = $data['subject'];
 				}
 				else
 				{
-					$dt['amount'] = $md['amount'] / 100;
 					$this->updateShippingDetails($user,$md);
 				}
 				
-               	$dt['courier_id'] = $md['courier'];
+				$dt['amount'] = $md['amount'] / 100;
+				$dt['courier_id'] = $md['courier'];
                	$dt['ref'] = $this->getRandomString(5);
 				$dt['notes'] = isset($md['notes']) ? $md['notes'] : "";
 				$dt['payment_type'] = "bank";

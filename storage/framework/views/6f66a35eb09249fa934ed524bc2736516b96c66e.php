@@ -6,7 +6,7 @@
  $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
-<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order <?php echo e($order['payment_code']); ?></h3>
+<h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Confirm payment for order <?php echo e($order['reference']); ?></h3>
 Hello admin,<br> kindly confirm that payment for the below referenced order has been cleared:<br><br>
 Reference #: <b><?php echo e($order['reference']); ?></b><br>
 Customer: <b><?php echo e($user); ?></b><br>

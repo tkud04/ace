@@ -23,7 +23,6 @@ foreach($items as $i)
 	$img = $product['imggs'][0];
 ?>
 <script>
-let cidcontents = [];
 cidcontents.push({
       id: "{{$sku}}",
       quantity: "{{$qty}}"

@@ -3,6 +3,9 @@
 @section('title',"Transaction Successful")
 
 @section('content')
+<script>
+let cidcontents = [];
+</script>
 <?php
 $amount = 0;
 if(isset($o)) $amount = $o['amount'];
