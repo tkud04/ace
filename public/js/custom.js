@@ -823,10 +823,15 @@ function getCouriers(dt){
 				   for(let r = 0; r < data.length; r++){
 					   let cc = data[r], cvg = "", ttype = "";
 					   let ss = `<a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="setCourier(${cc.id})">Select</a>`;
-					   
+					   let dtime = `3 to 5 days`;
 					   if(courier == cc.id) ss = `<span class="label label-success">SELECTED</span>`;
-					   if(cc.coverage == "lagos") cvg = "Lagos state";
-					   else if(cc.coverage == "sw") cvg = "Southwest states";
+					   if(cc.coverage == "lagos"){
+                        cvg = "Lagos state";
+                         dtime = `2 to 3 days`;
+                       }
+					   else if(cc.coverage == "sw"){
+                         cvg = "Southwest states";
+                       }
 					   else cvg = "Other states";
 					   
 					   if(cc.type == "prepaid") ttype = "Pay now";
@@ -837,7 +842,7 @@ function getCouriers(dt){
 						  <td>${cc.name}</td>
 						  <td>${ttype}</td>
 						  <td>${cvg}</td>
-						  <td>3 to 5 days</td>
+						  <td>${dtime}</td>
 						  <td>&#8358;${cc.price}</td>
 						  <td id="ca-action-${cc.id}">${ss}</td>
 						</tr>
