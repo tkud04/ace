@@ -823,11 +823,11 @@ function getCouriers(dt){
 				   for(let r = 0; r < data.length; r++){
 					   let cc = data[r], cvg = "", ttype = "";
 					   let ss = `<a href="javascript:void(0)" class="btn btn-sm btn-primary" onclick="setCourier(${cc.id})">Select</a>`;
-					   let dtime = `3 to 5 days`;
+					   let dtime = `3 to 5 working days`;
 					   if(courier == cc.id) ss = `<span class="label label-success">SELECTED</span>`;
 					   if(cc.coverage == "lagos"){
                         cvg = "Lagos state";
-                         dtime = `2 to 3 days`;
+                         dtime = `2 to 3 working days`;
                        }
 					   else if(cc.coverage == "sw"){
                          cvg = "Southwest states";
