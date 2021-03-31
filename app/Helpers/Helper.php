@@ -1950,7 +1950,14 @@ $subject = $data['subject'];
 				  {
 						$anon = $this->getAnonOrder($o->reference,false);
 						
-						$temp['totals']['delivery'] = $c['price'];  
+					        if($o->type == "admin")
+						{
+							
+						}
+					        else
+						{
+						      $temp['totals']['delivery'] = $c['price'];  
+						}
 				  }
 				  
                   $temp['date'] = $o->created_at->format("jS F, Y");
