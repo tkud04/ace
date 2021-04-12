@@ -103,6 +103,12 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 								$ttype = "Prepaid (".$type.")";
                                 $ttClass = "primary";								
 							 } 
+							 else if($type == "admin")
+							 {
+								 $ttype = "Admin";
+								 $ttClass = "success";
+								 $cr = ['name' => "admin",'price' => "0"];
+							 }
 							 else if($type == "pod")
 							 {
 								 $ttype = "Pay on Delivery";
