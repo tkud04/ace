@@ -1774,7 +1774,7 @@ $subject = $data['subject'];
                    $dt['sku'] = $c['product']['sku'];
 				   $dt['qty'] = $c['qty'];
 				   $dt['order_id'] = $order->id;
-				   if($data["status"] == "paid" || $data["status"] == "pod") $this->updateStock($dt['sku'],$dt['qty']);
+				   if($data["status"] == "paid") $this->updateStock($dt['sku'],$dt['qty']);
                    $oi = $this->createOrderItems($dt);                    
                }
 

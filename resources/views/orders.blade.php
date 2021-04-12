@@ -203,6 +203,15 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						   $items = $totals['items'];
 						  ?>
                           <h4 class="form-control-plaintext">{{$items}} items<br><br>Total: <b>&#8358;{{number_format($o['amount'],2)}}</b></h4>
+						  <?php
+						   if($o['status'] == "pod")
+						   {
+						  ?>
+						      <h4 class="form-control-plaintext">Initial payment: <b>&#8358;{{number_format($o['amount'] / 2,2)}}</b></h4>
+						      <h5 class="form-control-plaintext text-danger">NOTE: Your outstanding balance of <b>&#8358;{{number_format($o['amount'] / 2,2)}}</b> must be paid to the delivery agent upon receipt of your order.</h5>
+						  <?php
+						   }
+						  ?>
                         </div><br>
                         <div class="form-group">
                           <label class="control-label" for="mail">reference #<span class="req">*</span></label>
