@@ -209,7 +209,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 						   if($o['status'] == "pod")
 						   {
 						  ?>
-						      <h4 class="form-control-plaintext">Amount to be paid at checkout: <b>&#8358;<?php echo e(number_format($o['amount'] / 2,2)); ?></b></h4>
+						      <h4 class="form-control-plaintext">Initial payment: <b>&#8358;<?php echo e(number_format($o['amount'] / 2,2)); ?></b></h4>
 						      <h5 class="form-control-plaintext text-danger">NOTE: Your outstanding balance of <b>&#8358;<?php echo e(number_format($o['amount'] / 2,2)); ?></b> must be paid to the delivery agent upon receipt of your order.</h5>
 						  <?php
 						   }
