@@ -1188,7 +1188,7 @@ class MainController extends Controller {
 				$orders[0] = $this->helpers->getOrder($anon['reference']);
 				$banks = $this->helpers->banks;
 			    $bank = $this->helpers->getCurrentBank();
-				#dd($c);
+				#dd($orders);
 				return view("orders",compact(['user','cart','c','ad','anon','banks','bank','orders','signals','plugins']));		
 			}
 			else

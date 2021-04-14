@@ -1591,7 +1591,7 @@ $subject = $data['subject'];
            { 
   
               // String of all alphanumeric character 
-              $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+              $str_result = '0123456789abcdefghijklmnopqrstuvwxyz'; 
   
               // Shufle the $str_result and returns substring of specified length 
               return substr(str_shuffle($str_result),0, $length_of_string); 
@@ -2442,11 +2442,9 @@ $subject = $data['subject'];
            	$ret = [];
 			if($all)
 			{
-				$o = AnonOrders::where('reference',$id)
-			            ->orWhere('id',$id)->first();
+				$o = AnonOrders::where('reference',$id)->first();
 						
-               $o2 = Orders::where('reference',$id)
-			            ->orWhere('id',$id)->first();
+               $o2 = Orders::where('reference',$id)->first();
 						#dd([$o,$o2]);
               if($o != null || $o2 != null)
                {
