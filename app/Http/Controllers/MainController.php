@@ -398,6 +398,7 @@ class MainController extends Controller {
 				  $rett['payment_type'] = "bank";
 		          $this->helpers->sendEmailSMTP($rett,$view);
 				  
+				  /**
 				  $rett['subject'] = "URGENT: Bank payment request (part payment) for order ".$o['reference']." via POD";
 				  $rett['user'] = $u['email'];
 				  $rett['phone'] = $u['phone'];
@@ -405,6 +406,7 @@ class MainController extends Controller {
 				  $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
 				  $rett['em'] = $this->helpers->suEmail;
 				  $this->helpers->sendEmailSMTP($rett,"emails.admin-bank-alert");
+				  **/
 				}
 				
 				else
