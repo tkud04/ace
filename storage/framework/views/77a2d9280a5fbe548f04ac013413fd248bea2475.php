@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title',"Dashboard"); ?>
 
 <?php $__env->startSection('styles'); ?>
@@ -78,8 +80,7 @@
                                     <th>Reference #</th>
                                     <th>Items</th>
                                     <th>Amount</th>
-                                    <th>Payment code</th>
-                                    <th>Status</th>                                                                       
+									<th>Status</th>                                                                       
                                     <th>Actions</th>                                                                       
                                 </tr>
                        </thead>
@@ -114,7 +115,6 @@
 						?>
 					   </td>
 					   <td>&#8358;<?php echo e(number_format($o['amount'],2)); ?></td>		  
-					   <td><?php echo e($o['payment_code']); ?></td>
 					   <td><span class="label label-<?php echo e($statusClass); ?>"><?php echo e(strtoupper($o['status'])); ?></span></td>
 					   <td><a class="btn btn-primary" href="<?php echo e($tu); ?>">Track</span></td>
 					 </tr>

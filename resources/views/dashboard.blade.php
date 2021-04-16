@@ -80,8 +80,7 @@
                                     <th>Reference #</th>
                                     <th>Items</th>
                                     <th>Amount</th>
-                                    <th>Payment code</th>
-                                    <th>Status</th>                                                                       
+									<th>Status</th>                                                                       
                                     <th>Actions</th>                                                                       
                                 </tr>
                        </thead>
@@ -116,7 +115,6 @@
 						?>
 					   </td>
 					   <td>&#8358;{{number_format($o['amount'],2)}}</td>		  
-					   <td>{{$o['payment_code']}}</td>
 					   <td><span class="label label-{{$statusClass}}">{{strtoupper($o['status'])}}</span></td>
 					   <td><a class="btn btn-primary" href="{{$tu}}">Track</span></td>
 					 </tr>
