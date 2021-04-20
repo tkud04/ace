@@ -2,7 +2,7 @@
  $totals = $order['totals'];
  $items = $order['items'];
  $itemCount = $totals['items'];
- $uu = "http://www.aceluxurystore.com/confirm-payment?oid=".$order['reference'];
+ $uu = "http://www.aceluxurystore.com/anon-order?ref=".$order['reference'];
  $tu = "http://www.aceluxurystore.com/track?o=".$order['reference'];
   $cr = $order['courier'];
 ?>
