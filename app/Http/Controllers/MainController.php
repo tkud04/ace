@@ -1210,6 +1210,49 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+    public function getReviewOrder(Request $request)
+    {
+		$user = null;
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+			$c = $this->helpers->getCategories();
+			$ads = $this->helpers->getAds();
+			shuffle($ads);
+		    $ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
+		    $signals = $this->helpers->signals;
+			$plugins = $this->helpers->getPlugins();
+			
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+		
+        $req = $request->all();
+        #dd($req);
+        
+        $validator = Validator::make($req, [
+                             'ref' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+			 $ref = $req['ref'];       	
+				return view("review-order",compact(['user','cart','c','ad','ref','signals','plugins']));		
+         }        
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
     public function postAddReview(Request $request)
     {
 		$user = null;
