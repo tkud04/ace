@@ -13,7 +13,7 @@ class OrderReviews extends Model
      * @var array
      */
     protected $fillable = [
-         'reference', 'caa', 'daa', 'caa_img', 'payment_type', 'notes', 'status'
+         'reference', 'caa', 'daa', 'caa_img', 'rating', 'comment', 'status'
     ];
     
 }

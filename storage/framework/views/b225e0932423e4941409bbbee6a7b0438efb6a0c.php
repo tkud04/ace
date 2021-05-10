@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="facebook-domain-verification" content="l1zv5af26nl57l9wu9nf2w4kihldv3" />
 <?php echo $__env->yieldContent('metas'); ?>
 <title><?php echo $__env->yieldContent('title'); ?> | Ace Luxury Store - Online Luxury Fashion Accessories Store in Lagos, Nigeria</title>
 <!-- Google fonts -->
@@ -706,4 +707,5 @@
 
 <!--end of js-->
 </body>
-</html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
