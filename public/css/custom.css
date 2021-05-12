@@ -113,3 +113,7 @@ li.list-group-horizontal-li{
 .mb-100{
 	margin-bottom: 100px;
 }
+
+.large-text{
+	font-size: 1.6em !important;
+}

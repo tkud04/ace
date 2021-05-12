@@ -1137,3 +1137,8 @@ const fi_next = n => {
 		$(`#fieldset-${pp}`).fadeIn();
 	}
 }
+
+const setRating = n => {
+		$(`#ovr`).html(n);
+		$(`#ovr-2`).val(n);
+}

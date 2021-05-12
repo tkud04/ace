@@ -1231,7 +1231,7 @@ class MainController extends Controller {
         #dd($req);
         
         $validator = Validator::make($req, [
-                             'ref' => 'required'
+                             'r' => 'required'
          ]);
          
          if($validator->fails())
@@ -1243,8 +1243,55 @@ class MainController extends Controller {
          
          else
          {
-			 $ref = $req['ref'];       	
+			 $ref = $req['r'];       	
 				return view("review-order",compact(['user','cart','c','ad','ref','signals','plugins']));		
+         }        
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+    public function postReviewOrder(Request $request)
+    {
+		$user = null;
+    	if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+		
+        $req = $request->all();
+       # dd($req);
+        
+        $validator = Validator::make($req, [
+                             'caa' => 'required|not_in:none',
+                             'daa' => 'required|not_in:none',
+                             'rating' => 'required|numeric',
+							 'comment' => 'required'
+         ]);
+         
+         if($validator->fails())
+         {
+             $messages = $validator->messages();
+             return redirect()->back()->withInput()->with('errors',$messages);
+             //dd($messages);
+         }
+         
+         else
+         {
+			  //upload image
+			   $req['img'] = "";
+			  if(isset($req['caa_image']))
+			  {
+                $img = $request->file('caa_image');
+                $ret = $this->helpers->uploadCloudImage($img->getRealPath());
+			    $req['img'] = $ret['public_id'];
+			  }
+			  
+         	$this->helpers->createOrderReview($req);
+	        session()->flash("review-order-status","ok");
+			return redirect()->intended('orders');
          }        
     }
 	

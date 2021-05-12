@@ -95,6 +95,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							 $vpu = url('confirm-payment')."?oid=".$o['reference'];
 							 $tru = url('track')."?o=".$o['reference'];
 							 $iu = url('receipt')."?r=".$o['reference'];
+							 $rou = url('review-order')."?r=".$o['reference'];
 							 $type = $o['type']; $cr = $o['courier'];
 							 $ttype = "";
 							 
@@ -147,6 +148,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					   <td>
 					     <a class="btn btn-info" href="{{$iu}}" target="_blank">Receipt</a>
 						 <a class="btn btn-primary" href="{{$tru}}">Track</a>					     						 
+						 <!--<a class="btn btn-info" href="{{$rou}}">Review</a>	-->				     						 
 					   </td>
 					 </tr>
 					<?php
