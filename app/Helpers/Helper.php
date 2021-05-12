@@ -1234,7 +1234,7 @@ $subject = $data['subject'];
 		   function getOrderReviews()
            {
            	$ret = [];
-              $reviews = OrderReviews::where('status',"enabled")->get();
+             $reviews = OrderReviews::where('id','>',0)->get();
               $reviews = $reviews->sortByDesc('created_at');	
 			  
               if($reviews != null)
