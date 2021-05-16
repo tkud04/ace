@@ -291,7 +291,23 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					       }
 						 }  
 					  }
-                    ?>						  
+                    ?>		
+                     <?php
+					 if(count($o['reviews']) > 0)
+					  {
+				    ?>	
+                      <tr>
+					   <td colspan="8">
+					     <div class="row">
+                          <div class="col-sm-12 equal-height-container">
+						  
+						  </div>
+						 </div>
+					   </td>
+                       </tr>
+                    <?php
+					  }
+                    ?>					
 					</tbody>
 				  </table>
 				</div>

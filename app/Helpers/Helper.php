@@ -1259,9 +1259,9 @@ $subject = $data['subject'];
 		   function getOrderReview($ref)
            {
            	$ret = [];
-              $review = OrderReviews::where('ref',$ref)->first();
+              $r = OrderReviews::where('reference',$ref)->first();
              
-              if($review != null)
+              if($r != null)
                {
 				  
 					  $temp = [];
@@ -2025,7 +2025,7 @@ $subject = $data['subject'];
 						      $temp['totals']['delivery'] = $c['price'];  
 						}
 				  }
-				  
+				  $temp['reviews'] = $this->getOrderReview($temp['reference']);
                   $temp['date'] = $o->created_at->format("jS F, Y");
                   $ret = $temp; 
                }                                 
@@ -2549,6 +2549,7 @@ $subject = $data['subject'];
                          $ret = $temp;  
 					   }  
 				   }
+				   
                    	 
                }
 			}
@@ -2574,7 +2575,8 @@ $subject = $data['subject'];
 				   }
 			}
                                          
-                                                      
+                 
+                 #dd($ret);				 
                 return $ret;
            }
 		   
