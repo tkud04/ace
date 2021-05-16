@@ -295,12 +295,48 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
                      <?php
 					 if(count($o['reviews']) > 0)
 					  {
+						  $r = $o['reviews'];
 				    ?>	
                       <tr>
 					   <td colspan="8">
 					     <div class="row">
                           <div class="col-sm-12 equal-height-container">
-						  
+						    <div id="sticky">
+                <section>
+                  <h5 class="sub-title text-info text-uppercase">customer review</h5>
+				  <div class="table-responsive m-t-40 wow fadeInUp">
+                	   <table class="table ace-table">
+				   <thead>
+                     <tr>
+                     <th>Rating</th>
+                     <th>Details</th>
+                     <th>Comment</th>
+                     <tr>
+				   </thead>
+				   <tbody>
+				     <tr>
+				      <td>
+					    <?php
+							   for($i = 0; $i < $r['rating']; $i++)
+							   {
+								  
+							 ?>
+                             <a href="javascript:void(0)" class="ion-star large-text"></a>   
+							 <?php
+							   }
+							 ?>
+					  </td>
+				      <td>
+					   <p>Order came as advertised: <b>{{strtoupper($r['caa'])}}</b></p>
+					   <p>Order delivery was on time: <b>{{strtoupper($r['daa'])}}</b></p>
+					  </td>
+				      <td><b>{{strtoupper($r['comment'])}}</b></td>
+				     </tr>
+				   </tbody>
+				   </table>
+				   </div>
+                </section>
+              </div>
 						  </div>
 						 </div>
 					   </td>

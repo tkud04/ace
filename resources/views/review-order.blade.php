@@ -64,11 +64,12 @@ $legendText = "leave a review about order ".$ref." below";
 							   <option value="no">No</option>
 							</select>                        
 						  </div>
-						  
+						  <!--
 						    <div class="col-sm-6 form-group">
                             <label class="control-label">upload a pic of your order</label>
                             <input type="file" name="caa_image" class="form-control">                     
 						  </div>
+						  -->
 						  <div class="col-sm-6 form-group">
                             <label class="control-label">Rate your order: <span id="ovr" class="large-text">0</span></label>
 							<p class="form-control-plaintext">
