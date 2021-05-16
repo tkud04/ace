@@ -69,6 +69,44 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getReviews(Request $request)
+    {
+		$hasUnpaidOrders = null;
+		$user = null;
+		if(Auth::check())
+		{
+			$user = Auth::user();
+			#$hasUnpaidOrders = $this->helpers->checkForUnpaidOrders($user);
+		}
+		
+		$req = $request->all();
+		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+		$cart = $this->helpers->getCart($user,$gid);
+		
+		$c = $this->helpers->getCategories();
+		
+		$signals = $this->helpers->signals;
+		$reviews = $this->helpers->getOrderReviews(['order' => true]);
+		#dd($reviews);
+		
+		$ads = $this->helpers->getAds("wide-ad");
+		$banners = $this->helpers->getBanners();
+		$plugins = $this->helpers->getPlugins();
+		
+		#dd($hasUnpaidOrders);
+		
+		shuffle($ads);
+		shuffle($banners);
+		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
+
+    	return view("reviews",compact(['user','cart','c','banners','reviews','ad','signals','plugins']));
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
 	public function getShop(Request $request)
     {
 		$user = null;
@@ -1189,7 +1227,7 @@ class MainController extends Controller {
 			#dd($anon);
 			if(count($anon) > 0)
 			{
-				$orders[0] = $this->helpers->getOrder($anon['reference']);
+				$orders[0] = $this->helpers->getOrder($anon['reference'],['reviews' => true]);
 				$banks = $this->helpers->banks;
 			    $bank = $this->helpers->getCurrentBank();
 				#dd($orders);

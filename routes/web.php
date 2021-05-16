@@ -16,6 +16,7 @@ Route::get('shop', 'MainController@getShop');
 Route::get('new-arrivals', 'MainController@getNewArrivals');
 Route::get('best-sellers', 'MainController@getBestSellers');
 Route::get('product', 'MainController@getProduct');
+Route::get('reviews', 'MainController@getReviews');
 
 Route::get('cart', 'MainController@getCart');
 

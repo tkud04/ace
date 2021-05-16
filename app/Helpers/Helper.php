@@ -1231,7 +1231,7 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   function getOrderReviews()
+		   function getOrderReviews($params=[])
            {
            	$ret = [];
              $reviews = OrderReviews::where('id','>',0)->get();
@@ -1244,6 +1244,7 @@ $subject = $data['subject'];
 					  $temp = [];
 					  $temp['id'] = $r->id;
 					  $temp['reference'] = $r->reference;
+					  if(isset($params['order']) && $params['order']) $temp['order'] = $this->getAnonOrder($r->reference);
 					  $temp['rating'] = $r->rating;
 					  $temp['caa'] = $r->caa;
 					  $temp['img'] = $this->getCloudinaryImage($r->caa_img);
@@ -1257,7 +1258,7 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   function getOrderReview($ref)
+		   function getOrderReview($ref,$params=[])
            {
            	$ret = [];
               $r = OrderReviews::where('reference',$ref)->first();
@@ -1268,6 +1269,7 @@ $subject = $data['subject'];
 					  $temp = [];
 					  $temp['id'] = $r->id;
 					  $temp['reference'] = $r->reference;
+					  if(isset($params['order']) && $params['order']) $temp['order'] = $this->getOrder($r->reference);
 					  $temp['rating'] = $r->rating;
 					  $temp['caa'] = $r->caa;
 					  $temp['img'] = $this->getCloudinaryImage($r->caa_img);
@@ -1991,7 +1993,7 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   function getOrder($ref)
+		   function getOrder($ref,$params=[])
            {
            	$ret = [];
 
@@ -2027,7 +2029,7 @@ $subject = $data['subject'];
 						      $temp['totals']['delivery'] = $c['price'];  
 						}
 				  }
-				  $temp['reviews'] = $this->getOrderReview($temp['reference']);
+				  if(isset($params['reviews']) && $params['reviews']) $temp['reviews'] = $this->getOrderReview($temp['reference']);
                   $temp['date'] = $o->created_at->format("jS F, Y");
                   $ret = $temp; 
                }                                 
@@ -2578,7 +2580,8 @@ $subject = $data['subject'];
 			}
                                          
                  
-                 #dd($ret);				 
+                 #dd($ret);
+                 $ret['reviews'] = $this->getOrderReview($ret['reference']);				 
                 return $ret;
            }
 		   

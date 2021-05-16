@@ -174,6 +174,7 @@
             <li><a href="<?php echo e(url('dashboard')); ?>">Dashboard</a></li>
             <li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>
 		   <?php endif; ?>
+		 <li><a href="<?php echo e(url('reviews')); ?>">Reviews</a></li>
             <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
               <ul class="dropdown-menu" role="menu">
       
@@ -707,5 +708,4 @@
 
 <!--end of js-->
 </body>
-</html>
-<?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\bkupp\lokl\repo\ace\resources\views/layout.blade.php ENDPATH**/ ?>
