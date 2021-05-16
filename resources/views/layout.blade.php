@@ -12,6 +12,8 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!-- Ionicons font -->
 <link href="{{asset('css/ionicons.min.css')}}" rel="stylesheet">
+<!-- Font icons -->
+<link rel="stylesheet" href="{{asset('icon-fonts/font-awesome/css/font-awesome.min.css')}}"/><!-- Fontawesome icons css -->
 <!-- Bootstrap styles-->
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <!--custom styles-->

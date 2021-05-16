@@ -78,7 +78,7 @@ $legendText = "leave a review about order ".$ref." below";
 							   {
 								   $iru = "setRating(".($i+1).")";
 							 ?>
-                             <a href="javascript:void(0)" onclick="{{$iru}}" class="ion-star large-text"></a>   
+                             <a id="rbn-{{$i}}" href="javascript:void(0)" onclick="{{$iru}}" class="fa fa-star-o large-text"></a>   
 							 <?php
 							   }
 							 ?>

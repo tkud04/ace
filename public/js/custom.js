@@ -1141,4 +1141,14 @@ const fi_next = n => {
 const setRating = n => {
 		$(`#ovr`).html(n);
 		$(`#ovr-2`).val(n);
+		
+		for(let i = 0; i < 5; i++){
+			$(`#rbn-${i}`).removeClass('fa-star');
+			$(`#rbn-${i}`).addClass('fa-star-o');
+		}
+		
+		for(let i = 0; i < n; i++){
+			$(`#rbn-${i}`).removeClass('fa-star-o');
+			$(`#rbn-${i}`).addClass('fa-star');
+		}
 }
