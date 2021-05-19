@@ -103,7 +103,7 @@
     <div class="container">
       <div class="navbar-header"> 
         <!-- Top navbar button -->
-        <button type="button" class="navbar-toggle collapsed ion-android-menu" data-toggle="collapse" data-target="#line-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="fa fa-ellipsis-v"></span> </button>
+        <button type="button" class="navbar-toggle collapsed ion-android-menu" data-toggle="collapse" data-target="#line-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <!--<span class="fa fa-ellipsis-v"></span>--> </button>
         <!-- Cart button --> 
         <a class="lno-cart" href="#"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="cart-item-quantity"></span> </a> 
         <!-- left navbar button -->
@@ -174,19 +174,20 @@
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
 		   <?php else: ?>
             <li><a href="<?php echo e(url('dashboard')); ?>">Dashboard</a></li>
-            <li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>
 		   <?php endif; ?>
-		 <li><a href="<?php echo e(url('reviews')); ?>">Reviews</a></li>
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
+		
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="ion-android-arrow-dropdown"></span></a>
+			   
               <ul class="dropdown-menu" role="menu">
-      
+			  <li><a href="<?php echo e(url('reviews')); ?>">Reviews</a></li>
+                <li> <a href="#">NGN <span class="ion-checkmark"></span></a></li>
+                <li> <a href="#"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-checkmark"></span></a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-android-arrow-dropdown"></span></a>
-              <ul class="dropdown-menu">
-
-              </ul>
-            </li>
+			
+			<?php if(!is_null($user)): ?>
+			<li><a href="<?php echo e(url('signout')); ?>">Sign out</a></li>
+			<?php endif; ?>
           </ul>
           <form class="navbar-form navbar-left lno-search-form visible-xs" role="search">
             <div class="form-group">

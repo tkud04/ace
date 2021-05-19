@@ -102,7 +102,7 @@
     <div class="container">
       <div class="navbar-header"> 
         <!-- Top navbar button -->
-        <button type="button" class="navbar-toggle collapsed ion-android-menu" data-toggle="collapse" data-target="#line-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="fa fa-ellipsis-v"></span> </button>
+        <button type="button" class="navbar-toggle collapsed ion-android-menu" data-toggle="collapse" data-target="#line-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <!--<span class="fa fa-ellipsis-v"></span>--> </button>
         <!-- Cart button --> 
         <a class="lno-cart" href="#"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="cart-item-quantity"></span> </a> 
         <!-- left navbar button -->
@@ -173,24 +173,20 @@
             <li><a class="login" href="javascript:void(0)" data-toggle="modal" data-target="#login-box"> my account</a></li>
 		   @else
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
-            <li><a href="{{url('signout')}}">Sign out</a></li>
 		   @endif
 		
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More</a>
-			   <li><a href="{{url('reviews')}}">Reviews</a></li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="ion-android-arrow-dropdown"></span></a>
+			   
               <ul class="dropdown-menu" role="menu">
-                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-      
-                  </ul>
-                </li>
+			  <li><a href="{{url('reviews')}}">Reviews</a></li>
+                <li> <a href="#">NGN <span class="ion-checkmark"></span></a></li>
+                <li> <a href="#"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-checkmark"></span></a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-android-arrow-dropdown"></span></a>
-              <ul class="dropdown-menu">
-
-              </ul>
-            </li>
+			
+			@if(!is_null($user))
+			<li><a href="{{url('signout')}}">Sign out</a></li>
+			@endif
           </ul>
           <form class="navbar-form navbar-left lno-search-form visible-xs" role="search">
             <div class="form-group">
