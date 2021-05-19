@@ -175,10 +175,15 @@
             <li><a href="{{url('dashboard')}}">Dashboard</a></li>
             <li><a href="{{url('signout')}}">Sign out</a></li>
 		   @endif
-		 <li><a href="{{url('reviews')}}">Reviews</a></li>
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
+		
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More</a>
+			   <li><a href="{{url('reviews')}}">Reviews</a></li>
               <ul class="dropdown-menu" role="menu">
+                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">NGN <span class="ion-android-arrow-dropdown"></span></a>
+                  <ul class="dropdown-menu" role="menu">
       
+                  </ul>
+                </li>
               </ul>
             </li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-android-arrow-dropdown"></span></a>
