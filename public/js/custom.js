@@ -1164,6 +1164,6 @@ const useCoupon = () => {
 		}
 		
 		else{
-			window.location = `use-coupon?xf=${xf}`;
+			window.location = `cart?dxf=${xf}`;
 		}
 }

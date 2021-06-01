@@ -271,7 +271,14 @@ class MainController extends Controller {
 		$req = $request->all();
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
-		$totals = $this->helpers->getCartTotals($cart);
+		
+		$dxf = [];
+		if(isset($req['dxf']))
+		{
+			$dxf = $this->helpers->getDiscount($req['dxf']);
+		} 
+		
+		$totals = $this->helpers->getCartTotals($cart,$dxf);
 		//dd($totals);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
@@ -280,7 +287,8 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		#session()->reflash();
-		return view("cart",compact(['user','cart','totals','c','ad','signals','plugins']));					 
+		$dxf = $req['dxf'];
+		return view("cart",compact(['user','cart','totals','dxf','c','ad','signals','plugins']));					 
     }
 	
 	/**
@@ -310,56 +318,13 @@ class MainController extends Controller {
                 
                  else
                  {
-					 dd($req);
-					 $product = $this->helpers->getProduct($req["sku"]);
-					 #dd($product);
-					 $discounts = [];
-					 if(count($product['discounts']) > 0)
+					$discount = $this->helpers->getDiscount($req["xf"]);
+					$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
+					#dd($gid);
+					if(count($discounts) > 0)
 					 {
-						 $amount = $product['pd']['amount'];
-						 
-						 foreach($product['discounts'] as $d)
-						 {
-							 $temp = [];
-							 $val = $d['discount'];
-							 
-							 switch($d['type'])
-							 {
-								 case "general":
-								   $temp['name'] = "ACE discount: <b>".$val."%</b>";
-								 break;
-								 
-								 case "single":
-								   $temp['name'] = $product['sku']." discount: <b>&#8358;".$val."</b>";
-								 break;
-							 }
-							 switch($d['discount_type'])
-							 {
-								 case "percentage":
-								   $temp['discount'] = floor(($val / 100) * $amount);
-								 break;
-								 
-								 case "flat":
-								   $temp['discount'] = $val;
-								 break;
-							 }
-							 
-							 array_push($discounts,$temp);
-						 }
+						 $ca = $this->helpers->applyDiscount($user,$cart);
 					 }
-					 #dd($discounts);
-					 $reviews = $this->helpers->getReviews($req["sku"]);
-					 $related = $this->helpers->getProducts();
-					// dd($product);
-					
-					if(isset($req['type']) && $req['type'] == "json")
-					{
-						return json_encode($product);
-					}
-					else
-					{
-						return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','discounts','signals','plugins']));
-					}
                     			 
                  }			 
     	
@@ -383,7 +348,13 @@ class MainController extends Controller {
 		$req = $request->all();
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
-		$totals = $this->helpers->getCartTotals($cart);
+		$dxf = [];
+		if(isset($req['dxf']))
+		{
+			$dxf = $this->helpers->getDiscount($req['dxf']);
+		} 
+		
+		$totals = $this->helpers->getCartTotals($cart,$dxf);
 		
 
 			$ss = ['company' => "",
@@ -407,14 +378,14 @@ class MainController extends Controller {
 		$plugins = $this->helpers->getPlugins();
 		#dd($user);
 		$secure = (isset($req['ss']) && $req['ss'] == "1") ? false : true;
-
+        $dxf = $req['dxf'];
 		if(is_null($user))
 		{
-			return view("anon-checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals','plugins']));		
+			return view("anon-checkout",compact(['user','cart','totals','dxf','ss','ad','ref','md','states','secure','c','signals','plugins']));		
 		}
 		else
 		{
-			return view("checkout",compact(['user','cart','totals','ss','ad','ref','md','states','secure','c','signals','plugins']));		
+			return view("checkout",compact(['user','cart','totals','dxf','ss','ad','ref','md','states','secure','c','signals','plugins']));		
 		}
 								 
     }

@@ -964,8 +964,9 @@ $subject = $data['subject'];
 		   
 		   function getDiscount($id)
            {
-           	
-				$disc = Discounts::where('id',$id)->first();              
+           	$ret = [];
+				$disc = Discounts::where('id',$id)
+				                 ->orWhere('code',$id)->first();              
 							 
 					if($disc != null)
 					{
@@ -1013,6 +1014,7 @@ $subject = $data['subject'];
 					 }
 				   return $dsc;
 		   }
+		   
 		   
 		   function getProductData($sku)
            {
@@ -1449,7 +1451,7 @@ $subject = $data['subject'];
 			   return $ret;
 		   }
 				
-          function getCartTotals($cart)
+          function getCartTotals($cart,$discount=[])
            {
            	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
 			  $userId = null;
@@ -1458,11 +1460,24 @@ $subject = $data['subject'];
                {           	
                	foreach($cart as $c) 
                     {
+						$dsc = [];
+						
 						if(is_null($userId)) $userId = $c['user_id'];
 						$amount = $c['product']['pd']['amount'];
-						$discounts = $c['product']['discounts'];
-						#dd($discounts);
-						$dsc = $this->getDiscountPrices($amount,$discounts);
+						#dd($discount);
+						
+						if(count($discount) > 0)
+						{
+						switch($discount['type'])
+						{
+							case "category":
+							  if($c['product']['pd']['category'] == $discount['category']['category'])
+							  {
+								  $dsc = $this->getDiscountPrices($amount,[$discount]);
+						         # dd($dsc);
+							  }
+							break;
+						}
 						
 						$newAmount = 0;
 						if(count($dsc) > 0)
@@ -1479,6 +1494,7 @@ $subject = $data['subject'];
 					        }
 				          }
 					      $amount = $newAmount;
+			            }
 			            }
 						$qty = $c['qty'];
                     	$ret['items'] += $qty;
@@ -1538,6 +1554,25 @@ $subject = $data['subject'];
                                                       
                 return $ret;
            }	
+		   function getCategory($id)
+           {
+           	$ret = [];
+           	$c = Categories::where('id',$id)->first();
+              // dd($cart);
+			  
+              if($c != null)
+               {           	
+						$temp = [];
+						$temp['id'] = $c->id;
+						$temp['name'] = $c->name;
+						$temp['category'] = $c->category;
+						$temp['special'] = $c->special;
+						$temp['status'] = $c->status;
+						$ret = $temp;
+               }                                 
+                                                      
+                return $ret;
+           }
 		   
 		   function getFriendlyName($n)
            {

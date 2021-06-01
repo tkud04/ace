@@ -111,7 +111,7 @@
                 <div id="sticky">
                   <section class="col-sm-12">
 				  <?php
-				  $dsc = 0;
+				  $dsc = 0; $cu = url('checkout');
 				  
 				  if( isset($totals['discounts']) && count($totals['discounts']) > 0)
 				  {
@@ -120,6 +120,7 @@
 						$dsc += $d;  
 					  }
 					   $dsc *= $qty;
+					   $cu = url('checkout')."?dxf=".$dxf;
 				  }
 				  
 				  ?>
@@ -132,7 +133,7 @@
                   <section class="col-sm-12">
                     <h5 class="sub-title text-info text-uppercase">subtotal</h5>
                     <div class=" summary sum js-total text-center"> <strong> &#8358;{{number_format($totals['subtotal'],2)}}</strong> </div>
-                    <a href="{{url('checkout')}}" class="btn btn-block btn-default hvr-underline-from-center-default">Checkout</a>
+                    <a href="{{$cu}}" class="btn btn-block btn-default hvr-underline-from-center-default">Checkout</a>
                   </section>
                 </div>
               </div>
