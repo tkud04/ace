@@ -910,32 +910,37 @@ $subject = $data['subject'];
 
 		   function createDiscount($data)
            {
-			   $type = isset($data['type']) ? $data['type'] : "user";
-
-           	$ret = Discounts::create(['sku' => $data['id'],                                                                                                          
+			   $uid = "";
+			   
+			   if($data['type'] == "single") $uid = $data['sku'];
+			   else if($data['type'] == "category") $uid = $data['category'];
+			   
+           	$ret = Discounts::create(['uid' => $uid,                                                                                                          
+                                                      'code' => $data['code'], 
                                                       'discount_type' => $data['discount_type'], 
                                                       'discount' => $data['discount'], 
-                                                      'type' => $type, 
+                                                      'type' => $data['type'], 
                                                       'status' => $data['status'], 
                                                       ]);
-			return $ret;
+                                                      
+                return $ret;
            }
-
+		   
 		   function getDiscounts($id,$type="product")
            {
            	$ret = [];
-             if($type == "product")
+			
+			 if($id == "all")
 			 {
-				$discounts = Discounts::where('sku',$id)
-			                 ->orWhere('type',"general")
+				 $discounts = Discounts::where('id','>',"0")->get();
+             }
+			 else
+			 {
+               $discounts = Discounts::where('uid',$id)
+			                 ->orWhere('type',$type)
 							 ->where('status',"enabled")->get(); 
 			 }
-			 elseif($type == "user")
-			 {
-				 $discounts = Discounts::where('sku',$id)
-			                 ->where('type',"user")
-							 ->where('status',"enabled")->get();
-             }
+			 
 			 
               if($discounts != null)
                {
@@ -943,14 +948,39 @@ $subject = $data['subject'];
 				  {
 					$temp = [];
 				    $temp['id'] = $d->id;
-				    $temp['sku'] = $d->sku;
+				    $temp['uid'] = $d->uid;
+				    $temp['code'] = $d->code;
 				    $temp['discount_type'] = $d->discount_type;
 				    $temp['discount'] = $d->discount;
 				    $temp['type'] = $d->type;
+					if($temp['type'] == "category") $temp['category'] = $this->getCategory($temp['uid']);
 				    $temp['status'] = $d->status;
 				    array_push($ret,$temp);  
 				  }
                }                         
+                                                      
+                return $ret;
+           }
+		   
+		   function getDiscount($id)
+           {
+           	
+				$disc = Discounts::where('id',$id)->first();              
+							 
+					if($disc != null)
+					{
+					
+							$temp = [];
+				            $temp['id'] = $disc->id;
+				            $temp['uid'] = $disc->uid;
+				            $temp['code'] = $disc->code;
+				            $temp['discount_type'] = $disc->discount_type;
+				            $temp['discount'] = $disc->discount;
+				            $temp['type'] = $disc->type;
+							if($temp['type'] == "category") $temp['category'] = $this->getCategory($temp['uid']);
+				            $temp['status'] = $disc->status;
+							$ret = $temp;
+					}                      
                                                       
                 return $ret;
            }

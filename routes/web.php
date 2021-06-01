@@ -19,6 +19,7 @@ Route::get('product', 'MainController@getProduct');
 Route::get('reviews', 'MainController@getReviews');
 
 Route::get('cart', 'MainController@getCart');
+Route::get('use-coupon', 'MainController@getUseCoupon');
 
 Route::get('checkout', 'MainController@getCheckout');
 Route::post('checkout', 'MainController@postCheckout');

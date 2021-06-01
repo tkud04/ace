@@ -288,6 +288,88 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function getUseCoupon(Request $request)
+    {
+        $user = null;
+		$cart = [];
+		if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+		$req = $request->all();
+	    //dd($secure);
+		$validator = Validator::make($req, [
+                             'xf' => 'required'
+                   ]);
+         
+                 if($validator->fails())
+                  {
+                      return redirect()->back();
+                       
+                 }
+                
+                 else
+                 {
+					 dd($req);
+					 $product = $this->helpers->getProduct($req["sku"]);
+					 #dd($product);
+					 $discounts = [];
+					 if(count($product['discounts']) > 0)
+					 {
+						 $amount = $product['pd']['amount'];
+						 
+						 foreach($product['discounts'] as $d)
+						 {
+							 $temp = [];
+							 $val = $d['discount'];
+							 
+							 switch($d['type'])
+							 {
+								 case "general":
+								   $temp['name'] = "ACE discount: <b>".$val."%</b>";
+								 break;
+								 
+								 case "single":
+								   $temp['name'] = $product['sku']." discount: <b>&#8358;".$val."</b>";
+								 break;
+							 }
+							 switch($d['discount_type'])
+							 {
+								 case "percentage":
+								   $temp['discount'] = floor(($val / 100) * $amount);
+								 break;
+								 
+								 case "flat":
+								   $temp['discount'] = $val;
+								 break;
+							 }
+							 
+							 array_push($discounts,$temp);
+						 }
+					 }
+					 #dd($discounts);
+					 $reviews = $this->helpers->getReviews($req["sku"]);
+					 $related = $this->helpers->getProducts();
+					// dd($product);
+					
+					if(isset($req['type']) && $req['type'] == "json")
+					{
+						return json_encode($product);
+					}
+					else
+					{
+						return view("product",compact(['user','cart','c','cc','ad','reviews','related','product','discounts','signals','plugins']));
+					}
+                    			 
+                 }			 
+    	
+    }
+	
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
 	public function getCheckout(Request $request)
     {
         $user = null;

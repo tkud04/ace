@@ -1152,3 +1152,18 @@ const setRating = n => {
 			$(`#rbn-${i}`).addClass('fa-star');
 		}
 }
+
+const useCoupon = () => {
+		let xf = $(`#coupon`).val();
+		
+		if(xf == ""){
+			Swal.fire({
+			 icon: 'error',
+             title: "Enter a coupon code"
+           })	
+		}
+		
+		else{
+			window.location = `use-coupon?xf=${xf}`;
+		}
+}

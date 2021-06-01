@@ -180,8 +180,8 @@
 			   
               <ul class="dropdown-menu" role="menu">
 			  <li><a href="<?php echo e(url('reviews')); ?>">Reviews</a></li>
-                <li> <a href="#">NGN <span class="ion-checkmark"></span></a></li>
-                <li> <a href="#"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-checkmark"></span></a></li>
+                <li> <a href="javascript:void(0)">NGN <span class="ion-checkmark"></span></a></li>
+                <li> <a href="javascript:void(0)"><img width="16" height="12" alt="" src="images/ng.png"> <span class="ion-checkmark"></span></a></li>
               </ul>
             </li>
 			

@@ -32,7 +32,7 @@
                   </ol>
                 </div>
                 <div class="col-sm-12">
-                  <ul class="item-list list-group">
+                  <ul class="item-list list-group" style="margin-bottom: 5px !important;">
 				    <?php
 					
 					
@@ -82,8 +82,24 @@
 				   <?php
 			       }
 			      ?>
-                  </ul>
+                  </ul><br>
+				  <div class="row">
+				    <div class="col-sm-6">
+				 <h5 class="text-primary text-uppercase">coupon code</h5>
+				 <p>If you have a coupon code, enter the code here and click Apply.</p>
+				 <div class="input-group mb-10">
+				    <input type="text" class="form-control" id="coupon" placeholder="Enter coupon code here">
+				    <span class="input-group-btn"><a href="javascript:void(0)" onclick="useCoupon()" class="btn btn-primary pull-left hvr-underline-from-center-primary">Apply</a></span>
+                 </div>
                 </div>
+				<div class="col-sm-6">
+				<br>
+				 
+				</div>
+				  </div>
+                </div>
+				
+				
               </div>
             </div>
             
