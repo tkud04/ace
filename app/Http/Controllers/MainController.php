@@ -382,7 +382,7 @@ class MainController extends Controller {
 		$plugins = $this->helpers->getPlugins();
 		#dd($user);
 		$secure = (isset($req['ss']) && $req['ss'] == "1") ? false : true;
-        $dxf = $req['dxf'];
+        #$dxf = $req['dxf'];
 		if(is_null($user))
 		{
 			return view("anon-checkout",compact(['user','cart','totals','dxf','ss','ad','ref','md','states','secure','c','signals','plugins']));		
