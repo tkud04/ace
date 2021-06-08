@@ -281,7 +281,7 @@ class MainController extends Controller {
 		} 
 		
 		$totals = $this->helpers->getCartTotals($cart,$ddxf);
-		//dd($totals);
+		if(isset($req['rr'])) dd($totals);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
 		$ads = $this->helpers->getAds();
