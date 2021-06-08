@@ -156,8 +156,14 @@ class LoginController extends Controller {
 			 
             $req['role'] = "user";    
             $req['status'] = "enabled";           
-            $req['verified'] = "yes";           
-            
+            $req['verified'] = "yes";  
+            $req['account_status'] = "old";  
+			
+            if($isNew)
+			{
+				$req['account_status'] = "new";
+			}
+			
             # dd($isNew);            
 
             $user =  $this->helpers->createUser($req); 
@@ -166,11 +172,7 @@ class LoginController extends Controller {
 			$req['company'] = "";
             $shippingDetails =  $this->helpers->createShippingDetails($req); 
 			
-			if($isNew)
-			{
-				$newDiscount = $this->helpers->getSetting('nud');
-				$this->helpers->giveDiscount($user,['type' => "flat", 'amount' => $newDiscount]);
-			}
+			
            // $wallet =  $this->helpers->createWallet($req); 
            
                                                     

@@ -596,6 +596,7 @@ $subject = $data['subject'];
                                                       'role' => $data['role'], 
                                                       'status' => $data['status'], 
                                                       'verified' => $data['verified'], 
+                                                      'account_status' => $data['account_status'], 
                                                       'password' => bcrypt($data['pass']), 
                                                       ]);
                                                       
@@ -719,6 +720,7 @@ $subject = $data['subject'];
                        $temp['role'] = $u->role; 
                        $temp['status'] = $u->status; 
                        $temp['verified'] = $u->verified; 
+                       $temp['account_status'] = $u->account_status; 
                        $temp['id'] = $u->id; 
                        $temp['date'] = $u->created_at->format("jS F, Y"); 
                        $ret = $temp; 
@@ -1477,6 +1479,13 @@ $subject = $data['subject'];
 						         # dd($dsc);
 							  }
 							break;
+							
+							case "general":
+							  
+								  $dsc = $this->getDiscountPrices($amount,[$discount]);
+						         # dd($dsc);
+							 
+							break;
 						}
 						
 						$newAmount = 0;
@@ -1502,18 +1511,15 @@ $subject = $data['subject'];
                         $ret['discounts'] = $dsc;					
                     }
 					
-					$userDiscounts = $this->getDiscounts($userId,"user");
-					#dd($userDiscounts);
-					$ua = 0; $una = 0;
-
-					$dsc = $this->getDiscountPrices($ret['subtotal'],$userDiscounts);
-					#dd($dsc);
-					if(count($dsc) > 0)
+					 $u = User::where('id',$userId)->first();
+					#dd([$u,$userId]);
+					if($u != null && $u->account_status == "new")
 				          {
-					        $ret['subtotal'] -= $dsc[0];
+							  $newDiscount = $this->helpers->getSetting('nud');
+					        if($ret['subtotal'] > $newDiscount) $ret['subtotal'] -= $newDiscount;
 				          }
 					
-                   $u = User::where('id',$userId)->first();
+                  
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 

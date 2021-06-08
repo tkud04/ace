@@ -2,21 +2,21 @@
  $totals = $order['totals'];
  $items = $order['items'];
  $itemCount = $totals['items'];
- $uu = "http://www.aceluxurystore.com/confirm-payment?oid=".$order['reference'];
+ $uu = "http://www.aceluxurystore.com/anon-order?ref=".$order['reference'];
  $tu = "http://www.aceluxurystore.com/track?o=".$order['reference'];
   $cr = $order['courier'];
 ?>
 <center><img src="http://www.aceluxurystore.com/images/logo.png" width="150" height="150"/></center>
 <h3 style="background: #ff9bbc; color: #fff; padding: 10px 15px;">Your order reference # is #<?php echo e($order['reference']); ?></h3>
 
-Hello <?php echo e($u['name']); ?>,<br> You just placed an order via bank payment. See the details below:<br><br>
+Hello <?php echo e($name); ?>,<br> You just placed an order via bank payment. See the details below:<br><br>
 Reference #: <b><?php echo e($order['reference']); ?></b><br>
 <?php
 foreach($items as $i)
 {
 	$product = $i['product'];
 	$sku = $product['sku'];
-	$name = $product['name'];
+	$pname = $product['name'];
 	$qty = $i['qty'];
 	$pu = url('product')."?sku=".$product['sku'];
 	$img = $product['imggs'][0];
@@ -25,7 +25,7 @@ foreach($items as $i)
 
 <a href="<?php echo e($pu); ?>" target="_blank">
   <img style="vertical-align: middle;border:0;line-height: 20px;" src="<?php echo e($img); ?>" alt="<?php echo e($sku); ?>" height="80" width="80" style="margin-bottom: 5px;"/>
-	  <?php echo e($name); ?>
+	  <?php echo e($pname); ?>
 
 </a> (x<?php echo e($qty); ?>)<br>
 <?php
