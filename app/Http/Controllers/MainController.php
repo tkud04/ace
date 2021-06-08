@@ -273,9 +273,11 @@ class MainController extends Controller {
 		$cart = $this->helpers->getCart($user,$gid);
 		
 		$ddxf = [];
+		$dxf = "";
 		if(isset($req['dxf']))
 		{
 			$ddxf = $this->helpers->getDiscount($req['dxf']);
+			$dxf = $req['dxf'];
 		} 
 		
 		$totals = $this->helpers->getCartTotals($cart,$ddxf);
@@ -287,7 +289,7 @@ class MainController extends Controller {
 		shuffle($ads);
 		$ad = count($ads) < 1 ? "images/inner-ad-2.png" : $ads[0]['img'];
 		#session()->reflash();
-		$dxf = $req['dxf'];
+		
 		return view("cart",compact(['user','cart','totals','dxf','c','ad','signals','plugins']));					 
     }
 	
@@ -349,9 +351,11 @@ class MainController extends Controller {
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		$ddxf = [];
+		$dxf = "";
 		if(isset($req['dxf']))
 		{
 			$ddxf = $this->helpers->getDiscount($req['dxf']);
+			$dxf = $req['dxf'];
 		} 
 		
 		$totals = $this->helpers->getCartTotals($cart,$ddxf);
