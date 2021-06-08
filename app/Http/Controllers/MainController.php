@@ -272,13 +272,13 @@ class MainController extends Controller {
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
 		
-		$dxf = [];
+		$ddxf = [];
 		if(isset($req['dxf']))
 		{
-			$dxf = $this->helpers->getDiscount($req['dxf']);
+			$ddxf = $this->helpers->getDiscount($req['dxf']);
 		} 
 		
-		$totals = $this->helpers->getCartTotals($cart,$dxf);
+		$totals = $this->helpers->getCartTotals($cart,$ddxf);
 		//dd($totals);
 		$c = $this->helpers->getCategories();
 		$signals = $this->helpers->signals;
@@ -348,13 +348,13 @@ class MainController extends Controller {
 		$req = $request->all();
 		$gid = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 		$cart = $this->helpers->getCart($user,$gid);
-		$dxf = [];
+		$ddxf = [];
 		if(isset($req['dxf']))
 		{
-			$dxf = $this->helpers->getDiscount($req['dxf']);
+			$ddxf = $this->helpers->getDiscount($req['dxf']);
 		} 
 		
-		$totals = $this->helpers->getCartTotals($cart,$dxf);
+		$totals = $this->helpers->getCartTotals($cart,$ddxf);
 		
 
 			$ss = ['company' => "",
