@@ -1515,8 +1515,14 @@ $subject = $data['subject'];
 					#dd([$u,$userId]);
 					if($u != null && $u->account_status == "new")
 				          {
-							  $newDiscount = $this->helpers->getSetting('nud');
-					        if($ret['subtotal'] > $newDiscount) $ret['subtotal'] -= $newDiscount;
+							  $newDiscount = $this->getSetting('nud');
+							  #dd($newDiscount);
+					        if($ret['subtotal'] > $newDiscount['value'])
+							{
+								$ret['subtotal'] -= $newDiscount['value'];
+								array_push($ret['discounts'],$newDiscount['value']);	
+							} 
+							
 				          }
 					
                   
@@ -1884,14 +1890,7 @@ $subject = $data['subject'];
 			  # dd($user);
 			  if(!is_null($u))
 			  {
-			     $d = Discounts::where('sku',$u->id)
-			                 ->where('type',"user")
-							 ->where('discount',$this->getSetting('nud'))->first();
-			   
-			     if(!is_null($d))
-			     {
-				   $d->delete();
-			     }
+			     $u->update(['account_status' => "old"]);
 			  }
 		   }
 
