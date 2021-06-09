@@ -72,13 +72,15 @@
                     <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right" id="deliv">...</span></strong></li>
 				  </ul>
                 </section>
-                <section class="col-sm-12">
+                <section class="col-sm-12 mb-10">
 				 
 				  <h5 class="sub-title text-info text-uppercase">Coupon code</h5>
-                  <div class="form-group mb-10">
+                  <div class="input-group mb-10">
 				    <input type="text" class="form-control" id="coupon" placeholder="Enter coupon code here">
+					<span class="input-group-btn">
 				    <a href="javascript:void(0)" onclick="useCoupon('checkout')" class="btn btn-primary pull-left hvr-underline-from-center-primary">Apply</a>
-                 </div>
+                   </span>
+				</div>
                 </section> 
 				<section class="col-sm-12">
 				  <?php
