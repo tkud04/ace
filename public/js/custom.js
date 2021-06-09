@@ -1153,7 +1153,7 @@ const setRating = n => {
 		}
 }
 
-const useCoupon = () => {
+const useCoupon = (url) => {
 		let xf = $(`#coupon`).val();
 		
 		if(xf == ""){
@@ -1164,6 +1164,6 @@ const useCoupon = () => {
 		}
 		
 		else{
-			window.location = `cart?dxf=${xf}`;
+			window.location = `${url}?dxf=${xf}`;
 		}
 }

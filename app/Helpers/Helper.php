@@ -1455,7 +1455,7 @@ $subject = $data['subject'];
 				
           function getCartTotals($cart,$discount=[])
            {
-           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0];
+           	$ret = ["subtotal" => 0, "delivery" => 0, "items" => 0,'discounts' => []];
 			  $userId = null;
 			  
               if($cart != null && count($cart) > 0)
@@ -1503,12 +1503,13 @@ $subject = $data['subject'];
 					        }
 				          }
 					      $amount = $newAmount;
+						  array_push($ret['discounts'],$d);	
 			            }
 			            }
 						$qty = $c['qty'];
                     	$ret['items'] += $qty;
 						$ret['subtotal'] += ($amount * $qty);
-                        $ret['discounts'] = $dsc;					
+                        			
                     }
 					
 					 $u = User::where('id',$userId)->first();
@@ -1529,7 +1530,7 @@ $subject = $data['subject'];
                    $ret['delivery'] = $this->getDeliveryFee($u);
                   
                }                                 
-                   #dd($ret);                                  
+                  # dd($ret);                                  
                 return $ret;
            }
 		   
