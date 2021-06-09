@@ -36,7 +36,20 @@
         </div>
         <div class="col-sm-12 equal-height-container">
           <div class="row">
-		   
+		   <?php
+				  $dsc = 0; $cu = url('checkout');
+				  
+				  if( isset($totals['discounts']) && count($totals['discounts']) > 0)
+				  {
+					  foreach($totals['discounts'] as $d)
+					  {
+						$dsc += $d;  
+					  }
+					   #$dsc *= $qty;
+					   $cu = url('checkout')."?dxf=".$dxf;
+				  }
+				  
+				  ?>
             <div class="col-sm-4 col-md-3 sub-data-left sub-equal">
               <div id="sticky">
                 <section class="col-sm-12">
@@ -44,10 +57,19 @@
                   <h5 class="sub-title text-info text-uppercase">order summary</h5>
                   <ul class="list-group summary">
                     <li class="list-group-item text-uppercase"><strong>items:<span class="pull-right"> {{$totals['items']}}</span></strong></li>
+					<li class="list-group-item text-uppercase"><strong>discount:<span class="pull-right"> &#8358;{{number_format($dsc,2)}}</span></strong></li>
                     <li class="list-group-item text-uppercase"><strong>subtotal:<span class="pull-right"> &#8358;{{number_format($totals['subtotal'],2)}}</span></strong></li>
                     <li class="list-group-item text-uppercase"><strong>shipping: <span class="pull-right" id="deliv">...</span></strong></li>
 				  </ul>
                 </section>
+				<section class="col-sm-12">
+				 
+				  <h5 class="sub-title text-info text-uppercase">Coupon code</h5>
+                  <div class="form-group mb-10">
+				    <input type="text" class="form-control" id="coupon" placeholder="Enter coupon code here">
+				    <a href="javascript:void(0)" onclick="useCoupon('checkout')" class="btn btn-primary pull-left hvr-underline-from-center-primary">Apply</a>
+                 </div>
+                </section> 
                 <section class="col-sm-12">
 				  <?php
 				   $totalText = "subtotal"; $total = $totals['subtotal'];
