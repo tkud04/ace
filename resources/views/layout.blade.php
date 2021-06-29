@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="facebook-domain-verification" content="l1zv5af26nl57l9wu9nf2w4kihldv3" />
+<meta name="facebook-domain-verification" content="l1zv5af26nl57l9wu9nf2w4kihldv3" />
+<meta property="og:description" content="Buy the most glamorous earrings, bracelets, brooches and more from Ace Luxury Store.">
+<meta property="og:image" content="{{asset('images/logoo.png')}}">
+<meta property="og:url" content="{{url('/')}}">
+<meta property="og:type" content="website">
 @yield('metas')
 <title>@yield('title') | Ace Luxury Store - Online Luxury Fashion Accessories Store in Lagos, Nigeria</title>
 <!-- Google fonts -->
