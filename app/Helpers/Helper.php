@@ -265,20 +265,11 @@ public $categories = [
   //pass: Eca12345$
   
   
-  public $smtp2 = [
-       'ss' => "smtp.migadu.com",
-       'sp' => "587",
-       'sec' => "tls",
-       'sa' => "yes",
-       'su' => "olak@lotteryworldusa.com",
-       'spp' => "kudayisi",
-       'sn' => "LotteryWorld",
-       'se' => "olak@lotteryworldusa.com"
-  ];
+  
   
   
  // public $adminEmail = "aquarius4tkud@yahoo.com";
-  public $adminEmail = "aceluxurystore@yahoo.com";
+  public $adminEmail = "support@aceluxurystore.com";
   public $suEmail = "kudayisitobi@gmail.com";
   
   public $newUserDiscount = "500";
