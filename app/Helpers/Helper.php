@@ -2764,5 +2764,36 @@ $subject = $data['subject'];
                 return $ret;
            }
    
+   function sendMessage($dt)
+   {
+      $ret = ['status' => "error",'msg' => "nothing happened"];
+      $c = "";
+      
+      switch($dt['type'])
+      {
+         case "contact":
+           $c = "";
+         break;
+      }
+      
+      $rr = [
+          'auth' => ["api",env('MAILGUN_API_KEY')],
+          'data' => [
+            'from' => "Ace Luxury Store <noreply@aceluxurystore.com>",
+            'to' => $dt['t'],
+            'subject' => $dt['s'],
+            'html' => $c
+          ],
+          'headers' => [],
+          'url' => env('MAILGUN_BASE_URL')."/messages",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->bomb($rr);
+		 
+		 #dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
+   }
+   
 }
 ?>
