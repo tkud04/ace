@@ -608,9 +608,10 @@ $subject = $data['subject'];
            }
            function clearCart($user)
            {
+                $uu = "";
 			  if(is_null($user))
 			  {
-				  $uu = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";;
+				  $uu = isset($_COOKIE['gid']) ? $_COOKIE['gid'] : "";
 			  }
               else
 			  {
