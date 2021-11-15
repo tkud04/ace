@@ -956,14 +956,9 @@ const setCookie = (k,v) => {
 	 document.cookie = k + "=" + v + e;
 }
 
-const getCookie = (a) => {
-	for (var b = a + "=", c = document.cookie.split(";"), d = 0; d < c.length; d++) {
-            for (var e = c[d]; " " == e.charAt(0); )
-                e = e.substring(1, e.length);
-            if (0 == e.indexOf(b))
-                return e.substring(b.length, e.length)
-        }
-        return null;
+const getCookie = (name) => {
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) return match[2];
 }
 
 const getParameterByName = (name, url) => {
