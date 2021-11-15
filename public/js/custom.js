@@ -1086,6 +1086,7 @@ const showPage = (p) => {
 	
 	page = p;
 	$('#pagination-row').fadeIn();
+	document.querySelector('#pagination-row').scrollIntoView();
 	fbq('track', 'ViewContent', {content_ids: cids, currency: "NGN", content_type: 'product'});
 }
 
