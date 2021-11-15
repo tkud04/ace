@@ -1,6 +1,4 @@
 Website
-categories next is starting from the bottom
-track order alert, pics not showing
 guest add to cart bug
 
 Webmail app
