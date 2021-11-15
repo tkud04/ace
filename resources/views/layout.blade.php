@@ -127,7 +127,7 @@
 		  }
 		  
 		  //let ggid = getParameterByName("gid");
-		  console.log("gid: ",getCookie('gid');
+		  console.log("gid: ",getCookie('gid'));
 		  
          /**		 
 		 if(!ggid){
