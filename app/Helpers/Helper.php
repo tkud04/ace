@@ -2796,5 +2796,10 @@ $subject = $data['subject'];
 		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
    }
    
+   function clearGhostCarts()
+   {
+      Carts::where('user_id',"")->delete();
+   }
+   
 }
 ?>

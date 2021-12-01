@@ -89,7 +89,7 @@
 				 <p>If you have a coupon code, enter the code here and click Apply.</p>
 				 <div class="input-group mb-10">
 				    <input type="text" class="form-control" id="coupon" placeholder="Enter coupon code here">
-				    <span class="input-group-btn"><a href="javascript:void(0)" onclick="useCoupon()" class="btn btn-primary pull-left hvr-underline-from-center-primary">Apply</a></span>
+				    <span class="input-group-btn"><a href="javascript:void(0)" onclick="useCoupon('cart')" class="btn btn-primary pull-left hvr-underline-from-center-primary">Apply</a></span>
                  </div>
                 </div>
 				<div class="col-sm-6">

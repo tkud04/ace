@@ -32,6 +32,10 @@ class MainController extends Controller {
     {
 		$hasUnpaidOrders = null;
 		$user = null;
+		
+		//remove all carts with no user id
+		$this->helpers->clearGhostCarts();
+		
 		if(Auth::check())
 		{
 			$user = Auth::user();

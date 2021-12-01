@@ -1,7 +1,5 @@
 
 Webmail app
-Compose message
-Drafts
 Spam
 Trash
 Mark message read/unread
@@ -11,4 +9,5 @@ Settings -> Signature, etc
 About app
 attachments
 multiple accounts
+Drafts
 Notifications

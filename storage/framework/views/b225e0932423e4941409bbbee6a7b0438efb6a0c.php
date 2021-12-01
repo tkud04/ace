@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="facebook-domain-verification" content="l1zv5af26nl57l9wu9nf2w4kihldv3" />
+<meta name="facebook-domain-verification" content="l1zv5af26nl57l9wu9nf2w4kihldv3" />
+<meta property="og:description" content="Buy the most glamorous earrings, bracelets, brooches and more from Ace Luxury Store.">
+<meta property="og:image" content="<?php echo e(asset('images/logoo.png')); ?>">
+<meta property="og:url" content="<?php echo e(url('/')); ?>">
+<meta property="og:type" content="website">
 <?php echo $__env->yieldContent('metas'); ?>
 <title><?php echo $__env->yieldContent('title'); ?> | Ace Luxury Store - Online Luxury Fashion Accessories Store in Lagos, Nigeria</title>
 <!-- Google fonts -->
@@ -122,8 +127,8 @@
 			  setCookie("gid",gid);
 		  }
 		  
-		  let ggid = getParameterByName("gid");
-		  console.log("[gid,ggid]: ",[gid,ggid]);
+		  //let ggid = getParameterByName("gid");
+		  console.log("gid: ",getCookie('gid'));
 		  
          /**		 
 		 if(!ggid){
