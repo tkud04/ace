@@ -351,7 +351,7 @@
 	    ['name' => "rings",'url' => url('shop')."?category=rings"]
 	    ];
 		 ?>
-          <li class="active"><a href="{{url('/')}}" class="ion-ios-home"></a></li>
+          <li class="active"><a href="{{url('/')}}" class="ion-ios-home"> HOME</a></li>
           <li><a href="{{$nau}}">NEW ARRIVALS</a></li>
 		  @foreach($cccc as $xc)
           <li><a href="{{$xc['url']}}">{{strtoupper($xc['name'])}}</a></li>
