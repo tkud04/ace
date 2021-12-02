@@ -122,6 +122,8 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					   <td>{{$o['reference']}}</td>
 					    <td>
 						<?php
+						 if(count($items) > 0)
+						 {
 						 foreach($items as $i)
 						 {
 							   $product = $i['product'];
@@ -138,6 +140,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 							   {{$name}}
 						 </a> (x{{$qty}})<br>
 						 <?php
+						 }
 						 }
 						?>
 					   </td>
