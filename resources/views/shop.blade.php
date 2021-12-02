@@ -66,8 +66,11 @@
                 
 				 @if(count($products) > 0)
                 <!--start of display settings-->
-                
-                <div class="col-sm-12" style="margin-top: 30px;">
+                 @if($agent->isDesktop())
+                <div class="col-sm-12" style="margin-top: 100px;">
+			    @else
+				   <div class="col-sm-12" style="margin-top: 30px;">
+			    @endif
                   <div class="dashed-border ">
                     <ul class="list-inline view-style top-menu row">
 					<!--
