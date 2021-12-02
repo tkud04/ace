@@ -14,11 +14,13 @@
     <section class="container">
       <div class="row">
         @if($agent->isDesktop())
+			<!--
         <div class="col-sm-12">
           <div class="inner-ad">
             <figure><img class="img-responsive" src="{{$ad}}" width="970" height="100" alt=""></figure>
           </div>
         </div>
+		 -->
 	   @endif
         <div class="col-sm-12 equal-height-container">
           <div class="row">
@@ -44,7 +46,7 @@
                 </ul>
               </section>      
                
-             <!-- <section><center> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </center> </section> -->
+              <section><center> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </center> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
 				<?php
