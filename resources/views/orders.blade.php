@@ -351,6 +351,10 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
             
             </div>
             <!--end of columns--> 
+			@else
+			 <div class="col-sm-12">
+		      <h3 class="text-danger">Order not found.</h3>
+             </div>		 
 			@endif
 			
           </div>
