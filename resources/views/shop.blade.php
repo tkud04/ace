@@ -43,7 +43,29 @@
                   
                 </ul>
               </section>      
-               <section>
+               
+              <section><center> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </center> </section>
+              <section class="col-sm-12 tags">
+                <h5 class="sub-title text-info text-uppercase">popular tags</h5>
+				<?php
+				  $e
+				?>
+                <a href="#">travel</a> <a href="#">blog</a> <a href="#">lifestyle</a></section>
+            </div>
+			@endif
+            <div class="col-sm-8 col-md-9 col-lg-9 main-sec">
+              <div class="row"> 
+                
+                <!--start of breadcrumb-->
+                <div class="col-sm-12">
+                  <ol class="breadcrumb dashed-border">
+                    <li><a href="{{url('/')}}">Home</a></li>
+                    <li><a href="{{url('shop')}}">Shop</a></li>
+                    <li class="active">{{$samba}}</li>
+                  </ol>
+                </div>
+                <!--end of breadcrumb--> 
+                
 			     @if(count($products) > 0)
                 <!--start of display settings-->
                 <div class="col-sm-12">
@@ -79,30 +101,8 @@
                   </div>
                 </div>
                 <!--end of display settings-->
-				@endif
-              </section>			  
-              <section> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </section>
-              <section class="col-sm-12 tags">
-                <h5 class="sub-title text-info text-uppercase">popular tags</h5>
-				<?php
-				  $e
-				?>
-                <a href="#">travel</a> <a href="#">blog</a> <a href="#">lifestyle</a></section>
-            </div>
-			@endif
-            <div class="col-sm-8 col-md-9 col-lg-9 main-sec">
-              <div class="row"> 
-                
-                <!--start of breadcrumb-->
-                <div class="col-sm-12">
-                  <ol class="breadcrumb dashed-border">
-                    <li><a href="{{url('/')}}">Home</a></li>
-                    <li><a href="{{url('shop')}}">Shop</a></li>
-                    <li class="active">{{$samba}}</li>
-                  </ol>
-                </div>
-                <!--end of breadcrumb--> 
-                
+				@endif			  
+				
 				@if($agent->isMobile())
 				 @if(count($products) > 0)
                 <!--start of display settings-->
