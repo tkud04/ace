@@ -44,7 +44,7 @@
                 </ul>
               </section>      
                
-              <section><center> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </center> </section>
+             <!-- <section><center> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </center> </section> -->
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
 				<?php
