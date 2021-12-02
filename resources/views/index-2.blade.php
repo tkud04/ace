@@ -113,7 +113,7 @@
 		   {
 			   $n = $na[$i];
 			   $sku = $n['sku'];
-			   $name = $n['name'];
+			   $name = $n['shortname'];
 			   $displayName = $name == "" ? $sku : $name;
 			   $uu = url('product')."?sku=".$sku;
 			   $cu = url('add-to-cart')."?sku=".$sku."&qty=1";
