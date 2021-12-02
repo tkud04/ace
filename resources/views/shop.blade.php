@@ -67,7 +67,7 @@
 				 @if(count($products) > 0)
                 <!--start of display settings-->
                 
-                <div class="col-sm-12 mt-10">
+                <div class="col-sm-12" style="margin-top: 30px;">
                   <div class="dashed-border ">
                     <ul class="list-inline view-style top-menu row">
 					<!--
