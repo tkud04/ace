@@ -24,7 +24,26 @@
           <div class="row">
 		  @if($agent->isDesktop())
             <div class="col-sm-4 col-md-3  sub-data-left sub-equal">
+             
               <section>
+                <h5 class="sub-title text-info text-uppercase">Categories</h5>
+                <ul class="list-group nudge">
+				<?php
+				  $i = 0;
+				 foreach($c as $cc)
+				 {
+					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
+					  $ccu = url('shop')."?category=".$cc['category'];
+					  ++$i;
+				?>
+                  <li class="list-group-item"><a href="{{$ccu}}"{{$style}}>{{ucwords($cc['category'])}}</a></li>
+				<?php
+				 }
+				?>
+                  
+                </ul>
+              </section>      
+               <section>
 			     @if(count($products) > 0)
                 <!--start of display settings-->
                 <div class="col-sm-12">
@@ -61,25 +80,7 @@
                 </div>
                 <!--end of display settings-->
 				@endif
-              </section>
-              <section>
-                <h5 class="sub-title text-info text-uppercase">Categories</h5>
-                <ul class="list-group nudge">
-				<?php
-				  $i = 0;
-				 foreach($c as $cc)
-				 {
-					 $style = $i == 0 ? 'style="padding-left: 0px;"' : '';
-					  $ccu = url('shop')."?category=".$cc['category'];
-					  ++$i;
-				?>
-                  <li class="list-group-item"><a href="{{$ccu}}"{{$style}}>{{ucwords($cc['category'])}}</a></li>
-				<?php
-				 }
-				?>
-                  
-                </ul>
-              </section>        
+              </section>			  
               <section> <img width="820" height="703" alt="" src="images/banner5.png" class="img-responsive"> </section>
               <section class="col-sm-12 tags">
                 <h5 class="sub-title text-info text-uppercase">popular tags</h5>
