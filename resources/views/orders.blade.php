@@ -88,7 +88,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					  {
 						 foreach($orders as $o)
 						 {
-							 $items = $o['items'];
+							 $items = isset($o['items']) ? $o['items'] : [];
 							 $totals = $o['totals'];
 							 $statusClass = $o['status'] == "paid" ? "success" : "danger";
 							 $uu = "#";
