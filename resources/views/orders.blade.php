@@ -299,7 +299,9 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					  }
                     ?>		
                      <?php
-					 if(count($o['reviews']) > 0)
+					 if(isset($o['reviews']) > 0)
+					  {
+						  if(count($o['reviews']) > 0)
 					  {
 						  $r = $o['reviews'];
 				    ?>	
@@ -348,6 +350,7 @@ $legendText = count($orders) > 0 ? "enter your reference number below" : "sign i
 					   </td>
                        </tr>
                     <?php
+					  }
 					  }
                     ?>					
 					</tbody>
