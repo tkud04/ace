@@ -87,7 +87,7 @@
       </div>
 	  <div class="row">
          <div class="col-sm-12">
-		   @if(count($anon) > 0)
+		   @if(count($o) > 0)
 			   <div class="table-responsive m-t-40 wow fadeInUp">
                  <table class="table ace-table">
 				   <thead>
@@ -99,7 +99,6 @@
                        </thead>
 					<tbody>
 					<?php
-					  $o = $anon;
 					  $items = isset($o['items']) ? $o['items'] : [];
 					  $totals = $o['totals'];
 					?>
