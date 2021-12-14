@@ -85,6 +85,58 @@
           </div>
         </div>
       </div>
+	  <div class="row">
+         <div class="col-sm-12">
+		   @if(count($orders) > 0)
+			   <div class="table-responsive m-t-40 wow fadeInUp">
+                 <table class="table ace-table">
+				   <thead>
+                        <tr>
+                                    <th>Reference #</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>                                                    
+                                </tr>
+                       </thead>
+					<tbody>
+					<?php
+					  $o = $anon;
+					  $items = isset($o['items']) ? $o['items'] : [];
+					  $totals = $o['totals'];
+					?>
+					<tr>
+					   <td>{{$o['reference']}}</td>
+					   <td>
+						<?php
+						 if(count($items) > 0)
+						 {
+						 foreach($items as $i)
+						 {
+							   $product = $i['product'];
+							   $sku = $product['sku'];
+							   $name = $product['name'];
+							   $pu = url('product')."?sku=".$product['sku'];
+							   $img = $product['imggs'][0];
+							 
+							 $qty = $i['qty'];
+						 ?>
+						 
+						 <a href="{{$pu}}" target="_blank">
+						   <img class="img img-fluid" src="{{$img}}" alt="{{$sku}}" height="80" width="80" style="margin-bottom: 5px;"/>
+							   {{$name}}
+						 </a> (x{{$qty}})<br>
+						 <?php
+						 }
+						 }
+						?>
+					   </td>
+					   <td>&#8358;{{number_format($o['amount'],2)}}</td>
+					</tr>
+					</tbody>
+                 </table>
+               </div>				 
+		   @endif
+         </div>
+	  </div>
     </section>
   </div>
   <!--end of middle sec--> 

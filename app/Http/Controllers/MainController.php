@@ -1075,7 +1075,7 @@ class MainController extends Controller {
 				$r = $req['o'];
 			    $paidStatus = $anon['order']['type'] == "pod" ? "pod" : $anon['order']['status'];
 			    #dd($trackings);
-			    return view("track-results",compact(['user','cart','trackings','c','r','paidStatus','ad','signals','plugins']));	
+			    return view("track-results",compact(['user','cart','anon','trackings','c','r','paidStatus','ad','signals','plugins']));	
 			}
 			else
 			{
