@@ -88,6 +88,7 @@
 	  <div class="row">
          <div class="col-sm-12">
 		   @if(count($o) > 0)
+			   <h3 class="mb-2">Your Order</h3>
 			   <div class="table-responsive m-t-40 wow fadeInUp">
                  <table class="table ace-table">
 				   <thead>
