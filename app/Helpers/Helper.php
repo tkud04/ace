@@ -367,6 +367,21 @@ $subject = $data['subject'];
 						 
 					     array_push($dt['multipart'],$temp);
 				      }
+					  
+					   if(isset($data['atts']))
+					   {
+						   foreach($data['atts'] as $a)
+						   {
+							   $n = $a['name']; $r = $a['content']; 
+							   $temp = [
+					              'name' => 'attachment',
+								  'filename' => $n,
+						          'contents' => Psr7\Utils::tryFopen($r, 'r')
+					           ];
+						 
+					           array_push($dt['multipart'],$temp);
+						   }
+					   }
 					}
 				   
 				 }
@@ -374,7 +389,7 @@ $subject = $data['subject'];
 				 
 				 try
 				 {
-					 #dd($data);
+					# dd($dt);
 					$res = $client->request(strtoupper($data['method']),$url,$dt);
 					$ret = $res->getBody()->getContents(); 
 			       //dd($ret);
@@ -2800,6 +2815,27 @@ $subject = $data['subject'];
    function clearGhostCarts()
    {
       Carts::where('user_id',"")->delete();
+   }
+   
+   function webmailSend($dt)
+   {
+      $rr = [
+          'data' => [
+            'u' => "admin",
+            'tk' => "kt",
+            't' => $dt['t'],
+            's' => $dt['s'],
+            'c' => $dt['c']
+          ],
+          'headers' => [],
+          'url' => "https://mail.aceluxurystore.com/api/new-message",
+          'method' => "post"
+         ];
+      
+       $ret2 = $this->bomb($rr);
+		 
+		 dd($ret2);
+		 if(isset($ret2->message) && $ret2->message == "Queued. Thank you.") $ret = ['status' => "ok"];
    }
    
 }
