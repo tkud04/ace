@@ -1286,7 +1286,6 @@ class MainController extends Controller {
          {
          	$anon = $this->helpers->getAnonOrder($req['ref']);
 			$orders = [];
-			dd($anon);
 			if(count($anon) > 0)
 			{
 				$orders[0] = $this->helpers->getOrder($anon['reference'],['reviews' => true]);
