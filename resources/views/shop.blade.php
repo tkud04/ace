@@ -68,44 +68,7 @@
                 </div>
                 <!--end of breadcrumb--> 
                 
-			     @if(count($products) > 0)
-                <!--start of display settings-->
-                <div class="col-sm-12">
-                  <div class="dashed-border ">
-                    <ul class="list-inline view-style top-menu row">
-					<!--
-                      <li class="col-sm-3 col-md-2">
-                        <select class="selectpicker">
-                          <option>Sort By</option>
-                          <option>Position</option>
-                          <option>Name</option>
-                          <option>Price</option>
-                        </select>
-                      </li>
-					 -->
-                     
-                      <li  class="col-sm-3 col-md-2">  
-                        <select class="selectpicker" id="per-page">
-                          <option value="none">Show per page</option>
-                          <option value="9" selected="selected">9</option>
-                          <option value="12">12</option>
-                          <option value="15">15</option>
-                        </select>
-                      </li>
-					  <li  class="col-sm-3 col-md-2"></li>
-                      <li class="text-right col-sm-6 col-md-8">
-                        <div class="btn-group">
-                          <button id="grid" class="btn btn-primary hvr-underline-from-center-primary" > <span class="ion-android-apps"></span> </button>
-                          <button id="list" class="btn btn-primary hvr-underline-from-center-primary" > <span class="ion-android-menu"></span> </button>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <!--end of display settings-->
-				@endif			  
-				
-				@if($agent->isMobile())
+			  	
 				 @if(count($products) > 0)
                 <!--start of display settings-->
                 <div class="col-sm-12" style="margin-top: 30px;">
@@ -141,7 +104,6 @@
                   </div>
                 </div>
                 <!--end of display settings-->
-				@endif
 				@endif
                 
                 <div class="col-sm-12">
