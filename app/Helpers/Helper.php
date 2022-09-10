@@ -2594,8 +2594,9 @@ $subject = $data['subject'];
 			}
                                          
                  
-                 dd($ret);
-                 $ret['reviews'] = $this->getOrderReview($ret['reference']);				 
+                 $reviews = [];
+                 if(isset($ret['reference'])) $reviews = $this->getOrderReview($ret['reference']);
+		 $ret['reviews'] = $reviews;
                 return $ret;
            }
 		   
