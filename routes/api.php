@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('checkout', 'MainController@getCheckout');
+Route::post('checkout', 'MainController@postCheckout');
+Route::get('pod', 'MainController@getPOD');
+Route::post('pod', 'MainController@postPOD');
