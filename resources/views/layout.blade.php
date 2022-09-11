@@ -409,7 +409,7 @@
                    @include('session-status',['pop' => $pop, 'val' => $val])
                  @endif
         	<!--------- Input errors -------------->
-                    @if (count($errors) > 0)
+                    @if (isset($errors) && count($errors) > 0)
                           @include('input-errors', ['errors'=>$errors])
                      @endif 
   
