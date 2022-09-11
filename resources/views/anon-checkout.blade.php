@@ -110,8 +110,8 @@
 			  //for tests
 			  $secureCheckout = "https://www.aceluxurystore.com/api/checkout";
 			  $unsecureCheckout = url('api/checkout');
-			  $securePay = "https://www.aceluxurystore.com/pay";
-			  $unsecurePay = url('pay');
+			  $securePay = "https://www.aceluxurystore.com/api/pay";
+			  $unsecurePay = url('api/pay');
 			  $securePOD = "https://www.aceluxurystore.com/api/pod";
 			  $unsecurePOD = url('api/pod');
 			  
