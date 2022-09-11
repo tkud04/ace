@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('checkout', 'MainController@getCheckout');
 Route::post('checkout', 'MainController@postCheckout');
+Route::get('pay', 'MainController@getPay');
+Route::post('pay', 'PaymentController@postRedirectToGateway');
 Route::get('pod', 'MainController@getPOD');
 Route::post('pod', 'MainController@postPOD');
