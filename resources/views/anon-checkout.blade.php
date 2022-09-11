@@ -108,12 +108,12 @@
 			  }
 			  
 			  //for tests
-			  $secureCheckout = "https://www.aceluxurystore.com/checkout";
-			  $unsecureCheckout = url('checkout');
+			  $secureCheckout = "https://www.aceluxurystore.com/api/checkout";
+			  $unsecureCheckout = url('api/checkout');
 			  $securePay = "https://www.aceluxurystore.com/pay";
 			  $unsecurePay = url('pay');
-			  $securePOD = "https://www.aceluxurystore.com/pod";
-			  $unsecurePOD = url('pod');
+			  $securePOD = "https://www.aceluxurystore.com/api/pod";
+			  $unsecurePOD = url('api/pod');
 			  
 			  $isSecure = (isset($secure) && $secure);
 			  $pay = $isSecure ? $securePay : $unsecurePay;
